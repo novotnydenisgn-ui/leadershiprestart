@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jak pracujeme — program Leadership Restart | leadershiprestart.cz</title>
+<meta name="description" content="Jak funguje program Leadership Restart: diagnostika, 21denní výzva, Leadership Upgrade. Balíčky Basic, Standard a Private. Disciplína, návyky i optimalizace podnikání.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=3">
+<style>
+  .hero-prog{position:relative;overflow:hidden;
+    background:
+      radial-gradient(760px 460px at 15% 10%,rgba(255,99,57,.12),transparent 60%),
+      radial-gradient(820px 520px at 85% 25%,rgba(0,128,255,.14),transparent 62%),
+      var(--pearl)}
+  .hero-prog .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;
+    padding:clamp(48px,7vw,96px) clamp(18px,4vw,44px)}
+  @media(max-width:900px){.hero-prog .wrap{grid-template-columns:1fr}}
+  .hero-prog h1{font-size:clamp(32px,4.6vw,58px);margin:20px 0 18px}
+  .hero-prog img{max-height:480px;margin:0 auto;filter:drop-shadow(0 40px 80px rgba(0,0,0,.55))}
+
+  .faze{counter-reset:faze}
+  .balicky{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:36px;align-items:stretch}
+  .balicek{display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .balicek .b-head{font-family:"League Spartan",sans-serif;text-transform:uppercase;font-weight:800;
+    font-size:22px;margin-bottom:4px}
+  .balicek .b-tag{font-size:13px;font-weight:700;color:var(--teal-deep);margin-bottom:14px}
+  .balicek .check-list{flex:1}
+  .balicek .btn{margin-top:22px;width:100%}
+  .balicek.featured{border:2px solid transparent;
+    background:linear-gradient(var(--pearl-2),var(--pearl-2)) padding-box,var(--r21-grad) border-box}
+  .b-ribbon{position:absolute;top:16px;right:-38px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
+    font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
+    background:var(--r21-grad);padding:6px 44px}
+  .cena-note{max-width:720px;margin:30px auto 0;text-align:center;color:var(--ink-soft);font-size:14.5px}
+
+  .dimi-band{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:center}
+  @media(max-width:880px){.dimi-band{grid-template-columns:1fr}}
+
+  /* optimalizační balíček (prezentace jako na ceníku) */
+  .wbox{display:grid;grid-template-columns:1fr 1.15fr;gap:0;padding:0;overflow:hidden;align-items:stretch}
+  .wbox>img{width:100%;height:100%;object-fit:cover;min-height:320px}
+  .wbox-body{padding:clamp(26px,3.6vw,46px)}
+  .wbox .gift-line{display:flex;gap:10px;align-items:center;color:#f6d47c;font-weight:700;
+    border:1px solid rgba(233,182,79,.45);background:rgba(233,182,79,.06);
+    border-radius:14px;padding:12px 14px;margin:16px 0 4px;font-size:14.5px;line-height:1.5}
+  @media(max-width:860px){.wbox{grid-template-columns:1fr}.wbox>img{max-height:300px}}
+</style>
+</head>
+<body>
+
+<div id="siteNav"></div>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero-prog">
+  <div class="hero-aura"></div>
+  <div class="wrap">
+    <div>
+      <span class="kicker">Jak pracujeme</span>
+      <h1 class="display">Program, který se přizpůsobí <span class="grad-text">tobě</span></h1>
+      <p class="h-sub" style="font-size:clamp(16px,1.6vw,19px)">Nezáleží, jestli tě brzdí disciplína a návyky,
+      nebo marketing a procesy v podnikání. Začínáme diagnostikou a jdeme přesně tam,
+      kde ztrácíš nejvíc. Akce místo teorie — od prvního dne.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px">
+        <a class="btn btn-primary" href="rezervace.html">Rezervovat úvodní konzultaci</a>
+        <a class="btn btn-ghost" href="vyzva.html">Rovnou do výzvy</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <img src="assets/img/statue-zeus.png" alt="Antická socha s notebookem a palcem nahoru — starý mindset končí, nový začíná">
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FÁZE PROGRAMU ======================= -->
+<section class="section">
+  <div class="wrap">
+    <span class="kicker">Krok za krokem</span>
+    <h2 class="display h-section">Jak spolupráce probíhá</h2>
+    <div class="timeline faze">
+      <div class="t-item reveal"><div class="t-dot">1</div>
+        <div class="glass-card"><h3 class="display">Diagnostika &amp; onboarding</h3>
+        <p>Krátký dotazník, nezávazný hovor a individuální onboarding mentoring.
+        Zmapujeme tvé návyky, energii i byznys a pojmenujeme hlavní brzdu.
+        Součástí je onboarding protokol s interaktivními lekcemi — a jedno překvapení navrch. 🎁</p></div></div>
+      <div class="t-item reveal"><div class="t-dot">2</div>
+        <div class="glass-card"><h3 class="display">21denní výzva — restart návyků</h3>
+        <p>Denní mikro-kroky (15–20 min), reflexe v aplikaci Dimi, společné cally
+        v pondělí a pátek v 8:30 a podpora 24/7. Eliminace toxických návyků do 7 dnů,
+        pak budování nových — přes identitu, ne sílu vůle.</p></div></div>
+      <div class="t-item reveal"><div class="t-dot">3</div>
+        <div class="glass-card"><h3 class="display">Optimalizace podnikání</h3>
+        <p>S návyky v zádech jdeme na byznys: audit toho, co brzdí růst — marketing,
+        akvizice, procesy, rozhodování. Nastavíme systém, který generuje výsledky
+        předvídatelně. Koučink na úrovni CEO.</p></div></div>
+      <div class="t-item reveal"><div class="t-dot">4</div>
+        <div class="glass-card"><h3 class="display">Leadership Upgrade</h3>
+        <p>Dlouhodobá práce pro ty, kteří chtějí víc: individuální koučink, mastermind
+        skupina, strategie akvizice a růstu. Z restartu se stane trvalý standard.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= DIMI ======================= -->
+<section class="section section-dark">
+  <div class="wrap dimi-band">
+    <div class="reveal">
+      <span class="kicker">Tvůj denní parťák</span>
+      <h2 class="display h-section">Aplikace Dimi</h2>
+      <p class="h-sub">Každý den tě provede check-inem, reflexí a mikro-krokem.
+      Vidíš svůj progres, streaky i to, co ti bere energii. Koučink tak neběží jen
+      na callech — ale každý den, kdy se rozhoduješ.</p>
+      <ul class="check-list" style="margin-top:20px">
+        <li>Denní reflexe za 3 minuty</li>
+        <li>Sledování návyků, výzev a milníků</li>
+        <li>Měsíc předplatného v ceně programu</li>
+      </ul>
+    </div>
+    <div class="glass-card reveal" style="text-align:center">
+      <p style="font-size:15px;color:rgba(249,245,236,.8)">„Dimi mi každé ráno připomene, kdo chci být.
+      Zbytek dne se pak rozhoduje mnohem líp.“</p>
+      <p style="margin-top:10px"><b>účastník programu</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BALÍČKY ======================= -->
+<section class="section section-warm">
+  <div class="wrap">
+    <span class="kicker">Formy spolupráce</span>
+    <h2 class="display h-section">Vyber si intenzitu restartu</h2>
+    <p class="h-sub">Všechny balíčky obsahují onboarding protokol, denní reflexi v aplikaci Dimi
+    a vratnou motivační zálohu — vracíme ji za dokončení. Konkrétní podmínky probereme na konzultaci.</p>
+    <div class="balicky">
+      <div class="glass-card balicek reveal">
+        <div class="b-head">Basic</div>
+        <div class="b-tag">Restart návyků ve skupině · 1 měsíc</div>
+        <ul class="check-list">
+          <li>8 společných skupinových callů</li>
+          <li>2 individuální koučovací sezení</li>
+          <li>Denní reflexe a vedení v aplikaci Dimi</li>
+          <li>Onboarding protokol s lekcemi</li>
+        </ul>
+        <a class="btn btn-ghost" href="rezervace.html">Probrat na konzultaci</a>
+      </div>
+      <div class="glass-card balicek featured reveal">
+        <div class="b-ribbon">Nejoblíbenější</div>
+        <div class="b-head">Standard</div>
+        <div class="b-tag">Skupina + intenzivní 1:1 · 1 měsíc</div>
+        <ul class="check-list">
+          <li>8 společných skupinových callů</li>
+          <li>5 individuálních koučovacích sezení</li>
+          <li>Denní reflexe a vedení v aplikaci Dimi</li>
+          <li>Doplňkové materiály a lekce</li>
+          <li>Podpora mezi cally (zprávy)</li>
+        </ul>
+        <a class="btn btn-r21" href="rezervace.html">Probrat na konzultaci</a>
+      </div>
+      <div class="glass-card balicek reveal">
+        <div class="b-head">Private</div>
+        <div class="b-tag">Maximální intenzita · 3 měsíce</div>
+        <ul class="check-list">
+          <li>24 společných skupinových callů</li>
+          <li>12 individuálních sezení</li>
+          <li>WhatsApp podpora vč. hlasovek</li>
+          <li>Denní reflexe a vedení v aplikaci Dimi</li>
+          <li>Práce na návycích i byznysu do hloubky</li>
+        </ul>
+        <a class="btn btn-ghost" href="rezervace.html">Probrat na konzultaci</a>
+      </div>
+    </div>
+    <p class="cena-note">Cenu balíčků ti řekneme na úvodní konzultaci — podle toho, co potřebuješ
+    a co ti dává smysl. Platí garance spokojenosti: jestli se z tebe nestane nový člověk,
+    nechci po tobě ani korunu.</p>
+  </div>
+</section>
+
+<!-- ======================= OPTIMALIZAČNÍ BALÍČEK ======================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="glass-card wbox reveal">
+      <img src="assets/img/welcome-box.jpg"
+        alt="Otevřená krabice, ze které září zlaté světlo — optimalizační balíček">
+      <div class="wbox-body">
+        <span class="kicker">Dárek pro každého klienta</span>
+        <h2 class="display h-section" style="font-size:clamp(24px,3vw,36px)">Optimalizační balíček</h2>
+        <p class="gift-line">🎁 Každý klient ho získá hned na startu — na obnovu pozornosti,
+        energie a reflektování svého růstu.</p>
+        <ul class="check-list">
+          <li>Obnova pozornosti a hlubokého soustředění</li>
+          <li>Víc energie od prvního týdne</li>
+          <li>Reflektování vlastního růstu</li>
+          <li>Ušetří ti týdny práce</li>
+        </ul>
+        <div style="margin-top:22px"><a class="btn btn-r21" href="vyzva.html">Chci do programu</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FINAL CTA ======================= -->
+<section class="section section-dark" style="text-align:center">
+  <div class="wrap">
+    <h2 class="display h-section" style="font-size:clamp(28px,3.8vw,48px)">Nevíš, který balíček je pro tebe?</h2>
+    <p class="h-sub" style="margin:0 auto">Od toho je úvodní konzultace zdarma. 30 minut, žádný nátlak —
+    odejdeš minimálně s jasnem, co tě brzdí.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px">
+      <a class="btn btn-primary" href="rezervace.html">Rezervovat konzultaci zdarma</a>
+      <a class="btn btn-ghost on-dark" href="vysledky.html">Nejdřív chci vidět výsledky</a>
+    </div>
+  </div>
+</section>
+
+<div id="siteLead"></div>
+<div id="siteFooter"></div>
+
+<script src="assets/site.js?v=3"></script>
+</body>
+</html>

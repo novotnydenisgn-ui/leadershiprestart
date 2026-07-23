@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+._*
+
+# editor
+.vscode/
+.idea/
+
+# poznámkové / pomocné soubory (nepatří na web)
+TODO.md
+NASAZENI.md

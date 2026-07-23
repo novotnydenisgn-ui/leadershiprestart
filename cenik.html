@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceník — Leadership Restart | leadershiprestart.cz</title>
+<meta name="description" content="Kolik stojí Leadership Restart: Basic 4 850 Kč, 21denní výzva Standard 9 850 Kč, Premium 42 000 Kč. Vratná motivační záloha, garance spokojenosti a bonusy.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=3">
+<style>
+  /* ======================================================================
+     CENÍK — tmavý design (střídání tmavá/světlá), barvy z loga R21:
+     oranžová #ff6339 → modrá #0080ff
+     ====================================================================== */
+  :root{
+    --lr-orange:#ff6339;
+    --lr-blue:#0080ff;
+    --lr-grad:linear-gradient(100deg,var(--lr-orange) 0%,var(--lr-blue) 100%);
+    --dk-bg:#0b0e13;
+    --dk-bg-2:#10141b;
+    --dk-card:rgba(255,255,255,.035);
+    --dk-brd:rgba(255,255,255,.09);
+    --dk-text:#eef1f6;
+    --dk-muted:#98a2b3;
+    /* tmavé tóny oranžové a modré pro střídání pozadí sekcí */
+    --tint-blue:#0c1220;
+    --tint-warm:#151009;
+    /* barvy balíčků: Basic modrá · Standard oranžová · Premium zlatá */
+    --c-basic:#0080ff;
+    --c-standard:#ff6339;
+    --c-gold:#e9b64f;
+    --c-gold-grad:linear-gradient(120deg,#f6d47c 0%,#c8952f 100%);
+  }
+  body{background:var(--dk-bg);color:var(--dk-text)}
+
+  /* ---------- přepis sdílené (světlé) navigace na tmavou ---------- */
+  .nav{background:rgba(11,14,19,.72);border-bottom:1px solid rgba(255,255,255,.07);
+    box-shadow:0 8px 32px rgba(0,0,0,.45)}
+  .nav-brand b{color:var(--dk-text)}
+  .nav-brand small{color:var(--dk-muted)}
+  .nav-brand img{background:transparent}
+  .nav-links a{color:var(--dk-muted)}
+  .nav-links a:hover{background:rgba(255,255,255,.07);color:var(--dk-text)}
+  .nav-links a.active{background:rgba(255,255,255,.1);color:#fff}
+  .nav-links a.nav-cta{background:var(--lr-grad);color:#fff;
+    box-shadow:0 10px 24px rgba(255,99,57,.3)}
+  .nav-burger{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:var(--dk-text)}
+  @media(max-width:960px){
+    .nav-links{background:rgba(13,16,22,.98);border-color:rgba(255,255,255,.1);
+      box-shadow:0 30px 70px rgba(0,0,0,.6)}
+  }
+
+  /* ---------- obecné prvky v tmavé/světlé variantě ---------- */
+  .lr-grad-text{
+    background:var(--lr-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    padding:.16em .04em .06em;margin:-.16em -.04em -.06em;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  }
+  .lr-kicker{display:inline-flex;align-items:center;gap:10px;
+    font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:12.5px;letter-spacing:.16em;
+    color:var(--dk-muted);background:rgba(255,255,255,.04);
+    border:1px solid var(--dk-brd);padding:10px 18px 8px;border-radius:999px}
+  .lr-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lr-grad);flex:none}
+
+  .lr-card{background:var(--dk-card);border:1px solid var(--dk-brd);border-radius:24px;
+    padding:clamp(22px,3vw,34px);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+  .lr-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.18)}
+
+  .btn-lr{background:var(--lr-grad);color:#fff;
+    box-shadow:0 14px 34px rgba(255,99,57,.28)}
+  .btn-lr:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(0,128,255,.35)}
+  .btn-dark-ghost{background:rgba(255,255,255,.05);color:var(--dk-text);
+    border:1.5px solid rgba(255,255,255,.18)}
+  .btn-dark-ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.1)}
+
+  /* elegantnější tlačítka: tenká, menší písmo, jen lehce zaoblená (přepis pill tvaru ze site.css) */
+  .btn{padding:10px 22px 8px;font-size:12.5px;letter-spacing:.07em;border-radius:11px;font-weight:700}
+  .nav-links a.nav-cta{padding:7px 15px 6px;border-radius:9px;font-size:12px}
+
+  /* tenčí horní menu */
+  body{padding-top:58px}
+  .nav-in{padding:7px clamp(18px,4vw,44px);gap:20px}
+  .nav-brand img{width:34px;height:34px;border-radius:9px}
+  .nav-brand b{font-size:14.5px}
+  .nav-brand small{font-size:10px}
+  .nav-links a{font-size:13.5px;padding:8px 12px}
+  /* aktivní stránka: gradientní podtržení místo kapsle */
+  .nav-links a{position:relative;border-radius:9px}
+  .nav-links a.active{background:transparent;color:#fff}
+  .nav-links a.active::after{content:"";position:absolute;left:12px;right:12px;bottom:2px;
+    height:2px;border-radius:2px;background:var(--lr-grad)}
+  .nav-links a:hover{background:rgba(255,255,255,.05)}
+  @media(max-width:960px){.nav-links{top:58px}}
+
+  /* ---------- sekce (vše tmavé, střídají se odstíny) ---------- */
+  .sec-dark{background:var(--dk-bg);color:var(--dk-text);position:relative;overflow:hidden}
+  .sec-dark .h-sub{color:var(--dk-muted)}
+  .sec-dark h2{color:#fff}
+  /* tmavě modrý nádech */
+  .sec-tint-blue{background:var(--tint-blue)}
+  .sec-tint-blue::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(820px 480px at 80% 0%,rgba(0,128,255,.13),transparent 62%),
+      radial-gradient(560px 380px at 8% 100%,rgba(0,128,255,.06),transparent 60%)}
+  /* tmavě oranžový nádech */
+  .sec-tint-warm{background:var(--tint-warm)}
+  .sec-tint-warm::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(820px 480px at 15% 0%,rgba(255,99,57,.12),transparent 62%),
+      radial-gradient(560px 380px at 92% 100%,rgba(255,99,57,.05),transparent 60%)}
+  .sec-tint-blue > .wrap,.sec-tint-warm > .wrap{position:relative}
+
+  /* ---------- hero ---------- */
+  .hero-cena{position:relative;overflow:hidden;text-align:center;background:var(--dk-bg)}
+  .hero-cena::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(760px 460px at 18% 8%,rgba(255,99,57,.14),transparent 60%),
+      radial-gradient(820px 520px at 85% 20%,rgba(0,128,255,.16),transparent 62%)}
+  .hero-cena .wrap{padding:clamp(48px,7vw,92px) clamp(18px,4vw,44px) clamp(38px,5vw,64px);position:relative}
+  .hero-cena h1{font-size:clamp(32px,4.6vw,58px);margin:22px auto 16px;max-width:860px;color:#fff}
+  .hero-cena .h-sub{margin:0 auto;color:var(--dk-muted)}
+  .hero-cena .h-sub b{color:var(--dk-text)}
+
+  .anchor-band{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;
+    gap:14px;margin:38px auto 0;max-width:980px}
+  .anchor-card{flex:1;min-width:230px;text-align:center;padding:26px 20px 22px;
+    display:flex;flex-direction:column;justify-content:center}
+  .anchor-card:hover{transform:none}
+  .anchor-card small{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dk-muted);margin-bottom:8px}
+  .anchor-card b{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(26px,2.8vw,38px);line-height:1.05;color:#fff}
+  .anchor-card span{display:block;font-size:13.5px;color:var(--dk-muted);margin-top:8px}
+  /* hlavní kotva — hodnota programu (wow, minimalisticky) */
+  .anchor-card.anchor-hero{flex:1.5;min-width:290px;padding:34px 26px 30px;
+    border:1.5px solid transparent;
+    background:linear-gradient(var(--dk-bg-2),var(--dk-bg-2)) padding-box,var(--lr-grad) border-box;
+    box-shadow:0 24px 90px rgba(255,99,57,.16),0 24px 90px rgba(0,128,255,.14)}
+  .anchor-card.anchor-hero b{font-size:clamp(38px,4.4vw,58px)}
+  .anchor-card.anchor-hero small{color:var(--dk-text)}
+  .anchor-card b.lr-grad-text{color:transparent}
+
+  /* ---------- video „To zažiješ v programu" — červený blur za videem ---------- */
+  .video-glow{position:relative;max-width:920px;margin:40px auto 0;z-index:0}
+  .video-glow::before{content:"";position:absolute;inset:-14% -18%;pointer-events:none;z-index:0;
+    background:radial-gradient(closest-side,rgba(255,60,20,.65),rgba(255,60,20,.35) 55%,transparent 80%);
+    filter:blur(30px)}
+  /* mřížka referenčních videí (nativní YT konzole) */
+  .refs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px;margin-top:40px;position:relative}
+  .ref-embed{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000;
+    border:1px solid var(--dk-brd);transition:border-color .3s ease,transform .3s ease}
+  .ref-embed:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
+  .ref-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* normální YouTube přehrávač (nativní konzole) v rámečku se září */
+  .video-embed{position:relative;z-index:1;aspect-ratio:16/9;border-radius:22px;overflow:hidden;
+    background:#000;
+    box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 100px 8px rgba(255,70,25,.55),0 0 240px 70px rgba(255,60,20,.3)}
+  .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ---------- sociální důkaz (tmavě modrá) ---------- */
+  .total-count{margin:30px auto 6px;position:relative}
+  .total-count b{font-family:"League Spartan",sans-serif;font-weight:800;
+    font-size:clamp(72px,10vw,140px);line-height:1;display:block;
+    background:var(--lr-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .total-count span{font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    letter-spacing:.12em;font-size:clamp(13px,1.3vw,16px);color:var(--dk-text);display:block;margin-top:10px}
+
+  .proof-boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;
+    max-width:920px;margin:36px auto 0;position:relative}
+  .proof-box{text-align:center;padding:26px 16px 24px}
+  .proof-box h3{font-family:"League Spartan",sans-serif;text-transform:uppercase;font-weight:800;
+    font-size:15px;letter-spacing:.08em;margin-bottom:10px;color:var(--dk-text)}
+  .proof-box b{font-family:"League Spartan",sans-serif;font-weight:800;
+    font-size:clamp(38px,4.4vw,58px);line-height:1;display:block}
+  .proof-box span{font-size:13px;color:var(--dk-muted);font-weight:600;display:block;margin-top:8px}
+  .proof-box.b-blue{border-color:rgba(0,128,255,.4);box-shadow:0 20px 60px rgba(0,128,255,.12)}
+  .proof-box.b-blue:hover{border-color:rgba(0,128,255,.85);box-shadow:0 28px 80px rgba(0,128,255,.28)}
+  .proof-box.b-blue b{color:var(--c-basic)}
+  .proof-box.b-orange{border-color:rgba(255,99,57,.5);box-shadow:0 20px 70px rgba(255,99,57,.15)}
+  .proof-box.b-orange:hover{border-color:rgba(255,99,57,.95);box-shadow:0 28px 90px rgba(255,99,57,.32)}
+  .proof-box.b-orange b{color:var(--c-standard)}
+  .proof-box.b-gold{border-color:rgba(233,182,79,.4);box-shadow:0 20px 60px rgba(233,182,79,.12)}
+  .proof-box.b-gold:hover{border-color:rgba(233,182,79,.85);box-shadow:0 28px 80px rgba(233,182,79,.26)}
+  .proof-box.b-gold b{background:var(--c-gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .proof-bar{max-width:920px;margin:26px auto 0;text-align:left;position:relative}
+  .proof-bar .pb-label{display:flex;justify-content:space-between;font-size:13px;font-weight:700;
+    color:var(--dk-muted);margin-bottom:8px}
+  .pb-track{display:flex;height:16px;border-radius:999px;overflow:hidden;
+    border:1px solid var(--dk-brd);background:rgba(255,255,255,.05)}
+  .pb-seg{height:100%}
+  .pb-seg.basic{background:var(--c-basic);width:3.7%}
+  .pb-seg.standard{background:var(--c-standard);width:75.7%}
+  .pb-seg.premium{background:var(--c-gold-grad);width:20.6%}
+  .pb-legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:12px;font-size:13px;color:var(--dk-muted)}
+  .pb-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:-1px}
+  .pb-legend .basic i{background:var(--c-basic)}
+  .pb-legend .standard i{background:var(--c-standard)}
+  .pb-legend .premium i{background:var(--c-gold-grad)}
+
+  /* ---------- cenové karty (tmavá) ---------- */
+  .cenik-sec::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 500px at 12% 90%,rgba(255,99,57,.08),transparent 60%),
+      radial-gradient(760px 520px at 88% 10%,rgba(0,128,255,.1),transparent 62%)}
+  .cenik{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin-top:44px;align-items:stretch;position:relative}
+  .cena-card{display:flex;flex-direction:column;position:relative;overflow:hidden;text-align:center}
+  .cena-card .c-name{font-family:"League Spartan",sans-serif;text-transform:uppercase;font-weight:800;
+    font-size:22px;color:#fff}
+  .cena-card .c-tag{font-size:13px;font-weight:700;color:var(--dk-muted);margin:4px 0 20px}
+  .c-was{font-size:15.5px;font-weight:700;color:var(--dk-muted);text-decoration:line-through;
+    text-decoration-color:var(--lr-orange);text-decoration-thickness:2.5px}
+  .c-price{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(40px,4vw,54px);
+    line-height:1;margin:4px 0 22px;color:#fff}
+  .c-price small{font-size:.42em;font-weight:700;vertical-align:.62em;letter-spacing:.02em}
+  .c-price.lr-grad-text{color:transparent}
+  .c-list{list-style:none;flex:1;text-align:left;display:grid;gap:12px;margin-top:6px;align-content:start}
+  .c-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:#cdd4de}
+  /* ikonka položky z data-ico v jemně tónovaném kolečku (barva dle balíčku) */
+  .c-list li::before{content:attr(data-ico);flex:none;width:27px;height:27px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13.5px;
+    background:rgba(255,255,255,.07);margin-top:0}
+  .cena-card .btn{margin-top:24px;width:100%}
+  .c-pop{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--dk-muted);
+    background:rgba(255,255,255,.04);border:1px solid var(--dk-brd);border-radius:999px;
+    padding:7px 13px 5px;margin-top:14px}
+  .c-pop i{width:8px;height:8px;border-radius:50%;background:var(--lr-grad);flex:none}
+
+  /* --- barevné varianty balíčků: tenký rámeček + barevný blur/glow pod kartou --- */
+  .cena-card.v-basic{border:1.5px solid rgba(0,128,255,.4);
+    box-shadow:0 24px 80px rgba(0,128,255,.13)}
+  .cena-card.v-basic:hover{border-color:rgba(0,128,255,.85);
+    box-shadow:0 34px 110px rgba(0,128,255,.32)}
+  .cena-card.v-standard{border:1.5px solid rgba(255,99,57,.55);background:var(--dk-bg-2);
+    box-shadow:0 24px 90px rgba(255,99,57,.18)}
+  .cena-card.v-standard:hover{border-color:rgba(255,99,57,.95);
+    box-shadow:0 36px 120px rgba(255,99,57,.38)}
+  .cena-card.v-gold{border:1.5px solid rgba(233,182,79,.4);
+    box-shadow:0 24px 80px rgba(233,182,79,.13)}
+  .cena-card.v-gold:hover{border-color:rgba(233,182,79,.85);
+    box-shadow:0 34px 110px rgba(233,182,79,.3)}
+  @media(min-width:1000px){.cena-card.v-standard{transform:scale(1.04)}
+    .cena-card.v-standard:hover{transform:scale(1.04) translateY(-6px)}}
+
+  /* akcenty uvnitř karet podle barvy balíčku */
+  .v-basic .c-list li::before{background:rgba(0,128,255,.18)}
+  .v-standard .c-list li::before{background:rgba(255,99,57,.18)}
+  .v-gold .c-list li::before{background:rgba(233,182,79,.16)}
+  /* dárek — minimalistický zlatý mini rámeček */
+  .c-list li.gift{color:#f6d47c;font-weight:700;align-items:center;
+    border:1px solid rgba(233,182,79,.45);background:rgba(233,182,79,.06);
+    border-radius:14px;padding:10px 14px 10px 12px}
+  .c-list li.gift::before{content:"🎁";background:none;width:auto;height:auto;font-size:18px}
+  .v-basic .c-pop i{background:var(--c-basic)}
+  .v-standard .c-pop i{background:var(--c-standard)}
+  .v-gold .c-pop i{background:var(--c-gold-grad)}
+  .c-price.p-standard{background:linear-gradient(120deg,#ff8a5c,#ff4d18);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .c-price.p-gold{background:var(--c-gold-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* tlačítka v barvě balíčku */
+  .btn-basic{background:rgba(0,128,255,.14);color:#fff;border:1.5px solid rgba(0,128,255,.6)}
+  .btn-basic:hover{transform:translateY(-3px);background:var(--c-basic);border-color:var(--c-basic);
+    box-shadow:0 18px 44px rgba(0,128,255,.4)}
+  .btn-standard{background:linear-gradient(120deg,#ff7a4a,#ff4d18);color:#fff;
+    box-shadow:0 14px 34px rgba(255,99,57,.32)}
+  .btn-standard:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(255,99,57,.45)}
+  .btn-gold{background:rgba(233,182,79,.14);color:#f6d47c;border:1.5px solid rgba(233,182,79,.55)}
+  .btn-gold:hover{transform:translateY(-3px);background:var(--c-gold-grad);border-color:transparent;
+    color:#1a1206;box-shadow:0 18px 44px rgba(233,182,79,.35)}
+
+  .c-ribbon{position:absolute;top:28px;right:-34px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
+    font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
+    background:var(--c-standard);padding:6px 44px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+
+  .c-bonus{margin-top:20px;padding:14px 16px;border-radius:16px;text-align:left;font-size:13.5px;line-height:1.55;
+    background:rgba(255,99,57,.08);border:1px dashed rgba(255,99,57,.45);color:var(--dk-muted)}
+  .c-bonus b{color:#ff8a5c}
+
+  .cena-note{max-width:720px;margin:34px auto 0;text-align:center;color:var(--dk-muted);font-size:14.5px;position:relative}
+  .cena-note a{color:#4da3ff;font-weight:700}
+
+  /* ---------- záloha (tmavě oranžová) — velké ikony ---------- */
+  .zaloha-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px;position:relative}
+  .z-step{text-align:center;padding:32px 24px 30px;position:relative}
+  .z-step .z-ico{font-size:52px;line-height:1;margin-bottom:16px;
+    filter:drop-shadow(0 10px 30px rgba(255,99,57,.45))}
+  .z-step .z-tag{display:inline-block;font-family:"League Spartan",sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#ff8a5c;margin-bottom:8px}
+  .z-step h3{font-size:18px;margin-bottom:10px;color:#fff}
+  .z-step p{font-size:14.5px;color:var(--dk-muted)}
+  .z-gains{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:2px 0 12px}
+  .z-gains span{font-size:13px;font-weight:700;color:var(--dk-text);
+    background:rgba(255,99,57,.1);border:1px solid rgba(255,99,57,.35);
+    border-radius:999px;padding:7px 13px 6px}
+
+  /* ---------- garance (tmavá) ---------- */
+  .garance-sec::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(800px 480px at 50% 0%,rgba(0,128,255,.09),transparent 62%)}
+  .garance{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin-top:40px;position:relative}
+  .g-card{--gp:clamp(28px,3.4vw,42px);text-align:center;padding:var(--gp);overflow:hidden}
+  .g-card .g-ico{font-size:38px;line-height:1;margin-bottom:16px}
+  .g-img{width:calc(100% + 2*var(--gp));max-width:none;margin:calc(-1*var(--gp)) calc(-1*var(--gp)) 20px;
+    aspect-ratio:16/9;object-fit:cover;display:block}
+  .g-card h3{font-size:clamp(19px,2vw,24px);margin-bottom:10px;color:#fff}
+  .g-card p{color:var(--dk-muted);font-size:15px}
+  .g-card p b{color:#4da3ff}
+
+  /* ---------- FAQ (tmavá) ---------- */
+  .faq-lr{display:grid;gap:12px;max-width:840px;margin:38px auto 0;position:relative}
+  .faq-lr details{background:var(--dk-card);border:1px solid var(--dk-brd);border-radius:18px;overflow:hidden;
+    transition:border-color .25s ease}
+  .faq-lr details:hover{border-color:rgba(255,255,255,.18)}
+  .faq-lr summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;
+    gap:14px;padding:18px 22px;font-weight:800;font-size:15.5px;color:var(--dk-text)}
+  .faq-lr summary::-webkit-details-marker{display:none}
+  .faq-lr summary::after{content:"+";font-family:"League Spartan",sans-serif;font-size:22px;
+    color:var(--lr-orange);transition:transform .25s ease;flex:none}
+  .faq-lr details[open] summary::after{transform:rotate(45deg)}
+  .faq-lr .faq-a{padding:0 22px 20px;color:var(--dk-muted);font-size:15px}
+  .faq-lr .faq-a a{color:#4da3ff;font-weight:700}
+
+  /* ---------- leadmagnet band + footer přepis do modro-černé ---------- */
+  .lead-band{background:var(--dk-bg-2)}
+  .lead-band .aura{background:
+    radial-gradient(700px 420px at 82% 18%,rgba(0,128,255,.14),transparent 60%),
+    radial-gradient(600px 400px at 10% 90%,rgba(255,99,57,.1),transparent 60%)}
+  .lead-band .kicker{color:#4da3ff;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+  .lead-band .grad-text{background:var(--lr-grad);-webkit-background-clip:text;background-clip:text}
+  .lead-form input{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.05)}
+  .lead-form input:focus{border-color:var(--lr-blue)}
+  .lead-form .btn-r21{background:var(--lr-grad);box-shadow:0 14px 34px rgba(255,99,57,.28)}
+  .lead-ok{background:rgba(0,128,255,.15);border-color:rgba(0,128,255,.4)}
+  .footer{background:#080a0e}
+  .footer h4{color:#4da3ff}
+  .footer a:hover{color:#4da3ff}
+</style>
+</head>
+<body>
+
+<div id="siteNav"></div>
+
+<!-- ======================= HERO + KOTVA HODNOTY (tmavá) ======================= -->
+<section class="hero-cena">
+  <div class="wrap">
+    <span class="lr-kicker">Ceník programu</span>
+    <h1 class="display">Kolik stojí <span class="lr-grad-text">restart</span>, který vydrží?</h1>
+    <p class="h-sub" style="font-size:clamp(16px,1.6vw,19px)">Běžná cena profesionálního koučinku se pohybuje
+    mezi <b>4 000 a 8 000 Kč za jedno sezení</b>. My jsme program postavili tak,
+    aby na něj dosáhl každý, kdo to myslí vážně.</p>
+
+    <div class="anchor-band">
+      <div class="lr-card anchor-card reveal">
+        <small>Prošlo programem</small>
+        <b data-count="107">0</b>
+        <span>účastníků</span>
+      </div>
+      <div class="lr-card anchor-card anchor-hero reveal">
+        <small>Hodnota programu</small>
+        <b class="lr-grad-text">32–60 tis. Kč</b>
+        <span>při běžných cenách koučinku 4–8 tis. Kč za sezení</span>
+      </div>
+      <div class="lr-card anchor-card reveal">
+        <small>Tvoje riziko</small>
+        <b>0 Kč</b>
+        <span>garance spokojenosti</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= VIDEO — TO ZAŽIJEŠ V PROGRAMU ======================= -->
+<section class="section sec-dark" style="padding-bottom:clamp(70px,9vw,120px)">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Podívej se dovnitř</span>
+    <h2 class="display h-section">🔥 To zažiješ <span class="lr-grad-text">v programu</span></h2>
+    <div class="video-glow reveal">
+      <div class="video-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/wJ3yzUyEE00?rel=0"
+          title="To zažiješ v Leadership Restart — Denis Novotný"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SOCIÁLNÍ DŮKAZ (tmavě modrá) ======================= -->
+<section class="section sec-dark sec-tint-blue">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Výsledky mluví za nás</span>
+    <h2 class="display h-section">O program je <span class="lr-grad-text">zájem</span></h2>
+
+    <div class="total-count reveal">
+      <b data-count="107">0</b>
+      <span>účastníků už prošlo programem</span>
+    </div>
+
+    <div class="proof-boxes">
+      <div class="lr-card proof-box b-blue reveal">
+        <h3>Basic</h3>
+        <b data-count="4">0</b>
+        <span>účastníci</span>
+      </div>
+      <div class="lr-card proof-box b-orange reveal">
+        <h3>Standard</h3>
+        <b data-count="81">0</b>
+        <span>účastníků · nejčastější volba</span>
+      </div>
+      <div class="lr-card proof-box b-gold reveal">
+        <h3>Premium</h3>
+        <b data-count="22">0</b>
+        <span>účastníků</span>
+      </div>
+    </div>
+
+    <div class="proof-bar reveal">
+      <div class="pb-label"><span>Co si klienti vybírají</span><span>poměr zvolených balíčků</span></div>
+      <div class="pb-track" role="img" aria-label="Poměr balíčků: 4 Basic, 81 Standard, 22 Premium">
+        <div class="pb-seg basic"></div><div class="pb-seg standard"></div><div class="pb-seg premium"></div>
+      </div>
+      <div class="pb-legend">
+        <span class="basic"><i></i>Basic</span>
+        <span class="standard"><i></i>Standard</span>
+        <span class="premium"><i></i>Premium</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CENOVÉ KARTY (tmavá) ======================= -->
+<section class="section sec-dark cenik-sec">
+  <div class="wrap">
+    <div style="text-align:center;position:relative">
+      <span class="lr-kicker">Formy spolupráce</span>
+      <h2 class="display h-section" style="color:#fff">Vyber si <span class="lr-grad-text">intenzitu</span> restartu</h2>
+    </div>
+    <div class="cenik">
+
+      <!-- BASIC (modrá) -->
+      <div class="lr-card cena-card v-basic reveal">
+        <div class="c-name">Basic</div>
+        <div class="c-tag">Měsíční program ve skupině</div>
+        <div class="c-price">4 850<small>Kč</small></div>
+        <ul class="c-list">
+          <li class="gift">Dárek: Optimalizační balíček na obnovu pozornosti, energie a reflektování svého růstu</li>
+          <li data-ico="🧭">On-boarding protokol — interaktivní lekce pro optimalizaci před programem</li>
+          <li data-ico="👥">8× skupinový coaching status (Po &amp; Pá 8:30–9:00)</li>
+          <li data-ico="🎯">2× individuální koučink</li>
+          <li data-ico="📱">Denní reflexe s aplikací Dimi</li>
+        </ul>
+        <a class="btn btn-basic" href="rezervace.html">Chci začít s Basic</a>
+        <span class="c-pop"><i></i>Vstupní varianta pro první restart</span>
+      </div>
+
+      <!-- STANDARD (oranžová) -->
+      <div class="lr-card cena-card v-standard reveal">
+        <div class="c-ribbon">Nejčastější volba</div>
+        <div class="c-name">Standard</div>
+        <div class="c-tag">21denní výzva · měsíční program</div>
+        <div class="c-was">hodnota 32 000 Kč</div>
+        <div class="c-price p-standard">9 850<small>Kč</small></div>
+        <ul class="c-list">
+          <li class="gift">Dárek: Optimalizační balíček na obnovu pozornosti, energie a reflektování svého růstu</li>
+          <li data-ico="🧭">On-boarding protokol — interaktivní lekce pro optimalizaci před programem</li>
+          <li data-ico="👥">8× skupinový coaching status (Po &amp; Pá 8:30–9:00)</li>
+          <li data-ico="🎯">5× individuální koučink</li>
+          <li data-ico="📚">Dodatečné materiály a lekce mezi schůzkami</li>
+          <li data-ico="💬">Podpora mezi cally (zprávy)</li>
+          <li data-ico="📱">Denní reflexe s aplikací Dimi</li>
+        </ul>
+        <div class="c-bonus"><b>+ 5 000 Kč vratná motivační záloha — pro tvé maximální nasazení.</b>
+        Otevírá ti místo ve skupinových hovorech a drží tě ve hře, když je nejtěžší pokračovat.
+        Dokončíš výzvu → celých 5 000 Kč ti vracíme zpět. (Při startu zaplatíš 14 850 Kč.)</div>
+        <a class="btn btn-standard" href="rezervace.html">Chci do výzvy</a>
+        <span class="c-pop"><i></i>81 ze 107 účastníků šlo touhle cestou</span>
+      </div>
+
+      <!-- PREMIUM (zlatá) -->
+      <div class="lr-card cena-card v-gold reveal">
+        <div class="c-name">Premium</div>
+        <div class="c-tag">90denní individuální koučink</div>
+        <div class="c-price p-gold">42 000<small>Kč</small></div>
+        <ul class="c-list">
+          <li class="gift">Dárek: Optimalizační balíček na obnovu pozornosti, energie a reflektování svého růstu</li>
+          <li data-ico="🗺️">Individuální plán transformace na míru (herní plán)</li>
+          <li data-ico="🧭">On-boarding protokol — interaktivní lekce pro optimalizaci před programem</li>
+          <li data-ico="👥">24× skupinový coaching status (Po &amp; Pá 8:30–9:00)</li>
+          <li data-ico="🎯">12× individuální koučink</li>
+          <li data-ico="📚">Dodatečné materiály a lekce mezi schůzkami</li>
+          <li data-ico="📱">Denní reflexe s aplikací Dimi</li>
+          <li data-ico="🎙️">Individuální podpora a koučink přes WhatsApp — včetně hlasových zpráv</li>
+        </ul>
+        <a class="btn btn-gold" href="rezervace.html">Chci Premium</a>
+        <span class="c-pop"><i></i>22 klientů zvolilo maximální intenzitu</span>
+      </div>
+
+    </div>
+    <p class="cena-note">
+      Nevíš, který balíček dává smysl právě pro tebe? Probereme to na
+      <a href="rezervace.html">úvodní konzultaci zdarma</a> — 30 minut, žádný nátlak.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= JAK FUNGUJE ZÁLOHA (tmavě oranžová) ======================= -->
+<section class="section sec-dark sec-tint-warm">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Pro tvé maximální nasazení</span>
+    <h2 class="display h-section">Jak funguje <span class="lr-grad-text">vratná záloha</span></h2>
+    <p class="h-sub" style="margin:0 auto">Záloha není cena navíc — je to tvůj závazek sám sobě.
+    Otevírá ti místo ve skupinových hovorech a drží tě v maximálním nasazení po celých 21 dní.
+    Kdo má kůži ve hře, nevzdává to třetí den.</p>
+    <div class="zaloha-grid">
+      <div class="lr-card z-step reveal">
+        <div class="z-ico">💰</div>
+        <span class="z-tag">Krok 1</span>
+        <h3 class="display">Vložíš zálohu</h3>
+        <p>5 000 Kč při startu — tvoje vstupenka do skupinových hovorů
+        a kůže ve hře od prvního dne.</p>
+      </div>
+      <div class="lr-card z-step reveal">
+        <div class="z-ico">⚡</div>
+        <span class="z-tag">Krok 2</span>
+        <h3 class="display">Získáš tah na bránu</h3>
+        <div class="z-gains">
+          <span>🔥 Motivaci</span>
+          <span>🤝 Závazek</span>
+          <span>🎮 Hravost</span>
+        </div>
+        <p>21 dní jedeš naplno — záloha tě drží ve hře a my i skupina taky.</p>
+      </div>
+      <div class="lr-card z-step reveal">
+        <div class="z-ico">🏆</div>
+        <span class="z-tag">Krok 3</span>
+        <h3 class="display">Odměna: viditelný výsledek</h3>
+        <p>Dokončíš výzvu — celých 5 000 Kč se ti vrací a k tomu výsledek,
+        který je na tobě vidět.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GARANCE + BONUS (tmavá) ======================= -->
+<section class="section sec-dark garance-sec">
+  <div class="wrap" style="text-align:center;position:relative">
+    <span class="lr-kicker">Bez rizika</span>
+    <h2 class="display h-section" style="color:#fff">Garance a <span class="lr-grad-text">bonusy</span></h2>
+    <div class="garance">
+      <div class="lr-card g-card reveal">
+        <div class="g-ico">🛡️</div>
+        <h3 class="display">Garance spokojenosti</h3>
+        <p>Když ti program nepřinese žádnou změnu, máš ho <b>zdarma</b>.
+        Jestli se z tebe nestane nový člověk, nechceme ani korunu.</p>
+      </div>
+      <div class="lr-card g-card reveal">
+        <div class="g-ico">🎟️</div>
+        <h3 class="display">50% sleva na offline akce</h3>
+        <p>Jako klient máš celý rok <b>poloviční cenu</b> na všechny naše
+        offline akce — 6 akcí ročně, kde se potkáš s lidmi, co táhnou stejným směrem.</p>
+      </div>
+      <div class="lr-card g-card reveal">
+        <img class="g-img" src="assets/img/welcome-box.jpg"
+          alt="Otevřená krabice, ze které září zlaté světlo — Welcome optimalizační balíček">
+        <h3 class="display">Welcome balíček</h3>
+        <p><b style="color:#f6d47c">Každý klient získá optimalizační balíček</b> — překvapení
+        šité na míru tomu, co tě brzdí. Ušetří ti týdny práce; víc prozradíme první den.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:42px;position:relative">
+      <a class="btn btn-lr" href="vyzva.html">Chci do 21denní výzvy</a>
+      <a class="btn btn-dark-ghost" href="rezervace.html">Nejdřív konzultace zdarma</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ K CENĚ (tmavě modrá) ======================= -->
+<section class="section sec-dark sec-tint-blue">
+  <div class="wrap">
+    <div style="text-align:center">
+      <span class="lr-kicker">Časté dotazy</span>
+      <h2 class="display h-section">K ceně a platbě</h2>
+    </div>
+    <div class="faq-lr">
+      <details class="reveal">
+        <summary>Proč je v ceně Standard vratná záloha?</summary>
+        <div class="faq-a">Pro tvé maximální nasazení. Záloha ti otevírá místo ve skupinových hovorech
+        a kdo do výzvy vloží kůži ve hře, dokončí ji mnohonásobně častěji. Po dokončení se ti
+        celých 5 000 Kč vrací — reálná cena je tedy 9 850 Kč.</div>
+      </details>
+      <details class="reveal">
+        <summary>Jak přesně funguje garance spokojenosti?</summary>
+        <div class="faq-a">Jednoduše: když program projdeš a nepřinese ti žádnou změnu, nezaplatíš nic.
+        Podmínky si řekneme na úvodní konzultaci — žádná hvězdička, žádný chyták.</div>
+      </details>
+      <details class="reveal">
+        <summary>Můžu začít s Basic a později přejít výš?</summary>
+        <div class="faq-a">Ano. Kdykoliv během programu můžeš přejít na Standard nebo Premium —
+        doplatíš jen rozdíl. Většina klientů ale volí Standard rovnou, protože 5 individuálních
+        sezení udělá největší rozdíl.</div>
+      </details>
+      <details class="reveal">
+        <summary>Co když si nejsem jistý, který balíček zvolit?</summary>
+        <div class="faq-a">Rezervuj si <a href="rezervace.html">úvodní konzultaci zdarma</a>.
+        30 minut, projdeme, co tě brzdí, a doporučíme intenzitu — i kdyby to znamenalo, že program pro tebe teď není.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= REFERENCE — CO O MĚ A PROGRAMU ŘÍKAJÍ ======================= -->
+<section class="section sec-dark">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Reference</span>
+    <h2 class="display h-section">Co o mě a programu <span class="lr-grad-text">říkají</span> 👇</h2>
+    <div class="refs-grid">
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/M6q2CLq_170?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/-v6xZ6xo5w8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/J9Jlyw0-Jiw?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/cbf6HUMZFt8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/N5T8hqXaFCk?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/7cJ2fcQ0J_I?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/c1EyZpkdmiY?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/347l1tHpooM?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/bU3qbJcYPGk?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Iivs0hrn_VE?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/yzCJE_t99B8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Lt9ly4qTcf0?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<div id="siteLead"></div>
+<div id="siteFooter"></div>
+
+<script src="assets/site.js?v=3"></script>
+</body>
+</html>
