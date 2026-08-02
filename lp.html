@@ -17,14 +17,16 @@
     background:url('assets/img/statue-shatter-dark.jpg') center/cover no-repeat;
     transform:scaleX(-1)} /* zrcadlení: socha z leva obrazu → napravo od textu */
   .hero-land .shade{position:absolute;inset:0;background:
-    linear-gradient(90deg,rgba(11,14,19,.97) 0%,rgba(11,14,19,.86) 40%,rgba(11,14,19,.25) 100%)}
+    radial-gradient(900px 560px at 50% 42%,rgba(11,14,19,.55),transparent 70%),
+    linear-gradient(180deg,rgba(11,14,19,.72),rgba(11,14,19,.55) 45%,rgba(11,14,19,.85))}
   .hero-land .fade{position:absolute;inset:auto 0 0 0;height:140px;
     background:linear-gradient(180deg,transparent,var(--pearl))}
-  .hero-land .wrap{position:relative;z-index:1;padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(56px,8vw,110px)}
-  .hero-land h1{font-size:clamp(34px,5vw,64px);margin:20px 0 18px;max-width:760px}
-  .hero-land .lead{font-size:clamp(16px,1.6vw,19px);color:var(--ink-soft);max-width:560px}
-  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
-  .hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px}
+  .hero-land .wrap{position:relative;z-index:1;text-align:center;
+    padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(56px,8vw,110px)}
+  .hero-land h1{font-size:clamp(34px,4.6vw,60px);margin:20px auto 18px;max-width:960px}
+  .hero-land .lead{font-size:clamp(17px,1.8vw,22px);color:var(--ink);font-weight:600;max-width:640px;margin:0 auto}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;justify-content:center}
+  .hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px;justify-content:center}
   @media(max-width:700px){
     .hero-land .bg{background-position:72% center}
     .hero-land .shade{background:linear-gradient(180deg,rgba(11,14,19,.62),rgba(11,14,19,.9) 70%)}
@@ -91,10 +93,8 @@
   <div class="bg"></div><div class="shade"></div><div class="fade"></div>
   <div class="wrap">
     <span class="kicker">21denní výzva · vstup přes kvalifikaci</span>
-    <h1 class="display">Nezničitelné návyky.<br><span class="grad-text">Bez dřiny a přemáhání.</span></h1>
-    <p class="lead">Vytvoř si nezničitelné návyky už za 21 dní díky ICF metodice.
-    Víc energie a pozornosti, efektivnější růst — pro podnikatele a lídry,
-    kteří chtějí výsledky, ne teorii.</p>
+    <h1 class="display">Vytvoř si nezničitelné návyky už za <span class="grad-text">21 dní</span> díky ICF metodice.</h1>
+    <p class="lead">Pro podnikatele, kteří chtějí výsledky, ne teorii.</p>
     <div class="hero-ctas">
       <a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Zjistit, zda splňuji kritéria</a>
       <a class="btn btn-ghost" href="program.html">Jak program funguje</a>
