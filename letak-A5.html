@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership Restart — letáček A5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pearl:#0b0e13; --pearl-2:#10141b;
+    --ink:#eef1f6; --ink-soft:#98a2b3; --cream:#f9f5ec;
+    --r21-a:#ff6339; --r21-c:#0080ff;
+    --r21-grad:linear-gradient(100deg,#ff6339 0%,#0080ff 100%);
+    --glass:rgba(255,255,255,.04); --glass-brd:rgba(255,255,255,.09);
+    --gold:#f6d47c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  @page{ size:A5; margin:0 }
+
+  html,body{background:#05070a}
+  body{
+    font-family:"Manrope",system-ui,sans-serif;
+    display:flex;justify-content:center;align-items:flex-start;
+    padding:24px;
+  }
+
+  /* A5 na výšku = 148 × 210 mm */
+  .page{
+    width:148mm;height:210mm;
+    position:relative;overflow:hidden;
+    color:var(--ink);
+    background:
+      radial-gradient(70mm 44mm at 12% 6%,rgba(255,99,57,.16),transparent 60%),
+      radial-gradient(78mm 50mm at 92% 14%,rgba(0,128,255,.18),transparent 62%),
+      radial-gradient(90mm 60mm at 50% 116%,rgba(0,128,255,.10),transparent 60%),
+      var(--pearl);
+    padding:11mm 12mm 10mm;
+    display:flex;flex-direction:column;
+  }
+
+  /* ---------- horní řádek: logo + kicker ---------- */
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7mm}
+  .brand{display:flex;align-items:center;gap:8px;font-family:"League Spartan",sans-serif;
+    font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:#fff}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--r21-grad);
+    box-shadow:0 0 14px rgba(255,99,57,.6)}
+  .brand small{display:block;font-family:"Manrope";font-weight:600;text-transform:none;
+    letter-spacing:.02em;font-size:9px;color:var(--ink-soft);margin-top:1px}
+
+  .kicker{display:inline-flex;align-items:center;gap:8px;
+    font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:9.5px;letter-spacing:.14em;color:var(--ink-soft);
+    background:rgba(255,255,255,.04);border:1px solid var(--glass-brd);
+    padding:6px 11px;border-radius:999px}
+  .kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--r21-grad);flex:none}
+
+  /* ---------- headline ---------- */
+  h1{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;
+    font-size:37px;line-height:1.04;letter-spacing:-.01em;color:#fff;margin-bottom:4mm}
+  /* display:inline-block je nutný — jinak background-clip:text v Blinku ořízne
+     diakritiku (á/í) nad velkými písmeny */
+  .grad{display:inline-block;background:var(--r21-grad);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lead{color:var(--ink-soft);font-size:12.5px;line-height:1.55;max-width:118mm;font-weight:500}
+  .lead b{color:var(--cream);font-weight:700}
+
+  /* ---------- kroky (karty jako v referenci) ---------- */
+  .steps{display:flex;flex-direction:column;gap:6px;margin:6mm 0 auto}
+  .step{position:relative;display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+    border:1px solid var(--glass-brd);border-radius:16px;padding:10px 14px}
+  .step .n{width:34px;height:34px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 32% 28%,#ff6339,#0080ff 90%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"League Spartan",sans-serif;font-weight:800;font-size:16px;color:#fff;
+    box-shadow:0 6px 16px rgba(0,128,255,.35)}
+  .step h3{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;
+    font-size:13.5px;letter-spacing:.01em;color:#fff;margin-bottom:2px}
+  .step p{font-size:10.5px;line-height:1.42;color:var(--ink-soft)}
+
+  /* ---------- pás s čísly ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:5mm 0}
+  .stat{background:var(--glass);border:1px solid var(--glass-brd);border-radius:13px;
+    padding:9px 6px;text-align:center}
+  .stat b{display:block;font-family:"League Spartan",sans-serif;font-weight:800;font-size:19px;
+    background:var(--r21-grad);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;line-height:1}
+  .stat span{display:block;font-size:8px;color:var(--ink-soft);margin-top:4px;line-height:1.25;font-weight:600}
+
+  /* ---------- dárek ---------- */
+  .gift{display:flex;gap:9px;align-items:center;color:var(--gold);font-weight:700;
+    border:1px solid rgba(246,212,124,.42);background:rgba(246,212,124,.06);
+    border-radius:12px;padding:9px 12px;font-size:10.5px;line-height:1.4;margin-bottom:5mm}
+
+  /* ---------- CTA řádek ---------- */
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    border-top:1px solid var(--glass-brd);padding-top:5mm}
+  .cta-txt .big{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;
+    font-size:15px;color:#fff;line-height:1.05}
+  .cta-txt .sub{font-size:9.5px;color:var(--ink-soft);margin-top:3px;font-weight:600}
+  .btn{display:inline-block;font-family:"League Spartan",sans-serif;font-weight:800;
+    text-transform:uppercase;font-size:12px;letter-spacing:.03em;color:#fff;text-decoration:none;
+    background:var(--r21-grad);padding:12px 18px;border-radius:12px;white-space:nowrap;
+    box-shadow:0 10px 24px rgba(255,99,57,.28)}
+  .web{font-family:"League Spartan",sans-serif;font-weight:700;font-size:11px;color:var(--cream);
+    letter-spacing:.02em;margin-top:4mm;text-align:center;opacity:.85}
+  .web span{color:var(--r21-a)}
+
+  .rating{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:10px;color:var(--cream)}
+  .rating .stars{color:#ffb648;letter-spacing:1px}
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="top">
+      <div class="brand"><span class="dot"></span>
+        <div>LEADERSHIP&nbsp;RESTART
+          <small>Oficiální program · ICF metodika</small>
+        </div>
+      </div>
+      <span class="kicker">21 dní · online</span>
+    </div>
+
+    <h1>Nezničitelné<br>návyky.<br><span class="grad">Podnikání bez brzd.</span></h1>
+    <p class="lead">Přestaň o změně jen mluvit a začni ji žít. S <b>denním vedením</b>,
+    ICF metodikou a systémem, který funguje i bez dřiny — pro podnikatele a lídry,
+    kteří chtějí <b>výsledky, ne teorii</b>.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="n">1</span>
+        <div>
+          <h3>Kvalifikace &amp; konzultace</h3>
+          <p>Krátký dotazník a nezávazný hovor. Zjistíme, co tě brzdí nejvíc — a jestli si sedneme.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">2</span>
+        <div>
+          <h3>21denní výzva</h3>
+          <p>Denní mikro-kroky (15–20 min), 2× týdně společný call, reflexe v aplikaci Dimi a podpora 24/7.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="n">3</span>
+        <div>
+          <h3>Leadership Upgrade</h3>
+          <p>Kdo dokončí, pokračuje v dlouhodobé práci na byznysu i sobě. Z návyků se stane standard.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>250+</b><span>spokojených klientů</span></div>
+      <div class="stat"><b>1500+</b><span>hodin praxe</span></div>
+      <div class="stat"><b>300%</b><span>navýšení příjmu</span></div>
+      <div class="stat"><b>4,9/5</b><span>hodnocení klientů</span></div>
+    </div>
+
+    <div class="gift">🎁&nbsp;&nbsp;Optimalizační balíček ke každému startu — víc energie a soustředění hned od 1. týdne.</div>
+
+    <div class="cta">
+      <div class="cta-txt">
+        <div class="big">První krok je<br>nejdůležitější</div>
+        <div class="sub">Posledních pár volných míst v běhu.</div>
+      </div>
+      <a class="btn" href="#">Chci do výzvy →</a>
+    </div>
+
+    <div class="web">leadershiprestart<span>.cz</span></div>
+
+  </div>
+</body>
+</html>
