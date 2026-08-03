@@ -3,39 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leadership Restart — nezničitelné návyky a podnikání bez brzd za 21 dní</title>
-<meta name="description" content="Oficiální program Leadership Restart. Vybuduj si nezničitelné návyky, disciplínu a odstraň, co brzdí tvé podnikání — za 21 dní, s ICF metodikou a denním vedením.">
+<title>Nezničitelné návyky za 21 dní — bez dřiny a přemáhání | Leadership Restart</title>
+<meta name="description" content="Vytvoř si nezničitelné návyky už za 21 dní díky ICF metodice. Víc energie a pozornosti, efektivnější růst. Garance spokojenosti — jestli se z tebe nestane nový člověk, neplatíš nic.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=3">
 <style>
-  /* ---- hero ---- */
-  .hero-home{min-height:calc(100vh - 58px);display:flex;align-items:center;
-    background:
-      radial-gradient(760px 460px at 15% 10%,rgba(255,99,57,.12),transparent 60%),
-      radial-gradient(820px 520px at 85% 25%,rgba(0,128,255,.14),transparent 62%),
-      var(--pearl)}
-  .hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,60px);align-items:center;
-    padding:clamp(40px,6vw,80px) 0}
-  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-statue{order:-1;max-height:300px}}
-  .hero-home h1{font-size:clamp(34px,5vw,66px);margin:20px 0 18px}
-  .hero-home .lead{font-size:clamp(16px,1.6vw,19px);color:var(--ink-soft);max-width:560px}
-  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
-  .hero-statue{position:relative;display:flex;justify-content:center}
-  .hero-statue img{max-height:560px;filter:drop-shadow(0 40px 80px rgba(0,0,0,.55))}
-  .hero-statue::before{content:"";position:absolute;inset:auto 0 6% 0;margin:0 auto;width:78%;height:64%;
-    border-radius:38px;background:var(--r21-grad);opacity:.16;filter:blur(6px);z-index:0}
-  .hero-statue img{position:relative;z-index:1}
-  .hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:26px}
+  /* ---- hero s rozpadající se sochou ---- */
+  .hero-land{position:relative;overflow:hidden;min-height:calc(100vh - 58px);display:flex;align-items:center}
+  .hero-land .bg{position:absolute;inset:0;
+    background:url('assets/img/statue-shatter-dark.jpg') center/cover no-repeat;
+    transform:scaleX(-1)} /* zrcadlení: socha z leva obrazu → napravo od textu */
+  .hero-land .shade{position:absolute;inset:0;background:
+    radial-gradient(900px 560px at 50% 42%,rgba(11,14,19,.55),transparent 70%),
+    linear-gradient(180deg,rgba(11,14,19,.72),rgba(11,14,19,.55) 45%,rgba(11,14,19,.85))}
+  .hero-land .fade{position:absolute;inset:auto 0 0 0;height:140px;
+    background:linear-gradient(180deg,transparent,var(--pearl))}
+  .hero-land .wrap{position:relative;z-index:1;text-align:center;
+    padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(56px,8vw,110px)}
+  .hero-land h1{font-size:clamp(34px,4.6vw,60px);margin:20px auto 18px;max-width:960px}
+  .hero-land .lead{font-size:clamp(17px,1.8vw,22px);color:var(--ink);font-weight:600;max-width:640px;margin:0 auto}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;justify-content:center}
+  .hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px;justify-content:center}
+  @media(max-width:700px){
+    .hero-land .bg{background-position:72% center}
+    .hero-land .shade{background:linear-gradient(180deg,rgba(11,14,19,.62),rgba(11,14,19,.9) 70%)}
+  }
 
-  /* ---- větve (co tě brzdí) ---- */
-  .branch{position:relative;overflow:hidden}
-  .branch .num{position:absolute;top:14px;right:20px;font-family:"League Spartan",sans-serif;
-    font-weight:800;font-size:64px;line-height:1;opacity:.08}
+  /* ---- video „To zažiješ v programu" — červený blur za videem ---- */
+  .video-glow{position:relative;max-width:920px;margin:36px auto 0;z-index:0}
+  .video-glow::before{content:"";position:absolute;inset:-14% -18%;pointer-events:none;z-index:0;
+    background:radial-gradient(closest-side,rgba(255,60,20,.6),rgba(255,60,20,.32) 55%,transparent 80%);
+    filter:blur(30px)}
+  .video-embed{position:relative;z-index:1;aspect-ratio:16/9;border-radius:22px;overflow:hidden;background:#000;
+    box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 100px 8px rgba(255,70,25,.5),0 0 240px 70px rgba(255,60,20,.28)}
+  .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-  /* ---- optimalizační balíček (prezentace jako na ceníku) ---- */
+  /* ---- mřížka referenčních videí (nativní YT konzole) ---- */
+  .refs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-top:36px}
+  .ref-embed{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000;
+    border:1px solid var(--glass-brd);transition:border-color .3s ease,transform .3s ease}
+  .ref-embed:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
+  .ref-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ---- benefity ---- */
+  .b-ico{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+    font-size:23px;background:linear-gradient(120deg,rgba(255,99,57,.22),rgba(0,128,255,.22));
+    border:1px solid var(--glass-brd);margin-bottom:14px}
+
+  /* ---- garance ---- */
+  .garance{max-width:860px;margin:0 auto;text-align:center}
+  .garance .seal{width:86px;height:86px;border-radius:50%;margin:0 auto 18px;display:flex;
+    align-items:center;justify-content:center;font-size:38px;background:var(--r21-grad);
+    box-shadow:0 18px 40px rgba(255,99,57,.35)}
+  .garance blockquote{font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:clamp(20px,2.6vw,30px);line-height:1.3;margin:10px 0 16px;color:#fff}
+
+  /* ---- citace klientů ---- */
+  .quote-card blockquote{font-style:italic;color:var(--ink-soft);border-left:3px solid var(--teal);
+    padding-left:16px;margin:0 0 14px}
+
+  /* ---- výzva: hlavička se zlatým grafem ---- */
+  .vyzva-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+  .vyzva-head img{max-height:300px;margin:0 auto;filter:drop-shadow(0 24px 50px rgba(233,182,79,.25))}
+  @media(max-width:860px){.vyzva-head{grid-template-columns:1fr}.vyzva-head img{max-height:220px}}
+
+  /* ---- optimalizační balíček ---- */
   .wbox{display:grid;grid-template-columns:1fr 1.15fr;gap:0;padding:0;overflow:hidden;align-items:stretch}
   .wbox>img{width:100%;height:100%;object-fit:cover;min-height:320px}
   .wbox-body{padding:clamp(26px,3.6vw,46px)}
@@ -58,11 +93,11 @@
 
   /* ---- final CTA ---- */
   .final-cta{position:relative;overflow:hidden;color:var(--cream);text-align:center}
-  .final-cta .bg{position:absolute;inset:0;background:url('assets/img/marble-face.jpg') center 30%/cover no-repeat}
-  .final-cta .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,26,28,.82),rgba(9,26,28,.66) 50%,rgba(9,26,28,.88))}
+  .final-cta .bg{position:absolute;inset:0;background:url('assets/img/statue-shatter-dark.jpg') center 30%/cover no-repeat}
+  .final-cta .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,14,19,.88),rgba(11,14,19,.72) 50%,rgba(11,14,19,.94))}
   .final-cta .wrap{position:relative;z-index:1;padding:clamp(80px,11vw,150px) 0}
   .final-cta h2{font-size:clamp(30px,4.4vw,58px);max-width:820px;margin:16px auto}
-  .final-cta p{max-width:600px;margin:0 auto;color:rgba(249,245,236,.8)}
+  .final-cta p{max-width:600px;margin:0 auto;color:rgba(238,241,246,.8)}
 </style>
 </head>
 <body>
@@ -70,112 +105,203 @@
 <div id="siteNav"></div>
 
 <!-- ======================= HERO ======================= -->
-<section class="hero hero-home">
-  <div class="hero-aura"></div>
-  <div class="wrap hero-grid">
-    <div>
-      <span class="kicker">Oficiální program · Leadership Restart</span>
-      <h1 class="display">Nezničitelné návyky.<br>Podnikání <span class="grad-text">bez brzd</span>.<br>Za 21 dní.</h1>
-      <p class="lead">Přestaň o změně mluvit a začni ji žít. S ICF metodikou, denním vedením
-      a systémem, který funguje i bez dřiny a přemáhání — pro podnikatele a lídry,
-      kteří chtějí výsledky, ne teorii.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-r21" href="vyzva.html">Chci do 21denní výzvy</a>
-        <a class="btn btn-ghost" href="program.html">Jak program funguje</a>
-      </div>
-      <div class="hero-proof">
-        <span class="rating"><span class="stars">★★★★★</span> 4,9 / 5</span>
-        <span class="pill">250+ spokojených klientů</span>
-        <span class="pill">Garance spokojenosti</span>
-      </div>
-    </div>
-    <div class="hero-statue reveal">
-      <img src="assets/img/statue-laptop.png" alt="Stoický filozof s notebookem — moudrost antiky, nástroje dneška">
-    </div>
-  </div>
-</section>
-
-<!-- ======================= ČÍSLA ======================= -->
-<section class="section section-dark">
+<section class="hero-land">
+  <div class="bg"></div><div class="shade"></div><div class="fade"></div>
   <div class="wrap">
-    <div class="stats">
-      <div class="stat glass-card reveal"><b><span data-count="250" data-suffix="+">0</span></b><span>spokojených klientů</span></div>
-      <div class="stat glass-card reveal"><b><span data-count="1500" data-suffix="+">0</span></b><span>hodin certifikované praxe</span></div>
-      <div class="stat glass-card reveal"><b><span data-count="300" data-suffix="%">0</span></b><span>navýšení příjmu klienta během spolupráce</span></div>
-      <div class="stat glass-card reveal"><b>21</b><span>dní k novým návykům</span></div>
+    <span class="kicker">21denní výzva · vstup přes kvalifikaci</span>
+    <h1 class="display">Vytvoř si nezničitelné návyky už za <span class="grad-text">21 dní</span> díky ICF metodice.</h1>
+    <p class="lead">Pro podnikatele, kteří chtějí výsledky, ne teorii.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Zjistit, zda splňuji kritéria</a>
+    </div>
+    <div class="hero-proof">
+      <span class="rating"><span class="stars">★★★★★</span> 4,9 / 5</span>
+      <span class="pill">250+ spokojených klientů</span>
+      <span class="pill">Posledních pár volných míst</span>
     </div>
   </div>
 </section>
 
-<!-- ======================= CO TĚ BRZDÍ ======================= -->
+<!-- ======================= VIDEO — TO ZAŽIJEŠ V PROGRAMU ======================= -->
+<section class="section section-dark" style="padding-bottom:clamp(70px,9vw,120px)">
+  <div class="wrap" style="text-align:center">
+    <span class="kicker">Podívej se dovnitř</span>
+    <h2 class="display h-section">🔥 To zažiješ <span class="grad-text">v programu</span></h2>
+    <div class="video-glow reveal">
+      <div class="video-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/wJ3yzUyEE00?rel=0"
+          title="To zažiješ v Leadership Restart — Denis Novotný"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CO ZÍSKÁŠ ======================= -->
 <section class="section">
   <div class="wrap">
-    <span class="kicker">Kde tě to brzdí?</span>
-    <h2 class="display h-section">Řešíme to, co tě <span class="teal-text">reálně</span> zastavuje</h2>
-    <p class="h-sub">Každý podnikatel má jinou brzdu. Proto program začíná diagnostikou —
-    a pak jdeme přesně tam, kde ztrácíš nejvíc energie a peněz.</p>
-    <div class="grid-2" style="margin-top:36px;align-items:stretch">
-      <div class="glass-card branch reveal">
-        <span class="num">01</span>
-        <h3 class="display">Disciplína &amp; návyky</h3>
-        <p>Odkládáš, začínáš a nedokončuješ, večer padneš a ráno jedeš nanovo?
-        Vybudujeme ti nezničitelné návyky, které drží i v náročných týdnech —
-        bez síly vůle, na systému a nové identitě.</p>
-        <ul class="check-list">
-          <li>Denní check-in a reflexe v aplikaci Dimi</li>
-          <li>Eliminace toxických návyků do 7 dnů</li>
-          <li>Vnitřní motivace místo přemáhání</li>
-        </ul>
-      </div>
-      <div class="glass-card branch reveal">
-        <span class="num">02</span>
-        <h3 class="display">Optimalizace podnikání</h3>
-        <p>Byznys tě živí, ale nemůže růst? Najdeme, co ho brzdí — marketing, akvizice,
-        procesy nebo ty sám — a nastavíme systém, který generuje výsledky
-        předvídatelně, ne náhodou.</p>
-        <ul class="check-list">
-          <li>Audit toho, co brzdí růst a zisk</li>
-          <li>Marketing a akvizice, které fungují</li>
-          <li>Rozhodování s klidnou hlavou CEO</li>
-        </ul>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:34px">
-      <a class="btn btn-primary" href="program.html">Poznat celý program</a>
+    <span class="kicker">Co ti výzva přinese</span>
+    <h2 class="display h-section">Víc energie. Víc pozornosti. <span class="teal-text">Efektivnější růst.</span></h2>
+    <div class="grid-3" style="margin-top:36px">
+      <div class="glass-card reveal"><div class="b-ico">⚡</div>
+        <h3 class="display">Více energie</h3>
+        <p>Eliminujeme toxické návyky, které ti berou sílu — první výsledky pocítíš
+        do 7 dnů. Večer nepadneš a ráno nejedeš nanovo.</p></div>
+      <div class="glass-card reveal"><div class="b-ico">🎯</div>
+        <h3 class="display">Více pozornosti</h3>
+        <p>Hluboké soustředění místo rozstřeleného dne. Denní reflexe v aplikaci Dimi
+        ti za 3 minuty ukáže, kam šlapeš — a proč.</p></div>
+      <div class="glass-card reveal"><div class="b-ico">📈</div>
+        <h3 class="display">Efektivnější růst</h3>
+        <p>Když srovnáš návyky, srovná se i byznys. Systém mikro-kroků, který drží
+        i v náročných týdnech — bez síly vůle.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ======================= JAK TO PROBÍHÁ ======================= -->
+<!-- ======================= GARANCE ======================= -->
+<section class="section section-dark">
+  <div class="wrap">
+    <div class="glass-card garance reveal">
+      <div class="seal">🛡</div>
+      <span class="kicker">Garance spokojenosti</span>
+      <blockquote>„Jestli se z tebe nestane nový člověk,<br>nechci po tobě ani korunu.“</blockquote>
+      <p class="h-sub" style="margin:0 auto">Když výzvu dokončíš a nepocítíš, že ti přinesla skutečnou změnu,
+      neplatíš nic. Riziko nesu já, ne ty. — Denis</p>
+      <div style="margin-top:24px"><a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Chci do výzvy</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= REFERENCE ======================= -->
+<section class="section">
+  <div class="wrap">
+    <span class="kicker">Nevěř nám. Věř jim.</span>
+    <h2 class="display h-section">Výsledky mluví za nás</h2>
+    <p class="h-sub">Podnikatelé, CEO a zakladatelé, kteří si prošli restartem.</p>
+    <div class="grid-2" style="margin-top:36px;align-items:stretch">
+      <div class="glass-card quote-card reveal">
+        <blockquote>„Získal jsem nadhled, klidný drive a soustředění na podstatné věci.
+        Začal jsem se pravidelně hýbat a konečně mám prostor na vlastní projekty.“</blockquote>
+        <p><b>Michal Kuzněcov</b><br><span style="font-size:13px;color:var(--ink-soft)">CEO, Kuzněcov Partners Invest</span></p>
+      </div>
+      <div class="glass-card quote-card reveal">
+        <blockquote>„Žena se mě na poslední dovolené ptala, co se mnou ten Denis dělá.
+        Vyházel jsem toxické činnosti a výzvy dnes beru jako příležitost k růstu.“</blockquote>
+        <p><b>Lukáš Scorvan</b><br><span style="font-size:13px;color:var(--ink-soft)">programátor · founder tech startupu</span></p>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:22px">
+      <div class="reveal">
+        <div class="video-facade" data-vimeo="1101320230" style="background-image:url('assets/img/ref-lukas-berka.jpg')">
+          <button class="vf-play" aria-label="Přehrát referenci"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vf-cap"><b>Lukáš Berka</b><span>video reference</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="video-facade" data-vimeo="1101319961" style="background-image:url('assets/img/ref-lukas-scorvan.jpg')">
+          <button class="vf-play" aria-label="Přehrát referenci"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vf-cap"><b>Lukáš Scorvan</b><span>founder tech startupu</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="video-facade" data-vimeo="1101319832" style="background-image:url('assets/img/ref-maria-sabova.jpg')">
+          <button class="vf-play" aria-label="Přehrát referenci"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vf-cap"><b>Maria Sabová</b><span>video reference</span></div>
+        </div>
+      </div>
+    </div>
+    <h3 class="display h-section" style="margin-top:clamp(46px,6vw,74px);font-size:clamp(22px,2.8vw,34px);text-align:center">
+      Co o mě a programu <span class="grad-text">říkají</span> 👇</h3>
+    <div class="refs-grid">
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/M6q2CLq_170?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/-v6xZ6xo5w8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/J9Jlyw0-Jiw?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/cbf6HUMZFt8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/N5T8hqXaFCk?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/7cJ2fcQ0J_I?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/c1EyZpkdmiY?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/347l1tHpooM?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/bU3qbJcYPGk?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Iivs0hrn_VE?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/yzCJE_t99B8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Lt9ly4qTcf0?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a class="btn btn-ghost" href="vysledky.html">Všechny případové studie a recenze</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= KOMPLETNÍ TRANSFORMACE ======================= -->
 <section class="section section-warm">
   <div class="wrap">
-    <span class="kicker">Cesta k restartu</span>
-    <h2 class="display h-section">Tři kroky. Žádná teorie navíc.</h2>
+    <span class="kicker">Co tě ve výzvě čeká</span>
+    <h2 class="display h-section">Tvůj kompletní <span class="grad-text">arzenál</span> pro změnu</h2>
+    <div class="grid-3" style="margin-top:36px">
+      <div class="glass-card reveal"><div class="b-ico">🔄</div>
+        <h3 class="display">Kompletní transformace</h3>
+        <p>Úvodní mentoring 1:1, společné cally 2× týdně (pondělí a pátek 8:30)
+        a podpora 24/7. Živé vedení, ne video kurz, který nikdy nedokoukáš.</p></div>
+      <div class="glass-card reveal"><div class="b-ico">🧱</div>
+        <h3 class="display">Nové nezničitelné návyky</h3>
+        <p>Stavíme přes novou identitu a vnitřní motivaci, ne přes přemáhání.
+        Návyky, které přežijí i tvůj nejhorší týden.</p></div>
+      <div class="glass-card reveal"><div class="b-ico">🚀</div>
+        <h3 class="display">Restart</h3>
+        <p>Denní mikro-kroky (15–20 minut) a reflexe v aplikaci Dimi.
+        Za 21 dní stojí systém — a ty se poznáš v zrcadle.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TVÁ 21DENNÍ VÝZVA ======================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="vyzva-head">
+      <div>
+        <span class="kicker">Tvá 21denní výzva</span>
+        <h2 class="display h-section">Týden po týdnu k novému já</h2>
+        <p class="h-sub">Žádná teorie navíc — každý týden má jasný cíl a měřitelný výsledek.</p>
+      </div>
+      <img class="reveal" src="assets/img/gold-graph.png" alt="Zlatý graf růstu — výsledky týden po týdnu">
+    </div>
     <div class="timeline">
       <div class="t-item reveal">
         <div class="t-dot">1</div>
         <div class="glass-card">
-          <h3 class="display">Kvalifikace &amp; úvodní konzultace</h3>
-          <p>Vyplníš krátký dotazník a na nezávazném hovoru zjistíme, jestli si sedneme
-          a co tě brzdí nejvíc. Žádný nátlak — když to nedává smysl, řekneme si to na rovinu.</p>
+          <h3 class="display">Týden 1 — Úklid a restart</h3>
+          <p>Zmapujeme, co ti bere energii, a eliminujeme toxické návyky.
+          Už v prvním týdnu pocítíš víc energie a klidu — první výsledky do 7 dnů.</p>
+          <div class="kpis"><div class="kpi"><b>Den 1–7</b><span>eliminace brzd</span></div>
+          <div class="kpi"><b>15–20 min</b><span>denně</span></div></div>
         </div>
       </div>
       <div class="t-item reveal">
         <div class="t-dot">2</div>
         <div class="glass-card">
-          <h3 class="display">21denní výzva</h3>
-          <p>Denní mikro-kroky (15–20 minut), dvakrát týdně společný call, reflexe v aplikaci Dimi
-          a podpora 24/7. Za tři týdny stojí návyky, které přežijí i tvůj nejhorší týden.</p>
+          <h3 class="display">Týden 2 — Nové návyky a identita</h3>
+          <p>Stavíme návyky, které chceš — pohyb, focus, ranní režim, byznys rituály.
+          Ne na sílu, ale přes novou identitu: přestáváš se přemáhat a začínáš být.</p>
+          <div class="kpis"><div class="kpi"><b>Den 8–14</b><span>budování</span></div>
+          <div class="kpi"><b>2× týdně</b><span>společný call</span></div></div>
         </div>
       </div>
       <div class="t-item reveal">
         <div class="t-dot">3</div>
         <div class="glass-card">
-          <h3 class="display">Leadership Upgrade</h3>
-          <p>Kdo dokončí výzvu, může pokračovat v dlouhodobé práci na byznysu i sobě —
-          individuální koučink, skupina a strategie růstu. Z návyků se stane životní standard.</p>
+          <h3 class="display">Týden 3 — Upevnění a systém</h3>
+          <p>Návyky zatížíme realitou: náročné dny, cestování, stres. Odcházíš se systémem,
+          který přežije i tvůj nejhorší týden — a s plánem, co dál.</p>
+          <div class="kpis"><div class="kpi"><b>Den 15–21</b><span>zátěžový test</span></div>
+          <div class="kpi"><b>Den 21</b><span>nový standard</span></div></div>
         </div>
       </div>
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Vyplnit kvalifikační dotazník</a>
+      <p class="btn-note">Zabere 2 minuty. Nezavazuje k ničemu.</p>
     </div>
   </div>
 </section>
@@ -197,7 +323,7 @@
           <li>Reflektování vlastního růstu</li>
           <li>Ušetří ti týdny práce</li>
         </ul>
-        <div style="margin-top:22px"><a class="btn btn-r21" href="vyzva.html">Chci do programu</a></div>
+        <div style="margin-top:22px"><a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Chci do programu</a></div>
       </div>
     </div>
   </div>
@@ -213,10 +339,11 @@
       <div class="dc-body">
         <h3 class="display" style="font-size:clamp(20px,2.2vw,26px)">Denis Novotný</h3>
         <p style="color:var(--ink-soft);font-weight:700;margin-bottom:12px">Certifikovaný kouč (ICF &amp; KTM) · zakladatel Leadership Restart</p>
-        <p style="color:var(--ink-soft)">Leadership Restart jsem vytvořil pro ty, kteří už nechtějí o změnách jen mluvit,
-        ale chtějí se stát lídry vlastního života. Věřím v akci místo teorie — proto stavím
-        na reálné praxi, nové identitě a vnitřní motivaci, ne na motivačních citátech.
-        Přes 1 500 hodin praxe s podnikateli, manažery a majiteli firem.</p>
+        <p style="color:var(--ink-soft)"><b style="color:var(--ink)">Bohaté zkušenosti.</b> Přes 1 500 hodin certifikované praxe
+        s podnikateli, manažery a majiteli firem. <b style="color:var(--ink)">Holistický přístup.</b> Návyky, energie,
+        mysl i byznys — protože trvalá změna nikdy nestojí jen na jednom pilíři.
+        Věřím v akci místo teorie: reálná praxe, nová identita a vnitřní motivace,
+        ne motivační citáty.</p>
         <div class="badge-row">
           <span class="pill">ICF metodika</span><span class="pill">KTM koučink</span>
           <span class="pill">Performance University</span><span class="pill">Holistický přístup</span>
@@ -255,34 +382,51 @@
   </div>
 </section>
 
-<!-- ======================= REFERENCE PREVIEW ======================= -->
-<section class="section section-dark">
+<!-- ======================= ČÍSLA ======================= -->
+<section class="section section-dark" style="padding-top:56px;padding-bottom:56px">
   <div class="wrap">
-    <span class="kicker">Slova klientů</span>
-    <h2 class="display h-section">Výsledky mluví za nás</h2>
-    <p class="h-sub">Podnikatelé, CEO a zakladatelé, kteří si prošli restartem.</p>
-    <div class="grid-3" style="margin-top:36px">
-      <div class="reveal">
-        <div class="video-facade" data-vimeo="1101320230" style="background-image:url('assets/img/ref-lukas-berka.jpg')">
-          <button class="vf-play" aria-label="Přehrát referenci"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-          <div class="vf-cap"><b>Lukáš Berka</b><span>video reference</span></div>
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="video-facade" data-vimeo="1101319961" style="background-image:url('assets/img/ref-lukas-scorvan.jpg')">
-          <button class="vf-play" aria-label="Přehrát referenci"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-          <div class="vf-cap"><b>Lukáš Scorvan</b><span>founder tech startupu</span></div>
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="video-facade" data-vimeo="1101319832" style="background-image:url('assets/img/ref-maria-sabova.jpg')">
-          <button class="vf-play" aria-label="Přehrát referenci"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-          <div class="vf-cap"><b>Maria Sabová</b><span>video reference</span></div>
-        </div>
-      </div>
+    <div class="stats">
+      <div class="stat glass-card reveal"><b><span data-count="250" data-suffix="+">0</span></b><span>spokojených klientů</span></div>
+      <div class="stat glass-card reveal"><b><span data-count="1500" data-suffix="+">0</span></b><span>hodin certifikované praxe</span></div>
+      <div class="stat glass-card reveal"><b><span data-count="300" data-suffix="%">0</span></b><span>navýšení příjmu klienta během spolupráce</span></div>
+      <div class="stat glass-card reveal"><b>21</b><span>dní k novým návykům</span></div>
     </div>
-    <div style="text-align:center;margin-top:34px">
-      <a class="btn btn-primary" href="vysledky.html">Všechny případové studie a recenze</a>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section">
+  <div class="wrap">
+    <span class="kicker">Časté otázky</span>
+    <h2 class="display h-section">Na co se ptáš, než vstoupíš</h2>
+    <div class="faq">
+      <details class="reveal"><summary>Kolik času mi výzva denně zabere?</summary>
+        <div class="faq-a">15–20 minut denně na mikro-kroky a reflexi v aplikaci Dimi.
+        K tomu dva společné cally týdně (pondělí a pátek 8:30). Výzva je stavěná pro vytížené
+        podnikatele — čas ti spíš vrátí, než vezme.</div></details>
+      <details class="reveal"><summary>Kolik výzva stojí?</summary>
+        <div class="faq-a">Podmínky vstupu se dozvíš po vyplnění kvalifikačního dotazníku na nezávazném
+        hovoru. Platí garance: když výzvu dokončíš a nepocítíš přínos, neplatíš nic.
+        Přehled forem spolupráce najdeš v <a href="cenik.html" style="color:var(--teal-deep);font-weight:700">ceníku</a>.</div></details>
+      <details class="reveal"><summary>Jak výzva probíhá?</summary>
+        <div class="faq-a">Start úvodním mentoringem 1:1, pak 21 dní denních mikro-kroků s reflexí
+        v aplikaci Dimi, dvakrát týdně společný call a podpora 24/7 přes zprávy a hlasovky.</div></details>
+      <details class="reveal"><summary>Co když nestíhám nebo vypadnu?</summary>
+        <div class="faq-a">Počítáme s realitou podnikatelského života. Systém je stavěný tak, aby přežil
+        náročné dny — a když se zasekneš, řešíme to spolu hned, ne na příštím callu.</div></details>
+      <details class="reveal"><summary>Čím se to liší od kurzů a knih o návycích?</summary>
+        <div class="faq-a">Kurz si pustíš a život jede dál. Tady máš denní vedení, živou zpětnou vazbu
+        a certifikovanou ICF/NLP metodiku. Nestavíme na síle vůle, ale na nové identitě —
+        proto výsledky drží i po skončení výzvy.</div></details>
+      <details class="reveal"><summary>Pro koho výzva je?</summary>
+        <div class="faq-a">Pro podnikatele, majitele firem a lídry, kteří chtějí víc energie, disciplíny
+        a růstu — a jsou ochotní pro to 21 dní něco dělat. Vstup je přes kvalifikační dotazník.</div></details>
+      <details class="reveal"><summary>Co je optimalizační balíček?</summary>
+        <div class="faq-a">Dárek, který dostane každý klient hned na startu — na obnovu pozornosti,
+        energie a reflektování svého růstu. Ušetří ti týdny práce.</div></details>
+      <details class="reveal"><summary>Co se stane po vyplnění dotazníku?</summary>
+        <div class="faq-a">Ozveme se ti a domluvíme krátký nezávazný hovor. Na něm zjistíme, jestli si
+        sedneme, a domluvíme detaily vstupu. Žádný nátlak — když to nedává smysl, řekneme si to.</div></details>
     </div>
   </div>
 </section>
@@ -291,12 +435,12 @@
 <section class="final-cta">
   <div class="bg"></div><div class="shade"></div>
   <div class="wrap">
-    <span class="kicker" style="color:var(--azure);background:rgba(249,245,236,.1);border-color:rgba(249,245,236,.3)">Posledních pár volných míst</span>
+    <span class="kicker">Posledních pár volných míst</span>
     <h2 class="display">První krok je <span class="grad-text">nejdůležitější</span></h2>
     <p>Za 21 dní můžeš mít návyky, na které jsi roky neměl sílu.
     Nebo můžeš být přesně tam, kde jsi dnes. Vyber si.</p>
     <div class="hero-ctas" style="justify-content:center">
-      <a class="btn btn-r21" href="vyzva.html">Vstoupit do 21denní výzvy</a>
+      <a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Klikni a začni svou změnu</a>
       <a class="btn btn-ghost on-dark" href="rezervace.html">Rezervovat nezávaznou konzultaci</a>
     </div>
   </div>
