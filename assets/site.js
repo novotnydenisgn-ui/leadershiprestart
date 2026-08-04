@@ -89,12 +89,63 @@
     });
   }
 
+  /* --- brandové prvky z manuálu (kostka + kruh + spojka) --------------------
+     TEX = dlaždice 140×140 pro texturu v pozadí, WAVE = „vlna" (dělič),
+     MARK = značka „Krok" (dvě kostky přes spojku). Nikdy needituj tvary ručně —
+     pochází z brand manuálu (sekce Designové prvky). */
+  var TEX =
+    '<path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M7 112H21A7 7 0 0 1 28 119V133A7 7 0 0 1 21 140H7A7 7 0 0 1 0 133V119A7 7 0 0 1 7 112Z"/>' +
+    '<path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M28 84H56V112H28Z"/>' +
+    '<path d="M56 0H84V28H56Z"/><path d="M56 56H84V84H56Z"/><path d="M56 126a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/>' +
+    '<path d="M84 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 84H105A7 7 0 0 1 112 91V105A7 7 0 0 1 105 112H91A7 7 0 0 1 84 105V91A7 7 0 0 1 91 84Z"/>' +
+    '<path d="M119 0H133A7 7 0 0 1 140 7V21A7 7 0 0 1 133 28H119A7 7 0 0 1 112 21V7A7 7 0 0 1 119 0Z"/><path d="M112 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/>' +
+    '<path d="M112 112H140V140H112Z"/>' +
+    '<path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M28 70A14 14 0 0 0 42 84V98H28A14 14 0 0 0 14 84V70Z"/>' +
+    '<path d="M14 112A14 14 0 0 0 28 98H42V112A14 14 0 0 0 28 126H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/>' +
+    '<path d="M56 42A14 14 0 0 0 70 56V70H56A14 14 0 0 0 42 56V42Z"/><path d="M42 84A14 14 0 0 0 56 70H70V84A14 14 0 0 0 56 98H42Z"/>' +
+    '<path d="M56 98A14 14 0 0 0 70 112V126H56A14 14 0 0 0 42 112V98Z"/><path d="M84 14A14 14 0 0 0 98 28V42H84A14 14 0 0 0 70 28V14Z"/>' +
+    '<path d="M70 56A14 14 0 0 0 84 42H98V56A14 14 0 0 0 84 70H70Z"/><path d="M84 70A14 14 0 0 0 98 84V98H84A14 14 0 0 0 70 84V70Z"/>' +
+    '<path d="M70 112A14 14 0 0 0 84 98H98V112A14 14 0 0 0 84 126H70Z"/><path d="M98 28A14 14 0 0 0 112 14H126V28A14 14 0 0 0 112 42H98Z"/>' +
+    '<path d="M112 42A14 14 0 0 0 126 56V70H112A14 14 0 0 0 98 56V42Z"/><path d="M98 84A14 14 0 0 0 112 70H126V84A14 14 0 0 0 112 98H98Z"/>' +
+    '<path d="M112 98A14 14 0 0 0 126 112V126H112A14 14 0 0 0 98 112V98Z"/>';
+  var WAVE =
+    '<path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/>' +
+    '<path d="M56 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 0H105A7 7 0 0 1 112 7V21A7 7 0 0 1 105 28H91A7 7 0 0 1 84 21V7A7 7 0 0 1 91 0Z"/>' +
+    '<path d="M112 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/>' +
+    '<path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/><path d="M56 14A14 14 0 0 0 70 28V42H56A14 14 0 0 0 42 28V14Z"/>' +
+    '<path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/><path d="M112 14A14 14 0 0 0 126 28V42H112A14 14 0 0 0 98 28V14Z"/>';
+  var MARK =
+    '<path d="M0 28H28V56H0Z"/><path d="M28 0H56V28H28Z"/>' +
+    '<path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/>';
+
+  function footerBand() {
+    return '<div class="footer-band">' +
+      '<svg class="fb-tex" aria-hidden="true"><defs>' +
+      '<pattern id="fbTex" width="140" height="140" patternUnits="userSpaceOnUse">' +
+      '<g fill="#EFEEEC" opacity=".04">' + TEX + '</g></pattern>' +
+      '<linearGradient id="fbGrad" x1="0%" y1="100%" x2="100%" y2="0%">' +
+      '<stop offset="0%" stop-color="#0080ff"/><stop offset="100%" stop-color="#ff6339"/>' +
+      '</linearGradient></defs>' +
+      '<rect width="100%" height="100%" fill="url(#fbTex)"/></svg>' +
+      '<div class="wrap fb-inner">' +
+      '<svg class="fb-mark" viewBox="0 0 56 56" aria-hidden="true"><g fill="url(#fbGrad)">' + MARK + '</g></svg>' +
+      '<p class="fb-claim">Krok za krokem k novému standardu</p>' +
+      '<p class="fb-sub">Kostka je hotový krok, kruh otevřený začátek. Za 21 dní z nich složíš systém,' +
+      ' který drží — i když se den nepovede.</p>' +
+      '<div class="fb-ctas">' +
+      '<a class="btn btn-r21" href="' + KVALIFIKACE + '" target="_blank" rel="noopener">Zjistit, zda splňuji kritéria</a>' +
+      '<a class="btn btn-ghost on-dark" href="rezervace.html">Nezávazná konzultace</a>' +
+      '</div>' +
+      '<svg class="fb-wave" viewBox="0 0 140 56" aria-hidden="true"><g fill="#EFEEEC">' + WAVE + '</g></svg>' +
+      '</div></div>';
+  }
+
   function mountFooter() {
     var el = document.getElementById('siteFooter');
     if (!el) return;
     var y = new Date().getFullYear();
     el.outerHTML =
-      '<footer class="footer"><div class="wrap">' +
+      '<footer class="footer">' + footerBand() + '<div class="wrap">' +
       '<div class="footer-grid">' +
       '<div><div class="footer-brand"><img src="assets/img/r21-badge.png" alt=""><b>Leadership Restart</b></div>' +
       '<p>Program pro podnikatele a lídry, kteří už nechtějí o změně jen mluvit. ' +
