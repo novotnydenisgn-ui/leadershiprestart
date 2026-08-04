@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand design — Leadership Restart</title>
+<meta name="description" content="Vizuální identita Leadership Restart: logo, barvy, typografie, designové prvky a tokeny. Jak značku používat, aby fungovala pokaždé stejně.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   LEADERSHIP RESTART — BRAND TOKENS
+   ============================================================ */
+:root{
+  /* Značkové barvy */
+  --lr-blue:      #377EF7;
+  --lr-orange:    #ED6D47;
+  --lr-gold:      #CA9733;
+  --lr-ink:       #0E1621;
+  --lr-paper:     #EFEEEC;
+  --lr-dark:      #1E1E1E;
+
+  /* Odvozené tóny — jen pro záře a plochy v pozadí */
+  --lr-blue-soft:   #B3CEEE;
+  --lr-orange-soft: #ECBAA9;
+  --lr-cube:        #DFE3E8;
+  --lr-dark-blue:   #1F314A;
+
+  /* Gradienty */
+  --lr-grad-brand: linear-gradient(135deg, #377EF7 0%, #7A729C 50%, #ED6D47 100%);
+  --lr-grad-gold:  linear-gradient(180deg, #CE9D37 0%, #F4D077 100%);
+
+  /* Písma */
+  --font-display: "League Spartan", "Arial Black", sans-serif;
+  --font-body:    "Montserrat", "Segoe UI", Arial, sans-serif;
+  --font-accent:  "Caveat", "Bradley Hand", cursive;
+
+  /* Rytmus */
+  --gap: clamp(1rem, 2.5vw, 2rem);
+  --radius: 14px;
+  --maxw: 1180px;
+}
+
+/* Režimy */
+[data-theme="dark"]{
+  --bg: #1E1E1E;
+  --bg-elev: rgba(255,255,255,.045);
+  --fg: #EFEEEC;
+  --fg-dim: #9A9A98;
+  --line: rgba(255,255,255,.10);
+  --glow-a: rgba(55,126,247,.28);
+  --glow-b: rgba(237,109,71,.20);
+}
+[data-theme="light"]{
+  --bg: #EFEEEC;
+  --bg-elev: rgba(255,255,255,.55);
+  --fg: #0E1621;
+  --fg-dim: #5C6570;
+  --line: rgba(14,22,33,.12);
+  --glow-a: rgba(179,206,238,.85);
+  --glow-b: rgba(236,186,169,.75);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--font-body); font-weight:400; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease, color .35s ease;
+  overflow-x:hidden;
+}
+
+/* Ambientní záře v pozadí */
+.glowfield{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden}
+.glowfield i{position:absolute; border-radius:50%; filter:blur(90px); display:block}
+.glowfield i:nth-child(1){width:52vw;height:34vw;left:-12vw;top:-8vw;background:var(--glow-b)}
+.glowfield i:nth-child(2){width:60vw;height:38vw;right:-18vw;top:22vh;background:var(--glow-a)}
+.glowfield i:nth-child(3){width:48vw;height:30vw;left:8vw;bottom:-14vw;background:var(--glow-a);opacity:.6}
+
+.wrap{position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 var(--gap)}
+
+/* ---------- Typografie ---------- */
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:800; line-height:1.05; letter-spacing:-.02em; margin:0}
+h1{font-size:clamp(2.6rem,7vw,5.2rem)}
+h2{font-size:clamp(1.8rem,3.6vw,2.9rem)}
+h3{font-size:clamp(1.15rem,2vw,1.5rem); font-weight:700}
+h4{font-size:1rem; font-weight:700; letter-spacing:.01em}
+p{margin:0 0 1em}
+a{color:var(--lr-blue)}
+code,.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:.85em}
+
+.grad-text{
+  background:var(--lr-grad-brand);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.accent{font-family:var(--font-accent); font-weight:600; font-size:1.5em; line-height:1}
+
+.eyebrow{
+  font-family:var(--font-body); font-size:.7rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--fg-dim);
+  margin:0 0 .8rem;
+}
+.lead{font-size:clamp(1rem,1.5vw,1.15rem); color:var(--fg-dim); max-width:60ch}
+
+/* ---------- Glass ---------- */
+.glass{
+  background:var(--bg-elev);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+}
+
+/* ---------- Navigace ---------- */
+header.top{
+  position:sticky; top:0; z-index:50;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.topbar{display:flex; align-items:center; gap:1.2rem; padding:.7rem 0; max-width:var(--maxw); margin:0 auto; padding-inline:var(--gap)}
+.topbar .mark{width:26px;height:26px;flex:none}
+.topbar .name{font-family:var(--font-display); font-weight:800; font-size:.95rem; letter-spacing:-.01em; white-space:nowrap}
+nav.jump{display:flex; gap:.2rem; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+nav.jump::-webkit-scrollbar{display:none}
+nav.jump a{
+  font-size:.78rem; font-weight:500; color:var(--fg-dim); text-decoration:none;
+  padding:.4rem .6rem; border-radius:8px; white-space:nowrap;
+}
+nav.jump a:hover{color:var(--fg); background:var(--bg-elev)}
+.toggle{
+  flex:none; font:inherit; font-size:.75rem; font-weight:600; cursor:pointer;
+  background:var(--bg-elev); color:var(--fg); border:1px solid var(--line);
+  border-radius:99px; padding:.4rem .8rem;
+}
+.toggle:hover{border-color:var(--lr-blue)}
+a.backlink{text-decoration:none;display:inline-flex;align-items:center}
+@media(max-width:720px){a.backlink{display:none}}
+
+/* ---------- Sekce ---------- */
+section{padding:clamp(3.5rem,8vw,6.5rem) 0; scroll-margin-top:70px}
+section+section{border-top:1px solid var(--line)}
+.sec-head{margin-bottom:2.5rem; max-width:70ch}
+.sec-head h2{margin-bottom:.6rem}
+
+/* ---------- Hero ---------- */
+.hero{padding:clamp(4rem,12vh,8rem) 0 clamp(3rem,8vh,5rem)}
+.hero-mark{width:clamp(100px,14vw,150px); height:auto; display:block; margin-bottom:2rem}
+.hero h1{margin-bottom:1rem}
+.hero .meta{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2rem}
+.chip{
+  font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  padding:.4rem .8rem; border-radius:99px; border:1px solid var(--line); color:var(--fg-dim);
+}
+
+/* ---------- Mřížky ---------- */
+.grid{display:grid; gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+
+.card{padding:1.4rem}
+.card h3{margin-bottom:.5rem}
+.card p:last-child{margin-bottom:0}
+
+/* ---------- Barvy ---------- */
+.swatch{
+  border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+  cursor:pointer; background:var(--bg-elev); text-align:left; width:100%;
+  font:inherit; color:inherit; padding:0; display:block;
+  transition:transform .18s ease, border-color .18s ease;
+}
+.swatch:hover{transform:translateY(-3px); border-color:var(--lr-blue)}
+.swatch:focus-visible{outline:2px solid var(--lr-blue); outline-offset:3px}
+.swatch .fill{height:104px; display:block}
+.swatch .info{padding:.75rem .85rem}
+.swatch .nm{font-weight:600; font-size:.88rem; display:block}
+.swatch .hx{font-family:ui-monospace,Menlo,monospace; font-size:.78rem; color:var(--fg-dim); display:block; margin-top:.1rem}
+.swatch .use{font-size:.72rem; color:var(--fg-dim); margin-top:.45rem; display:block; line-height:1.45}
+.copied{color:var(--lr-blue) !important; font-weight:600}
+
+.gradbar{height:130px; border-radius:var(--radius); border:1px solid var(--line); position:relative}
+.gradbar span{
+  position:absolute; bottom:.6rem; left:.7rem; font-family:ui-monospace,Menlo,monospace;
+  font-size:.7rem; background:rgba(0,0,0,.55); color:#fff; padding:.25rem .5rem; border-radius:6px;
+}
+
+/* ---------- Typografie ukázky ---------- */
+.typerow{padding:1.3rem 0; border-bottom:1px solid var(--line); display:grid; gap:.4rem}
+.typerow:last-child{border-bottom:0}
+.typerow .spec{font-size:.72rem; color:var(--fg-dim); font-family:ui-monospace,Menlo,monospace}
+.sample-display{font-family:var(--font-display)}
+.sample-body{font-family:var(--font-body)}
+.sample-accent{font-family:var(--font-accent)}
+
+/* ---------- Do / Don't ---------- */
+.rule{display:flex; gap:.7rem; align-items:flex-start; padding:.7rem 0; border-bottom:1px solid var(--line); font-size:.92rem}
+.rule:last-child{border-bottom:0}
+.rule b{flex:none; width:1.4rem; font-weight:700; font-family:var(--font-display); line-height:1.5}
+.ok b{color:var(--lr-blue)}
+.no b{color:var(--lr-orange)}
+
+/* ---------- Logo plochy ---------- */
+.logobox{
+  display:grid; place-items:center; min-height:190px; border-radius:var(--radius);
+  border:1px solid var(--line); padding:1.5rem; position:relative; overflow:hidden;
+}
+.logobox .cap{position:absolute; top:.7rem; left:.9rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; opacity:.55}
+.bg-dark{background:#1E1E1E; color:#EFEEEC}
+.bg-paper{background:#EFEEEC; color:#0E1621}
+.bg-blue{background:#377EF7; color:#fff}
+.bg-grad{background:var(--lr-grad-brand); color:#fff}
+
+.clearspace{background:var(--bg-elev)}
+
+/* ---------- Prvky soustavy ---------- */
+.parts{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.4rem}
+.parts .part{text-align:center}
+.parts .part svg{display:block; margin:0 auto .8rem; max-width:100%; height:auto}
+.parts .part b{display:block; font-family:var(--font-display); font-weight:700; font-size:1rem; margin-bottom:.25rem}
+.parts .part span{font-size:.78rem; color:var(--fg-dim); line-height:1.5; display:block}
+
+.note{
+  margin-top:1.3rem; padding:.85rem 1rem; border-radius:10px;
+  border-left:3px solid var(--lr-blue); background:var(--bg-elev);
+  font-size:.85rem; color:var(--fg-dim); line-height:1.6;
+}
+.note .accent{font-size:1.25em; margin-right:.35rem}
+.note em{color:var(--fg); font-style:normal; font-weight:600}
+
+.vocab{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1.5rem}
+
+.joins{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:1.4rem}
+.jn{text-align:center}
+.jn svg{display:block; width:100%; height:auto; max-height:92px; margin:0 auto .6rem}
+.jn span{font-size:.76rem; color:var(--fg-dim); display:block; line-height:1.5}
+.jn b{font-weight:700}
+.vitem svg{display:block; width:100%; height:auto; max-height:110px; margin-bottom:.7rem}
+.vitem b{display:block; font-family:var(--font-display); font-weight:700; font-size:.98rem; margin-bottom:.2rem}
+.vitem span{font-size:.76rem; color:var(--fg-dim); line-height:1.5; display:block}
+.vitem em{color:var(--fg); font-style:normal; font-weight:600}
+
+.levels{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1.2rem}
+.lvl{text-align:center}
+.lvlbox{
+  display:grid; place-items:center; padding:1.1rem; margin-bottom:.7rem;
+  border:1px solid var(--line); border-radius:12px; background:var(--bg-elev);
+}
+.lvlbox svg{width:100%; max-width:78px; height:auto; display:block}
+.lvl b{display:block; font-family:var(--font-display); font-weight:700; font-size:.95rem; margin-bottom:.15rem}
+.lvl span{font-size:.74rem; color:var(--fg-dim); line-height:1.5; display:block}
+
+.bgdemo{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem}
+.bgcell{
+  position:relative; min-height:170px; border-radius:12px; overflow:hidden;
+  border:1px solid var(--line); display:flex; align-items:flex-end;
+}
+.bgcell.dark{background:#1E1E1E}
+.bgcell.paper{background:#EFEEEC}
+.bgcell.grd{background:linear-gradient(135deg,#377EF7 0%,#7A729C 50%,#ED6D47 100%)}
+.bgtex{position:absolute; inset:0; width:100%; height:100%}
+.bglabel{position:relative; padding:.85rem 1rem; color:#EFEEEC}
+.bglabel.dk{color:#0E1621}
+.bglabel strong{display:block; font-size:.82rem; font-family:var(--font-display); font-weight:700}
+.bglabel span{font-size:.72rem; opacity:.7}
+.bglabel code{font-size:.95em}
+
+.colordemo{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1.3rem}
+.cd svg{display:block; width:100%; max-height:96px; height:auto; margin-bottom:.6rem}
+.cd span{font-size:.78rem; color:var(--fg-dim); line-height:1.5; display:block}
+.cd b{font-family:var(--font-display); margin-right:.25rem}
+
+/* ---------- Kód ---------- */
+pre{
+  background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1.1rem 1.2rem; overflow-x:auto; font-size:.78rem; line-height:1.7; margin:0;
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+.tabs{display:flex; gap:.3rem; margin-bottom:.8rem}
+.tabs button{
+  font:inherit; font-size:.78rem; font-weight:600; cursor:pointer; padding:.4rem .8rem;
+  border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--fg-dim);
+}
+.tabs button[aria-selected="true"]{background:var(--bg-elev); color:var(--fg); border-color:var(--lr-blue)}
+.copybtn{
+  font:inherit; font-size:.72rem; font-weight:600; cursor:pointer; margin-left:auto;
+  padding:.4rem .8rem; border-radius:8px; border:1px solid var(--line);
+  background:transparent; color:var(--fg-dim);
+}
+.copybtn:hover{color:var(--fg); border-color:var(--lr-blue)}
+
+footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim); font-size:.85rem}
+.weblink{
+  display:inline-flex; align-items:center; gap:.55rem; margin-top:1.4rem;
+  font-family:var(--font-body); font-size:.82rem; font-weight:600; text-decoration:none;
+  color:var(--fg); background:var(--bg-elev);
+  backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border:1px solid var(--line); border-radius:99px; padding:.65rem 1.15rem;
+  transition:border-color .18s ease, transform .18s ease;
+}
+.weblink:hover{border-color:var(--lr-blue); transform:translateY(-2px)}
+.weblink:focus-visible{outline:2px solid var(--lr-blue); outline-offset:3px}
+.weblink svg{flex:none}
+
+/* ---------- Tisk ---------- */
+@media print{
+  :root{--bg:#fff;--fg:#0E1621;--fg-dim:#555;--line:#ddd;--bg-elev:#f7f7f6}
+  html[data-theme]{--bg:#fff;--fg:#0E1621}
+  body{background:#fff;color:#0E1621}
+  .glowfield,header.top,.toggle,.copybtn,.tabs{display:none !important}
+  section{page-break-inside:avoid; padding:1.6rem 0; border-top:1px solid #ddd}
+  .glass,.card,.swatch{break-inside:avoid}
+  .swatch .fill{height:60px}
+  a{color:#0E1621; text-decoration:none}
+  h1{font-size:2.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; animation:none !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="glowfield" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- Sdílené SVG definice -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lrGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#377EF7"/>
+      <stop offset="100%" stop-color="#ED6D47"/>
+    </linearGradient>
+    <linearGradient id="lrGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#CE9D37"/>
+      <stop offset="100%" stop-color="#F4D077"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="topbar">
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+    </svg>
+    <span class="name">Brand manuál</span>
+    <nav class="jump">
+      <a href="#logo">Logo</a>
+      <a href="#barvy">Barvy</a>
+      <a href="#typografie">Typografie</a>
+      <a href="#prvky">Prvky</a>
+      <a href="#pravidla">Pravidla</a>
+      <a href="#tokeny">Tokeny</a>
+    </nav>
+    <a class="toggle backlink" href="index.html">← Zpět na web</a>
+    <button class="toggle" id="themeBtn" type="button">Světlý režim</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" id="uvod">
+  <svg class="hero-mark" viewBox="0 0 100 100" role="img" aria-label="Značka Leadership Restart">
+    <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+  </svg>
+  <p class="eyebrow">Leadership Restart · vizuální identita</p>
+  <h1>Dvě kostky,<br><span class="grad-text">jedno spojení.</span></h1>
+  <p class="lead">Značku drží jediná myšlenka: dva samostatné bloky, které se propojí a začnou spolu pracovat. Kouč a klient. Záměr a čin. Tenhle manuál říká, jak to používat, aby to fungovalo pokaždé stejně.</p>
+  <div class="meta">
+    <span class="chip">Verze 1.0</span>
+    <span class="chip">Klikni na barvu = zkopíruje se</span>
+    <span class="chip">Ctrl+P = PDF</span>
+  </div>
+</section>
+
+<!-- ══════════════ LOGO ══════════════ -->
+<section id="logo">
+  <div class="sec-head">
+    <p class="eyebrow">01 — Značka</p>
+    <h2>Logo</h2>
+    <p class="lead">Značka je tvořená <strong>dvěma kostkami spojenými přechodem</strong>. Modrá vpravo nahoře, oranžová vlevo dole, mezi nimi zúžený krček. Tenhle tvar se nikdy nemění.</p>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:1rem">
+    <div class="logobox bg-dark">
+      <span class="cap">Na tmavém</span>
+      <svg width="150" viewBox="0 0 380 100" aria-hidden="true">
+        <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+        <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
+        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#EFEEEC">START</tspan></text>
+        <text x="128" y="92" font-family="Montserrat, sans-serif" font-weight="500" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>
+      </svg>
+    </div>
+    <div class="logobox bg-paper">
+      <span class="cap">Na světlém</span>
+      <svg width="150" viewBox="0 0 380 100" aria-hidden="true">
+        <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+        <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#0E1621">Leadership</text>
+        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#0E1621">START</tspan></text>
+        <text x="128" y="92" font-family="Montserrat, sans-serif" font-weight="500" font-size="12" letter-spacing="1.5" fill="#5C6570">ZA 21 DNÍ</text>
+      </svg>
+    </div>
+    <div class="logobox bg-blue">
+      <span class="cap">Inverzní — jednobarevné</span>
+      <svg width="150" viewBox="0 0 380 100" aria-hidden="true">
+        <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="#FFFFFF"/>
+        <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#fff">Leadership</text>
+        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#fff">RESTART</text>
+        <text x="128" y="92" font-family="Montserrat, sans-serif" font-weight="500" font-size="12" letter-spacing="1.5" fill="rgba(255,255,255,.75)">ZA 21 DNÍ</text>
+      </svg>
+    </div>
+    <div class="logobox bg-grad">
+      <span class="cap">Na fotce nebo gradientu</span>
+      <svg width="150" viewBox="0 0 380 100" aria-hidden="true">
+        <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="#FFFFFF"/>
+        <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#fff">Leadership</text>
+        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#fff">RESTART</text>
+        <text x="128" y="92" font-family="Montserrat, sans-serif" font-weight="500" font-size="12" letter-spacing="1.5" fill="rgba(255,255,255,.8)">ZA 21 DNÍ</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="grid g3">
+    <div class="glass card">
+      <h3>Ochranná zóna</h3>
+      <p style="color:var(--fg-dim);font-size:.9rem">Kolem loga nech volno minimálně <strong>na šířku jedné kostky</strong>. Do téhle zóny nevstupuje text, foto ani okraj stránky.</p>
+      <svg viewBox="0 0 200 120" width="100%" style="margin-top:.8rem">
+        <rect x="4" y="4" width="192" height="112" fill="none" stroke="var(--lr-blue)" stroke-width="1" stroke-dasharray="4 4" opacity=".5"/>
+        <g transform="translate(60,26) scale(0.68)">
+          <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+        </g>
+        <text x="100" y="115" text-anchor="middle" font-family="Montserrat" font-size="8" fill="var(--fg-dim)">volno = 1× kostka na každé straně</text>
+      </svg>
+    </div>
+    <div class="glass card">
+      <h3>Minimální velikost</h3>
+      <p style="color:var(--fg-dim);font-size:.9rem">Pod tuhle hranici se krček mezi kostkami slije a značka přestane být čitelná.</p>
+      <div style="display:flex;gap:1.4rem;align-items:flex-end;margin-top:1rem">
+        <div style="text-align:center">
+          <svg width="24" viewBox="0 0 100 100"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/></svg>
+          <div style="font-size:.7rem;color:var(--fg-dim);margin-top:.4rem">24 px<br>digitál</div>
+        </div>
+        <div style="text-align:center">
+          <svg width="38" viewBox="0 0 100 100"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/></svg>
+          <div style="font-size:.7rem;color:var(--fg-dim);margin-top:.4rem">10 mm<br>tisk</div>
+        </div>
+      </div>
+    </div>
+    <div class="glass card">
+      <h3>Samotná značka</h3>
+      <p style="color:var(--fg-dim);font-size:.9rem">Bez textu se používá tam, kde je značka už známá: profilovka, favicon, razítko na fotce, patka dokumentu.</p>
+      <div style="display:flex;gap:1rem;margin-top:1rem;align-items:center">
+        <svg width="44" viewBox="0 0 100 100"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/></svg>
+        <svg width="44" viewBox="0 0 100 100"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="var(--fg)"/></svg>
+        <svg width="44" viewBox="0 0 100 100"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="none" stroke="var(--fg)" stroke-width="4"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ BARVY ══════════════ -->
+<section id="barvy">
+  <div class="sec-head">
+    <p class="eyebrow">02 — Barvy</p>
+    <h2>Barevná paleta</h2>
+    <p class="lead">Modrá a oranžová jsou značka. Zlatá je odměna — používá se střídmě, jen tam, kde jde o výsledek nebo prémiovou úroveň. Klikni na kterýkoliv vzorek a HEX se zkopíruje.</p>
+  </div>
+
+  <h4 style="margin-bottom:.9rem">Základní</h4>
+  <div class="grid g4" style="margin-bottom:2.5rem">
+    <button class="swatch" data-hex="#377EF7">
+      <span class="fill" style="background:#377EF7"></span>
+      <span class="info"><span class="nm">Modrá</span><span class="hx">#377EF7</span>
+      <span class="use">Primární. Odkazy, CTA, zvýrazněná slova, ikony.</span></span>
+    </button>
+    <button class="swatch" data-hex="#ED6D47">
+      <span class="fill" style="background:#ED6D47"></span>
+      <span class="info"><span class="nm">Oranžová</span><span class="hx">#ED6D47</span>
+      <span class="use">Primární. Akcenty, energie, druhá polovina gradientu.</span></span>
+    </button>
+    <button class="swatch" data-hex="#0E1621">
+      <span class="fill" style="background:#0E1621"></span>
+      <span class="info"><span class="nm">Inkoust</span><span class="hx">#0E1621</span>
+      <span class="use">Nadpisy a text na světlém pozadí.</span></span>
+    </button>
+    <button class="swatch" data-hex="#EFEEEC">
+      <span class="fill" style="background:#EFEEEC"></span>
+      <span class="info"><span class="nm">Papír</span><span class="hx">#EFEEEC</span>
+      <span class="use">Světlé pozadí. Text na tmavém pozadí.</span></span>
+    </button>
+  </div>
+
+  <h4 style="margin-bottom:.9rem">Doplňkové</h4>
+  <div class="grid g4" style="margin-bottom:2.5rem">
+    <button class="swatch" data-hex="#CA9733">
+      <span class="fill" style="background:#CA9733"></span>
+      <span class="info"><span class="nm">Zlatá</span><span class="hx">#CA9733</span>
+      <span class="use">Odměna, prémium, dokončená výzva. Max. 5 % plochy.</span></span>
+    </button>
+    <button class="swatch" data-hex="#1E1E1E">
+      <span class="fill" style="background:#1E1E1E"></span>
+      <span class="info"><span class="nm">Tmavá</span><span class="hx">#1E1E1E</span>
+      <span class="use">Pozadí tmavého režimu — web, prezentace, sociální sítě.</span></span>
+    </button>
+    <button class="swatch" data-hex="#B3CEEE">
+      <span class="fill" style="background:#B3CEEE"></span>
+      <span class="info"><span class="nm">Modrá záře</span><span class="hx">#B3CEEE</span>
+      <span class="use">Jen rozostřené elipsy v pozadí. Nikdy text.</span></span>
+    </button>
+    <button class="swatch" data-hex="#ECBAA9">
+      <span class="fill" style="background:#ECBAA9"></span>
+      <span class="info"><span class="nm">Oranžová záře</span><span class="hx">#ECBAA9</span>
+      <span class="use">Jen rozostřené elipsy v pozadí. Nikdy text.</span></span>
+    </button>
+  </div>
+
+  <h4 style="margin-bottom:.9rem">Gradienty</h4>
+  <div class="grid g2">
+    <div>
+      <div class="gradbar" style="background:linear-gradient(135deg,#377EF7 0%,#7A729C 50%,#ED6D47 100%)">
+        <span>135° · #377EF7 → #7A729C → #ED6D47</span>
+      </div>
+      <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.7rem">Značkový přechod. Logo, zvýrazněná slova v nadpisech, symboly, tlačítka. Vždycky modrá na začátku, oranžová na konci.</p>
+    </div>
+    <div>
+      <div class="gradbar" style="background:linear-gradient(180deg,#CE9D37 0%,#F4D077 100%)">
+        <span>180° · #CE9D37 → #F4D077</span>
+      </div>
+      <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.7rem">Zlatý přechod. Certifikáty, odznaky za dokončení, Premium balíček. Nikdy jako pozadí celé stránky.</p>
+    </div>
+  </div>
+
+  <div class="glass card" style="margin-top:1.5rem">
+    <h3>Poměr v ploše</h3>
+    <div style="display:flex;height:34px;border-radius:8px;overflow:hidden;margin:.9rem 0 .7rem">
+      <div style="flex:60;background:var(--bg-elev);border:1px solid var(--line)"></div>
+      <div style="flex:25;background:#377EF7"></div>
+      <div style="flex:10;background:#ED6D47"></div>
+      <div style="flex:5;background:#CA9733"></div>
+    </div>
+    <p style="font-size:.85rem;color:var(--fg-dim);margin:0">60 % neutrální pozadí · 25 % modrá · 10 % oranžová · 5 % zlatá. Když je oranžové stejně jako modré, ztratí se důraz.</p>
+  </div>
+</section>
+
+<!-- ══════════════ TYPOGRAFIE ══════════════ -->
+<section id="typografie">
+  <div class="sec-head">
+    <p class="eyebrow">03 — Písmo</p>
+    <h2>Typografie</h2>
+    <p class="lead">Tři řezy, tři úkoly. League Spartan křičí, Montserrat vysvětluje, Caveat komentuje. Všechny tři jsou zdarma na Google Fonts.</p>
+  </div>
+
+  <div class="grid g3" style="margin-bottom:2.5rem">
+    <div class="glass card">
+      <p class="eyebrow" style="margin-bottom:.4rem">Nadpisy</p>
+      <div style="font-family:var(--font-display);font-weight:800;font-size:2rem;line-height:1">League Spartan</div>
+      <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.6rem;margin-bottom:0">Řezy 700 a 800. Nikdy pod 18 px. Prokládání −2 %.</p>
+    </div>
+    <div class="glass card">
+      <p class="eyebrow" style="margin-bottom:.4rem">Běžný text</p>
+      <div style="font-family:var(--font-body);font-weight:600;font-size:1.7rem;line-height:1.1">Montserrat</div>
+      <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.6rem;margin-bottom:0">Řezy 400, 500, 600. Řádkování 1,6. Popisky verzálkami 500.</p>
+    </div>
+    <div class="glass card">
+      <p class="eyebrow" style="margin-bottom:.4rem">Dekorativní</p>
+      <div style="font-family:var(--font-accent);font-weight:600;font-size:2.4rem;line-height:1">Caveat</div>
+      <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.6rem;margin-bottom:0">Citáty, poznámky na okraj, ručně psané důrazy. Nikdy celý odstavec.</p>
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.4rem">Škála</h4>
+  <div>
+    <div class="typerow">
+      <div class="sample-display" style="font-weight:800;font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.02;letter-spacing:-.02em">Vítej v programu</div>
+      <div class="spec">H1 · League Spartan 800 · 56/57 px · −2 %</div>
+    </div>
+    <div class="typerow">
+      <div class="sample-display" style="font-weight:800;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.1;letter-spacing:-.015em">Co dáš, to dostaneš</div>
+      <div class="spec">H2 · League Spartan 800 · 36/40 px · −1,5 %</div>
+    </div>
+    <div class="typerow">
+      <div class="sample-display" style="font-weight:700;font-size:1.35rem;line-height:1.25">Jak funguje vratná záloha</div>
+      <div class="spec">H3 · League Spartan 700 · 22/28 px</div>
+    </div>
+    <div class="typerow">
+      <div class="sample-body" style="font-size:1rem;line-height:1.65;max-width:62ch">Přestaň o změně jen mluvit a začni ji žít. S <strong style="color:var(--lr-blue)">denním vedením</strong>, ICF metodikou a systémem, který funguje i bez dřiny — pro podnikatele a lídry, kteří chtějí <strong style="color:var(--lr-blue)">výsledky, ne teorii</strong>.</div>
+      <div class="spec">Text · Montserrat 400 · 16/26 px · max. 65 znaků na řádek · zvýraznění 600 v modré</div>
+    </div>
+    <div class="typerow">
+      <div class="sample-body" style="font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-dim)">21 dní · online · ICF metodika</div>
+      <div class="spec">Popisek · Montserrat 600 · 12 px · +16 % · verzálky</div>
+    </div>
+    <div class="typerow">
+      <div class="sample-accent" style="font-size:2rem;line-height:1.2;color:var(--lr-orange)">Kdo má kůži ve hře, nevzdává to třetí den.</div>
+      <div class="spec">Akcent · Caveat 600 · 32 px · modrá nebo oranžová</div>
+    </div>
+  </div>
+
+  <div class="glass card" style="margin-top:1.5rem">
+    <h3>Náhradní písma</h3>
+    <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:0">Když League Spartan nebo Montserrat nejsou k dispozici (Word, cizí šablona, e-mail): nadpisy <strong>Arial Black</strong>, text <strong>Arial</strong> nebo <strong>Segoe UI</strong>. Caveat se nenahrazuje — radši ho vynech než použít jiné psací písmo.</p>
+  </div>
+</section>
+
+<!-- ══════════════ PRVKY ══════════════ -->
+<section id="prvky">
+  <div class="sec-head">
+    <p class="eyebrow">04 — Vizuální jazyk</p>
+    <h2>Designové prvky</h2>
+    <p class="lead">Čtyři stavební kameny. Kostky nesou význam, sklo drží obsah, záře dělá hloubku, přechod zvýrazňuje.</p>
+  </div>
+
+  <h4 style="margin-bottom:.8rem">Tři prvky</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.2rem">Celý vizuální jazyk stojí na třech tvarech. Každý sedí do stejné buňky o straně <strong>M</strong> a všechny tři se umí plynule napojit na kteroukoliv spojku — proto z nich jde skládat linie i ornamenty, aniž by někde vznikl zlom.</p>
+
+    <div class="parts">
+      <div class="part">
+        <svg viewBox="0 0 28 28" width="86" aria-hidden="true"><g fill="var(--fg)" opacity=".85"><path d="M0 14a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/></g></svg>
+        <b>Kruh</b>
+        <span>Průměr M. Otevřený bod — člověk, začátek, ještě neuzavřeno.</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 28 28" width="86" aria-hidden="true"><g fill="var(--fg)" opacity=".85"><path d="M7 0H21A7 7 0 0 1 28 7V21A7 7 0 0 1 21 28H7A7 7 0 0 1 0 21V7A7 7 0 0 1 7 0Z"/></g></svg>
+        <b>Zaoblená kostka</b>
+        <span>Roh M/4. Přechodový stav — probíhá, rozpracováno.</span>
+      </div>
+      <div class="part">
+        <svg viewBox="0 0 28 28" width="86" aria-hidden="true"><g fill="var(--fg)" opacity=".85"><path d="M0 0H28V28H0Z"/></g></svg>
+        <b>Kostka</b>
+        <span>Ostrý čtverec M×M. Pevný bod — hotovo, ukotveno, výsledek.</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="accent" style="color:var(--lr-blue)">Klíčové číslo:</span>
+      Spojka má konkávní rádius <strong style="color:var(--fg)">R = M/2</strong>. Při téhle hodnotě se napojí na kruh <em>přesně tečně</em> — vzdálenost středů je 2R, tedy součet obou poloměrů. Jiný rádius napojení rozbije: menší udělá zlom, větší nateče přes obrys.
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.8rem">Jak se prvky spojují</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.3rem">Spojka jde <strong>vždycky po diagonále</strong>, nikdy vodorovně ani svisle. Prvky se dotýkají rohem, spojka ten roh na obou volných stranách vykrojí obloukem R.</p>
+    <div class="joins">
+      <div class="jn"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".8"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M28 14a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></svg><span>kruh + kruh</span></div>
+      <div class="jn"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".8"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></svg><span>kruh + zaoblená</span></div>
+      <div class="jn"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".8"><path d="M7 28H21A7 7 0 0 1 28 35V49A7 7 0 0 1 21 56H7A7 7 0 0 1 0 49V35A7 7 0 0 1 7 28Z"/><path d="M28 0H56V28H28Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></svg><span>zaoblená + kostka</span></div>
+      <div class="jn"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><g fill="url(#lrGrad)"><path d="M0 28H28V56H0Z"/><path d="M28 0H56V28H28Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></svg><span>kostka + kostka = <b style="color:var(--fg)">značka</b></span></div>
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.8rem">Slovník tvarů</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.3rem">Z těch tří prvků vzniká pět tvarů se stálým významem. Nepoužívej je zaměnitelně jen proto, že se hodí do místa.</p>
+    <div class="vocab">
+      <div class="vitem"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><g fill="url(#lrGrad)"><path d="M0 28H28V56H0Z"/><path d="M28 0H56V28H28Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></svg>
+        <b>Krok</b><span>Dvě kostky přes spojku. <em>Toto je značka</em> — v téhle podobě se nikdy nemění.</span></div>
+      <div class="vitem"><svg viewBox="0 0 84 84" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".78"><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M56 0H84V28H56Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/></g></svg>
+        <b>Schodiště</b><span>Kruh → zaoblená → kostka. Postup od otevřeného k hotovému.</span></div>
+      <div class="vitem"><svg viewBox="0 0 84 84" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".78"><path d="M0 14a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M28 28H56V56H28Z"/><path d="M56 14a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M56 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M28 14A14 14 0 0 0 42 28V42H28A14 14 0 0 0 14 28V14Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/><path d="M56 42A14 14 0 0 0 70 56V70H56A14 14 0 0 0 42 56V42Z"/></g></svg>
+        <b>Uzel</b><span>Čtyři kruhy kolem jedné kostky. Skupina, sdílení, společný hovor.</span></div>
+      <div class="vitem"><svg viewBox="0 0 112 56" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".78"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/><path d="M63 28H77A7 7 0 0 1 84 35V49A7 7 0 0 1 77 56H63A7 7 0 0 1 56 49V35A7 7 0 0 1 63 28Z"/><path d="M84 0H112V28H84Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/><path d="M56 14A14 14 0 0 0 70 28V42H56A14 14 0 0 0 42 28V14Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/></g></svg>
+        <b>Cesta</b><span>Zalomená trasa. Nejde to rovně — ale jde to.</span></div>
+      <div class="vitem"><svg viewBox="0 0 140 56" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".78"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/><path d="M56 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 0H105A7 7 0 0 1 112 7V21A7 7 0 0 1 105 28H91A7 7 0 0 1 84 21V7A7 7 0 0 1 91 0Z"/><path d="M112 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/><path d="M56 14A14 14 0 0 0 70 28V42H56A14 14 0 0 0 42 28V14Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/><path d="M112 14A14 14 0 0 0 126 28V42H112A14 14 0 0 0 98 28V14Z"/></g></svg>
+        <b>Vlna</b><span>Vodorovná linie nahoru a dolů. Dělič sekcí, pruh v patce.</span></div>
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.8rem">Ikony pro úrovně programu</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.3rem">Úroveň se pozná podle <strong>délky řetězce</strong>, ne podle barvy. A podle toho, čím řetězec začíná: kruh na začátku znamená otevřený vstup, kostka na konci hotový výsledek. Čím dál klient došel, tím delší cesta.</p>
+    <div class="levels">
+      <div class="lvl"><div class="lvlbox"><svg viewBox="0 0 28 28" width="100%" aria-hidden="true"><g fill="url(#lrGrad)"><path d="M0 0H28V28H0Z"/></g></svg></div>
+        <b>Vstup</b><span>1 kostka<br>první krok</span></div>
+      <div class="lvl"><div class="lvlbox"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><g fill="url(#lrGrad)"><path d="M7 28H21A7 7 0 0 1 28 35V49A7 7 0 0 1 21 56H7A7 7 0 0 1 0 49V35A7 7 0 0 1 7 28Z"/><path d="M28 0H56V28H28Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></svg></div>
+        <b>Restart</b><span>2 prvky<br>21 dní</span></div>
+      <div class="lvl"><div class="lvlbox"><svg viewBox="0 0 84 84" width="100%" aria-hidden="true"><g fill="url(#lrGrad)"><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M56 0H84V28H56Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/></g></svg></div>
+        <b>Up Great</b><span>3 prvky<br>dlouhodobý růst</span></div>
+      <div class="lvl"><div class="lvlbox"><svg viewBox="0 0 112 112" width="100%" aria-hidden="true"><g fill="url(#lrGold)"><path d="M0 98a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 56H49A7 7 0 0 1 56 63V77A7 7 0 0 1 49 84H35A7 7 0 0 1 28 77V63A7 7 0 0 1 35 56Z"/><path d="M63 28H77A7 7 0 0 1 84 35V49A7 7 0 0 1 77 56H63A7 7 0 0 1 56 49V35A7 7 0 0 1 63 28Z"/><path d="M84 0H112V28H84Z"/><path d="M14 84A14 14 0 0 0 28 70H42V84A14 14 0 0 0 28 98H14Z"/><path d="M42 56A14 14 0 0 0 56 42H70V56A14 14 0 0 0 56 70H42Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/></g></svg></div>
+        <b>Privátní</b><span>4 prvky · zlatá<br>nejvyšší úroveň</span></div>
+    </div>
+    <div class="note" style="margin-top:1.3rem">
+      <span class="accent" style="color:var(--lr-orange)">Pozor:</span>
+      Zlatá patří <em>jen</em> nejvyšší úrovni. Kdyby ji dostal každý stupeň, přestane cokoliv znamenat.
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.8rem">Symboly v pozadí</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.2rem">Prvky poskládané do mřížky dělají texturu. Musí zůstat <strong>na hranici viditelnosti</strong> — jakmile si jí čtenář všimne dřív než textu, je moc silná.</p>
+    <div class="bgdemo">
+      <div class="bgcell dark">
+        <svg viewBox="0 0 140 140" class="bgtex" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#EFEEEC" opacity=".05"><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M7 112H21A7 7 0 0 1 28 119V133A7 7 0 0 1 21 140H7A7 7 0 0 1 0 133V119A7 7 0 0 1 7 112Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M28 84H56V112H28Z"/><path d="M56 0H84V28H56Z"/><path d="M56 56H84V84H56Z"/><path d="M56 126a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M84 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 84H105A7 7 0 0 1 112 91V105A7 7 0 0 1 105 112H91A7 7 0 0 1 84 105V91A7 7 0 0 1 91 84Z"/><path d="M119 0H133A7 7 0 0 1 140 7V21A7 7 0 0 1 133 28H119A7 7 0 0 1 112 21V7A7 7 0 0 1 119 0Z"/><path d="M112 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M112 112H140V140H112Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M28 70A14 14 0 0 0 42 84V98H28A14 14 0 0 0 14 84V70Z"/><path d="M14 112A14 14 0 0 0 28 98H42V112A14 14 0 0 0 28 126H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/><path d="M56 42A14 14 0 0 0 70 56V70H56A14 14 0 0 0 42 56V42Z"/><path d="M42 84A14 14 0 0 0 56 70H70V84A14 14 0 0 0 56 98H42Z"/><path d="M56 98A14 14 0 0 0 70 112V126H56A14 14 0 0 0 42 112V98Z"/><path d="M84 14A14 14 0 0 0 98 28V42H84A14 14 0 0 0 70 28V14Z"/><path d="M70 56A14 14 0 0 0 84 42H98V56A14 14 0 0 0 84 70H70Z"/><path d="M84 70A14 14 0 0 0 98 84V98H84A14 14 0 0 0 70 84V70Z"/><path d="M70 112A14 14 0 0 0 84 98H98V112A14 14 0 0 0 84 126H70Z"/><path d="M98 28A14 14 0 0 0 112 14H126V28A14 14 0 0 0 112 42H98Z"/><path d="M112 42A14 14 0 0 0 126 56V70H112A14 14 0 0 0 98 56V42Z"/><path d="M98 84A14 14 0 0 0 112 70H126V84A14 14 0 0 0 112 98H98Z"/><path d="M112 98A14 14 0 0 0 126 112V126H112A14 14 0 0 0 98 112V98Z"/></g></svg>
+        <div class="bglabel"><strong>Tmavé pozadí</strong><span>bílá na <code>5 %</code> krytí</span></div>
+      </div>
+      <div class="bgcell paper">
+        <svg viewBox="0 0 140 140" class="bgtex" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#0E1621" opacity=".055"><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M7 112H21A7 7 0 0 1 28 119V133A7 7 0 0 1 21 140H7A7 7 0 0 1 0 133V119A7 7 0 0 1 7 112Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M28 84H56V112H28Z"/><path d="M56 0H84V28H56Z"/><path d="M56 56H84V84H56Z"/><path d="M56 126a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M84 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 84H105A7 7 0 0 1 112 91V105A7 7 0 0 1 105 112H91A7 7 0 0 1 84 105V91A7 7 0 0 1 91 84Z"/><path d="M119 0H133A7 7 0 0 1 140 7V21A7 7 0 0 1 133 28H119A7 7 0 0 1 112 21V7A7 7 0 0 1 119 0Z"/><path d="M112 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M112 112H140V140H112Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M28 70A14 14 0 0 0 42 84V98H28A14 14 0 0 0 14 84V70Z"/><path d="M14 112A14 14 0 0 0 28 98H42V112A14 14 0 0 0 28 126H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/><path d="M56 42A14 14 0 0 0 70 56V70H56A14 14 0 0 0 42 56V42Z"/><path d="M42 84A14 14 0 0 0 56 70H70V84A14 14 0 0 0 56 98H42Z"/><path d="M56 98A14 14 0 0 0 70 112V126H56A14 14 0 0 0 42 112V98Z"/><path d="M84 14A14 14 0 0 0 98 28V42H84A14 14 0 0 0 70 28V14Z"/><path d="M70 56A14 14 0 0 0 84 42H98V56A14 14 0 0 0 84 70H70Z"/><path d="M84 70A14 14 0 0 0 98 84V98H84A14 14 0 0 0 70 84V70Z"/><path d="M70 112A14 14 0 0 0 84 98H98V112A14 14 0 0 0 84 126H70Z"/><path d="M98 28A14 14 0 0 0 112 14H126V28A14 14 0 0 0 112 42H98Z"/><path d="M112 42A14 14 0 0 0 126 56V70H112A14 14 0 0 0 98 56V42Z"/><path d="M98 84A14 14 0 0 0 112 70H126V84A14 14 0 0 0 112 98H98Z"/><path d="M112 98A14 14 0 0 0 126 112V126H112A14 14 0 0 0 98 112V98Z"/></g></svg>
+        <div class="bglabel dk"><strong>Světlé pozadí</strong><span>inkoust na <code>5,5 %</code> krytí</span></div>
+      </div>
+      <div class="bgcell grd">
+        <svg viewBox="0 0 140 140" class="bgtex" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#FFFFFF" opacity=".13"><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M7 112H21A7 7 0 0 1 28 119V133A7 7 0 0 1 21 140H7A7 7 0 0 1 0 133V119A7 7 0 0 1 7 112Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M28 84H56V112H28Z"/><path d="M56 0H84V28H56Z"/><path d="M56 56H84V84H56Z"/><path d="M56 126a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M84 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 84H105A7 7 0 0 1 112 91V105A7 7 0 0 1 105 112H91A7 7 0 0 1 84 105V91A7 7 0 0 1 91 84Z"/><path d="M119 0H133A7 7 0 0 1 140 7V21A7 7 0 0 1 133 28H119A7 7 0 0 1 112 21V7A7 7 0 0 1 119 0Z"/><path d="M112 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M112 112H140V140H112Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M28 70A14 14 0 0 0 42 84V98H28A14 14 0 0 0 14 84V70Z"/><path d="M14 112A14 14 0 0 0 28 98H42V112A14 14 0 0 0 28 126H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/><path d="M56 42A14 14 0 0 0 70 56V70H56A14 14 0 0 0 42 56V42Z"/><path d="M42 84A14 14 0 0 0 56 70H70V84A14 14 0 0 0 56 98H42Z"/><path d="M56 98A14 14 0 0 0 70 112V126H56A14 14 0 0 0 42 112V98Z"/><path d="M84 14A14 14 0 0 0 98 28V42H84A14 14 0 0 0 70 28V14Z"/><path d="M70 56A14 14 0 0 0 84 42H98V56A14 14 0 0 0 84 70H70Z"/><path d="M84 70A14 14 0 0 0 98 84V98H84A14 14 0 0 0 70 84V70Z"/><path d="M70 112A14 14 0 0 0 84 98H98V112A14 14 0 0 0 84 126H70Z"/><path d="M98 28A14 14 0 0 0 112 14H126V28A14 14 0 0 0 112 42H98Z"/><path d="M112 42A14 14 0 0 0 126 56V70H112A14 14 0 0 0 98 56V42Z"/><path d="M98 84A14 14 0 0 0 112 70H126V84A14 14 0 0 0 112 98H98Z"/><path d="M112 98A14 14 0 0 0 126 112V126H112A14 14 0 0 0 98 112V98Z"/></g></svg>
+        <div class="bglabel"><strong>Na gradientu</strong><span>bílá na <code>13 %</code> krytí</span></div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:1.3rem">
+      <div>
+        <p style="font-size:.85rem;color:var(--fg-dim);margin-bottom:.5rem"><strong style="color:var(--fg)">Kam textura patří</strong></p>
+        <div class="rule ok"><b>✓</b><span>Roh stránky, odkud se rozbíhá ven z formátu.</span></div>
+        <div class="rule ok"><b>✓</b><span>Za nadpisem — část tvarů schovaná pod textem.</span></div>
+        <div class="rule ok"><b>✓</b><span>Patka dokumentu jako tichý pruh.</span></div>
+      </div>
+      <div>
+        <p style="font-size:.85rem;color:var(--fg-dim);margin-bottom:.5rem"><strong style="color:var(--fg)">Kam nepatří</strong></p>
+        <div class="rule no"><b>✗</b><span>Pod běžný text — snižuje čitelnost.</span></div>
+        <div class="rule no"><b>✗</b><span>Přes celou plochu rovnoměrně. Vždycky jen výřez.</span></div>
+        <div class="rule no"><b>✗</b><span>V barvě značky. Textura je vždycky neutrální.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.8rem">Barvení symbolů</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.2rem">Gradient se na řetězec nanáší <strong>přes celý tvar naráz</strong>, ne na každý modul zvlášť. Směr kopíruje směr pohybu: začátek modrý, konec oranžový.</p>
+    <div class="colordemo">
+      <div class="cd"><svg viewBox="0 0 112 56" width="100%" aria-hidden="true"><g fill="url(#lrGrad)"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/><path d="M63 28H77A7 7 0 0 1 84 35V49A7 7 0 0 1 77 56H63A7 7 0 0 1 56 49V35A7 7 0 0 1 63 28Z"/><path d="M84 0H112V28H84Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/><path d="M56 14A14 14 0 0 0 70 28V42H56A14 14 0 0 0 42 28V14Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/></g></svg>
+        <span><b style="color:var(--lr-blue)">✓</b> Jeden přechod přes celý tvar</span></div>
+      <div class="cd"><svg viewBox="0 0 112 56" width="100%" aria-hidden="true">
+        <g fill="#377EF7"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g>
+        <g fill="#ED6D47"><path d="M63 28H77A7 7 0 0 1 84 35V49A7 7 0 0 1 77 56H63A7 7 0 0 1 56 49V35A7 7 0 0 1 63 28Z"/><path d="M84 0H112V28H84Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/></g>
+      </svg>
+        <span><b style="color:var(--lr-orange)">✗</b> Každý prvek jinou barvou</span></div>
+      <div class="cd"><svg viewBox="0 0 112 56" width="100%" aria-hidden="true"><g fill="var(--fg)" opacity=".8"><path d="M0 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 0H49A7 7 0 0 1 56 7V21A7 7 0 0 1 49 28H35A7 7 0 0 1 28 21V7A7 7 0 0 1 35 0Z"/><path d="M63 28H77A7 7 0 0 1 84 35V49A7 7 0 0 1 77 56H63A7 7 0 0 1 56 49V35A7 7 0 0 1 63 28Z"/><path d="M84 0H112V28H84Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/><path d="M56 14A14 14 0 0 0 70 28V42H56A14 14 0 0 0 42 28V14Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/></g></svg>
+        <span><b style="color:var(--lr-blue)">✓</b> Jednobarevně — v textu a malých velikostech</span></div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-bottom:1.6rem">
+    <div class="glass card">
+      <h3>Sklo</h3>
+      <p style="font-size:.9rem;color:var(--fg-dim)">Rámečky, karty, menu, cenové tabulky. Sklo vždycky leží na záři — na plochém pozadí nemá co ukázat.</p>
+      <pre style="margin-top:.9rem">background: rgba(255,255,255,.045);
+backdrop-filter: blur(18px) saturate(140%);
+border: 1px solid rgba(255,255,255,.10);
+border-radius: 14px;</pre>
+      <p style="font-size:.8rem;color:var(--fg-dim);margin-top:.7rem;margin-bottom:0">Ve světlém režimu: pozadí <code>rgba(255,255,255,.55)</code>, rámeček <code>rgba(14,22,33,.12)</code>.</p>
+    </div>
+    <div class="glass card">
+      <h3>Záře</h3>
+      <p style="font-size:.9rem;color:var(--fg-dim)">Rozostřené elipsy pod obsahem. Dvě až tři na plochu, nikdy víc — jinak se z hloubky stane mlha.</p>
+      <pre style="margin-top:.9rem">border-radius: 50%;
+filter: blur(90px);
+/* tmavý režim */
+background: rgba(55,126,247,.28);
+background: rgba(237,109,71,.20);
+/* světlý režim */
+background: #B3CEEE;
+background: #ECBAA9;</pre>
+    </div>
+  </div>
+
+  <div class="glass card">
+    <h3>Přechod na textu a symbolech</h3>
+    <p style="font-size:.9rem;color:var(--fg-dim);margin-bottom:1rem">Gradient patří na <strong>jedno slovo</strong> v nadpisu, ne na celou větu. Symboly a piktogramy ho mohou nést celé.</p>
+    <div style="font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,4vw,2.6rem);line-height:1.1;letter-spacing:-.02em">
+      Restart, který <span class="grad-text">vydrží</span>
+    </div>
+    <pre style="margin-top:1rem">background: linear-gradient(135deg,#377EF7,#ED6D47);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;</pre>
+  </div>
+</section>
+
+<!-- ══════════════ PRAVIDLA ══════════════ -->
+<section id="pravidla">
+  <div class="sec-head">
+    <p class="eyebrow">05 — Pravidla</p>
+    <h2>Co dělat a co ne</h2>
+  </div>
+  <div class="grid g2">
+    <div class="glass card">
+      <h3 style="color:var(--lr-blue);margin-bottom:.8rem">Dělej</h3>
+      <div class="rule ok"><b>✓</b><span>Nech kolem loga volno alespoň na šířku kostky.</span></div>
+      <div class="rule ok"><b>✓</b><span>Gradient veď vždycky od modré k oranžové, ne naopak.</span></div>
+      <div class="rule ok"><b>✓</b><span>Zvýrazňuj modrou. Oranžová je akcent, ne druhý hlas.</span></div>
+      <div class="rule ok"><b>✓</b><span>Drž text na maximálně 65 znacích na řádek.</span></div>
+      <div class="rule ok"><b>✓</b><span>Sklo pokládej na záři, aby bylo co prosvítat.</span></div>
+      <div class="rule ok"><b>✓</b><span>Zlatou nech jen na dokončení, odměnu a Premium.</span></div>
+    </div>
+    <div class="glass card">
+      <h3 style="color:var(--lr-orange);margin-bottom:.8rem">Nedělej</h3>
+      <div class="rule no"><b>✗</b><span>Neroztahuj ani nenaklápěj logo. Měň jen velikost.</span></div>
+      <div class="rule no"><b>✗</b><span>Nepřidávej ke značce třetí kostku — to už není logo.</span></div>
+      <div class="rule no"><b>✗</b><span>Nedávej gradient na celý odstavec, jen na jedno slovo.</span></div>
+      <div class="rule no"><b>✗</b><span>Nepiš text v barvách záře (#B3CEEE, #ECBAA9) — neposkytnou kontrast.</span></div>
+      <div class="rule no"><b>✗</b><span>Nemíchej Caveat do běžného textu ani do tlačítek.</span></div>
+      <div class="rule no"><b>✗</b><span>Nestav sklo na sklo. Jedna vrstva na plochu stačí.</span></div>
+    </div>
+  </div>
+
+  <div class="glass card" style="margin-top:1.5rem">
+    <h3>Tón</h3>
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:.6rem">Tykáme. Mluvíme v druhé osobě, sloves víc než podstatných jmen. Krátké věty. Žádné superlativy, které nejde doložit — místo „nejlepší program" konkrétní číslo.</p>
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:0"><span class="accent" style="color:var(--lr-blue)">Ano:</span> „81 ze 107 účastníků šlo touhle cestou."&nbsp;&nbsp;&nbsp;<span class="accent" style="color:var(--lr-orange)">Ne:</span> „Náš revoluční systém změní váš život."</p>
+  </div>
+</section>
+
+<!-- ══════════════ TOKENY ══════════════ -->
+<section id="tokeny">
+  <div class="sec-head">
+    <p class="eyebrow">06 — Ke zkopírování</p>
+    <h2>Tokeny</h2>
+    <p class="lead">Hotové proměnné pro web, Figmu nebo cokoliv dalšího. Zkopíruj a vlož.</p>
+  </div>
+  <div class="tabs">
+    <button type="button" aria-selected="true" data-tab="css">CSS</button>
+    <button type="button" aria-selected="false" data-tab="json">JSON</button>
+    <button class="copybtn" id="copyCode" type="button">Kopírovat</button>
+  </div>
+  <pre id="codeBox"></pre>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p style="margin-bottom:.3rem"><strong style="color:var(--fg)">Leadership Restart — brand manuál v1.0</strong></p>
+  <p style="margin-bottom:0">Otázky ke značce řeš dřív, než něco vyrobíš. Opravit soubor je levnější než dotisk.</p>
+  <a class="weblink" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+    </svg>
+    Zpět na web — leadershiprestart.cz
+  </a>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* --- Přepínač režimu --- */
+  var btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    btn.textContent = next === 'dark' ? 'Světlý režim' : 'Tmavý režim';
+  });
+
+  /* --- Kopírování --- */
+  function copy(text, done){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallback(text, done); });
+    } else { fallback(text, done); }
+  }
+  function fallback(text, done){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta); done();
+  }
+
+  /* --- Vzorky barev --- */
+  Array.prototype.forEach.call(document.querySelectorAll('.swatch'), function(sw){
+    sw.addEventListener('click', function(){
+      var hex = sw.getAttribute('data-hex');
+      var label = sw.querySelector('.hx');
+      copy(hex, function(){
+        var orig = label.textContent;
+        label.textContent = 'zkopírováno';
+        label.classList.add('copied');
+        setTimeout(function(){ label.textContent = orig; label.classList.remove('copied'); }, 1200);
+      });
+    });
+  });
+
+  /* --- Tokeny --- */
+  var snippets = {
+    css: [
+      ':root {',
+      '  /* Značkové barvy */',
+      '  --lr-blue:   #377EF7;',
+      '  --lr-orange: #ED6D47;',
+      '  --lr-gold:   #CA9733;',
+      '  --lr-ink:    #0E1621;',
+      '  --lr-paper:  #EFEEEC;',
+      '  --lr-dark:   #1E1E1E;',
+      '',
+      '  /* Záře — jen pro pozadí */',
+      '  --lr-blue-soft:   #B3CEEE;',
+      '  --lr-orange-soft: #ECBAA9;',
+      '',
+      '  /* Gradienty */',
+      '  --lr-grad-brand: linear-gradient(135deg, #377EF7 0%, #7A729C 50%, #ED6D47 100%);',
+      '  --lr-grad-gold:  linear-gradient(180deg, #CE9D37 0%, #F4D077 100%);',
+      '',
+      '  /* Písma */',
+      '  --lr-font-display: "League Spartan", "Arial Black", sans-serif;',
+      '  --lr-font-body:    "Montserrat", "Segoe UI", Arial, sans-serif;',
+      '  --lr-font-accent:  "Caveat", cursive;',
+      '',
+      '  /* Sklo */',
+      '  --lr-glass-bg:     rgba(255,255,255,.045);',
+      '  --lr-glass-border: rgba(255,255,255,.10);',
+      '  --lr-glass-blur:   18px;',
+      '  --lr-radius:       14px;',
+      '}'
+    ].join('\n'),
+    json: [
+      '{',
+      '  "color": {',
+      '    "blue":   "#377EF7",',
+      '    "orange": "#ED6D47",',
+      '    "gold":   "#CA9733",',
+      '    "ink":    "#0E1621",',
+      '    "paper":  "#EFEEEC",',
+      '    "dark":   "#1E1E1E",',
+      '    "blueSoft":   "#B3CEEE",',
+      '    "orangeSoft": "#ECBAA9"',
+      '  },',
+      '  "gradient": {',
+      '    "brand": { "angle": 135, "stops": ["#377EF7", "#7A729C", "#ED6D47"] },',
+      '    "gold":  { "angle": 180, "stops": ["#CE9D37", "#F4D077"] }',
+      '  },',
+      '  "font": {',
+      '    "display": { "family": "League Spartan", "weights": [700, 800] },',
+      '    "body":    { "family": "Montserrat", "weights": [400, 500, 600] },',
+      '    "accent":  { "family": "Caveat", "weights": [600] }',
+      '  },',
+      '  "glass": {',
+      '    "background": "rgba(255,255,255,0.045)",',
+      '    "border": "rgba(255,255,255,0.10)",',
+      '    "blur": 18,',
+      '    "radius": 14',
+      '  }',
+      '}'
+    ].join('\n')
+  };
+
+  var box = document.getElementById('codeBox');
+  var current = 'css';
+  box.textContent = snippets.css;
+
+  Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-tab]'), function(t){
+    t.addEventListener('click', function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-tab]'), function(o){
+        o.setAttribute('aria-selected', String(o === t));
+      });
+      current = t.getAttribute('data-tab');
+      box.textContent = snippets[current];
+    });
+  });
+
+  var cbtn = document.getElementById('copyCode');
+  cbtn.addEventListener('click', function(){
+    copy(snippets[current], function(){
+      cbtn.textContent = 'Zkopírováno';
+      setTimeout(function(){ cbtn.textContent = 'Kopírovat'; }, 1200);
+    });
+  });
+})();
+</script>
+</body>
+</html>

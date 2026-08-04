@@ -164,7 +164,7 @@
       '<li><a href="' + CALENDLY + '" target="_blank" rel="noopener">Rezervovat hovor&nbsp;→</a></li>' +
       '</ul></div></div>' +
       '<div class="footer-bottom"><span>© ' + y + ' Denis Novotný — Leadership Restart. Váš partner na cestě k osobnímu a profesnímu rozvoji.</span>' +
-      '<span><a href="gdpr.html">Ochrana osobních údajů (GDPR)</a></span></div>' +
+      '<span><a href="brand.html">Brand design</a> · <a href="gdpr.html">Ochrana osobních údajů (GDPR)</a></span></div>' +
       '</div></footer>';
   }
 
