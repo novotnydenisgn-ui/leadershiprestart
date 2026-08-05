@@ -8,7 +8,6 @@
     { href: 'index.html',     label: 'Domů' },
     { href: 'program.html',   label: 'Program' },
     { href: 'cenik.html',     label: 'Ceník' },
-    { href: 'vysledky.html',  label: 'Výsledky' },
     { href: 'rezervace.html', label: 'Rezervace' }
   ];
   var CTA = { href: 'vyzva.html', label: '21denní výzva' };
@@ -167,7 +166,7 @@
       '<li><a href="index.html">Domů</a></li>' +
       '<li><a href="program.html">Program</a></li>' +
       '<li><a href="cenik.html">Ceník</a></li>' +
-      '<li><a href="vysledky.html">Výsledky &amp; reference</a></li>' +
+      '<li><a href="index.html#reference">Výsledky &amp; reference</a></li>' +
       '<li><a href="vyzva.html">21denní výzva</a></li>' +
       '<li><a href="rezervace.html">Rezervace konzultace</a></li>' +
       '</ul></div>' +
