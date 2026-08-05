@@ -165,6 +165,22 @@
   .mentor span{font-size:12.5px;color:var(--ink-soft)}
   .mentors-note{margin-top:26px;font-size:14px;color:var(--ink-soft)}
   .mentors-note b{color:var(--ink)}
+
+  /* ---- loga: bílý monochrom + nekonečný posun zleva doprava ---- */
+  .logo-marquee{margin-top:clamp(38px,5vw,58px);overflow:hidden;position:relative;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .lm-track{display:flex;width:max-content;animation:lmSlide 34s linear infinite}
+  .logo-marquee:hover .lm-track{animation-play-state:paused}
+  .lm-set{display:flex;align-items:center;gap:clamp(48px,7vw,104px);
+    padding-right:clamp(48px,7vw,104px);flex:none}
+  /* loga jsou předpřipravená jako bílé siluety (assets/logos/white/) */
+  .lm-set img{height:clamp(56px,6.4vw,86px);width:auto;object-fit:contain;
+    opacity:.7;transition:opacity .3s}
+  .logo-marquee:hover .lm-set img{opacity:1}
+  /* posun zleva doprava: startuje o jednu sadu vlevo a jede zpět na nulu */
+  @keyframes lmSlide{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  @media(prefers-reduced-motion:reduce){.lm-track{animation:none;transform:none}}
   @media(max-width:520px){.mentor{width:132px}.mentor img{width:110px;height:110px}}
   .denis-card{display:grid;grid-template-columns:340px 1fr;gap:0;overflow:hidden;padding:0;align-items:stretch}
   .denis-card img{width:100%;height:100%;object-fit:cover}
@@ -507,13 +523,25 @@
         </figure>
       </div>
     </div>
-    <div class="logo-strip reveal">
-      <img src="assets/logos/koucink-akademie.png" alt="Koučink akademie">
-      <img src="assets/logos/muni.png" alt="Masarykova univerzita">
-      <img src="assets/logos/performance.png" alt="Performance Lifestyle">
-      <img src="assets/logos/itp.png" alt="ITP">
-      <img src="assets/logos/logo-web.png" alt="Certifikace">
-    </div>
+      <!-- loga: bílý monochrom, nekonečný posun zleva doprava -->
+      <div class="logo-marquee" aria-label="Kde jsem se učil a certifikoval">
+        <div class="lm-track">
+          <div class="lm-set">
+            <img src="assets/logos/white/koucink-akademie.png" alt="Koučink akademie">
+            <img src="assets/logos/white/muni.png" alt="Masarykova univerzita">
+            <img src="assets/logos/white/performance.png" alt="Performance Lifestyle">
+            <img src="assets/logos/white/itp.png" alt="ITP">
+            <img src="assets/logos/white/logo-web.png" alt="Certifikace">
+          </div>
+          <div class="lm-set" aria-hidden="true">
+            <img src="assets/logos/white/koucink-akademie.png" alt="">
+            <img src="assets/logos/white/muni.png" alt="">
+            <img src="assets/logos/white/performance.png" alt="">
+            <img src="assets/logos/white/itp.png" alt="">
+            <img src="assets/logos/white/logo-web.png" alt="">
+          </div>
+        </div>
+      </div>
   </div>
 </section>
 
