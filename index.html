@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=6">
+<link rel="stylesheet" href="assets/site.css?v=7">
 <style>
   /* ---- hero s rozpadající se sochou ---- */
   .hero-land{position:relative;overflow:hidden;min-height:calc(100vh - 58px);display:flex;align-items:center}
@@ -522,7 +522,7 @@
           <span class="pill">ICF metodika</span><span class="pill">KTM koučink</span>
           <span class="pill">Performance University</span><span class="pill">Holistický přístup</span>
         </div>
-        <a class="btn btn-ghost" href="rezervace.html" style="margin-top:8px">Rezervovat konzultaci s Denisem</a>
+        <a class="btn btn-ghost" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener" style="margin-top:8px">Rezervovat konzultaci s Denisem</a>
       </div>
     </div>
 
@@ -635,16 +635,36 @@
     Nebo můžeš být přesně tam, kde jsi dnes. Vyber si.</p>
     <div class="hero-ctas" style="justify-content:center">
       <a class="btn btn-r21" href="https://silabytsebou.cz/kvalifikace_do_vyzvy" target="_blank" rel="noopener">Klikni a začni svou změnu</a>
-      <a class="btn btn-ghost on-dark" href="rezervace.html">Rezervovat nezávaznou konzultaci</a>
+      <a class="btn btn-ghost on-dark" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Rezervovat nezávaznou konzultaci</a>
     </div>
   </div>
 </section>
 
-<div id="siteLead"></div>
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=6"></script>
+<script src="assets/site.js?v=7"></script>
 <script>
+/* harmonogram — linka vlevo postupně nabíhá podle scrollu */
+(function(){
+  var tl = document.querySelector('.timeline');
+  if (!tl) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var r = tl.getBoundingClientRect();
+    /* 0 = linka ještě nezačala, 1 = celá napsaná;
+       vztažný bod je 62 % výšky okna, ať linka běží kousek před obsahem */
+    var anchor = innerHeight * 0.62;
+    var p = (anchor - r.top) / r.height;
+    tl.style.setProperty('--tl', Math.max(0, Math.min(1, p)).toFixed(3));
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  update();
+})();
+
 /* video reference — karusel (šipky, tečky, swipe, Vimeo facáda) */
 (function(){
   var track = document.getElementById('vrefsTrack');
