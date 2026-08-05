@@ -63,7 +63,12 @@
 
   /* ---- citace klientů ---- */
   .quote-card blockquote{font-style:italic;color:var(--ink-soft);border-left:3px solid var(--teal);
-    padding-left:16px;margin:0 0 14px}
+    padding-left:16px;margin:0 0 18px}
+  .who{display:flex;align-items:center;gap:14px}
+  .who img{width:54px;height:54px;border-radius:50%;object-fit:cover;object-position:center 18%;
+    flex:none;border:1px solid var(--glass-brd)}
+  .who b{display:block;font-size:15px;line-height:1.3}
+  .who span{font-size:13px;color:var(--ink-soft)}
 
   /* ---- výzva: hlavička se zlatým grafem ---- */
   .vyzva-head{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
@@ -183,12 +188,18 @@
       <div class="glass-card quote-card reveal">
         <blockquote>„Získal jsem nadhled, klidný drive a soustředění na podstatné věci.
         Začal jsem se pravidelně hýbat a konečně mám prostor na vlastní projekty.“</blockquote>
-        <p><b>Michal Kuzněcov</b><br><span style="font-size:13px;color:var(--ink-soft)">CEO, Kuzněcov Partners Invest</span></p>
+        <div class="who">
+          <img src="assets/img/ref-michal-kuznecov.jpg" alt="Michal Kuzněcov" loading="lazy">
+          <p><b>Michal Kuzněcov</b><span>CEO, Kuzněcov Partners Invest</span></p>
+        </div>
       </div>
       <div class="glass-card quote-card reveal">
         <blockquote>„Žena se mě na poslední dovolené ptala, co se mnou ten Denis dělá.
         Vyházel jsem toxické činnosti a výzvy dnes beru jako příležitost k růstu.“</blockquote>
-        <p><b>Lukáš Scorvan</b><br><span style="font-size:13px;color:var(--ink-soft)">programátor · founder tech startupu</span></p>
+        <div class="who">
+          <img src="assets/img/ref-lukas-scorvan-foto.jpg" alt="Lukáš Scorvan" loading="lazy">
+          <p><b>Lukáš Scorvan</b><span>programátor · founder tech startupu</span></p>
+        </div>
       </div>
     </div>
     <div class="grid-3" style="margin-top:22px">

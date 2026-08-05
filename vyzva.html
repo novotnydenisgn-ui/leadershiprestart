@@ -38,6 +38,12 @@
   .garance blockquote{font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
     font-size:clamp(20px,2.6vw,30px);line-height:1.3;margin:10px 0 16px}
 
+  .who{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .who img{width:54px;height:54px;border-radius:50%;object-fit:cover;object-position:center 18%;
+    flex:none;border:1px solid var(--glass-brd)}
+  .who b{display:block;font-size:15px;line-height:1.3}
+  .who span{font-size:13px;color:var(--ink-soft)}
+
   .prokoho{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
   @media(max-width:820px){.prokoho{grid-template-columns:1fr}}
   .no-list li::before{content:"✕";background:linear-gradient(120deg,#c0392b,#8e2318)}
@@ -210,12 +216,18 @@
         <div class="glass-card reveal">
           <p style="font-style:italic">„Získal jsem nadhled, klidný drive a soustředění na podstatné věci.
           Začal jsem se pravidelně hýbat a konečně mám prostor na vlastní projekty.“</p>
-          <p style="margin-top:12px"><b>Michal Kuzněcov</b><br><span style="font-size:13px;color:var(--ink-soft)">CEO, Kuzněcov Partners Invest</span></p>
+          <div class="who">
+            <img src="assets/img/ref-michal-kuznecov.jpg" alt="Michal Kuzněcov" loading="lazy">
+            <p><b>Michal Kuzněcov</b><span>CEO, Kuzněcov Partners Invest</span></p>
+          </div>
         </div>
         <div class="glass-card reveal">
           <p style="font-style:italic">„Žena se mě na poslední dovolené ptala, co se mnou ten Denis dělá.
           Vyházel jsem toxické činnosti a výzvy beru jako příležitost k růstu.“</p>
-          <p style="margin-top:12px"><b>Lukáš Scorvan</b><br><span style="font-size:13px;color:var(--ink-soft)">programátor, founder tech startupu</span></p>
+          <div class="who">
+            <img src="assets/img/ref-lukas-scorvan-foto.jpg" alt="Lukáš Scorvan" loading="lazy">
+            <p><b>Lukáš Scorvan</b><span>programátor, founder tech startupu</span></p>
+          </div>
         </div>
       </div>
     </div>
