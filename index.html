@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
+<link rel="stylesheet" href="assets/site.css?v=9">
 <style>
   /* ---- hero s rozpadající se sochou ---- */
   .hero-land{position:relative;overflow:hidden;min-height:calc(100vh - 58px);display:flex;align-items:center}
@@ -49,10 +49,22 @@
   .ref-embed:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
   .ref-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
-  /* ---- benefity ---- */
-  .b-ico{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;
-    font-size:23px;background:linear-gradient(120deg,rgba(255,99,57,.22),rgba(0,128,255,.22));
-    border:1px solid var(--glass-brd);margin-bottom:14px}
+  /* ---- benefity: linkové ikony místo emoji ---- */
+  .b-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(120deg,rgba(255,99,57,.18),rgba(0,128,255,.18));
+    border:1px solid var(--glass-brd);margin-bottom:16px;color:#fff}
+  .b-ico svg{width:25px;height:25px}
+  .glass-card:hover .b-ico{border-color:rgba(255,99,57,.45)}
+
+  /* ---- pozadí sekce arzenálu ---- */
+  .sec-bg{position:relative;overflow:hidden;isolation:isolate}
+  .sec-bg::before{content:"";position:absolute;inset:0;z-index:-2;
+    background:url('assets/img/bg-consistency.jpg') 88% center/auto 128% no-repeat;opacity:.3;
+    filter:grayscale(.4)}
+  .sec-bg::after{content:"";position:absolute;inset:0;z-index:-1;background:
+    linear-gradient(90deg,var(--pearl) 26%,rgba(11,14,19,.86) 52%,rgba(11,14,19,.55)),
+    linear-gradient(180deg,var(--pearl),transparent 22%,transparent 78%,var(--pearl))}
+  @media(max-width:820px){.sec-bg::before{opacity:.16;background-position:70% center}}
 
   /* ---- garance ---- */
   .garance{max-width:860px;margin:0 auto;text-align:center}
@@ -226,7 +238,7 @@
 <section class="section section-dark" style="padding-bottom:clamp(70px,9vw,120px)">
   <div class="wrap" style="text-align:center">
     <span class="kicker">Podívej se dovnitř</span>
-    <h2 class="display h-section">🔥 To zažiješ <span class="grad-text">v programu</span></h2>
+    <h2 class="display h-section">To zažiješ <span class="grad-text">v programu</span></h2>
     <div class="video-glow reveal">
       <div class="video-embed">
         <iframe src="https://www.youtube-nocookie.com/embed/wJ3yzUyEE00?rel=0"
@@ -244,15 +256,15 @@
     <span class="kicker">Co ti výzva přinese</span>
     <h2 class="display h-section">Víc energie. Víc pozornosti. <span class="teal-text">Efektivnější růst.</span></h2>
     <div class="grid-3" style="margin-top:36px">
-      <div class="glass-card reveal"><div class="b-ico">⚡</div>
+      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.6 13.2a1 1 0 0 0 .8 1.6H11l-1 7.2 8.4-11.2a1 1 0 0 0-.8-1.6H12l1-7.2Z"/></svg></div>
         <h3 class="display">Více energie</h3>
         <p>Eliminujeme toxické návyky, které ti berou sílu — první výsledky pocítíš
         do 7 dnů. Večer nepadneš a ráno nejedeš nanovo.</p></div>
-      <div class="glass-card reveal"><div class="b-ico">🎯</div>
+      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg></div>
         <h3 class="display">Více pozornosti</h3>
         <p>Hluboké soustředění místo rozstřeleného dne. Denní reflexe v aplikaci Dimi
         ti za 3 minuty ukáže, kam šlapeš — a proč.</p></div>
-      <div class="glass-card reveal"><div class="b-ico">📈</div>
+      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
         <h3 class="display">Efektivnější růst</h3>
         <p>Když srovnáš návyky, srovná se i byznys. Systém mikro-kroků, který drží
         i v náročných týdnech — bez síly vůle.</p></div>
@@ -359,7 +371,7 @@
     </div>
     <div class="vrefs-dots" id="vrefsDots" aria-hidden="true"></div>
     <h3 class="display h-section" style="margin-top:clamp(46px,6vw,74px);font-size:clamp(22px,2.8vw,34px);text-align:center">
-      Co o mě a programu <span class="grad-text">říkají</span> 👇</h3>
+      Co o mě a programu <span class="grad-text">říkají</span></h3>
     <div class="refs-grid">
       <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/M6q2CLq_170?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
       <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/-v6xZ6xo5w8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
@@ -378,20 +390,20 @@
 </section>
 
 <!-- ======================= KOMPLETNÍ TRANSFORMACE ======================= -->
-<section class="section section-warm">
+<section class="section section-warm sec-bg">
   <div class="wrap">
     <span class="kicker">Co tě ve výzvě čeká</span>
     <h2 class="display h-section">Tvůj kompletní <span class="grad-text">arzenál</span> pro změnu</h2>
     <div class="grid-3" style="margin-top:36px">
-      <div class="glass-card reveal"><div class="b-ico">🔄</div>
+      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.3-6.4L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.3 6.4L3 16"/><path d="M3 21v-5h5"/></svg></div>
         <h3 class="display">Kompletní transformace</h3>
         <p>Úvodní mentoring 1:1, společné cally 2× týdně (pondělí a pátek 8:30)
         a podpora 24/7. Živé vedení, ne video kurz, který nikdy nedokoukáš.</p></div>
-      <div class="glass-card reveal"><div class="b-ico">🧱</div>
+      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg></div>
         <h3 class="display">Nové nezničitelné návyky</h3>
         <p>Stavíme přes novou identitu a vnitřní motivaci, ne přes přemáhání.
         Návyky, které přežijí i tvůj nejhorší týden.</p></div>
-      <div class="glass-card reveal"><div class="b-ico">🚀</div>
+      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></div>
         <h3 class="display">Restart</h3>
         <p>Denní mikro-kroky (15–20 minut) a reflexe v aplikaci Dimi.
         Za 21 dní stojí systém — a ty se poznáš v zrcadle.</p></div>
@@ -489,7 +501,7 @@
       <div class="wbox-body">
         <span class="kicker">Dárek pro každého klienta</span>
         <h2 class="display h-section" style="font-size:clamp(24px,3vw,38px)">Optimalizační balíček</h2>
-        <p class="gift-line">🎁 Každý klient ho získá hned na startu — na obnovu pozornosti,
+        <p class="gift-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:19px;height:19px;flex:none"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18"/><path d="M12 9v12"/><path d="M12 9c-2.5 0-4.5-1-4.5-3S9 3.5 12 9Zm0 0c2.5 0 4.5-1 4.5-3S15 3.5 12 9Z"/></svg> Každý klient ho získá hned na startu — na obnovu pozornosti,
         energie a reflektování svého růstu.</p>
         <ul class="check-list">
           <li>Obnova pozornosti a hlubokého soustředění</li>
@@ -642,7 +654,7 @@
 
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=8"></script>
+<script src="assets/site.js?v=9"></script>
 <script>
 /* harmonogram — linka vlevo postupně nabíhá podle scrollu */
 (function(){
