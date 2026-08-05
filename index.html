@@ -150,6 +150,10 @@
     border-radius:14px;padding:12px 14px;margin:16px 0 4px;font-size:14.5px;line-height:1.5}
   @media(max-width:860px){.wbox{grid-template-columns:1fr}.wbox>img{max-height:300px}}
 
+  /* čísla navázaná přímo na Denisovu kartu */
+  .denis-stats{margin-top:18px}
+  .denis-stats .stat{padding:22px 16px}
+
   /* ---- moji mentoři (od koho se Denis učil) ---- */
   .mentors{margin-top:clamp(34px,5vw,54px);text-align:center}
   .mentors h3{font-size:clamp(22px,2.8vw,34px);margin-bottom:10px}
@@ -400,41 +404,72 @@
   <div class="wrap">
     <div class="vyzva-head">
       <div>
-        <span class="kicker">Tvá 21denní výzva</span>
-        <h2 class="display h-section">Týden po týdnu k novému já</h2>
-        <p class="h-sub">Žádná teorie navíc — každý týden má jasný cíl a měřitelný výsledek.</p>
+        <span class="kicker">Harmonogram spolupráce</span>
+        <h2 class="display h-section">1–3měsíční <span class="grad-text">program</span></h2>
+        <p class="h-sub">Začínáme 21denní výzvou a podle tvého cíle pokračujeme dál.
+        Každá fáze má jasný úkol a měřitelný výsledek — žádná teorie navíc.</p>
       </div>
-      <img class="reveal" src="assets/img/gold-graph.png" alt="Zlatý graf růstu — výsledky týden po týdnu">
+      <img class="reveal" src="assets/img/gold-graph.png" alt="Zlatý graf růstu — výsledky fáze po fázi">
     </div>
     <div class="timeline">
       <div class="t-item reveal">
+        <div class="t-dot">0</div>
+        <div class="glass-card">
+          <h3 class="display">Vstupní seznámení</h3>
+          <p>Nezávazný hovor 1:1: kde jsi, kam chceš dojít a co tě dosud brzdilo.
+          Nastavíme cíl, rozsah spolupráce a její délku — ať víš, do čeho jdeš.</p>
+          <div class="kpis"><div class="kpi"><b>Den 1–3</b><span>cíl a rozsah</span></div>
+          <div class="kpi"><b>1:1</b><span>úvodní mentoring</span></div></div>
+        </div>
+      </div>
+      <div class="t-item reveal">
         <div class="t-dot">1</div>
         <div class="glass-card">
-          <h3 class="display">Týden 1 — Úklid a restart</h3>
-          <p>Zmapujeme, co ti bere energii, a eliminujeme toxické návyky.
-          Už v prvním týdnu pocítíš víc energie a klidu — první výsledky do 7 dnů.</p>
-          <div class="kpis"><div class="kpi"><b>Den 1–7</b><span>eliminace brzd</span></div>
+          <h3 class="display">Den 3–7 — Příprava na program</h3>
+          <p>Zmapujeme tvůj den a to, co ti bere energii. Zprovozníme aplikaci Dimi,
+          nastavíme denní rutinu a odstraníme brzdy — start bez zbytečného rozjezdu.</p>
+          <div class="kpis"><div class="kpi"><b>Den 3–7</b><span>eliminace brzd</span></div>
           <div class="kpi"><b>15–20 min</b><span>denně</span></div></div>
         </div>
       </div>
       <div class="t-item reveal">
         <div class="t-dot">2</div>
         <div class="glass-card">
-          <h3 class="display">Týden 2 — Nové návyky a identita</h3>
+          <h3 class="display">Den 7–14 — Nastavování nových návyků</h3>
           <p>Stavíme návyky, které chceš — pohyb, focus, ranní režim, byznys rituály.
           Ne na sílu, ale přes novou identitu: přestáváš se přemáhat a začínáš být.</p>
-          <div class="kpis"><div class="kpi"><b>Den 8–14</b><span>budování</span></div>
+          <div class="kpis"><div class="kpi"><b>Den 7–14</b><span>budování</span></div>
           <div class="kpi"><b>2× týdně</b><span>společný call</span></div></div>
         </div>
       </div>
       <div class="t-item reveal">
         <div class="t-dot">3</div>
         <div class="glass-card">
-          <h3 class="display">Týden 3 — Upevnění a systém</h3>
-          <p>Návyky zatížíme realitou: náročné dny, cestování, stres. Odcházíš se systémem,
-          který přežije i tvůj nejhorší týden — a s plánem, co dál.</p>
-          <div class="kpis"><div class="kpi"><b>Den 15–21</b><span>zátěžový test</span></div>
+          <h3 class="display">Den 14–21 — Zátěžový test a upevnění</h3>
+          <p>Návyky zatížíme realitou: náročné dny, cestování, stres. Na konci třetího
+          týdne máš systém, který přežije i tvůj nejhorší týden — a plán, co dál.</p>
+          <div class="kpis"><div class="kpi"><b>Den 14–21</b><span>zátěžový test</span></div>
           <div class="kpi"><b>Den 21</b><span>nový standard</span></div></div>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot">4</div>
+        <div class="glass-card">
+          <h3 class="display">Měsíc 2 — Přenos do byznysu</h3>
+          <p>Když drží režim, jde se na výkon: priority, rozhodování, delegování a čas
+          na věci, které posouvají firmu. Návyky začínají vydělávat.</p>
+          <div class="kpis"><div class="kpi"><b>Den 22–60</b><span>výkon a fokus</span></div>
+          <div class="kpi"><b>1:1</b><span>individuální vedení</span></div></div>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot">5</div>
+        <div class="glass-card">
+          <h3 class="display">Měsíc 3 — Samostatnost</h3>
+          <p>Ladíme, co ještě drhne, a předáváme řízení tobě. Odcházíš s vlastním
+          systémem, kterým se umíš vrátit do formy sám — i za půl roku.</p>
+          <div class="kpis"><div class="kpi"><b>Den 61–90</b><span>upevnění</span></div>
+          <div class="kpi"><b>Výstup</b><span>plán na dalších 6 měsíců</span></div></div>
         </div>
       </div>
     </div>
@@ -491,11 +526,19 @@
       </div>
     </div>
 
+    <!-- čísla patří k Denisovi — proto rovnou pod jeho kartu -->
+    <div class="stats denis-stats">
+      <div class="stat glass-card reveal"><b><span data-count="250" data-suffix="+">0</span></b><span>spokojených klientů</span></div>
+      <div class="stat glass-card reveal"><b><span data-count="1500" data-suffix="+">0</span></b><span>hodin certifikované praxe</span></div>
+      <div class="stat glass-card reveal"><b><span data-count="300" data-suffix="%">0</span></b><span>navýšení příjmu klienta během spolupráce</span></div>
+      <div class="stat glass-card reveal"><b><span data-count="100" data-suffix="+">0</span></b><span>spokojených absolventů programu</span></div>
+    </div>
+
     <!-- MOJI UČITELÉ — ne lektoři programu, ale lidé, od kterých se Denis učil -->
     <div class="mentors reveal">
       <h3 class="display">Učil jsem se od těch <span class="grad-text">nejlepších</span></h3>
-      <p class="h-sub" style="margin:0 auto">Metodika a mentoři, kteří stojí za výsledky více než
-      <b style="color:var(--ink)">100 spokojených absolventů</b> programu.</p>
+      <p class="h-sub" style="margin:0 auto">Metodika a mentoři, kteří stojí za výsledky
+      mých klientů — a za tím, jak dnes program vedu.</p>
       <div class="mentors-row">
         <figure class="mentor">
           <img src="assets/img/mentor-pavel-moric.jpg" alt="Pavel Moric">
@@ -542,18 +585,6 @@
           </div>
         </div>
       </div>
-  </div>
-</section>
-
-<!-- ======================= ČÍSLA ======================= -->
-<section class="section section-dark" style="padding-top:56px;padding-bottom:56px">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat glass-card reveal"><b><span data-count="250" data-suffix="+">0</span></b><span>spokojených klientů</span></div>
-      <div class="stat glass-card reveal"><b><span data-count="1500" data-suffix="+">0</span></b><span>hodin certifikované praxe</span></div>
-      <div class="stat glass-card reveal"><b><span data-count="300" data-suffix="%">0</span></b><span>navýšení příjmu klienta během spolupráce</span></div>
-      <div class="stat glass-card reveal"><b>21</b><span>dní k novým návykům</span></div>
-    </div>
   </div>
 </section>
 
