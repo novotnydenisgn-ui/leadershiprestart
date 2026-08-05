@@ -15,6 +15,24 @@
   var CALENDLY = 'https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1';
   var KVALIFIKACE = 'https://silabytsebou.cz/kvalifikace_do_vyzvy';
 
+  /* --- LOGO (brand manuál v1.0) ------------------------------------------
+     Značka = dvě kostky spojené krčkem, JEDEN přechod přes celý tvar
+     (modrá vpravo nahoře → oranžová vlevo dole). Tvar se nikdy nemění. */
+  var LOGO_MARK = 'M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 ' +
+    'L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z';
+
+  function logo(id, cls) {
+    return '<svg class="' + cls + '" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart za 21 dní">' +
+      '<defs><linearGradient id="' + id + '" x1="100%" y1="0%" x2="0%" y2="100%">' +
+      '<stop offset="0%" stop-color="#377EF7"/><stop offset="100%" stop-color="#ED6D47"/>' +
+      '</linearGradient></defs>' +
+      '<path d="' + LOGO_MARK + '" fill="url(#' + id + ')"/>' +
+      '<text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>' +
+      '<text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#EFEEEC">START</tspan></text>' +
+      '<text x="128" y="92" font-family="Manrope, sans-serif" font-weight="600" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>' +
+      '</svg>';
+  }
+
   function current() {
     var f = location.pathname.split('/').pop() || 'index.html';
     return f === '' ? 'index.html' : f;
@@ -30,9 +48,7 @@
     }).join('');
     el.outerHTML =
       '<header class="nav"><div class="nav-in">' +
-      '<a class="nav-brand" href="index.html">' +
-      '<img src="assets/img/r21-badge.png" alt="Leadership R21">' +
-      '<span><b>Leadership Restart</b><small>leadershiprestart.cz</small></span></a>' +
+      '<a class="nav-brand" href="index.html">' + logo('lrLogoNav', 'brand-logo') + '</a>' +
       '<button class="nav-burger" aria-label="Menu" aria-expanded="false">☰</button>' +
       '<nav class="nav-links">' + links +
       '<a href="' + CTA.href + '" class="nav-cta">' + CTA.label + '</a></nav>' +
@@ -91,8 +107,8 @@
 
   /* --- brandové prvky z manuálu (kostka + kruh + spojka) --------------------
      TEX = dlaždice 140×140 pro texturu v pozadí, WAVE = „vlna" (dělič),
-     MARK = značka „Krok" (dvě kostky přes spojku). Nikdy needituj tvary ručně —
-     pochází z brand manuálu (sekce Designové prvky). */
+     značka v pásu = LOGO_MARK (jedna cesta → jeden přechod přes celý tvar).
+     Nikdy needituj tvary ručně — pochází z brand manuálu (Designové prvky). */
   var TEX =
     '<path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M7 112H21A7 7 0 0 1 28 119V133A7 7 0 0 1 21 140H7A7 7 0 0 1 0 133V119A7 7 0 0 1 7 112Z"/>' +
     '<path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M28 84H56V112H28Z"/>' +
@@ -114,21 +130,18 @@
     '<path d="M112 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/>' +
     '<path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/><path d="M56 14A14 14 0 0 0 70 28V42H56A14 14 0 0 0 42 28V14Z"/>' +
     '<path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/><path d="M112 14A14 14 0 0 0 126 28V42H112A14 14 0 0 0 98 28V14Z"/>';
-  var MARK =
-    '<path d="M0 28H28V56H0Z"/><path d="M28 0H56V28H28Z"/>' +
-    '<path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/>';
-
   function footerBand() {
     return '<div class="footer-band">' +
       '<svg class="fb-tex" aria-hidden="true"><defs>' +
       '<pattern id="fbTex" width="140" height="140" patternUnits="userSpaceOnUse">' +
       '<g fill="#EFEEEC" opacity=".04">' + TEX + '</g></pattern>' +
-      '<linearGradient id="fbGrad" x1="0%" y1="100%" x2="100%" y2="0%">' +
-      '<stop offset="0%" stop-color="#0080ff"/><stop offset="100%" stop-color="#ff6339"/>' +
+      '<linearGradient id="fbGrad" x1="100%" y1="0%" x2="0%" y2="100%">' +
+      '<stop offset="0%" stop-color="#377EF7"/><stop offset="100%" stop-color="#ED6D47"/>' +
       '</linearGradient></defs>' +
       '<rect width="100%" height="100%" fill="url(#fbTex)"/></svg>' +
       '<div class="wrap fb-inner">' +
-      '<svg class="fb-mark" viewBox="0 0 56 56" aria-hidden="true"><g fill="url(#fbGrad)">' + MARK + '</g></svg>' +
+      '<svg class="fb-mark" viewBox="0 0 100 100" aria-hidden="true">' +
+      '<path d="' + LOGO_MARK + '" fill="url(#fbGrad)"/></svg>' +
       '<p class="fb-claim">Krok za krokem k novému standardu</p>' +
       '<p class="fb-sub">Kostka je hotový krok, kruh otevřený začátek. Za 21 dní z nich složíš systém,' +
       ' který drží — i když se den nepovede.</p>' +
@@ -147,7 +160,7 @@
     el.outerHTML =
       '<footer class="footer">' + footerBand() + '<div class="wrap">' +
       '<div class="footer-grid">' +
-      '<div><div class="footer-brand"><img src="assets/img/r21-badge.png" alt=""><b>Leadership Restart</b></div>' +
+      '<div><div class="footer-brand">' + logo('lrLogoFoot', 'brand-logo brand-logo-lg') + '</div>' +
       '<p>Program pro podnikatele a lídry, kteří už nechtějí o změně jen mluvit. ' +
       'Nezničitelné návyky, disciplína a byznys bez brzd — za 21 dní.</p></div>' +
       '<div><h4>Web</h4><ul>' +

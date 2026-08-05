@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Leadership Restart">
+  <defs>
+    <linearGradient id="m" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#377EF7"/>
+      <stop offset="100%" stop-color="#ED6D47"/>
+    </linearGradient>
+  </defs>
+  <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#m)"/>
+</svg>

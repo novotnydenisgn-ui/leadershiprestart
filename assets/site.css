@@ -128,12 +128,11 @@ a{color:inherit}
 }
 .nav-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:20px;
   padding:7px clamp(18px,4vw,44px)}
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto}
-.nav-brand img{width:34px;height:34px;object-fit:contain;border-radius:9px;background:transparent}
-.nav-brand b{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;
-  font-size:14.5px;letter-spacing:.02em;line-height:1;color:var(--ink)}
-.nav-brand small{display:block;font-family:"Manrope",sans-serif;font-weight:600;text-transform:none;
-  font-size:10px;color:var(--ink-soft);letter-spacing:.08em}
+.nav-brand{display:flex;align-items:center;text-decoration:none;margin-right:auto}
+/* logo = SVG lockup z brand manuálu (mount v site.js) */
+.brand-logo{height:38px;width:auto;display:block}
+.brand-logo-lg{height:54px}
+@media(max-width:520px){.brand-logo{height:32px}}
 .nav-links{display:flex;align-items:center;gap:6px}
 .nav-links a{
   text-decoration:none;font-weight:700;font-size:13.5px;color:var(--ink-soft);
@@ -335,9 +334,7 @@ body{padding-top:58px}
 .footer a{color:rgba(238,241,246,.75);text-decoration:none}
 .footer a:hover{color:var(--azure)}
 .footer ul{list-style:none;display:grid;gap:8px}
-.footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.footer-brand img{width:46px;height:46px;object-fit:contain}
-.footer-brand b{font-family:"League Spartan",sans-serif;text-transform:uppercase;font-size:17px;color:#fff}
+.footer-brand{display:flex;align-items:center;margin-bottom:16px}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:38px;padding-top:20px;
   display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:12.5px;
   color:rgba(238,241,246,.45)}
