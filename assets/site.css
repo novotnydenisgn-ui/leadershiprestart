@@ -184,10 +184,13 @@ body{padding-top:58px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
 .stat{text-align:center;padding:28px 18px}
 .stat b{font-family:"League Spartan",sans-serif;font-weight:800;
-  font-size:clamp(38px,4.6vw,64px);line-height:1;display:block;
+  font-size:clamp(42px,5vw,72px);line-height:1;display:block;letter-spacing:-.01em;
   background:var(--r21-grad);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
-.stat span{font-size:14px;color:var(--ink-soft);font-weight:600;display:block;margin-top:8px}
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 8px 26px rgba(255,99,57,.28))}
+/* číslo uvnitř <b> (počítadlo) musí dědit velikost, ne popiskový styl */
+.stat b span{font:inherit;color:inherit;display:inline;margin:0}
+.stat > span{font-size:14px;color:var(--ink-soft);font-weight:600;display:block;margin-top:10px}
 
 /* ---------- sekce s tmavě modrým nádechem ---------- */
 .section-dark{
@@ -344,6 +347,9 @@ body{padding-top:58px}
   color:rgba(238,241,246,.42)}
 .footer-ico a{color:inherit}
 .footer-ico a:hover{color:var(--azure)}
+/* nenápadný odkaz na brand manuál pod e-mailem */
+.footer-ico .fl-brand{display:inline-block;margin-top:8px;font-size:11.5px;
+  color:rgba(238,241,246,.28);letter-spacing:.04em}
 
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
 @media(max-width:820px){.footer-grid{grid-template-columns:1fr}}
