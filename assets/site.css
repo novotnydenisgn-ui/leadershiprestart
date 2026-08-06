@@ -318,8 +318,8 @@ body{padding-top:58px}
 .lead-note{font-size:12.5px;color:var(--ink-soft);margin-top:12px}
 
 /* ---------- patička ---------- */
-.footer{background:var(--dark-2);color:rgba(238,241,246,.75);padding:0 0 34px;font-size:14px}
-.footer>.wrap{padding-top:52px}
+.footer{background:var(--dark-2);color:rgba(238,241,246,.75);padding:0 0 26px;font-size:14px}
+.footer>.wrap{padding-top:38px}
 
 /* brandový pás nad patičkou (designové prvky z manuálu) */
 .footer-band{position:relative;overflow:hidden;text-align:center;
@@ -338,18 +338,18 @@ body{padding-top:58px}
 .fb-wave{display:block;width:min(170px,42%);height:auto;margin:clamp(32px,4vw,46px) auto 0;opacity:.14}
 /* minimalistická patička: řada právních odkazů + firemní údaje */
 .footer-legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
-  gap:clamp(20px,4vw,58px);text-align:center}
-.footer-legal a{font-weight:600;font-size:14.5px;color:rgba(238,241,246,.9);
+  gap:clamp(16px,3vw,42px);text-align:center}
+.footer-legal a{font-weight:600;font-size:13px;color:rgba(238,241,246,.85);
   text-decoration:none;transition:color .2s}
 .footer-legal a:hover{color:var(--azure)}
-.footer-legal .fl-copy{font-size:14.5px;color:rgba(238,241,246,.5)}
-.footer-ico{margin-top:clamp(30px,4vw,46px);text-align:center;font-size:12.5px;line-height:1.9;
-  color:rgba(238,241,246,.42)}
+.footer-legal .fl-copy{font-size:13px;color:rgba(238,241,246,.45)}
+.footer-ico{margin-top:20px;text-align:center;font-size:11.5px;line-height:1.65;
+  color:rgba(238,241,246,.38)}
 .footer-ico a{color:inherit}
 .footer-ico a:hover{color:var(--azure)}
 /* nenápadný odkaz na brand manuál pod e-mailem */
-.footer-ico .fl-brand{display:inline-block;margin-top:8px;font-size:11.5px;
-  color:rgba(238,241,246,.28);letter-spacing:.04em}
+.footer-ico .fl-brand{display:inline-block;margin-top:6px;font-size:11px;
+  color:rgba(238,241,246,.26);letter-spacing:.04em}
 
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
 @media(max-width:820px){.footer-grid{grid-template-columns:1fr}}
