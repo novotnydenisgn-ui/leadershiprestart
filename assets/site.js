@@ -70,10 +70,12 @@
       '<nav class="footer-legal">' +
       '<a href="gdpr.html">Ochrana osobních údajů</a>' +
       '<a href="gdpr.html#cookies">Zásady používání souborů cookie</a>' +
+      '<a href="odstoupeni.html">Odstoupení od smlouvy</a>' +
       '<span class="fl-copy">© Leadership Restart ' + y + '</span>' +
       '</nav>' +
       '<p class="footer-ico">Denis Novotný, se sídlem Vranov 198, Vranov u Brna<br>' +
       'IČO 05876664, datová schránka cdawukj<br>' +
+      'Fyzická osoba zapsaná v živnostenském rejstříku vedeném Magistrátem města Brna. Nejsem plátce DPH.<br>' +
       '<a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a><br>' +
       '<a class="fl-brand" href="brand.html">Brand design</a></p>' +
       '</div></footer>';
