@@ -10,13 +10,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=9">
+<link rel="stylesheet" href="assets/site.css?v=10">
 <style>
   /* ---- hero s rozpadající se sochou ---- */
   .hero-land{position:relative;overflow:hidden;min-height:calc(100vh - 58px);display:flex;align-items:center}
+  /* zrcadlení (socha z leva obrazu → napravo od textu) + zvětšování při scrollu (--hz z site.js) */
   .hero-land .bg{position:absolute;inset:0;
     background:url('assets/img/statue-shatter-dark.jpg') center/cover no-repeat;
-    transform:scaleX(-1)} /* zrcadlení: socha z leva obrazu → napravo od textu */
+    transform:scaleX(-1) scale(var(--hz,1));transform-origin:center 40%}
   .hero-land .shade{position:absolute;inset:0;background:
     radial-gradient(900px 560px at 50% 42%,rgba(11,14,19,.55),transparent 70%),
     linear-gradient(180deg,rgba(11,14,19,.72),rgba(11,14,19,.55) 45%,rgba(11,14,19,.85))}
@@ -55,6 +56,37 @@
     border:1px solid var(--glass-brd);margin-bottom:16px;color:#fff}
   .b-ico svg{width:25px;height:25px}
   .glass-card:hover .b-ico{border-color:rgba(255,99,57,.45)}
+
+
+  /* ---- co ti výzva přinese: karty s vycentrovanou ikonou bez rámečku ---- */
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:clamp(16px,2.2vw,26px);margin-top:clamp(34px,4vw,52px)}
+  .bcard{position:relative;overflow:hidden;isolation:isolate;text-align:center;
+    padding:clamp(30px,3.4vw,44px) clamp(20px,2.4vw,28px);border-radius:var(--radius);
+    background:rgba(255,255,255,.03);border:1px solid var(--glass-brd);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s,background .45s}
+  /* volitelná fotka na pozadí karty: style="--photo:url('…')" */
+  .bcard::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--photo,none);
+    background-size:cover;background-position:center;opacity:.22;
+    transform:scale(1.04);transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .45s}
+  .bcard::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(11,14,19,.55),rgba(11,14,19,.88))}
+  .bcard:hover{transform:translateY(-6px);border-color:rgba(255,99,57,.35);background:rgba(255,255,255,.05)}
+  .bcard:hover::before{transform:scale(1.12);opacity:.3}
+  .bcard h3{font-size:clamp(17px,1.7vw,21px);margin-bottom:10px;line-height:1.25}
+  .bcard p{color:var(--ink-soft);font-size:14.5px;line-height:1.7;margin:0}
+
+  .bico{display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:#fff;
+    filter:drop-shadow(0 0 0 rgba(255,99,57,0));
+    transform:scale(.86);opacity:.75;
+    transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .6s,opacity .6s}
+  .bico svg{width:clamp(38px,4vw,50px);height:auto}
+  /* při doskrolování (reveal) a při hoveru ikona povyroste a rozzáří se */
+  .bcard.in .bico{transform:scale(1);opacity:1;
+    filter:drop-shadow(0 0 16px rgba(255,99,57,.45)) drop-shadow(0 0 34px rgba(0,128,255,.28))}
+  .bcard:hover .bico{transform:scale(1.12);
+    filter:drop-shadow(0 0 22px rgba(255,99,57,.7)) drop-shadow(0 0 46px rgba(0,128,255,.4))}
+  @media(prefers-reduced-motion:reduce){.bico{transform:none;opacity:1}}
 
   /* ---- pozadí sekce arzenálu ---- */
   .sec-bg{position:relative;overflow:hidden;isolation:isolate}
@@ -153,8 +185,16 @@
   .vyzva-head img{max-height:300px;margin:0 auto;filter:drop-shadow(0 24px 50px rgba(233,182,79,.25))}
   @media(max-width:860px){.vyzva-head{grid-template-columns:1fr}.vyzva-head img{max-height:220px}}
 
-  /* ---- optimalizační balíček ---- */
-  .wbox{display:grid;grid-template-columns:1fr 1.15fr;gap:0;padding:0;overflow:hidden;align-items:stretch}
+  /* ---- optimalizační balíček (zlatá záře při doskrolování i hoveru) ---- */
+  .wbox{display:grid;grid-template-columns:1fr 1.15fr;gap:0;padding:0;overflow:hidden;align-items:stretch;
+    position:relative;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .6s ease,border-color .6s ease}
+  .wbox.in{border-color:rgba(233,182,79,.28);
+    box-shadow:0 0 46px -12px rgba(233,182,79,.4),0 30px 70px rgba(0,0,0,.45)}
+  .wbox:hover{transform:translateY(-5px);border-color:rgba(233,182,79,.6);
+    box-shadow:0 0 80px -6px rgba(233,182,79,.6),0 44px 96px rgba(0,0,0,.55)}
+  .wbox>img{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+  .wbox:hover>img{transform:scale(1.04)}
   .wbox>img{width:100%;height:100%;object-fit:cover;min-height:320px}
   .wbox-body{padding:clamp(26px,3.6vw,46px)}
   .wbox .gift-line{display:flex;gap:10px;align-items:center;color:#f6d47c;font-weight:700;
@@ -254,20 +294,33 @@
 <section class="section">
   <div class="wrap">
     <span class="kicker">Co ti výzva přinese</span>
-    <h2 class="display h-section">Víc energie. Víc pozornosti. <span class="teal-text">Efektivnější růst.</span></h2>
-    <div class="grid-3" style="margin-top:36px">
-      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4.6 13.2a1 1 0 0 0 .8 1.6H11l-1 7.2 8.4-11.2a1 1 0 0 0-.8-1.6H12l1-7.2Z"/></svg></div>
-        <h3 class="display">Více energie</h3>
-        <p>Eliminujeme toxické návyky, které ti berou sílu — první výsledky pocítíš
-        do 7 dnů. Večer nepadneš a ráno nejedeš nanovo.</p></div>
-      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg></div>
-        <h3 class="display">Více pozornosti</h3>
-        <p>Hluboké soustředění místo rozstřeleného dne. Denní reflexe v aplikaci Dimi
-        ti za 3 minuty ukáže, kam šlapeš — a proč.</p></div>
-      <div class="glass-card reveal"><div class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
-        <h3 class="display">Efektivnější růst</h3>
-        <p>Když srovnáš návyky, srovná se i byznys. Systém mikro-kroků, který drží
-        i v náročných týdnech — bez síly vůle.</p></div>
+    <h2 class="display h-section">Zažívej znovu úspěch a nastartuj <span class="teal-text">produktivitu,</span></h2>
+    <p class="h-sub">která tě baví, přináší výsledky a další růst.</p>
+    <div class="bgrid">
+      <article class="bcard reveal">
+        <!-- foto na pozadí: přidej style="--photo:url('assets/img/…jpg')" -->
+        <div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 4.5 6v6c0 4.4 3.1 8.2 7.5 9.2 4.4-1 7.5-4.8 7.5-9.2V6L12 2.8Z"/><path d="m9 12.2 2.2 2.2L15.3 10"/></svg></div>
+        <h3 class="display">Disciplína, která není na sílu</h3>
+        <p>Nestavíme na vůli, která dojde v úterý. Stavíme na systému a nové identitě — pak už se nemusíš nutit.</p>
+      </article>
+      <article class="bcard reveal">
+        <!-- foto na pozadí: přidej style="--photo:url('assets/img/…jpg')" -->
+        <div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-8"/><path d="M12 13C12 9.7 9.3 7 6 7c0 3.3 2.7 6 6 6Z"/><path d="M12 13c0-3.9 3.1-7 7-7 0 3.9-3.1 7-7 7Z"/></svg></div>
+        <h3 class="display">Nové zdravé návyky</h3>
+        <p>Pohyb, spánek, ranní režim, práce s energií. Ne deset naráz — postupně a tak, aby vydržely.</p>
+      </article>
+      <article class="bcard reveal">
+        <!-- foto na pozadí: přidej style="--photo:url('assets/img/…jpg')" -->
+        <div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9.5V13l2.5 1.6"/><path d="m4.5 4.5 15 15"/></svg></div>
+        <h3 class="display">Konec odkládání</h3>
+        <p>Prokrastinace, výmluvy a vyčerpání z neúspěchu končí. Místo velkých předsevzetí denní mikro-krok, který uděláš.</p>
+      </article>
+      <article class="bcard reveal">
+        <!-- foto na pozadí: přidej style="--photo:url('assets/img/…jpg')" -->
+        <div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3.2M12 18.3v3.2M2.5 12h3.2M18.3 12h3.2"/><path d="m5.6 5.6 2.2 2.2M16.2 16.2l2.2 2.2M18.4 5.6l-2.2 2.2M7.8 16.2l-2.2 2.2"/></svg></div>
+        <h3 class="display">Lejzrová pozornost</h3>
+        <p>Hluboká práce bez vyrušení. Víš, co je teď důležité — a zbytek počká, aniž bys měl špatný pocit.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -654,7 +707,7 @@
 
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=9"></script>
+<script src="assets/site.js?v=10"></script>
 <script>
 /* harmonogram — linka vlevo postupně nabíhá podle scrollu */
 (function(){

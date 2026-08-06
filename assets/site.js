@@ -151,11 +151,139 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
+  /* --- souhlas s cookies -------------------------------------------------
+     Volba se ukládá do localStorage a rozesílá jako událost `lr:consent`,
+     aby se na ni daly navázat budoucí skripty (GA4, Meta Pixel).
+     Nezbytné cookies jsou vždy zapnuté — bez nich web nefunguje. */
+  var CONSENT_KEY = 'lr-consent';
+
+  function readConsent() {
+    try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null'); }
+    catch (e) { return null; }
+  }
+  function saveConsent(c) {
+    c.ts = new Date().toISOString();
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(c)); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('lr:consent', { detail: c }));
+  }
+
+  var COOKIE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-5-5 4 4 0 0 1-4-4Z"/>' +
+    '<path d="M8.5 10.5h.01M12 15h.01M15.5 12h.01M9 14.5h.01"/></svg>';
+
+  function mountCookies() {
+    if (document.getElementById('ckFab')) return;
+    var c = readConsent();
+
+    var wrap = document.createElement('div');
+    wrap.innerHTML =
+      '<button class="ck-fab" id="ckFab" type="button" aria-label="Nastavení cookies">' + COOKIE_ICON + '</button>' +
+      '<div class="ck-scrim" id="ckScrim" hidden></div>' +
+      '<div class="ck-panel" id="ckPanel" role="dialog" aria-modal="true" aria-labelledby="ckTitle" hidden>' +
+      '<h2 class="display" id="ckTitle">Cookies na tomhle webu</h2>' +
+      '<p class="ck-lead">Nezbytné cookies web potřebuje k fungování. U ostatních se ptáme — ' +
+      'vybereš si sám a rozhodnutí můžeš kdykoli změnit. Podrobnosti v ' +
+      '<a href="gdpr.html#cookies">zásadách zpracování údajů</a>.</p>' +
+      '<div class="ck-cats">' +
+      '<label class="ck-row"><span><b>Nezbytné</b><small>Bez nich se stránka nenačte a nezapamatuje si tvou volbu.</small></span>' +
+      '<input type="checkbox" checked disabled></label>' +
+      '<label class="ck-row"><span><b>Analytické</b><small>Anonymní měření návštěvnosti — kolik lidí a odkud přišlo.</small></span>' +
+      '<input type="checkbox" id="ckAna"></label>' +
+      '<label class="ck-row"><span><b>Marketingové</b><small>Měření reklam a remarketing (např. Meta, Google).</small></span>' +
+      '<input type="checkbox" id="ckMkt"></label>' +
+      '</div>' +
+      '<div class="ck-acts">' +
+      '<button class="btn btn-ghost on-dark" type="button" data-ck="reject">Odmítnout</button>' +
+      '<button class="btn btn-ghost on-dark" type="button" data-ck="save">Uložit výběr</button>' +
+      '<button class="btn btn-r21" type="button" data-ck="all">Přijmout vše</button>' +
+      '</div></div>';
+    while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
+
+    var fab = document.getElementById('ckFab');
+    var panel = document.getElementById('ckPanel');
+    var scrim = document.getElementById('ckScrim');
+    var ana = document.getElementById('ckAna');
+    var mkt = document.getElementById('ckMkt');
+
+    function open() {
+      var cur = readConsent();
+      ana.checked = !!(cur && cur.analytics);
+      mkt.checked = !!(cur && cur.marketing);
+      panel.hidden = false; scrim.hidden = false;
+      void panel.offsetWidth; /* vynutí reflow — spolehlivější než rAF (na skryté kartě je pozastavené) */
+      panel.classList.add('open'); scrim.classList.add('open');
+    }
+    function close() {
+      panel.classList.remove('open'); scrim.classList.remove('open');
+      setTimeout(function () { panel.hidden = true; scrim.hidden = true; }, 250);
+    }
+    function decide(analytics, marketing) {
+      saveConsent({ necessary: true, analytics: analytics, marketing: marketing });
+      close();
+    }
+
+    fab.addEventListener('click', open);
+    scrim.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
+    panel.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-ck]'); if (!a) return;
+      var k = a.getAttribute('data-ck');
+      if (k === 'reject') decide(false, false);
+      if (k === 'save') decide(ana.checked, mkt.checked);
+      if (k === 'all') decide(true, true);
+    });
+
+    /* první návštěva → panel sám vyskočí */
+    if (!c) setTimeout(open, 900);
+  }
+
+  /* --- fade-up: automaticky označí obsahové bloky ------------------------- */
+  function autoReveal() {
+    var SEL = '.section .wrap > .kicker, .section .wrap > h2, .section .wrap > .h-sub,' +
+      '.section .wrap > p, .glass-card, .stat, .mentor, .faq details, .logo-marquee';
+    document.querySelectorAll(SEL).forEach(function (el) {
+      if (el.closest('.hero-land, .hero-vyzva, .ck-panel')) return;
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+    });
+    /* jemné prodlevy uvnitř skupin, ať prvky nenaskočí naráz */
+    document.querySelectorAll('.grid-2, .grid-3, .arzenal, .stats, .mentors-row, .refs-grid').forEach(function (g) {
+      [].slice.call(g.children).forEach(function (ch, i) {
+        var r = ch.classList.contains('reveal') ? ch : ch.querySelector('.reveal');
+        if (r) r.style.transitionDelay = Math.min(i, 5) * 70 + 'ms';
+      });
+    });
+  }
+
+  /* --- pozadí hera se při scrollu zvětšuje -------------------------------- */
+  function heroZoom() {
+    var hero = document.querySelector('.hero-land, .hero-vyzva');
+    if (!hero) return;
+    var bg = hero.querySelector('.bg');
+    if (!bg || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var h = hero.offsetHeight || 1;
+      var p = Math.min(Math.max(window.scrollY / h, 0), 1);
+      bg.style.setProperty('--hz', (1 + p * 0.18).toFixed(4));
+      bg.style.setProperty('--hy', (p * 6).toFixed(2) + '%');
+    }
+    addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     mountNav();
     mountFooter();
+    autoReveal();
     reveals();
     videos();
     counters();
+    heroZoom();
+    mountCookies();
   });
 })();
