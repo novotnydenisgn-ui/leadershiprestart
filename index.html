@@ -58,7 +58,10 @@
   .glass-card:hover .b-ico{border-color:rgba(255,99,57,.45)}
 
 
-  /* ---- co ti výzva přinese: karty s vycentrovanou ikonou bez rámečku ---- */
+  /* ---- co ti výzva přinese ---- */
+  .bhead{font-size:clamp(24px,3.1vw,42px);line-height:1.18;max-width:1020px}
+
+  /* karty s vycentrovanou ikonou bez rámečku */
   .bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:clamp(16px,2.2vw,26px);margin-top:clamp(34px,4vw,52px)}
   .bcard{position:relative;overflow:hidden;isolation:isolate;text-align:center;
@@ -294,8 +297,8 @@
 <section class="section">
   <div class="wrap">
     <span class="kicker">Co ti výzva přinese</span>
-    <h2 class="display h-section">Zažívej znovu úspěch a nastartuj <span class="teal-text">produktivitu,</span></h2>
-    <p class="h-sub">která tě baví, přináší výsledky a další růst.</p>
+    <h2 class="display h-section bhead">Zažívej znovu úspěch a nastartuj <span class="teal-text">produktivitu,</span>
+    která tě baví, přináší výsledky a další růst.</h2>
     <div class="bgrid">
       <article class="bcard reveal">
         <!-- foto na pozadí: přidej style="--photo:url('assets/img/…jpg')" -->
