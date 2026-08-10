@@ -95,9 +95,14 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* Video facáda — iframe (Vimeo/YouTube) se načte až po kliknutí na Play */
+  /* Video facáda — iframe (Vimeo/YouTube) se načte až po kliknutí na Play.
+     Do té doby je na stránce jen náhledový obrázek → žádné skripty YouTube. */
   function videos() {
     document.querySelectorAll('.video-facade').forEach(function (box) {
+      /* klávesnice: Enter/mezerník na prvku s role="button" */
+      box.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); box.click(); }
+      });
       box.addEventListener('click', function () {
         if (box.dataset.loaded) return;
         var src = '';

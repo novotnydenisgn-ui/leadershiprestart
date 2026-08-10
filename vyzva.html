@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=12">
+<link rel="preload" as="image" href="assets/img/marble-face.webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/site.css?v=13">
 <style>
   .hero-vyzva{position:relative;overflow:hidden;color:var(--ink);
     background:linear-gradient(158deg,#101a2b,var(--pearl) 58%,#0c1220)}
-  .hero-vyzva .bg{position:absolute;inset:0;background:url('assets/img/marble-face.jpg') center 22%/cover no-repeat;opacity:.28;
+  .hero-vyzva .bg{position:absolute;inset:0;background:url('assets/img/marble-face.webp') center 22%/cover no-repeat;opacity:.28;
     transform:scale(var(--hz,1));transform-origin:center 30%}
   .hero-vyzva .shade{position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,10,14,.92) 30%,rgba(8,10,14,.55))}
   .hero-vyzva .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr 1fr;
@@ -37,7 +38,7 @@
 
   .sec-bg{position:relative;overflow:hidden;isolation:isolate}
   .sec-bg::before{content:"";position:absolute;inset:0;z-index:-2;
-    background:url('assets/img/bg-consistency.jpg') 88% center/auto 128% no-repeat;opacity:.3;
+    background:url('assets/img/bg-consistency.webp') 88% center/auto 128% no-repeat;opacity:.3;
     filter:grayscale(.4)}
   .sec-bg::after{content:"";position:absolute;inset:0;z-index:-1;background:
     linear-gradient(90deg,var(--pearl) 26%,rgba(11,14,19,.86) 52%,rgba(11,14,19,.55)),
@@ -84,7 +85,7 @@
       </div>
     </div>
     <div class="statue reveal">
-      <img src="assets/img/statue-pullup.png" alt="Antická socha při shybu na hrazdě — disciplína, která drží">
+      <img loading="lazy" decoding="async" src="assets/img/statue-pullup.webp" alt="Antická socha při shybu na hrazdě — disciplína, která drží">
     </div>
   </div>
 </section>
@@ -169,7 +170,7 @@
 <section class="section section-dark">
   <div class="wrap">
     <div class="glass-card garance reveal">
-      <img class="seal" src="assets/img/garance.png" alt="Garance spokojenosti" loading="lazy">
+      <img decoding="async" class="seal" src="assets/img/garance.png" alt="Garance spokojenosti" loading="lazy">
       <blockquote>„Jestli se z tebe nestane nový člověk,<br>nechci po tobě ani korunu.“</blockquote>
       <p class="h-sub" style="margin:0 auto">Když výzvu dokončíš a nepocítíš, že ti přinesla skutečnou změnu,
       neplatíš nic a peníze vracím zpět. Riziko nesu já, ne ty. — Denis</p>
@@ -228,7 +229,7 @@
           <p style="font-style:italic">„Získal jsem nadhled, klidný drive a soustředění na podstatné věci.
           Začal jsem se pravidelně hýbat a konečně mám prostor na vlastní projekty.“</p>
           <div class="who">
-            <img src="assets/img/ref-michal-kuznecov.jpg" alt="Michal Kuzněcov" loading="lazy">
+            <img decoding="async" src="assets/img/ref-michal-kuznecov.webp" alt="Michal Kuzněcov" loading="lazy">
             <p><b>Michal Kuzněcov</b><span>CEO, Kuzněcov Partners Invest</span></p>
           </div>
         </div>
@@ -236,7 +237,7 @@
           <p style="font-style:italic">„Žena se mě na poslední dovolené ptala, co se mnou ten Denis dělá.
           Vyházel jsem toxické činnosti a výzvy beru jako příležitost k růstu.“</p>
           <div class="who">
-            <img src="assets/img/ref-lukas-scorvan-foto.jpg" alt="Lukáš Scorvan" loading="lazy">
+            <img decoding="async" src="assets/img/ref-lukas-scorvan-foto.jpg" alt="Lukáš Scorvan" loading="lazy">
             <p><b>Lukáš Scorvan</b><span>programátor, founder tech startupu</span></p>
           </div>
         </div>
@@ -252,7 +253,7 @@
 <section class="section">
   <div class="wrap">
     <span class="kicker">Časté otázky</span>
-    <h2 class="display h-section">Na co se ptáš, než vstoupíš</h2>
+    <h2 class="display h-section">Nejčastější dotazy</h2>
     <div class="faq">
       <details class="reveal"><summary>Kolik času mi výzva denně zabere?</summary>
         <div class="faq-a">15–20 minut denně na mikro-kroky a reflexi v aplikaci Dimi.
@@ -298,6 +299,6 @@
 
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=12"></script>
+<script src="assets/site.js?v=13"></script>
 </body>
 </html>
