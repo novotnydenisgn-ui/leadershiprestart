@@ -235,6 +235,18 @@ body{padding-top:58px}
   font-family:"League Spartan",sans-serif;font-weight:800;font-size:18px;color:#fff;
   background:var(--r21-grad);box-shadow:0 10px 26px rgba(255,99,57,.35);position:relative;z-index:1}
 .t-item .glass-card:hover{transform:none}
+/* zakončení linky (jen tam, kde je .t-tail): dráha se pod poslední kartou
+   plynule vytratí a konec nabíhající linky nese světelný bod */
+.timeline--tail{--tl-tail:104px}
+.timeline--tail::before{
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - var(--tl-tail)),transparent 100%);
+          mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - var(--tl-tail)),transparent 100%)}
+.t-tail{height:74px;pointer-events:none}
+.t-head{position:absolute;left:26px;top:calc(8px + var(--tl,0) * (100% - 16px));
+  width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;
+  box-shadow:0 0 12px 3px rgba(255,99,57,.55),0 0 34px 10px rgba(0,128,255,.32);
+  opacity:calc(var(--tl,0) * 12);transition:top .18s linear;pointer-events:none;z-index:1}
+@media(prefers-reduced-motion:reduce){.t-head{transition:none}}
 
 /* ---------- reference / video ---------- */
 .video-facade{position:relative;border-radius:var(--radius);overflow:hidden;cursor:pointer;
