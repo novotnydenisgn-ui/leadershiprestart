@@ -1,0 +1,5 @@
+# Netlify: web se od reorganizace servíruje ze složky public/
+# (v repozitáři vedle běží Cloudflare worker pro A/B testy — ten Netlify neřeší).
+[build]
+  publish = "public"
+  command = ""

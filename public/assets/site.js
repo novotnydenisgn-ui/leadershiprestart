@@ -9,7 +9,13 @@
   var PAGES = [];
   var CALENDLY = 'https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1';
   var KVALIFIKACE = 'https://silabytsebou.cz/kvalifikace_do_vyzvy';
-  var CTA = { href: KVALIFIKACE, label: 'Chci svůj restart' };
+
+  /* A/B: server (Cloudflare Worker) vkládá window.__AB = {t, v, q, x}.
+     q = query string (v=varianta + utm), který se připojuje k odkazům na
+     kvalifikaci vkládaným JavaScriptem — hardcoded odkazy v HTML přepisuje server. */
+  var AB = window.__AB || {};
+  var kvalifikaceHref = AB.q ? KVALIFIKACE + '?' + AB.q : KVALIFIKACE;
+  var CTA = { href: kvalifikaceHref, label: 'Chci svůj restart' };
 
   /* --- LOGO (brand manuál v1.0) ------------------------------------------
      Značka = dvě kostky spojené krčkem, JEDEN přechod přes celý tvar
@@ -47,7 +53,7 @@
       '<a class="nav-brand" href="index.html">' + logo('lrLogoNav', 'brand-logo') + '</a>' +
       '<button class="nav-burger" aria-label="Menu" aria-expanded="false">☰</button>' +
       '<nav class="nav-links">' + links +
-      '<a href="' + CTA.href + '" class="nav-cta" target="_blank" rel="noopener">' + CTA.label + '</a></nav>' +
+      '<a href="' + CTA.href + '" class="nav-cta" data-cta-pos="nav" target="_blank" rel="noopener">' + CTA.label + '</a></nav>' +
       '</div></header>';
 
     var burger = document.querySelector('.nav-burger');
@@ -158,20 +164,61 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* --- souhlas s cookies -------------------------------------------------
-     Volba se ukládá do localStorage a rozesílá jako událost `lr:consent`,
-     aby se na ni daly navázat budoucí skripty (GA4, Meta Pixel).
-     Nezbytné cookies jsou vždy zapnuté — bez nich web nefunguje. */
-  var CONSENT_KEY = 'lr-consent';
-
-  function readConsent() {
-    try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null'); }
-    catch (e) { return null; }
+  /* --- A/B: měření kliků na kvalifikační CTA ------------------------------
+     sendBeacon přežije odchod ze stránky; server si test/variantu čte sám
+     z cookie a boty/výluky filtruje — tady jen pozice CTA a stránka.
+     AB.x === 1 znamená bot / vlastní návštěva / preview => neměřit. */
+  function abClicks() {
+    if (!AB.t || AB.x === 1 || !navigator.sendBeacon) return;
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="silabytsebou.cz/kvalifikace_do_vyzvy"]');
+      if (!a) return;
+      var pos = a.getAttribute('data-cta-pos') || 'other';
+      try {
+        navigator.sendBeacon('/api/click', new Blob(
+          [JSON.stringify({ pos: pos, page: location.pathname })],
+          { type: 'application/json' }
+        ));
+      } catch (err) { /* měření nesmí nikdy rozbít proklik */ }
+    });
   }
-  function saveConsent(c) {
-    c.ts = new Date().toISOString();
-    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(c)); } catch (e) {}
-    document.dispatchEvent(new CustomEvent('lr:consent', { detail: c }));
+
+  /* --- Meta Pixel -----------------------------------------------------------
+     Stejné pixely jako na staré stránce (silabytsebou.cz) — na nich se trénuje
+     reklama, proto běží na každém webu. Načítá se jen s marketingovým souhlasem.
+     Varianta A/B testu jde jako PARAMETR standardních eventů (ab_test,
+     ab_variant) — žádné nové custom eventy, ať se nerozbije optimalizace
+     kampaní v Events Manageru. */
+  var PIXEL_IDS = ['1323130886277601', '672648001991578'];
+
+  function loadPixel() {
+    if (!PIXEL_IDS.length || window.fbq) return;
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    for (var i = 0; i < PIXEL_IDS.length; i++) fbq('init', PIXEL_IDS[i]);
+    fbq('track', 'PageView', { ab_test: AB.t || '', ab_variant: AB.v || '' });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="silabytsebou.cz/kvalifikace_do_vyzvy"]');
+      if (!a || !window.fbq) return;
+      fbq('track', 'Lead', {
+        ab_test: AB.t || '',
+        ab_variant: AB.v || '',
+        cta_pos: a.getAttribute('data-cta-pos') || 'other'
+      });
+    });
+  }
+
+  function mountPixel() {
+    /* Pixel se načítá hned pro všechny — stejný režim jako stará stránka na
+       Tildě, aby obě varianty A/B testu sbíraly data identicky. Lišta níže
+       o měření informuje (nenabízí volbu, která by se nerespektovala). */
+    loadPixel();
   }
 
   var COOKIE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" ' +
@@ -179,70 +226,34 @@
     '<path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-5-5 4 4 0 0 1-4-4Z"/>' +
     '<path d="M8.5 10.5h.01M12 15h.01M15.5 12h.01M9 14.5h.01"/></svg>';
 
+  /* Informační lišta: web měří od první návštěvy (viz mountPixel), takže lišta
+     o měření informuje a odkazuje na podrobnosti — nenabízí přepínače, které by
+     se stejně nerespektovaly. Zavření se pamatuje, ať neotravuje. */
+  var NOTE_KEY = 'lr-cookie-note';
+
   function mountCookies() {
-    if (document.getElementById('ckFab')) return;
-    var c = readConsent();
+    if (document.getElementById('ckNote')) return;
+    var seen = null;
+    try { seen = localStorage.getItem(NOTE_KEY); } catch (e) {}
+    if (seen) return;
 
-    var wrap = document.createElement('div');
-    wrap.innerHTML =
-      '<button class="ck-fab" id="ckFab" type="button" aria-label="Nastavení cookies">' + COOKIE_ICON + '</button>' +
-      '<div class="ck-scrim" id="ckScrim" hidden></div>' +
-      '<div class="ck-panel" id="ckPanel" role="dialog" aria-modal="true" aria-labelledby="ckTitle" hidden>' +
-      '<h2 class="display" id="ckTitle">Cookies na tomhle webu</h2>' +
-      '<p class="ck-lead">Nezbytné cookies web potřebuje k fungování. U ostatních se ptáme — ' +
-      'vybereš si sám a rozhodnutí můžeš kdykoli změnit. Podrobnosti v ' +
-      '<a href="gdpr.html#cookies">zásadách zpracování údajů</a>.</p>' +
-      '<div class="ck-cats">' +
-      '<label class="ck-row"><span><b>Nezbytné</b><small>Bez nich se stránka nenačte a nezapamatuje si tvou volbu.</small></span>' +
-      '<input type="checkbox" checked disabled></label>' +
-      '<label class="ck-row"><span><b>Analytické</b><small>Anonymní měření návštěvnosti — kolik lidí a odkud přišlo.</small></span>' +
-      '<input type="checkbox" id="ckAna"></label>' +
-      '<label class="ck-row"><span><b>Marketingové</b><small>Měření reklam a remarketing (např. Meta, Google).</small></span>' +
-      '<input type="checkbox" id="ckMkt"></label>' +
-      '</div>' +
-      '<div class="ck-acts">' +
-      '<button class="btn btn-ghost on-dark" type="button" data-ck="reject">Odmítnout</button>' +
-      '<button class="btn btn-ghost on-dark" type="button" data-ck="save">Uložit výběr</button>' +
-      '<button class="btn btn-r21" type="button" data-ck="all">Přijmout vše</button>' +
-      '</div></div>';
-    while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
+    var bar = document.createElement('div');
+    bar.className = 'ck-note';
+    bar.id = 'ckNote';
+    bar.innerHTML =
+      '<span class="ck-note-ico" aria-hidden="true">' + COOKIE_ICON + '</span>' +
+      '<p>Web používá cookies pro měření návštěvnosti a fungování reklamy. ' +
+      'Podrobnosti v <a href="gdpr.html#cookies">zásadách zpracování údajů</a>.</p>' +
+      '<button class="btn btn-r21" type="button" id="ckOk">Rozumím</button>';
+    document.body.appendChild(bar);
+    void bar.offsetWidth; /* reflow -> spustí přechod i na skryté kartě */
+    bar.classList.add('open');
 
-    var fab = document.getElementById('ckFab');
-    var panel = document.getElementById('ckPanel');
-    var scrim = document.getElementById('ckScrim');
-    var ana = document.getElementById('ckAna');
-    var mkt = document.getElementById('ckMkt');
-
-    function open() {
-      var cur = readConsent();
-      ana.checked = !!(cur && cur.analytics);
-      mkt.checked = !!(cur && cur.marketing);
-      panel.hidden = false; scrim.hidden = false;
-      void panel.offsetWidth; /* vynutí reflow — spolehlivější než rAF (na skryté kartě je pozastavené) */
-      panel.classList.add('open'); scrim.classList.add('open');
-    }
-    function close() {
-      panel.classList.remove('open'); scrim.classList.remove('open');
-      setTimeout(function () { panel.hidden = true; scrim.hidden = true; }, 250);
-    }
-    function decide(analytics, marketing) {
-      saveConsent({ necessary: true, analytics: analytics, marketing: marketing });
-      close();
-    }
-
-    fab.addEventListener('click', open);
-    scrim.addEventListener('click', close);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
-    panel.addEventListener('click', function (e) {
-      var a = e.target.closest('[data-ck]'); if (!a) return;
-      var k = a.getAttribute('data-ck');
-      if (k === 'reject') decide(false, false);
-      if (k === 'save') decide(ana.checked, mkt.checked);
-      if (k === 'all') decide(true, true);
+    document.getElementById('ckOk').addEventListener('click', function () {
+      try { localStorage.setItem(NOTE_KEY, '1'); } catch (e) {}
+      bar.classList.remove('open');
+      setTimeout(function () { bar.remove(); }, 250);
     });
-
-    /* první návštěva → panel sám vyskočí */
-    if (!c) setTimeout(open, 900);
   }
 
   /* --- fade-up: automaticky označí obsahové bloky ------------------------- */
@@ -292,5 +303,7 @@
     counters();
     heroZoom();
     mountCookies();
+    abClicks();
+    mountPixel();
   });
 })();

@@ -1,0 +1,51 @@
+{
+  "//": "Katalog A/B testů. Nová varianta = nový objekt ve `variants` + `wrangler deploy`. 2-4 varianty na test; kontrola je vždy první s content:null. `id` = interní čitelné jméno (admin, statistiky). `token` = NEČITELNÝ kód, který jde ven do URL dotazníku (v=<token>) — návštěvník z něj nesmí poznat, že jde o test; musí být unikátní napříč všemi testy. `note` = lidský popis, co varianta mění. Lifecycle (running/paused/locked/aktivní test) žije v KV a ovládá se z /ab/ — sem se nezapisuje. Test s `archived: true` se ignoruje (vítěz byl zapečen do HTML).",
+  "tests": [
+    {
+      "id": "t1_hero_h1",
+      "label": "Hero titulek (H1)",
+      "slot": "hero_h1",
+      "page": "/",
+      "type": "inner_html",
+      "queue_order": 1,
+      "autostart": true,
+      "min_days": 7,
+      "min_n_big": 250,
+      "min_n_small": 900,
+      "variants": [
+        { "id": "A", "token": "e4t9", "weight": 50, "content": null, "note": "Kontrola — původní titulek v HTML" },
+        { "id": "disciplina-21", "token": "r7k2", "weight": 50, "content": "Nezničitelná disciplína za <span class=\"grad-text\">21 dní</span>. Bez motivačních řečí.", "note": "PLACEHOLDER — důraz na disciplínu a konkrétní termín; nahradit reálnými variantami od Denise" }
+      ]
+    },
+    {
+      "id": "t2_hero_subtitle",
+      "label": "Hero podtitul",
+      "slot": "hero_subtitle",
+      "page": "/",
+      "type": "inner_html",
+      "queue_order": 2,
+      "min_days": 7,
+      "min_n_big": 250,
+      "min_n_small": 900,
+      "variants": [
+        { "id": "A", "token": "n2w6", "weight": 50, "content": null, "note": "Kontrola — původní podtitul" },
+        { "id": "B", "token": "p8d3", "weight": 50, "content": "Pro podnikatele, kteří už přečetli dost knih. Teď chtějí systém.", "note": "PLACEHOLDER — příklad testu ve frontě" }
+      ]
+    },
+    {
+      "id": "t3_stara_stranka",
+      "label": "Nový web vs. stará stránka (Tilda)",
+      "slot": "page",
+      "page": "/",
+      "type": "page",
+      "queue_order": 3,
+      "min_days": 7,
+      "min_n_big": 250,
+      "min_n_small": 900,
+      "variants": [
+        { "id": "A", "token": "w5m1", "weight": 50, "content": null, "note": "Kontrola — nový web (leadershiprestart.cz)" },
+        { "id": "stara-tilda", "token": "j6h4", "weight": 50, "src": "https://silabytsebou.cz/", "note": "Stará stránka ze silabytsebou.cz, servírovaná na stejné adrese (proxy)" }
+      ]
+    }
+  ]
+}

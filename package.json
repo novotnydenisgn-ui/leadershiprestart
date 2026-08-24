@@ -1,0 +1,13 @@
+{
+  "name": "web-leadershiprestart",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 execute lr-ab --local --file worker/schema.sql",
+    "db:remote": "wrangler d1 execute lr-ab --remote --file worker/schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

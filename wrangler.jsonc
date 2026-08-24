@@ -1,0 +1,50 @@
+{
+  // Cloudflare Worker: A/B testing + servírování statického webu leadershiprestart.cz
+  "name": "leadershiprestart",
+  "main": "worker/src/index.js",
+  "compatibility_date": "2026-08-01",
+
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Bez automatických "clean URL" redirectů: /vyzva.html se servíruje přímo (200),
+    // stejně jako dnes na Netlify a jak míří interní odkazy i canonical tagy.
+    // Bezpříponové /vyzva doresolvuje Worker (fetchAsset v index.js).
+    "html_handling": "none",
+    // Vše kromě assets/* jde přes Worker; assets/* servíruje assets vrstva přímo
+    // (necharguje Worker invocations a cachuje se dle public/_headers).
+    "run_worker_first": ["/*", "!/assets/*"]
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "lr-ab",
+      "database_id": "98b91cdd-09d1-4192-8271-7c5fcbdf4474"
+    }
+  ],
+
+  "kv_namespaces": [
+    {
+      "binding": "AB_KV",
+      "id": "0f140e2a86fa4f2ebd1decb34152b680"
+    }
+  ],
+
+  // Logy requestů v dashboardu (Workers → leadershiprestart → Logs).
+  "observability": { "enabled": true }
+
+  // --- CUTOVER na ostrou doménu (až budou nameservery přepnuté a zóna aktivní) ---
+  // Odkomentovat a `wrangler deploy`. Používáme ROUTE (ne custom_domain) schválně:
+  // DNS záznamy dál míří na Netlify, takže rollback = smazat route a provoz se
+  // okamžitě vrátí na původní web, bez zásahu do DNS.
+  // "routes": [
+  //   { "pattern": "leadershiprestart.cz/*", "zone_name": "leadershiprestart.cz" },
+  //   { "pattern": "www.leadershiprestart.cz/*", "zone_name": "leadershiprestart.cz" }
+  // ],
+  //
+  // Po ověření cutoveru vypnout testovací adresu, ať nevzniká duplicitní obsah
+  // pro vyhledávače (canonical na ni sice míří správně, ale takhle je to čisté):
+  // "workers_dev": false,
+  // "preview_urls": false
+}
