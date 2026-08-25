@@ -215,10 +215,30 @@
   }
 
   function mountPixel() {
-    /* Pixel se načítá hned pro všechny — stejný režim jako stará stránka na
-       Tildě, aby obě varianty A/B testu sbíraly data identicky. Lišta níže
-       o měření informuje (nenabízí volbu, která by se nerespektovala). */
-    loadPixel();
+    /* Pixel se načte jen se souhlasem s marketingovými cookies a hned, jakmile
+       ho návštěvník udělí. Odvolání souhlasu se projeví po znovunačtení stránky
+       (fbq nejde z běžící stránky odinstalovat) — proto po změně volby reload. */
+    var c = readConsent();
+    if (c && c.marketing) loadPixel();
+    document.addEventListener('lr:consent', function (e) {
+      if (e.detail && e.detail.marketing) loadPixel();
+    });
+  }
+
+  /* --- souhlas s cookies -------------------------------------------------
+     Volba se ukládá do localStorage a rozesílá jako událost `lr:consent`,
+     aby se na ni daly navázat budoucí skripty (GA4, Meta Pixel).
+     Nezbytné cookies jsou vždy zapnuté — bez nich web nefunguje. */
+  var CONSENT_KEY = 'lr-consent';
+
+  function readConsent() {
+    try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null'); }
+    catch (e) { return null; }
+  }
+  function saveConsent(c) {
+    c.ts = new Date().toISOString();
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(c)); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('lr:consent', { detail: c }));
   }
 
   var COOKIE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" ' +
@@ -226,34 +246,205 @@
     '<path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-5-5 4 4 0 0 1-4-4Z"/>' +
     '<path d="M8.5 10.5h.01M12 15h.01M15.5 12h.01M9 14.5h.01"/></svg>';
 
-  /* Informační lišta: web měří od první návštěvy (viz mountPixel), takže lišta
-     o měření informuje a odkazuje na podrobnosti — nenabízí přepínače, které by
-     se stejně nerespektovaly. Zavření se pamatuje, ať neotravuje. */
-  var NOTE_KEY = 'lr-cookie-note';
+  /* Katalog toho, co web opravdu používá. `key` = kategorie souhlasu,
+     null = nezbytné (nejde vypnout). Počty v odznacích se počítají odsud,
+     takže seznam a čísla nemůžou rozejít. */
+  var CK_CATS = [
+    {
+      key: null,
+      name: 'Nezbytné',
+      desc: 'Tyto technologie jsou nezbytné k aktivaci základních funkcí naší služby.',
+      items: [
+        { n: 'ab_v', p: 'Leadership Restart', d: '90 dní', u: 'Která verze stránky se ti zobrazila, ať se ti obsah při návratu nemění.' },
+        { n: 'ab_utm', p: 'Leadership Restart', d: '30 dní', u: 'Technické označení zdroje návštěvy (odkud jsi přišel).' },
+        { n: 'ab_x', p: 'Leadership Restart', d: '1 rok', u: 'Výluka z měření — používá ji provozovatel pro vlastní návštěvy.' },
+        { n: 'lr-consent', p: 'Leadership Restart', d: 'trvale', u: 'Tvoje volba v tomhle okně, ať se tě neptáme pořád dokola.' }
+      ]
+    },
+    {
+      key: 'analytics',
+      name: 'Funkční',
+      desc: 'Tyto technologie nám umožňují analyzovat chování uživatelů za účelem měření a zlepšování výkonu.',
+      items: [
+        { n: 'Měření obsahu', p: 'Leadership Restart', d: 'neukládá cookies', u: 'Anonymní součty zobrazení a prokliků. Neukládáme jméno ani e-mail a jednotlivce z toho nepoznáme.' }
+      ]
+    },
+    {
+      key: 'marketing',
+      name: 'Marketing',
+      desc: 'Tyto technologie používají inzerenti k zobrazování reklam, které jsou relevantní pro vaše zájmy.',
+      items: [
+        { n: 'Meta Pixel', p: 'Meta Platforms Ireland Ltd.', d: 'až 2 roky', u: 'Měření reklamy na Facebooku a Instagramu a remarketing.' },
+        { n: 'Meta Pixel (druhý účet)', p: 'Meta Platforms Ireland Ltd.', d: 'až 2 roky', u: 'Druhý reklamní účet se stejným účelem.' }
+      ]
+    }
+  ];
+
+  function ckEsc(t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function ckCatRow(c, i) {
+    var lock = c.key === null;
+    var rows = c.items.map(function (it) {
+      return '<div class="ck-svc"><div class="ck-svc-h"><b>' + ckEsc(it.n) + '</b>' +
+        '<span>' + ckEsc(it.d) + '</span></div>' +
+        '<p>' + ckEsc(it.u) + '</p>' +
+        '<small>Poskytovatel: ' + ckEsc(it.p) + '</small></div>';
+    }).join('');
+    return '<div class="ck-cat" data-cat="' + i + '">' +
+      '<div class="ck-cat-h">' +
+      '<button class="ck-exp" type="button" aria-expanded="false" aria-label="Rozbalit ' + ckEsc(c.name) + '">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>' +
+      '<span class="ck-cat-n">' + ckEsc(c.name) + '</span>' +
+      '<span class="ck-badge">' + c.items.length + '</span>' +
+      (lock
+        ? '<input class="ck-tog" type="checkbox" checked disabled aria-label="Nezbytné — vždy zapnuto">'
+        : '<input class="ck-tog" type="checkbox" data-ck-key="' + c.key + '" aria-label="' + ckEsc(c.name) + '">') +
+      '</div>' +
+      '<p class="ck-cat-d">' + ckEsc(c.desc) + '</p>' +
+      '<div class="ck-svcs" hidden>' + rows + '</div>' +
+      '</div>';
+  }
 
   function mountCookies() {
-    if (document.getElementById('ckNote')) return;
-    var seen = null;
-    try { seen = localStorage.getItem(NOTE_KEY); } catch (e) {}
-    if (seen) return;
+    if (document.getElementById('ckFab')) return;
+    var c = readConsent();
 
-    var bar = document.createElement('div');
-    bar.className = 'ck-note';
-    bar.id = 'ckNote';
-    bar.innerHTML =
-      '<span class="ck-note-ico" aria-hidden="true">' + COOKIE_ICON + '</span>' +
-      '<p>Web používá cookies pro měření návštěvnosti a fungování reklamy. ' +
-      'Podrobnosti v <a href="gdpr.html#cookies">zásadách zpracování údajů</a>.</p>' +
-      '<button class="btn btn-r21" type="button" id="ckOk">Rozumím</button>';
-    document.body.appendChild(bar);
-    void bar.offsetWidth; /* reflow -> spustí přechod i na skryté kartě */
-    bar.classList.add('open');
+    var cats = CK_CATS.map(ckCatRow).join('');
+    var wrap = document.createElement('div');
+    wrap.innerHTML =
+      '<button class="ck-fab" id="ckFab" type="button" aria-label="Nastavení cookies">' + COOKIE_ICON + '</button>' +
+      '<div class="ck-scrim" id="ckScrim" hidden></div>' +
+      '<div class="ck-panel" id="ckPanel" role="dialog" aria-modal="true" aria-labelledby="ckTitle" hidden>' +
+        '<div class="ck-top">' +
+          '<span class="ck-brand">' + logo('lrLogoCk', 'ck-logo') + '</span>' +
+          '<button class="ck-x" type="button" data-ck="close" aria-label="Zavřít">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
+        '</div>' +
+        '<h2 id="ckTitle" class="ck-sr">Nastavení soukromí</h2>' +
+        '<div class="ck-tabs" role="tablist">' +
+          '<button class="ck-tab active" type="button" data-tab="cats" role="tab" aria-selected="true">Kategorie</button>' +
+          '<button class="ck-tab" type="button" data-tab="svcs" role="tab" aria-selected="false">Služby</button>' +
+          '<button class="ck-tab" type="button" data-tab="info" role="tab" aria-selected="false">Co se týká cookies?</button>' +
+        '</div>' +
+        '<div class="ck-body">' +
+          '<div class="ck-pane" data-pane="cats">' + cats + '</div>' +
+          '<div class="ck-pane" data-pane="svcs" hidden>' +
+            '<p class="ck-lead">Přesný seznam toho, co na webu běží. Nic dalšího tu není.</p>' +
+            CK_CATS.map(function (x) {
+              return '<h3 class="ck-sub">' + ckEsc(x.name) + '</h3>' +
+                x.items.map(function (it) {
+                  return '<div class="ck-svc"><div class="ck-svc-h"><b>' + ckEsc(it.n) + '</b><span>' + ckEsc(it.d) + '</span></div>' +
+                    '<p>' + ckEsc(it.u) + '</p><small>Poskytovatel: ' + ckEsc(it.p) + '</small></div>';
+                }).join('');
+            }).join('') +
+          '</div>' +
+          '<div class="ck-pane" data-pane="info" hidden>' +
+            '<p class="ck-lead">Cookies jsou drobné soubory, které si web uloží ve tvém prohlížeči. ' +
+            'Některé potřebuje k fungování — třeba aby si zapamatoval tvoje rozhodnutí z tohohle okna. ' +
+            'Jiné slouží k měření reklamy.</p>' +
+            '<p class="ck-lead"><b>Rozhoduješ ty.</b> Co si tu vypneš, se opravdu nespustí. ' +
+            'Volbu můžeš kdykoli změnit — sušenka v levém dolním rohu webu. ' +
+            'Když souhlas odvoláš, měření se okamžitě zastaví.</p>' +
+            '<p class="ck-lead">Odmítnutím o nic nepřijdeš: web funguje úplně stejně. ' +
+            'Podrobnosti v <a href="gdpr.html#cookies">zásadách zpracování údajů</a>.</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="ck-acts">' +
+          '<button class="ck-btn" type="button" data-ck="reject">Odmítnout</button>' +
+          '<button class="ck-btn" type="button" data-ck="only">Jen nezbytné</button>' +
+          '<button class="ck-btn" type="button" data-ck="save" id="ckSave">Přijmout vše</button>' +
+        '</div>' +
+      '</div>';
+    while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
 
-    document.getElementById('ckOk').addEventListener('click', function () {
-      try { localStorage.setItem(NOTE_KEY, '1'); } catch (e) {}
-      bar.classList.remove('open');
-      setTimeout(function () { bar.remove(); }, 250);
+    var fab = document.getElementById('ckFab');
+    var panel = document.getElementById('ckPanel');
+    var scrim = document.getElementById('ckScrim');
+    var togs = panel.querySelectorAll('[data-ck-key]');
+
+    var saveBtn = panel.querySelector('#ckSave');
+
+    /* Popisek posledního tlačítka se řídí přepínači: dokud jsou všechny zapnuté,
+       je to „Přijmout vše"; jakmile něco vypneš, uloží se tvůj výběr. */
+    function syncSaveLabel() {
+      var all = true;
+      togs.forEach(function (t) { if (!t.checked) all = false; });
+      saveBtn.textContent = all ? 'Přijmout vše' : 'Uložit výběr';
+    }
+
+    function open() {
+      var cur = readConsent();
+      /* Bez uložené volby jsou přepínače přednastavené na zapnuto. */
+      togs.forEach(function (t) { t.checked = cur ? !!cur[t.dataset.ckKey] : true; });
+      syncSaveLabel();
+      panel.hidden = false; scrim.hidden = false;
+      void panel.offsetWidth; /* vynutí reflow — spolehlivější než rAF (na skryté kartě je pozastavené) */
+      panel.classList.add('open'); scrim.classList.add('open');
+    }
+    function close() {
+      panel.classList.remove('open'); scrim.classList.remove('open');
+      setTimeout(function () { panel.hidden = true; scrim.hidden = true; }, 250);
+    }
+    function decide(analytics, marketing) {
+      var prev = readConsent();
+      var revoked = prev && prev.marketing && !marketing; /* odvolání souhlasu */
+      saveConsent({ necessary: true, analytics: analytics, marketing: marketing });
+      close();
+      /* Jednou načtený pixel nejde z běžící stránky odstranit — po odvolání
+         souhlasu proto stránku znovu načteme, aby se opravdu přestal měřit. */
+      if (revoked) setTimeout(function () { location.reload(); }, 300);
+    }
+    function picked(key) {
+      var t = panel.querySelector('[data-ck-key="' + key + '"]');
+      return !!(t && t.checked);
+    }
+
+    fab.addEventListener('click', open);
+    scrim.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
+
+    panel.addEventListener('change', function (e) {
+      if (e.target.classList.contains('ck-tog')) syncSaveLabel();
     });
+
+    panel.addEventListener('click', function (e) {
+      /* přepínání záložek */
+      var tab = e.target.closest('.ck-tab');
+      if (tab) {
+        panel.querySelectorAll('.ck-tab').forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panel.querySelectorAll('.ck-pane').forEach(function (p) {
+          p.hidden = p.dataset.pane !== tab.dataset.tab;
+        });
+        panel.querySelector('.ck-body').scrollTop = 0;
+        return;
+      }
+      /* rozbalení kategorie */
+      var exp = e.target.closest('.ck-exp');
+      if (exp) {
+        var cat = exp.closest('.ck-cat');
+        var list = cat.querySelector('.ck-svcs');
+        var openNow = list.hidden;
+        list.hidden = !openNow;
+        cat.classList.toggle('open', openNow);
+        exp.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+        return;
+      }
+      /* rozhodnutí */
+      var a = e.target.closest('[data-ck]'); if (!a) return;
+      var k = a.getAttribute('data-ck');
+      if (k === 'close') close();
+      if (k === 'reject' || k === 'only') decide(false, false);
+      if (k === 'save') decide(picked('analytics'), picked('marketing'));
+    });
+
+    /* první návštěva → panel sám vyskočí */
+    if (!c) setTimeout(open, 900);
   }
 
   /* --- fade-up: automaticky označí obsahové bloky ------------------------- */
