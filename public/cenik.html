@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=18">
+<link rel="stylesheet" href="assets/site.css?v=21">
 <style>
   /* ======================================================================
      CENÍK — tmavý design (střídání tmavá/světlá), barvy z loga R21:
@@ -329,6 +329,157 @@
   .faq-lr .faq-a{padding:0 22px 20px;color:var(--dk-muted);font-size:15px}
   .faq-lr .faq-a a{color:#4da3ff;font-weight:700}
 
+  /* ---------- SYMFONIE KOMPONENTŮ (návrh) — rozepsané položky programu ---------- */
+  .symf-sec::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(760px 500px at 10% 6%,rgba(255,99,57,.08),transparent 60%),
+      radial-gradient(820px 560px at 92% 94%,rgba(0,128,255,.09),transparent 62%)}
+  .symf-flow{position:relative;max-width:1060px;margin:clamp(40px,5vw,64px) auto 0}
+  /* „partitura" — svislá gradientní linka spojující věty symfonie */
+  .symf-flow::before{content:"";position:absolute;left:50%;top:30px;bottom:30px;width:2px;
+    transform:translateX(-50%);pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(255,99,57,.7) 10%,rgba(0,128,255,.7) 90%,transparent)}
+  .symf-item{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center;
+    position:relative;padding:clamp(24px,3.6vw,42px) 0}
+  /* uzel na lince */
+  .symf-item::before{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;
+    transform:translate(-50%,-50%);border-radius:50%;background:var(--dk-bg);
+    border:3px solid var(--si-c,var(--lr-orange));box-shadow:0 0 0 6px var(--dk-bg),0 0 24px var(--si-glow,rgba(255,99,57,.55));z-index:1}
+  .symf-item:nth-child(even) .symf-visual{order:2}
+  .symf-item:nth-child(even) .symf-body{order:1;text-align:right}
+  .symf-item:nth-child(even) .symf-meta{justify-content:flex-end}
+
+  /* velká vizuální dlaždice — zatím ikonka, připraveno na fotku/obrázek */
+  .symf-visual{position:relative;aspect-ratio:4/3;border-radius:26px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(120% 120% at 30% 20%,var(--si-tint,rgba(255,99,57,.16)),transparent 62%),
+      var(--dk-bg-2);
+    border:1px solid var(--dk-brd);transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+  .symf-item:hover .symf-visual{transform:translateY(-6px);border-color:var(--si-brd,rgba(255,99,57,.55));
+    box-shadow:0 30px 90px var(--si-glow,rgba(255,99,57,.2))}
+  .symf-visual .si-ico{font-size:clamp(72px,9vw,116px);line-height:1;
+    filter:drop-shadow(0 16px 44px var(--si-glow,rgba(255,99,57,.5)))}
+  /* obrázek místo ikonky: <img class="si-img" src="…"> uvnitř .symf-visual */
+  .symf-visual .si-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  /* dlaždice s fotkou: tmavý přechod dole pro hloubku + ikonka jako malý badge v rohu */
+  .symf-visual.has-img::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(11,14,19,.08) 40%,rgba(11,14,19,.62) 100%)}
+  .symf-visual.has-img .si-ico{position:absolute;left:14px;bottom:12px;z-index:2;
+    font-size:30px;line-height:1;width:52px;height:52px;display:flex;align-items:center;
+    justify-content:center;border-radius:14px;background:rgba(11,14,19,.55);
+    border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);
+    filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+  .symf-visual.has-img::after{z-index:1}
+  /* logo Dimi jako badge v rohu (místo emoji) */
+  .symf-visual.has-img .si-logo{position:absolute;left:14px;bottom:12px;z-index:2;
+    width:52px;height:52px;padding:8px;border-radius:14px;
+    background:rgba(255,255,255,.93);box-shadow:0 6px 18px rgba(0,0,0,.5)}
+  /* jemný „notový" vzor v pozadí dlaždice */
+  .symf-visual::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+    background:repeating-linear-gradient(180deg,transparent 0 26px,rgba(255,255,255,.04) 26px 27px)}
+
+  .symf-body .si-movement{display:inline-flex;align-items:center;gap:9px;
+    font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    letter-spacing:.15em;font-size:11.5px;color:var(--si-c,var(--lr-orange));margin-bottom:12px}
+  .symf-body .si-movement::before{content:"";width:22px;height:2px;background:var(--si-c,var(--lr-orange));flex:none}
+  .symf-item:nth-child(even) .si-movement{flex-direction:row-reverse}
+  .symf-body h3{font-size:clamp(21px,2.3vw,28px);color:#fff;margin-bottom:12px}
+  .symf-body p{color:var(--dk-muted);font-size:15.5px;line-height:1.65}
+  .symf-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .symf-meta span{font-size:12.5px;font-weight:700;color:var(--dk-text);
+    background:rgba(255,255,255,.05);border:1px solid var(--dk-brd);
+    border-radius:999px;padding:7px 13px 5px;letter-spacing:.03em}
+
+  /* --- tři prodejní principy: Disciplína · Pozornost · Výsledky --- */
+  .symf-principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;max-width:1060px;margin:clamp(34px,4.4vw,54px) auto 0;position:relative}
+  .princ-card{text-align:center;padding:30px 24px 26px;position:relative;overflow:hidden}
+  .princ-card .p-num{position:absolute;top:10px;right:16px;font-family:"League Spartan",sans-serif;
+    font-weight:800;font-size:64px;line-height:1;opacity:.07;color:#fff}
+  .princ-card .p-ico{font-size:42px;line-height:1;margin-bottom:12px;display:block;
+    filter:drop-shadow(0 10px 30px var(--si-glow,rgba(255,99,57,.45)))}
+  .princ-card h3{font-family:"League Spartan",sans-serif;text-transform:uppercase;font-weight:800;
+    letter-spacing:.1em;font-size:15px;color:#fff;margin-bottom:10px}
+  .princ-card blockquote{font-size:15px;line-height:1.6;color:var(--dk-muted);font-style:italic}
+  .princ-card blockquote b{color:var(--dk-text);font-style:normal}
+  .princ-card.si-orange{border-color:rgba(255,99,57,.4);box-shadow:0 20px 60px rgba(255,99,57,.1)}
+  .princ-card.si-blue{border-color:rgba(0,128,255,.4);box-shadow:0 20px 60px rgba(0,128,255,.1)}
+  .princ-card.si-gold{--si-glow:rgba(233,182,79,.4);border-color:rgba(233,182,79,.4);
+    box-shadow:0 20px 60px rgba(233,182,79,.1)}
+  /* plakátová varianta principu — fotka přes celou kartu, text dole */
+  .princ-card.p-photo{padding:0;aspect-ratio:3/4;display:flex;align-items:flex-end;
+    text-align:left;overflow:hidden}
+  .p-photo .p-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transition:transform .5s ease}
+  .p-photo:hover .p-img{transform:scale(1.045)}
+  .p-photo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(11,14,19,.1) 34%,rgba(11,14,19,.9) 100%)}
+  .p-photo .p-num{z-index:2;opacity:.28;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+  .p-photo .p-body{position:relative;z-index:2;padding:20px 20px 18px;width:100%}
+  .p-photo h3{font-size:21px;letter-spacing:.12em;margin-bottom:8px;
+    display:flex;align-items:center;gap:9px}
+  .p-photo h3::before{content:"";width:22px;height:3px;border-radius:2px;flex:none;
+    background:var(--si-c,var(--lr-orange))}
+  .p-photo.si-gold h3::before{background:var(--c-gold-grad)}
+  .p-photo blockquote{font-size:13.5px;line-height:1.55;color:#c8cfda}
+  .symf-formula{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;
+    margin:26px auto 0;position:relative;font-family:"League Spartan",sans-serif;font-weight:800;
+    text-transform:uppercase;letter-spacing:.1em;font-size:clamp(14px,1.6vw,18px);color:#fff}
+  .symf-formula i{font-style:normal;color:var(--dk-muted);font-weight:700}
+  .symf-formula .f-grad{background:var(--lr-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .symf-formula .f-gold{background:var(--c-gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* --- prodejní argument u každé věty (citát obchodníka) --- */
+  .si-quote{margin:14px 0 0;padding:13px 16px 12px;border-radius:0 14px 14px 0;
+    border-left:3px solid var(--si-c,var(--lr-orange));
+    background:linear-gradient(90deg,var(--si-tint,rgba(255,99,57,.12)),transparent 85%);
+    font-size:14.5px;line-height:1.55;color:var(--dk-text);font-weight:600;font-style:italic}
+  .si-quote b{color:var(--si-c,var(--lr-orange));font-style:normal}
+  .symf-item:nth-child(even) .si-quote{border-left:0;border-right:3px solid var(--si-c);
+    border-radius:14px 0 0 14px;
+    background:linear-gradient(270deg,var(--si-tint,rgba(0,128,255,.12)),transparent 85%)}
+  /* štítek principu, na který věta hraje */
+  .si-princ{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--si-c,var(--lr-orange));
+    background:var(--si-tint,rgba(255,99,57,.12));border:1px solid var(--si-brd,rgba(255,99,57,.4));
+    border-radius:999px;padding:6px 12px 4px;margin-bottom:12px}
+  @media(max-width:860px){
+    .symf-item:nth-child(even) .si-quote{border-right:0;border-left:3px solid var(--si-c);
+      border-radius:0 14px 14px 0;
+      background:linear-gradient(90deg,var(--si-tint),transparent 85%)}
+  }
+
+  /* barevné varianty vět (střídání oranžová / modrá) */
+  .symf-item.si-orange{--si-c:var(--lr-orange);--si-tint:rgba(255,99,57,.17);
+    --si-brd:rgba(255,99,57,.55);--si-glow:rgba(255,99,57,.28)}
+  .symf-item.si-blue{--si-c:#4da3ff;--si-tint:rgba(0,128,255,.17);
+    --si-brd:rgba(0,128,255,.55);--si-glow:rgba(0,128,255,.28)}
+  /* zlatá varianta pro dárek */
+  .symf-item.si-gold{--si-c:#f6d47c;--si-tint:rgba(233,182,79,.15);
+    --si-brd:rgba(233,182,79,.55);--si-glow:rgba(233,182,79,.28)}
+  .symf-item.si-gold .si-quote b{color:#f6d47c}
+
+  /* finále — všechno hraje dohromady */
+  .symf-finale{max-width:860px;margin:clamp(30px,4vw,50px) auto 0;text-align:center;
+    padding:clamp(30px,4vw,46px);border-radius:26px;position:relative;
+    border:1.5px solid transparent;
+    background:linear-gradient(var(--dk-bg-2),var(--dk-bg-2)) padding-box,var(--lr-grad) border-box;
+    box-shadow:0 26px 90px rgba(255,99,57,.14),0 26px 90px rgba(0,128,255,.12)}
+  .symf-finale .si-ico{font-size:44px;line-height:1;display:block;margin-bottom:14px}
+  .symf-finale h3{font-size:clamp(20px,2.2vw,26px);color:#fff;margin-bottom:10px}
+  .symf-finale p{color:var(--dk-muted);font-size:15.5px;max-width:620px;margin:0 auto}
+
+  @media(max-width:860px){
+    .symf-flow::before{left:8px;transform:none}
+    .symf-item{grid-template-columns:1fr;gap:18px;padding-left:34px}
+    .symf-item::before{left:8px;top:26px;transform:translate(-50%,0)}
+    .symf-item:nth-child(even) .symf-visual{order:1}
+    .symf-item:nth-child(even) .symf-body{order:2;text-align:left}
+    .symf-item:nth-child(even) .symf-meta{justify-content:flex-start}
+    .symf-item:nth-child(even) .si-movement{flex-direction:row}
+  }
+
   /* ---------- leadmagnet band + footer přepis do modro-černé ---------- */
   .lead-band{background:var(--dk-bg-2)}
   .lead-band .aura{background:
@@ -432,6 +583,185 @@
         <span class="standard"><i></i>Standard</span>
         <span class="premium"><i></i>Premium</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SYMFONIE KOMPONENTŮ (návrh) ======================= -->
+<section class="section sec-dark symf-sec">
+  <div class="wrap">
+    <div style="text-align:center;position:relative">
+      <span class="lr-kicker">Co je uvnitř programu</span>
+      <h2 class="display h-section">Symfonie komponentů, které <span class="lr-grad-text">hrají spolu</span></h2>
+      <p class="h-sub" style="margin:0 auto;max-width:640px">Žádná část programu nestojí sama.
+      Každá navazuje na předchozí a zesiluje tu další — dohromady tvoří systém,
+      který tě nese celých 21 dní. Celý program stojí na třech principech:</p>
+    </div>
+
+    <!-- tři principy, na kterých program stojí -->
+    <div class="symf-principles">
+      <div class="lr-card princ-card p-photo si-orange reveal">
+        <img class="p-img" loading="lazy" decoding="async" src="assets/img/symf/princ-disciplina.jpg"
+          alt="Běžec stojící na atletické dráze — Motivation fades. Discipline shows up anyway.">
+        <span class="p-num">1</span>
+        <div class="p-body">
+          <h3>Disciplína</h3>
+          <blockquote>„Za disciplínu si můžeš koupit <b>úplně cokoliv</b>.
+          Proto je to základ číslo jedna."</blockquote>
+        </div>
+      </div>
+      <div class="lr-card princ-card p-photo si-blue reveal">
+        <img class="p-img" loading="lazy" decoding="async" src="assets/img/symf/princ-pozornost.jpg"
+          alt="Pracovní stůl s notebookem, telefonem a kávou — Focus">
+        <span class="p-num">2</span>
+        <div class="p-body">
+          <h3>Pozornost</h3>
+          <blockquote>„Pozornost máš jen <b>jednu</b> — a právě ona produkuje
+          efektivitu a výsledky."</blockquote>
+        </div>
+      </div>
+      <div class="lr-card princ-card p-photo si-gold reveal">
+        <img class="p-img" loading="lazy" decoding="async" src="assets/img/symf/princ-vysledky.jpg"
+          alt="Zlatá trofej v záři reflektoru s konfetami — výsledky">
+        <span class="p-num">3</span>
+        <div class="p-body">
+          <h3>Výsledky</h3>
+          <blockquote>„Počítá se to, co je <b>vidět</b>. Proto zaměřujeme
+          pozornost na výsledek už od prvního dne."</blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="symf-formula reveal">
+      <span class="f-grad">Disciplína</span><i>×</i>
+      <span class="f-grad">Pozornost</span><i>=</i>
+      <span class="f-gold">Výsledky, které vydrží</span>
+    </div>
+
+    <div class="symf-flow">
+
+      <!-- Dárek — Optimalizační balíček (zlatý úvod) -->
+      <div class="symf-item si-gold reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/welcome-box.webp" alt="Otevřená krabice, ze které září zlaté světlo — Welcome optimalizační balíček"><span class="si-ico">🎁</span></div>
+        <div class="symf-body">
+          <span class="si-princ">🎁 Dárek — v každém balíčku</span><br>
+          <span class="si-movement">Hned na startu</span>
+          <h3 class="display">Optimalizační balíček</h3>
+          <p>Každý klient získá optimalizační balíček na obnovu pozornosti, energie
+          a reflektování svého růstu — překvapení šité na míru tomu, co tě brzdí.
+          Ušetří ti týdny práce; víc prozradíme první den.</p>
+          <div class="si-quote">Dostaneš ho <b>jako dárek</b> — ještě než odehraje
+          první komponenta, máš náskok.</div>
+          <div class="symf-meta"><span>V ceně všech balíčků</span><span>Šitý na míru</span><span>Překvapení prvního dne</span></div>
+        </div>
+      </div>
+
+      <!-- 1. věta — On-boarding -->
+      <div class="symf-item si-orange reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/symf/symf-onboarding.jpg" alt="Ruka držící kompas ve tmě s modrými světly v pozadí"><span class="si-ico">🧭</span></div>
+        <div class="symf-body">
+          <span class="si-princ">🏁 hraje na princip: Výsledky</span><br>
+          <span class="si-movement">Komponenta 01 · Před startem</span>
+          <h3 class="display">On-boarding protokol</h3>
+          <p>Než začneme, doladíme základ. Interaktivní lekce tě ještě před startem
+          provede optimalizací spánku, pozornosti a energie — takže do programu nevstupuješ
+          ze setrvačnosti, ale v plné síle. Prvních 21 dní tak má dvojnásobný účinek.</p>
+          <div class="si-quote">Výsledky jsou to, co se počítá — proto <b>zacílíme už na začátku</b>.
+          Kdo ví, kam míří, nemíjí.</div>
+          <div class="symf-meta"><span>Před startem</span><span>Interaktivní lekce</span><span>Vlastním tempem</span></div>
+        </div>
+      </div>
+
+      <!-- 2. věta — Skupinový coaching -->
+      <div class="symf-item si-blue reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/symf/symf-status.jpg" alt="Skupinový videohovor — usměvaví účastníci na obrazovce notebooku"><span class="si-ico">👥</span></div>
+        <div class="symf-body">
+          <span class="si-princ">🔦 hraje na princip: Pozornost</span><br>
+          <span class="si-movement">Komponenta 02 · 2× týdně</span>
+          <h3 class="display">8× skupinový coaching status</h3>
+          <p>Pondělí nastavíš priority a nasměruješ pozornost na to podstatné. Pátek vyhodnotíš,
+          jak se ti ji dařilo udržet — a co příští týden uděláš jinak. Skupina vidí tvé závazky,
+          a to je tah na bránu, který sám doma nevytvoříš.</p>
+          <div class="si-quote">Pozornost je jen jedna — a právě ona <b>produkuje efektivitu
+          a výsledky</b>. Proto ji každé pondělí míříme a každý pátek vyhodnocujeme.</div>
+          <div class="symf-meta"><span>Po &amp; Pá 8:30–9:00</span><span>Priority → vyhodnocení</span><span>Závazky nahlas</span></div>
+        </div>
+      </div>
+
+      <!-- 3. věta — Individuální koučink -->
+      <div class="symf-item si-orange reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/symf/symf-koucink.jpg" alt="Usměvavý muž při online koučovacím hovoru si zapisuje poznámky"><span class="si-ico">🎯</span></div>
+        <div class="symf-body">
+          <span class="si-princ">💪 hraje na princip: Disciplína</span><br>
+          <span class="si-movement">Komponenta 03 · Jeden na jednoho</span>
+          <h3 class="display">5× individuální koučink</h3>
+          <p>Hodina, kdy reflektor míří jen na tebe. Hlubší ponor a optimalizace — pomocí
+          <b style="color:#fff">NLP technik a ICF metod</b> odemykáme vnitřní motivaci,
+          rozpouštíme vzorce, které tě brzdí, a stavíme stabilní růst. Z každého sezení
+          odcházíš s konkrétním krokem, ne jen s dobrým pocitem.</p>
+          <div class="si-quote">Vnější tlak vyprchá. <b>Vnitřní motivace vydrží</b> — a přesně tu
+          budujeme, aby disciplína nebyla dřina, ale samozřejmost.</div>
+          <div class="symf-meta"><span>5 sezení 1:1</span><span>NLP techniky</span><span>ICF metody</span><span>Stabilní růst</span></div>
+        </div>
+      </div>
+
+      <!-- 4. věta — Materiály a lekce -->
+      <div class="symf-item si-blue reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/symf/symf-materialy.jpg" alt="Holografické rozhraní s lekcemi a grafy — digitální studijní materiály"><span class="si-ico">📚</span></div>
+        <div class="symf-body">
+          <span class="si-princ">🔦 hraje na princip: Pozornost</span><br>
+          <span class="si-movement">Komponenta 04 · Mezi cally</span>
+          <h3 class="display">Materiály a lekce mezi schůzkami</h3>
+          <p>Mezi cally program nespí. Krátké lekce, cvičení a nahrávky dostáváš přesně ve chvíli,
+          kdy navazují na tvou fázi výzvy. Nic nestuduješ „do zásoby" — všechno hned použiješ
+          a na dalším callu už stavíme na výsledku.</p>
+          <div class="si-quote">Správná informace <b>ve správný moment</b> — pozornost zůstává
+          u praxe, ne u hromady teorie.</div>
+          <div class="symf-meta"><span>Průběžně</span><span>Krátké dávky</span><span>Hned do praxe</span></div>
+        </div>
+      </div>
+
+      <!-- 5. věta — Podpora mezi cally -->
+      <div class="symf-item si-orange reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/symf/symf-podpora.jpg" alt="Notebook a telefon s konverzacemi propojené zářícím WhatsApp logem"><span class="si-ico">💬</span></div>
+        <div class="symf-body">
+          <span class="si-princ">💪 hraje na princip: Disciplína</span><br>
+          <span class="si-movement">Komponenta 05 · Kdykoliv potřebuješ</span>
+          <h3 class="display">Podpora mezi cally</h3>
+          <p>Zasekl ses ve středu večer? Napiš. Nečekáš týden na další sezení — krátká zpráva,
+          rychlá odpověď a jedeš dál. Právě tahle drobnost rozhoduje o tom, jestli krize
+          trvá hodinu, nebo celý týden.</p>
+          <div class="si-quote">Disciplína nepadá na velkých dnech, ale na malých zaseknutích.
+          <b>Proto jsme na příjmu</b>, když je potřebuješ překonat.</div>
+          <div class="symf-meta"><span>Zprávy kdykoliv</span><span>Rychlá reakce</span><span>Nikdy v tom nejsi sám</span></div>
+        </div>
+      </div>
+
+      <!-- 6. věta — Denní reflexe s Dimi -->
+      <div class="symf-item si-blue reveal">
+        <div class="symf-visual has-img"><img class="si-img" loading="lazy" decoding="async" src="assets/img/symf/symf-reflexe.jpg" alt="Ruce držící telefon s reflektivním dotazníkem"><img class="si-logo" src="assets/img/symf/dimi-logo.svg" alt="Logo Dimi"></div>
+        <div class="symf-body">
+          <span class="si-princ">💪 hraje na princip: Disciplína</span><br>
+          <span class="si-movement">Komponenta 06 · Každý den</span>
+          <h3 class="display">Denní reflexe s aplikací Dimi</h3>
+          <p>Každý den pár minut s Dimi: co se povedlo, co tě brzdilo a kam míříš zítra.
+          Denní puls, který drží změnu při životě i po skončení programu — a kouč díky němu
+          vidí tvůj vývoj v reálném čase, ne jen jednou za týden.</p>
+          <div class="si-quote">Za disciplínu si můžeš koupit <b>úplně cokoliv</b> — a disciplína
+          se staví denně. Dimi je tvůj trenažér: malý krok každý den, velký výsledek za 21 dní.</div>
+          <div class="symf-meta"><span>Denně · pár minut</span><span>AI průvodce</span><span>Kouč vidí tvůj progres</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- finále -->
+    <div class="symf-finale reveal">
+      <span class="si-ico">🧩</span>
+      <h3 class="display">Všechno do sebe zapadá</h3>
+      <p>Každá komponenta je silná sama o sobě — ale skutečný výsledek dělají dohromady.
+      Proto je nedostáváš jako seznam položek, ale jako jeden systém:
+      <b style="color:#fff">disciplína ti dá tah, pozornost směr — a výsledky jsou pak
+      jen otázkou času.</b> Vyber si intenzitu níže. 👇</p>
     </div>
   </div>
 </section>
@@ -647,6 +977,6 @@
 
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=18"></script>
+<script src="assets/site.js?v=21"></script>
 </body>
 </html>
