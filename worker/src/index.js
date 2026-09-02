@@ -30,6 +30,15 @@ export default {
     if (url.pathname === '/lp.html') {
       return Response.redirect(new URL('/', url).toString(), 301);
     }
+    // Leadership Up-Grade: kanonická adresa /up-great; aliasy a jiná velikost
+    // písmen (/Up-Great, /up-grade, /up-great.html…) -> 301 na /up-great
+    {
+      const lower = url.pathname.toLowerCase();
+      const aliases = ['/up-great', '/up-great.html', '/up-grade', '/up-grade.html'];
+      if (aliases.includes(lower) && url.pathname !== '/up-great') {
+        return Response.redirect(new URL('/up-great', url).toString(), 301);
+      }
+    }
     if (url.pathname === '/api/click' && request.method === 'POST') {
       return handleClick(request, env, ctx);
     }

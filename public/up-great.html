@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership Up-Grade — Leadership Restart | leadershiprestart.cz</title>
+<meta name="description" content="Leadership Up-Grade: měsíční členství se skupinovým i individuálním coachingem. Basic 2 950 Kč, Prémium lvl1 4 450 Kč, Prémium lvl2 7 450 Kč měsíčně — akční ceny pro 50 lidí. Elite: vše uděláme za tebe za 99 000 Kč.">
+<link rel="canonical" href="https://leadershiprestart.cz/up-great">
+<link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=21">
+<style>
+  /* ======================================================================
+     LEADERSHIP UP-GRADE — tmavý design shodný s ceníkem, barvy z loga:
+     oranžová #ff6339 → modrá #0080ff
+     ====================================================================== */
+  :root{
+    --lr-orange:#ff6339;
+    --lr-blue:#0080ff;
+    --lr-grad:linear-gradient(100deg,var(--lr-orange) 0%,var(--lr-blue) 100%);
+    --dk-bg:#0b0e13;
+    --dk-bg-2:#10141b;
+    --dk-card:rgba(255,255,255,.035);
+    --dk-brd:rgba(255,255,255,.09);
+    --dk-text:#eef1f6;
+    --dk-muted:#98a2b3;
+    --tint-blue:#0c1220;
+    --tint-warm:#151009;
+    /* barvy balíčků: Basic modrá · Prémium lvl1 oranžová · Prémium lvl2 zlatá · Elite gradient */
+    --c-basic:#0080ff;
+    --c-standard:#ff6339;
+    --c-gold:#e9b64f;
+    --c-gold-grad:linear-gradient(120deg,#f6d47c 0%,#c8952f 100%);
+  }
+  body{background:var(--dk-bg);color:var(--dk-text)}
+
+  /* ---------- přepis sdílené (světlé) navigace na tmavou ---------- */
+  .nav{background:rgba(11,14,19,.72);border-bottom:1px solid rgba(255,255,255,.07);
+    box-shadow:0 8px 32px rgba(0,0,0,.45)}
+  .nav-brand b{color:var(--dk-text)}
+  .nav-brand small{color:var(--dk-muted)}
+  .nav-brand img{background:transparent}
+  .nav-links a{color:var(--dk-muted)}
+  .nav-links a:hover{background:rgba(255,255,255,.07);color:var(--dk-text)}
+  .nav-links a.active{background:rgba(255,255,255,.1);color:#fff}
+  .nav-links a.nav-cta{background:var(--lr-grad);color:#fff;
+    box-shadow:0 10px 24px rgba(255,99,57,.3)}
+  .nav-burger{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:var(--dk-text)}
+  @media(max-width:960px){
+    .nav-links{background:rgba(13,16,22,.98);border-color:rgba(255,255,255,.1);
+      box-shadow:0 30px 70px rgba(0,0,0,.6)}
+  }
+
+  /* ---------- obecné prvky ---------- */
+  .lr-grad-text{
+    background:var(--lr-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    padding:.16em .04em .06em;margin:-.16em -.04em -.06em;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  }
+  .lr-kicker{display:inline-flex;align-items:center;gap:10px;
+    font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:12.5px;letter-spacing:.16em;
+    color:var(--dk-muted);background:rgba(255,255,255,.04);
+    border:1px solid var(--dk-brd);padding:10px 18px 8px;border-radius:999px}
+  .lr-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lr-grad);flex:none}
+
+  .lr-card{background:var(--dk-card);border:1px solid var(--dk-brd);border-radius:24px;
+    padding:clamp(22px,3vw,34px);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+  .lr-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.18)}
+
+  .btn-lr{background:var(--lr-grad);color:#fff;
+    box-shadow:0 14px 34px rgba(255,99,57,.28)}
+  .btn-lr:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(0,128,255,.35)}
+
+  .btn{padding:10px 22px 8px;font-size:12.5px;letter-spacing:.07em;border-radius:11px;font-weight:700}
+  .nav-links a.nav-cta{padding:7px 15px 6px;border-radius:9px;font-size:12px}
+
+  /* tenčí horní menu */
+  body{padding-top:58px}
+  .nav-in{padding:7px clamp(18px,4vw,44px);gap:20px}
+  .nav-brand img{width:34px;height:34px;border-radius:9px}
+  .nav-brand b{font-size:14.5px}
+  .nav-brand small{font-size:10px}
+  .nav-links a{font-size:13.5px;padding:8px 12px}
+  .nav-links a{position:relative;border-radius:9px}
+  .nav-links a.active{background:transparent;color:#fff}
+  .nav-links a.active::after{content:"";position:absolute;left:12px;right:12px;bottom:2px;
+    height:2px;border-radius:2px;background:var(--lr-grad)}
+  .nav-links a:hover{background:rgba(255,255,255,.05)}
+  @media(max-width:960px){.nav-links{top:58px}}
+
+  /* ---------- sekce ---------- */
+  .sec-dark{background:var(--dk-bg);color:var(--dk-text);position:relative;overflow:hidden}
+  .sec-dark .h-sub{color:var(--dk-muted)}
+  .sec-dark h2{color:#fff}
+  .sec-tint-blue{background:var(--tint-blue)}
+  .sec-tint-blue::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(820px 480px at 80% 0%,rgba(0,128,255,.13),transparent 62%),
+      radial-gradient(560px 380px at 8% 100%,rgba(0,128,255,.06),transparent 60%)}
+  .sec-tint-warm{background:var(--tint-warm)}
+  .sec-tint-warm::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(820px 480px at 15% 0%,rgba(255,99,57,.12),transparent 62%),
+      radial-gradient(560px 380px at 92% 100%,rgba(255,99,57,.05),transparent 60%)}
+  .sec-tint-blue > .wrap,.sec-tint-warm > .wrap{position:relative}
+
+  /* ---------- hero ---------- */
+  .hero-up{position:relative;overflow:hidden;text-align:center;background:var(--dk-bg)}
+  .hero-up::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(760px 460px at 18% 8%,rgba(255,99,57,.14),transparent 60%),
+      radial-gradient(820px 520px at 85% 20%,rgba(0,128,255,.16),transparent 62%)}
+  .hero-up .wrap{padding:clamp(48px,7vw,92px) clamp(18px,4vw,44px) clamp(38px,5vw,64px);position:relative}
+  .hero-up h1{font-size:clamp(32px,4.6vw,58px);margin:22px auto 16px;max-width:860px;color:#fff}
+  .hero-up .h-sub{margin:0 auto;color:var(--dk-muted)}
+  .hero-up .h-sub b{color:var(--dk-text)}
+
+  .anchor-band{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;
+    gap:14px;margin:38px auto 0;max-width:980px}
+  .anchor-card{flex:1;min-width:230px;text-align:center;padding:26px 20px 22px;
+    display:flex;flex-direction:column;justify-content:center}
+  .anchor-card:hover{transform:none}
+  .anchor-card small{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dk-muted);margin-bottom:8px}
+  .anchor-card b{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(26px,2.8vw,38px);line-height:1.05;color:#fff}
+  .anchor-card span{display:block;font-size:13.5px;color:var(--dk-muted);margin-top:8px}
+  .anchor-card.anchor-hero{flex:1.5;min-width:290px;padding:34px 26px 30px;
+    border:1.5px solid transparent;
+    background:linear-gradient(var(--dk-bg-2),var(--dk-bg-2)) padding-box,var(--lr-grad) border-box;
+    box-shadow:0 24px 90px rgba(255,99,57,.16),0 24px 90px rgba(0,128,255,.14)}
+  .anchor-card.anchor-hero b{font-size:clamp(38px,4.4vw,58px)}
+  .anchor-card.anchor-hero small{color:var(--dk-text)}
+  .anchor-card b.lr-grad-text{color:transparent}
+
+  /* ---------- OBSAH — tři pilíře členství ---------- */
+  .obsah-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px;position:relative}
+  .ob-card{text-align:center;padding:32px 24px 30px;position:relative}
+  .ob-card .ob-ico{font-size:52px;line-height:1;margin-bottom:16px;
+    filter:drop-shadow(0 10px 30px rgba(0,128,255,.45))}
+  .ob-card .ob-tag{display:inline-block;font-family:"League Spartan",sans-serif;font-weight:700;
+    text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#4da3ff;margin-bottom:8px}
+  .ob-card h3{font-size:18px;margin-bottom:10px;color:#fff}
+  .ob-card p{font-size:14.5px;color:var(--dk-muted)}
+  .ob-card p b{color:var(--dk-text)}
+  .ob-card.o-warm .ob-ico{filter:drop-shadow(0 10px 30px rgba(255,99,57,.45))}
+  .ob-card.o-warm .ob-tag{color:#ff8a5c}
+
+  /* ---------- BONUSY ---------- */
+  .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;
+    max-width:920px;margin:40px auto 0;position:relative}
+  .bonus-card{text-align:left;padding:clamp(26px,3vw,36px);position:relative;overflow:hidden;
+    border:1.5px solid rgba(233,182,79,.4);box-shadow:0 24px 80px rgba(233,182,79,.1)}
+  .bonus-card:hover{border-color:rgba(233,182,79,.85);box-shadow:0 34px 110px rgba(233,182,79,.26)}
+  .bonus-card .b-num{position:absolute;top:8px;right:18px;font-family:"League Spartan",sans-serif;
+    font-weight:800;font-size:74px;line-height:1;opacity:.07;color:#f6d47c}
+  .bonus-card .b-tag{display:inline-flex;align-items:center;gap:8px;font-family:"League Spartan",sans-serif;
+    font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:11.5px;color:#f6d47c;
+    background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.4);
+    border-radius:999px;padding:7px 13px 5px;margin-bottom:14px}
+  .bonus-card .b-ico{font-size:40px;line-height:1;display:block;margin-bottom:12px;
+    filter:drop-shadow(0 10px 30px rgba(233,182,79,.4))}
+  .bonus-card h3{font-size:clamp(18px,2vw,22px);color:#fff;margin-bottom:10px}
+  .bonus-card p{font-size:14.5px;color:var(--dk-muted);line-height:1.6}
+  .bonus-card p b{color:var(--dk-text)}
+  .b-value{display:inline-flex;align-items:center;gap:10px;margin-top:16px;font-weight:800;
+    font-family:"League Spartan",sans-serif;font-size:14px;letter-spacing:.04em;color:#f6d47c;
+    background:rgba(233,182,79,.08);border:1px dashed rgba(233,182,79,.5);
+    border-radius:12px;padding:10px 16px 8px}
+  .b-value s{color:var(--dk-muted);text-decoration-color:var(--lr-orange);text-decoration-thickness:2px}
+
+  /* ---------- cenové karty ---------- */
+  .cenik-sec::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 500px at 12% 90%,rgba(255,99,57,.08),transparent 60%),
+      radial-gradient(760px 520px at 88% 10%,rgba(0,128,255,.1),transparent 62%)}
+  .cenik{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:44px;align-items:stretch;position:relative}
+  .cena-card{display:flex;flex-direction:column;position:relative;overflow:hidden;text-align:center}
+  .cena-card .c-name{font-family:"League Spartan",sans-serif;text-transform:uppercase;font-weight:800;
+    font-size:22px;color:#fff}
+  .cena-card .c-tag{font-size:13px;font-weight:700;color:var(--dk-muted);margin:4px 0 20px}
+  .c-was{font-size:15.5px;font-weight:700;color:var(--dk-muted);text-decoration:line-through;
+    text-decoration-color:var(--lr-orange);text-decoration-thickness:2.5px}
+  .c-price{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(38px,3.6vw,50px);
+    line-height:1;margin:4px 0 6px;color:#fff}
+  .c-price small{font-size:.42em;font-weight:700;vertical-align:.62em;letter-spacing:.02em}
+  .c-eur{font-size:14.5px;font-weight:700;color:var(--dk-muted);letter-spacing:.01em;margin:0 0 20px}
+  .c-list{list-style:none;flex:1;text-align:left;display:grid;gap:12px;margin-top:6px;align-content:start}
+  .c-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:#cdd4de}
+  .c-list li::before{content:attr(data-ico);flex:none;width:27px;height:27px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13.5px;
+    background:rgba(255,255,255,.07);margin-top:0}
+  .cena-card .btn{margin-top:24px;width:100%}
+  .c-pop{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--dk-muted);
+    background:rgba(255,255,255,.04);border:1px solid var(--dk-brd);border-radius:999px;
+    padding:7px 13px 5px;margin-top:14px}
+  .c-pop i{width:8px;height:8px;border-radius:50%;background:var(--lr-grad);flex:none}
+
+  /* --- barevné varianty balíčků --- */
+  .cena-card.v-basic{border:1.5px solid rgba(0,128,255,.4);
+    box-shadow:0 24px 80px rgba(0,128,255,.13)}
+  .cena-card.v-basic:hover{border-color:rgba(0,128,255,.85);
+    box-shadow:0 34px 110px rgba(0,128,255,.32)}
+  .cena-card.v-standard{border:1.5px solid rgba(255,99,57,.55);background:var(--dk-bg-2);
+    box-shadow:0 24px 90px rgba(255,99,57,.18)}
+  .cena-card.v-standard:hover{border-color:rgba(255,99,57,.95);
+    box-shadow:0 36px 120px rgba(255,99,57,.38)}
+  .cena-card.v-gold{border:1.5px solid rgba(233,182,79,.4);
+    box-shadow:0 24px 80px rgba(233,182,79,.13)}
+  .cena-card.v-gold:hover{border-color:rgba(233,182,79,.85);
+    box-shadow:0 34px 110px rgba(233,182,79,.3)}
+  /* Elite — gradientní rámeček, „vše za tebe" */
+  .cena-card.v-elite{border:1.5px solid transparent;
+    background:linear-gradient(var(--dk-bg-2),var(--dk-bg-2)) padding-box,var(--lr-grad) border-box;
+    box-shadow:0 24px 90px rgba(255,99,57,.16),0 24px 90px rgba(0,128,255,.14)}
+  .cena-card.v-elite:hover{box-shadow:0 36px 120px rgba(255,99,57,.3),0 36px 120px rgba(0,128,255,.26)}
+
+  .v-basic .c-list li::before{background:rgba(0,128,255,.18)}
+  .v-standard .c-list li::before{background:rgba(255,99,57,.18)}
+  .v-gold .c-list li::before{background:rgba(233,182,79,.16)}
+  .v-elite .c-list li::before{background:rgba(255,255,255,.1)}
+  /* bonusy v kartě — zlatý mini rámeček */
+  .c-list li.gift{color:#f6d47c;font-weight:700;align-items:center;
+    border:1px solid rgba(233,182,79,.45);background:rgba(233,182,79,.06);
+    border-radius:14px;padding:10px 14px 10px 12px}
+  .c-list li.gift::before{content:"🎁";background:none;width:auto;height:auto;font-size:18px}
+  .v-basic .c-pop i{background:var(--c-basic)}
+  .v-standard .c-pop i{background:var(--c-standard)}
+  .v-gold .c-pop i{background:var(--c-gold-grad)}
+  .c-price.p-standard{background:linear-gradient(120deg,#ff8a5c,#ff4d18);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .c-price.p-gold{background:var(--c-gold-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .c-price.p-elite{background:var(--lr-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .c-per{font-size:.34em;font-weight:700;color:var(--dk-muted);letter-spacing:.02em}
+
+  /* tlačítka v barvě balíčku */
+  .btn-basic{background:rgba(0,128,255,.14);color:#fff;border:1.5px solid rgba(0,128,255,.6)}
+  .btn-basic:hover{transform:translateY(-3px);background:var(--c-basic);border-color:var(--c-basic);
+    box-shadow:0 18px 44px rgba(0,128,255,.4)}
+  .btn-standard{background:linear-gradient(120deg,#ff7a4a,#ff4d18);color:#fff;
+    box-shadow:0 14px 34px rgba(255,99,57,.32)}
+  .btn-standard:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(255,99,57,.45)}
+  .btn-gold{background:rgba(233,182,79,.14);color:#f6d47c;border:1.5px solid rgba(233,182,79,.55)}
+  .btn-gold:hover{transform:translateY(-3px);background:var(--c-gold-grad);border-color:transparent;
+    color:#1a1206;box-shadow:0 18px 44px rgba(233,182,79,.35)}
+  .btn-elite{background:var(--lr-grad);color:#fff;box-shadow:0 14px 34px rgba(255,99,57,.3)}
+  .btn-elite:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(0,128,255,.4)}
+
+  .c-ribbon{position:absolute;top:28px;right:-34px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
+    font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
+    background:var(--c-standard);padding:6px 44px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+  .c-ribbon.r-grad{background:linear-gradient(100deg,#ff6339,#0080ff)}
+
+  .c-note{margin-top:18px;padding:12px 14px;border-radius:14px;text-align:left;font-size:13px;line-height:1.55;
+    background:rgba(255,255,255,.04);border:1px dashed var(--dk-brd);color:var(--dk-muted)}
+  .c-note b{color:var(--dk-text)}
+
+  .cena-note{max-width:720px;margin:34px auto 0;text-align:center;color:var(--dk-muted);font-size:14.5px;position:relative}
+  .cena-note a{color:#4da3ff;font-weight:700}
+
+  /* omezená kapacita — pruh */
+  .cap-band{max-width:680px;margin:38px auto 0;text-align:center;position:relative;
+    padding:clamp(24px,3vw,34px);border-radius:22px;
+    border:1.5px solid rgba(255,99,57,.5);background:rgba(255,99,57,.06)}
+  .cap-band b{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(20px,2.2vw,26px);color:#fff;display:block;margin-bottom:8px}
+  .cap-band p{color:var(--dk-muted);font-size:14.5px}
+  .cap-band p b{display:inline;font-size:inherit;color:#ff8a5c}
+
+  /* ---------- leadmagnet band + footer přepis ---------- */
+  .lead-band{background:var(--dk-bg-2)}
+  .lead-band .aura{background:
+    radial-gradient(700px 420px at 82% 18%,rgba(0,128,255,.14),transparent 60%),
+    radial-gradient(600px 400px at 10% 90%,rgba(255,99,57,.1),transparent 60%)}
+  .lead-band .kicker{color:#4da3ff;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+  .lead-band .grad-text{background:var(--lr-grad);-webkit-background-clip:text;background-clip:text}
+  .lead-form input{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.05)}
+  .lead-form input:focus{border-color:var(--lr-blue)}
+  .lead-form .btn-r21{background:var(--lr-grad);box-shadow:0 14px 34px rgba(255,99,57,.28)}
+  .lead-ok{background:rgba(0,128,255,.15);border-color:rgba(0,128,255,.4)}
+  .footer{background:#080a0e}
+  .footer h4{color:#4da3ff}
+  .footer a:hover{color:#4da3ff}
+</style>
+</head>
+<body>
+
+<div id="siteNav"></div>
+
+<!-- ======================= HERO + KOTVA HODNOTY ======================= -->
+<section class="hero-up">
+  <div class="wrap">
+    <span class="lr-kicker">Pokračování pro absolventy</span>
+    <h1 class="display">Leadership <span class="lr-grad-text">Up-Grade</span> 🔥</h1>
+    <p class="h-sub" style="font-size:clamp(16px,1.6vw,19px)">Restart byl začátek — Up-Grade je systém,
+    který tě drží v růstu <b>měsíc za měsícem</b>. Moje aktuální cena za jednorázovou konzultaci
+    je <b>4 500 Kč za 60 minut</b>. Členství v Up-Grade ti dá násobně víc — za zlomek ceny.</p>
+
+    <div class="anchor-band">
+      <div class="lr-card anchor-card reveal">
+        <small>Jednorázová konzultace</small>
+        <b>4 500 Kč</b>
+        <span>za 60 minut · aktuální ceník</span>
+      </div>
+      <div class="lr-card anchor-card anchor-hero reveal">
+        <small>Bonusy k členství</small>
+        <b class="lr-grad-text">15 900 Kč</b>
+        <span>rok Remind Systému (11 400 Kč) + vstupní Mentoring Diagnóza (4 500 Kč) — zdarma</span>
+      </div>
+      <div class="lr-card anchor-card reveal">
+        <small>Akční cena</small>
+        <b>pro 50 lidí</b>
+        <span>pak se ceny vrací na běžnou úroveň</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= OBSAH — CO ČLENSTVÍ OBSAHUJE ======================= -->
+<section class="section sec-dark sec-tint-blue">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Obsah</span>
+    <h2 class="display h-section">Co v Up-Grade <span class="lr-grad-text">dostáváš</span></h2>
+    <p class="h-sub" style="margin:0 auto;max-width:640px">Tři pilíře, které spolu drží tvůj růst:
+    rytmus skupiny, podpora každý den a hloubka individuální práce.</p>
+    <div class="obsah-grid">
+      <div class="lr-card ob-card o-warm reveal">
+        <div class="ob-ico">💪</div>
+        <span class="ob-tag">Pilíř 1</span>
+        <h3 class="display">Leadership Remind calls</h3>
+        <p><b>8× měsíčně</b> — skupinový coaching, motivace a vzájemná podpora.
+        Pravidelný rytmus, který tě nenechá vypadnout ze hry.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico">📲</div>
+        <span class="ob-tag">Pilíř 2</span>
+        <h3 class="display">Denní podpora</h3>
+        <p>Možnost <b>24/7 podpory</b> přes hlasové i textové zprávy.
+        Zasekneš se? Napiš — nečekáš týden na další call.</p>
+      </div>
+      <div class="lr-card ob-card o-warm reveal">
+        <div class="ob-ico">🚀</div>
+        <span class="ob-tag">Pilíř 3</span>
+        <h3 class="display">Individuální coaching</h3>
+        <p><b>1× nebo 2× měsíčně</b> individuální coaching / mentoring
+        pro hlubší aplikaci a byznys šablony.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BONUSY ======================= -->
+<section class="section sec-dark">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Navíc ke každému členství</span>
+    <h2 class="display h-section">Dva bonusy v hodnotě <span class="lr-grad-text">15 900 Kč</span></h2>
+    <div class="bonus-grid">
+      <div class="lr-card bonus-card reveal">
+        <span class="b-num">1</span>
+        <span class="b-tag">🎁 Bonus 1</span>
+        <span class="b-ico">📊</span>
+        <h3 class="display">Interaktivní Remind Systém [software]</h3>
+        <p>Metodické lekce self-coachingu v aplikaci Telegram a na webu.
+        <b>AI coaching, který tě přesně provede</b> aplikováním všeho do praxe.</p>
+        <span class="b-value">🤑 Rok předplatného <s>11 400 Kč</s> zdarma</span>
+      </div>
+      <div class="lr-card bonus-card reveal">
+        <span class="b-num">2</span>
+        <span class="b-tag">🎁 Bonus 2</span>
+        <span class="b-ico">🚀</span>
+        <h3 class="display">1× vstupní 60min MENTORING Diagnóza</h3>
+        <p>Nastavení strategie na následující <b>3 měsíce</b> a vytvoření
+        road mapy pro realizaci. Začínáš s jasným plánem, ne naslepo.</p>
+        <span class="b-value">💎 V hodnotě 4 500 Kč — zdarma</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CENOVÉ KARTY ======================= -->
+<section class="section sec-dark cenik-sec">
+  <div class="wrap">
+    <div style="text-align:center;position:relative">
+      <span class="lr-kicker">Vyber si úroveň</span>
+      <h2 class="display h-section" style="color:#fff">Čtyři úrovně <span class="lr-grad-text">Up-Grade</span></h2>
+    </div>
+    <div class="cenik">
+
+      <!-- BASIC (modrá) -->
+      <div class="lr-card cena-card v-basic reveal">
+        <div class="c-name">Basic</div>
+        <div class="c-tag">Měsíční členství ve skupině</div>
+        <div class="c-was">běžná cena 9 250 Kč</div>
+        <div class="c-price">2 950<small>Kč</small> <span class="c-per">/ měsíc</span></div>
+        <div class="c-eur">≈ 117 € měsíčně</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👥">8× měsíčně skupinový coaching (30–60 min, 2× týdně)</li>
+          <li data-ico="🧭">1× za 3 měsíce revize situace</li>
+          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+        </ul>
+        <a class="btn btn-basic" data-cta-pos="upgrade_basic" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Basic</a>
+        <span class="c-pop"><i></i>Vstupní úroveň — držíš rytmus skupiny</span>
+      </div>
+
+      <!-- PRÉMIUM LVL1 (oranžová) -->
+      <div class="lr-card cena-card v-standard reveal">
+        <div class="c-ribbon">Nejoblíbenější</div>
+        <div class="c-name">Prémium lvl1</div>
+        <div class="c-tag">Skupina + individuální vedení</div>
+        <div class="c-was">běžná cena 12 500 Kč</div>
+        <div class="c-price p-standard">4 450<small>Kč</small> <span class="c-per">/ měsíc</span></div>
+        <div class="c-eur">≈ 176 € měsíčně</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👥">8× měsíčně skupinový coaching (60 min, 2× týdně — Po &amp; Pá 8:30)</li>
+          <li data-ico="🎯">1× měsíčně individuální coaching</li>
+          <li data-ico="💬">Denní podpora 24/7 — hlasové i textové zprávy</li>
+          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+        </ul>
+        <div class="c-note"><b>Příplatek za 1× individuální coaching</b> je zde reálně
+        1 500 Kč oproti základu.</div>
+        <a class="btn btn-standard" data-cta-pos="upgrade_lvl1" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Prémium lvl1</a>
+        <span class="c-pop"><i></i>Nejlepší poměr hloubky a ceny</span>
+      </div>
+
+      <!-- PRÉMIUM LVL2 (zlatá) -->
+      <div class="lr-card cena-card v-gold reveal">
+        <div class="c-name">Prémium lvl2</div>
+        <div class="c-tag">Maximální intenzita + šablony</div>
+        <div class="c-was">běžná cena 18 250 Kč</div>
+        <div class="c-price p-gold">7 450<small>Kč</small> <span class="c-per">/ měsíc</span></div>
+        <div class="c-eur">≈ 294 € měsíčně</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👥">8× měsíčně skupinový coaching (60 min, 2× týdně)</li>
+          <li data-ico="🎯">2× měsíčně individuální coaching + mentoring</li>
+          <li data-ico="🧰">Business &amp; marketing šablony</li>
+          <li data-ico="💬">Denní podpora 24/7 — hlasové i textové zprávy</li>
+          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+        </ul>
+        <div class="c-note"><b>Příplatek za 2× coaching + mentoring a šablony</b>
+        je 4 500 Kč oproti základu.</div>
+        <a class="btn btn-gold" data-cta-pos="upgrade_lvl2" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Prémium lvl2</a>
+        <span class="c-pop"><i></i>Pro ty, kdo chtějí jet naplno</span>
+      </div>
+
+      <!-- ELITE (gradient) — vše za klienta -->
+      <div class="lr-card cena-card v-elite reveal">
+        <div class="c-ribbon r-grad">Done for you</div>
+        <div class="c-name">Elite</div>
+        <div class="c-tag">Vše uděláme za tebe</div>
+        <div class="c-price p-elite">99 000<small>Kč</small></div>
+        <div class="c-eur">≈ 3 960 €</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👑">Vše z Prémium lvl2 — skupina, 2× individuální coaching, šablony</li>
+          <li data-ico="🛠️">Realizace za tebe — strategii nejen nastavíme, ale rovnou implementujeme</li>
+          <li data-ico="🧰">Business &amp; marketing šablony připravené na míru a nasazené do praxe</li>
+          <li data-ico="📞">Prioritní přístup 24/7 — jsi vždy první na řadě</li>
+        </ul>
+        <div class="c-note"><b>Pro ty, kdo chtějí výsledek, ne další úkoly.</b>
+        Ty vedeš — my dodáváme. Kapacita jen pro pár klientů současně.</div>
+        <a class="btn btn-elite" data-cta-pos="upgrade_elite" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Elite</a>
+        <span class="c-pop"><i></i>Omezená kapacita — na osobní domluvu</span>
+      </div>
+
+    </div>
+
+    <div class="cap-band reveal">
+      <b>⚡ Akční ceny platí pro prvních 50 lidí</b>
+      <p>Jakmile se kapacita naplní, vracíme se na běžné ceny
+      <b>9 250 / 12 500 / 18 250 Kč</b>. Kdo je uvnitř, drží akční cenu dál.</p>
+    </div>
+
+    <p class="cena-note">
+      Nevíš, která úroveň dává smysl právě pro tebe?
+      <a data-cta-pos="text" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Rezervuj si nezávazný hovor</a>
+      — probereme, kde jsi, a doporučíme intenzitu.
+    </p>
+    <p class="cena-note" style="margin-top:14px;font-size:13px;opacity:.8">
+      Ceny v eurech jsou orientační (přepočet kurzem 25 Kč/€, zaokrouhleno).
+      Fakturujeme v korunách.
+    </p>
+  </div>
+</section>
+
+<div id="siteFooter"></div>
+
+<script src="assets/site.js?v=21"></script>
+</body>
+</html>
