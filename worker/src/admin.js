@@ -1,5 +1,5 @@
 // Admin přehled /ab/ — basic auth, dashboard s kartami variant, grafem a trychtýřem.
-import { getState, putState, getTests, getTestById, getQueue } from './config.js';
+import { getState, putState, getTests, getTestById, getQueue, getAllTests, getAnyTest, getPlanIdeas } from './config.js';
 import { cookie, COOKIE_EXCLUDE, parseCookies } from './ab.js';
 import { testStats, timeseries, goalBreakdown, breakdown, pBest, sampleTier } from './stats.js';
 
@@ -118,6 +118,8 @@ const PALETTE = ['#8b93a7', '#6ea8fe', '#f7b955', '#5fd39a', '#e07be0'];
 // Pořadí a české popisky pater trychtýře za klikem (název = param g v /api/goal).
 const GOAL_ORDER = ['form', 'rezervace'];
 const GOAL_LABELS = { form: 'Vyplněný formulář', rezervace: 'Rezervace schůzky' };
+// Z čeho se počítá procento na kartě varianty (patro se vždy měří vůči předchozímu).
+const GOAL_OF = { form: 'z kliků', rezervace: 'z formulářů' };
 const sortGoals = (names) =>
   [...names].sort((a, b) => {
     const ia = GOAL_ORDER.indexOf(a);
@@ -212,7 +214,7 @@ function chartSvg(rows, variants, days) {
 async function renderDashboard(request, env, url) {
   const state = await getState(env, { fresh: true });
   const shownId = url.searchParams.get('test') || state.active_test_id;
-  const test = shownId ? getTestById(shownId) : null;
+  const test = shownId ? getAnyTest(shownId) : null; // i archivované — historie
   const days = url.searchParams.get('days') === '7' ? 7 : 30;
 
   let body = '<p class="muted">Žádný test není definovaný v tests.json.</p>';
@@ -224,26 +226,29 @@ async function renderDashboard(request, env, url) {
       goalBreakdown(env, test.id),
       breakdown(env, test.id),
     ]);
-    const isActive = test.id === state.active_test_id;
-    const lockedWinner = state.locked?.[test.id] || null;
+    const isActive = !test.archived && test.id === state.active_test_id;
+    const lockedWinner = test.archived ? test.winner || null : state.locked?.[test.id] || null;
     const guard = sampleTier(test, variants, isActive ? state.started_at : null);
-    const probs = guard.tier !== 'collecting' ? pBest(variants) : null;
+    const probs = test.archived || guard.tier !== 'collecting' ? pBest(variants) : null; // archiv: historie se čte i na malém vzorku
     const control = variants[0];
     const totalWeight = variants.reduce((s, v) => s + (v.weight || 1), 0) || 1;
-    const goalNames = sortGoals(new Set(goalsRows.map((g) => g.goal)));
+    const goalNames = sortGoals(new Set([...GOAL_ORDER, ...goalsRows.map((g) => g.goal)]));
     const goalsBy = {};
     for (const g of goalsRows) (goalsBy[g.variant_id] ||= {})[g.goal] = g.n;
 
     // -- stavový řádek + guard --
-    const statusLine = lockedWinner
+    const statusLine = test.archived
+      ? `📦 Archivovaný test (${esc(test.ran || 'termín neuveden')})${lockedWinner ? ` — vítěz <b>${esc(lockedWinner)}</b> je zapečený v HTML` : ''}. Jen historická data.`
+      : lockedWinner
       ? `🔒 Zamčený vítěz: <b>${esc(lockedWinner)}</b> — servíruje se všem. Řekni Claudovi, ať ho zapeče do HTML a test archivuje.`
       : isActive
         ? state.status === 'paused'
           ? '⏸ Test je pozastavený — všichni vidí kontrolu, nic se neměří.'
           : `▶️ Test běží <b>${guard.days}. den</b>.`
         : 'ℹ️ Tento test není aktivní — jen náhled dat.';
-    const guardLine =
-      guard.tier === 'collecting'
+    const guardLine = test.archived
+      ? esc(test.result || '')
+      : guard.tier === 'collecting'
         ? `⏳ <b>Sbírá se vzorek</b> — ${fmtN(guard.minViews)}/${fmtN(guard.nBig)} zobrazení na variantu, den ${guard.days}/${guard.minDays}. Vítěz se zatím nehlásí.`
         : guard.tier === 'provisional'
           ? `🌗 Vzorek ${fmtN(guard.minViews)}/${fmtN(guard.nSmall)} — průkazné jen pro velké rozdíly (≳10 pb).`
@@ -260,11 +265,15 @@ async function renderDashboard(request, env, url) {
           isControl || !control.views || !v.views
             ? null
             : (v.cr - control.cr) * 100;
+        let prevStep = v.clicks;
         const goalCells = goalNames
           .map((g) => {
             const n = goalsBy[v.id]?.[g] || 0;
-            const pctOfClicks = v.clicks ? ` <span class="muted">(${fmtPct(n / v.clicks, 0)} z kliků)</span>` : '';
-            return `<div class="mrow"><span>${esc(GOAL_LABELS[g] || g)}</span><b>${fmtN(n)}</b>${pctOfClicks}</div>`;
+            const rel = prevStep
+              ? ` <span class="muted">(${fmtPct(n / prevStep, 0)} ${esc(GOAL_OF[g] || 'z předchozího')})</span>`
+              : '';
+            prevStep = n;
+            return `<div class="mrow"><span>${esc(GOAL_LABELS[g] || g)}</span><b>${fmtN(n)}</b>${rel}</div>`;
           })
           .join('');
         return `
@@ -287,7 +296,7 @@ async function renderDashboard(request, env, url) {
             <div class="pbar"><i style="width:${p != null ? Math.round(p * 100) : 0}%"></i></div>
           </div>
           <div class="cbtns">
-            <a class="btn" href="/?preview=${encodeURIComponent(v.id)}" target="_blank" rel="noopener">👁 Náhled webu</a>
+            ${test.archived ? '' : `<a class="btn" href="/?preview=${encodeURIComponent(v.id)}" target="_blank" rel="noopener">👁 Náhled webu</a>`}
             ${
               isActive && !lockedWinner
                 ? `<button data-action="lock" data-variant="${esc(v.id)}">🔒 Zamknout</button>`
@@ -300,7 +309,7 @@ async function renderDashboard(request, env, url) {
 
     // -- trychtýř: 1. zobrazení -> 2. klik -> dynamická patra podle goalů,
     //    procento se vždy vztahuje k předchozímu patru --
-    const goalCols = goalNames.length ? goalNames : ['form'];
+    const goalCols = goalNames;
     const funnelHead = goalCols
       .map((g, i) => `<th>${i + 3}. ${esc(GOAL_LABELS[g] || g)}</th>`)
       .join('');
@@ -364,6 +373,7 @@ async function renderDashboard(request, env, url) {
         <div>
           <h2>${esc(test.label || test.id)}</h2>
           <p class="muted">slot <code>${esc(test.slot)}</code> · stránka <code>${esc(test.page)}</code> · ${variants.length} varianty</p>
+          ${test.hypothesis ? `<p class="hyp">🧪 ${esc(test.hypothesis)}</p>` : ''}
         </div>
         <div class="statusbox"><p>${statusLine}</p><p>${guardLine}</p></div>
       </div>
@@ -444,6 +454,51 @@ new Image().src='${origin}/api/goal?v='+encodeURIComponent(v)+'&amp;g=rezervace&
     })
     .join('');
 
+  // -- checklist: co už se testovalo (archiv + zamčené), co běží/čeká, co dál --
+  const doneHtml = getAllTests()
+    .filter((t) => t.archived || state.locked?.[t.id])
+    .map((t) => {
+      const winner = t.archived ? t.winner : state.locked[t.id];
+      const badge = !t.archived
+        ? '<span class="tag win">🔒 zamčeno, čeká na zapečení</span>'
+        : winner
+          ? `<span class="tag win">✅ vítěz ${esc(winner)}</span>`
+          : '<span class="tag">— bez vítěze</span>';
+      return `<li class="chk">
+        <div><a href="/ab/?test=${encodeURIComponent(t.id)}">${esc(t.label || t.id)}</a>
+        <span class="muted">(${esc(t.slot)}${t.ran ? ` · ${esc(t.ran)}` : ''})</span> ${badge}</div>
+        ${t.result ? `<p class="res">${esc(t.result)}</p>` : ''}
+      </li>`;
+    })
+    .join('');
+
+  const PRIO = { 1: ['Příště', '#5fd39a'], 2: ['Brzy', '#f7b955'], 3: ['Někdy', '#8b93a7'] };
+  const ideasHtml = getPlanIdeas()
+    .map((i) => {
+      const [pl, pc] = PRIO[i.priority] || ['—', '#8b93a7'];
+      return `<li class="idea">
+        <div class="ihead"><span class="prio" style="--pc:${pc}">${pl}</span>
+          <span class="muted">${esc(i.area || '')}</span> · <b>${esc(i.title || '')}</b>
+          <span class="tag">práce: ${esc(i.effort || '?')}</span></div>
+        <p>${esc(i.hypothesis || '')}</p>
+        <p class="muted">Metrika: ${esc(i.metric || '—')}${i.how ? ` · Jak: ${esc(i.how)}` : ''}</p>
+      </li>`;
+    })
+    .join('');
+
+  const checklistHtml = `
+    <h3>📋 Checklist testování</h3>
+    <details open><summary>✅ Otestováno (${getAllTests().filter((t) => t.archived || state.locked?.[t.id]).length})</summary>
+      <ul class="chklist">${doneHtml || '<li class="muted">zatím nic</li>'}</ul>
+    </details>
+    <details open><summary>▶️ Běží / ⏳ ve frontě (${getQueue().filter((t) => !state.locked?.[t.id]).length})</summary>
+      <ul>${queueHtml || '<li class="muted">prázdná — přidej test do tests.json'}</ul>
+    </details>
+    <details open><summary>💡 Návrhy, co testovat dál (${getPlanIdeas().length})</summary>
+      <p class="muted">Backlog z <code>worker/plan.json</code>. Chceš některý spustit? Napiš Claudovi „udělej z návrhu X test“ — připraví varianty a nasadí.</p>
+      <ul class="chklist">${ideasHtml || '<li class="muted">žádné nápady</li>'}</ul>
+    </details>`;
+
   const html = `<!DOCTYPE html><html lang="cs"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>A/B testy — leadershiprestart.cz</title>
@@ -486,10 +541,17 @@ new Image().src='${origin}/api/goal?v='+encodeURIComponent(v)+'&amp;g=rezervace&
   details{margin:16px 0}summary{cursor:pointer;color:var(--mut)}
   .help p{font-size:14px}.help pre{background:#1d2026;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px;overflow-x:auto}
   ul{padding-left:20px}li{margin:4px 0}
+  .hyp{margin:6px 0 0;font-size:13px;color:#c5c5c2;max-width:560px}
+  details[open]>summary{margin-bottom:6px}
+  .chklist{list-style:none;padding:0}
+  .chk,.idea{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .chk .res,.idea p{margin:5px 0 0;font-size:13px;color:#c5c5c2}
+  .ihead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .prio{font-size:11px;font-weight:700;border-radius:99px;padding:1px 8px;color:#0f1115;background:var(--pc,#8b93a7)}
 </style></head><body>
 <h1>A/B testy — leadershiprestart.cz</h1>
 ${body}
-<h3>Fronta testů</h3><ul>${queueHtml || '<li class="muted">prázdná</li>'}</ul>
+${checklistHtml}
 <p class="muted">Tvoje návštěvy se od otevření téhle stránky nepočítají do statistik (cookie ab_x).</p>
 <script>
 document.addEventListener('click', async (e) => {

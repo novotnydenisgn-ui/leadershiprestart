@@ -178,11 +178,24 @@ export function buildProxyRewriter({ srcOrigin, ctaQuery, abGlobals }) {
 
 // slotApplications: [{ test, variant }] — aktivní test s přiřazenou variantou
 // + všechny zamčené testy s vítězem (dokud se vítěz nezapeče do HTML commitem).
-// Kontrola (content === null a bez attrs) se neaplikuje — v HTML už je.
+// Kontrola (content === null a bez attrs/slots) se neaplikuje — v HTML už je.
 export function buildRewriter({ slotApplications, ctaQuery, abGlobals }) {
   let rw = new HTMLRewriter();
 
   for (const { test, variant } of slotApplications) {
+    // Varianta celostránkového testu může místo `src` (proxy) měnit konkrétní
+    // sloty našeho HTML: `slots: { "<nazev-slotu>": "<html>" }`. Tak jde do
+    // jednoho testu postavit vedle sebe „jiný web" i „náš web s jiným videem".
+    if (variant.slots) {
+      for (const [slotName, html] of Object.entries(variant.slots)) {
+        rw = rw.on(`[data-ab-slot="${slotName}"]`, {
+          element(el) {
+            el.setInnerContent(html, { html: true });
+          },
+        });
+      }
+      continue;
+    }
     if (variant.content == null && !variant.attrs) continue;
     rw = rw.on(`[data-ab-slot="${test.slot}"]`, slotHandler(test, variant));
   }

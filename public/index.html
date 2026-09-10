@@ -11,18 +11,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/img/statue-shatter-dark.webp" fetchpriority="high">
-<link rel="stylesheet" href="assets/site.css?v=18">
+<link rel="preload" as="image" href="assets/img/hero-brand-wave.webp" fetchpriority="high">
+<link rel="stylesheet" href="assets/site.css?v=21">
 <style>
   /* ---- hero s rozpadající se sochou ---- */
   .hero-land{position:relative;overflow:hidden;min-height:calc(100vh - 58px);display:flex;align-items:center}
-  /* zrcadlení (socha z leva obrazu → napravo od textu) + zvětšování při scrollu (--hz z site.js) */
+  /* brandová vlna z grafiky (fin werze2) + zvětšování při scrollu (--hz z site.js) */
   .hero-land .bg{position:absolute;inset:0;
-    background:url('assets/img/statue-shatter-dark.webp') center/cover no-repeat;
-    transform:scaleX(-1) scale(var(--hz,1));transform-origin:center 40%}
+    background:url('assets/img/hero-brand-wave.webp') center/cover no-repeat;
+    transform:scale(var(--hz,1));transform-origin:center 45%}
+  /* Ztmavení jen tolik, aby bílý text držel kontrast a barvy vlny zůstaly vidět. */
   .hero-land .shade{position:absolute;inset:0;background:
-    radial-gradient(900px 560px at 50% 42%,rgba(11,14,19,.55),transparent 70%),
-    linear-gradient(180deg,rgba(11,14,19,.72),rgba(11,14,19,.55) 45%,rgba(11,14,19,.85))}
+    radial-gradient(980px 600px at 50% 44%,rgba(11,14,19,.58),rgba(11,14,19,.12) 72%,transparent 90%),
+    linear-gradient(180deg,rgba(11,14,19,.28),rgba(11,14,19,.04) 40%,rgba(11,14,19,.52))}
   .hero-land .fade{position:absolute;inset:auto 0 0 0;height:140px;
     background:linear-gradient(180deg,transparent,var(--pearl))}
   .hero-land .wrap{position:relative;z-index:1;text-align:center;
@@ -32,8 +33,8 @@
   .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;justify-content:center}
   .hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px;justify-content:center}
   @media(max-width:700px){
-    .hero-land .bg{background-position:72% center}
-    .hero-land .shade{background:linear-gradient(180deg,rgba(11,14,19,.62),rgba(11,14,19,.9) 70%)}
+    .hero-land .bg{background-position:60% center}
+    .hero-land .shade{background:linear-gradient(180deg,rgba(11,14,19,.55),rgba(11,14,19,.35) 45%,rgba(11,14,19,.8))}
   }
 
   /* ---- video „To zažiješ v programu" — červený blur za videem ---- */
@@ -285,11 +286,9 @@
     <span class="kicker">Podívej se dovnitř</span>
     <h2 class="display h-section">To zažiješ <span class="grad-text">v programu</span></h2>
     <div class="video-glow reveal">
-      <div class="video-embed" data-ab-slot="hero_video">
-        <iframe src="https://www.youtube-nocookie.com/embed/g6GX54nY2Nk?rel=0"
-          title="To zažiješ v Leadership Restart — Denis Novotný"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-      </div>
+      <!-- Wistia = vítěz A/B testu t3 (26. 8. – 1. 9. 2026, CR 8,7 % vs. 4,4 % YouTube), zapečeno 10. 9. 2026.
+           Přehrávač připojí site.js (mountWistia). Původní YouTube embed: youtube-nocookie.com/embed/g6GX54nY2Nk -->
+      <div class="video-embed" data-ab-slot="hero_video"><div data-lr-wistia="or7azr4kh3"></div></div>
     </div>
   </div>
 </section>
@@ -466,7 +465,7 @@
 </section>
 
 <!-- ======================= TVÁ 21DENNÍ VÝZVA ======================= -->
-<section class="section">
+<section class="section" data-ab-slot="program_timeline">
   <div class="wrap">
     <div class="vyzva-head">
       <div>
@@ -708,7 +707,7 @@
 
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=18"></script>
+<script src="assets/site.js?v=21"></script>
 <script>
 /* harmonogram — linka vlevo postupně nabíhá podle scrollu */
 (function(){

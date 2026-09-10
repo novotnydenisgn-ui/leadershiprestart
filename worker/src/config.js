@@ -1,6 +1,7 @@
 // Katalog testů (git) + lifecycle stav (KV) — rekonciliace a cache.
 // Zdroj pravdy: tests.json = CO testy jsou; KV `ab:state` = KTERÝ běží a v jakém stavu.
 import TESTS from '../tests.json';
+import PLAN from '../plan.json';
 
 const STATE_KEY = 'ab:state';
 const CACHE_TTL_MS = 30_000;
@@ -14,6 +15,20 @@ export function getTests() {
 
 export function getTestById(id) {
   return getTests().find((t) => t.id === id) || null;
+}
+
+// Včetně archivovaných — jen pro čtení historie v adminu (nikdy pro servírování).
+export function getAllTests() {
+  return TESTS.tests;
+}
+
+export function getAnyTest(id) {
+  return TESTS.tests.find((t) => t.id === id) || null;
+}
+
+// Backlog nápadů (plan.json) pro checklist v adminu.
+export function getPlanIdeas() {
+  return (PLAN.ideas || []).slice().sort((a, b) => (a.priority || 9) - (b.priority || 9));
 }
 
 export function getQueue() {
