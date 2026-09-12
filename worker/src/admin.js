@@ -35,6 +35,8 @@ function unauthorized() {
 
 // --- router ------------------------------------------------------------------
 
+import { renderStatus } from './status.js';
+
 export async function handleAdmin(request, env, ctx) {
   if (!(await authorized(request, env))) return unauthorized();
 
@@ -48,6 +50,9 @@ export async function handleAdmin(request, env, ctx) {
       return json({ error: 'missing X-AB-Admin header' }, 400);
     }
     return handleAction(path.slice('/ab/api/'.length), request, env);
+  }
+  if (request.method === 'GET' && path === '/ab/api/status') {
+    return renderStatus(request, env);
   }
   if (request.method === 'GET' && (path === '/ab' || path === '/ab/index.html')) {
     return renderDashboard(request, env, url);
