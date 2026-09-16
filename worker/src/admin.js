@@ -35,7 +35,7 @@ function unauthorized() {
 
 // --- router ------------------------------------------------------------------
 
-import { renderStatus } from './status.js';
+import { renderStatus, renderTestDetail } from './status.js';
 
 export async function handleAdmin(request, env, ctx) {
   if (!(await authorized(request, env))) return unauthorized();
@@ -53,6 +53,9 @@ export async function handleAdmin(request, env, ctx) {
   }
   if (request.method === 'GET' && path === '/ab/api/status') {
     return renderStatus(request, env);
+  }
+  if (request.method === 'GET' && path.startsWith('/ab/api/test/')) {
+    return renderTestDetail(request, env, decodeURIComponent(path.slice('/ab/api/test/'.length)));
   }
   if (request.method === 'GET' && (path === '/ab' || path === '/ab/index.html')) {
     return renderDashboard(request, env, url);
@@ -99,6 +102,15 @@ async function handleAction(action, request, env) {
       state.active_test_id = next.id;
       state.status = 'running';
       state.started_at = new Date().toISOString();
+      break;
+    }
+    case 'unlock': {
+      // Odemknutí omylem zamčeného vítěze — test se vrátí do sběru dat (pokud je aktivní).
+      const tid = body.test || state.active_test_id;
+      if (!tid || !state.locked?.[tid]) return json({ error: 'test nemá zamčeného vítěze' }, 400);
+      const locked = { ...state.locked };
+      delete locked[tid];
+      state.locked = locked;
       break;
     }
     case 'activate': {
