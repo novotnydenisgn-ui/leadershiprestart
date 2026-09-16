@@ -38,13 +38,14 @@
   // Odkomentovat a `wrangler deploy`. Používáme ROUTE (ne custom_domain) schválně:
   // DNS záznamy dál míří na Netlify, takže rollback = smazat route a provoz se
   // okamžitě vrátí na původní web, bez zásahu do DNS.
-  // "routes": [
-  //   { "pattern": "leadershiprestart.cz/*", "zone_name": "leadershiprestart.cz" },
-  //   { "pattern": "www.leadershiprestart.cz/*", "zone_name": "leadershiprestart.cz" }
-  // ],
-  //
-  // Po ověření cutoveru vypnout testovací adresu, ať nevzniká duplicitní obsah
-  // pro vyhledávače (canonical na ni sice míří správně, ale takhle je to čisté):
-  // "workers_dev": false,
-  // "preview_urls": false
+  ,
+  "routes": [
+    { "pattern": "leadershiprestart.cz/*", "zone_name": "leadershiprestart.cz" },
+    { "pattern": "www.leadershiprestart.cz/*", "zone_name": "leadershiprestart.cz" }
+  ],
+
+  // Cutover doběhl 25. 8. 2026 → testovací adresa vypnutá, ať pro vyhledávače
+  // nevzniká druhá kopie webu. Pro ověřování slouží ?preview=<token>.
+  "workers_dev": false,
+  "preview_urls": false
 }

@@ -443,6 +443,11 @@ body{padding-top:58px}
 .ck-svcs{margin:12px 0 2px 28px;display:grid;gap:8px}
 .ck-svcs[hidden]{display:none}  /* display:grid výše přebíjí [hidden] — nutné explicitně */
 .ck-pane[hidden]{display:none}
+/* Totéž u samotného panelu: .ck-panel má display:flex, které přebíjí [hidden].
+   Bez tohohle řádku zůstane zavřený panel viset uprostřed obrazovky — neviditelný
+   (opacity:0), ale s pointer-events:auto a z-indexem 71, takže polyká kliknutí
+   na všechno pod sebou (video, CTA). */
+.ck-panel[hidden]{display:none}
 .ck-svc{padding:11px 13px;border-radius:11px;background:rgba(255,255,255,.035);
   border:1px solid rgba(255,255,255,.07)}
 .ck-svc-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
@@ -497,3 +502,10 @@ body{padding-top:58px}
   background:rgba(255,255,255,.05);border:1px solid var(--glass-brd)}
 .rating{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--ink)}
 .rating .stars{color:#f5a623;letter-spacing:2px}
+
+/* ---- Wistia varianta videa (A/B slot hero_video) ----
+   Přehrávač vyplní 16:9 rámeček .video-embed; než se custom element
+   zaregistruje, ať neproblikne nestylovaný obsah. Bez souhlasu s funkčními
+   cookies se místo přehrávače zobrazí .wistia-gate. */
+.video-embed wistia-player{position:absolute;inset:0;width:100%;height:100%;display:block}
+.video-embed wistia-player:not(:defined){opacity:0}

@@ -275,6 +275,10 @@ section+section{border-top:1px solid var(--line)}
 .cd span{font-size:.78rem; color:var(--fg-dim); line-height:1.5; display:block}
 .cd b{font-family:var(--font-display); margin-right:.25rem}
 
+/* ---------- Ikony (ukázka) ---------- */
+.ico-demo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line);background:color-mix(in srgb,var(--lr-blue) 10%,transparent);color:var(--lr-blue)}
+.ico-demo svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
 /* ---------- Kód ---------- */
 pre{
   background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius);
@@ -340,6 +344,12 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
       <stop offset="0%" stop-color="#CE9D37"/>
       <stop offset="100%" stop-color="#F4D077"/>
     </linearGradient>
+    <!-- zlatý přechod pro logotypy prémiových produktů (Up-Grade, Partner) -->
+    <linearGradient id="lrGoldLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F6D47C"/>
+      <stop offset="45%" stop-color="#E9B64F"/>
+      <stop offset="100%" stop-color="#C8952F"/>
+    </linearGradient>
   </defs>
 </svg>
 
@@ -373,7 +383,7 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
   <h1>Dvě kostky,<br><span class="grad-text">jedno spojení.</span></h1>
   <p class="lead">Značku drží jediná myšlenka: dva samostatné bloky, které se propojí a začnou spolu pracovat. Kouč a klient. Záměr a čin. Tenhle manuál říká, jak to používat, aby to fungovalo pokaždé stejně.</p>
   <div class="meta">
-    <span class="chip">Verze 1.1</span>
+    <span class="chip">Verze 1.2</span>
     <span class="chip">Klikni na barvu = zkopíruje se</span>
     <span class="chip">Ctrl+P = PDF</span>
   </div>
@@ -468,8 +478,10 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
     <p class="eyebrow">01b — Rodina značek</p>
     <h3 style="font-size:clamp(1.3rem,2.4vw,1.8rem);margin-bottom:.6rem">Varianty logotypu</h3>
     <p class="lead">Základní logo je <strong>Leadership RESTART</strong>. Pro navazující produkty se
-      <strong>mění pouze druhé slovo</strong> — kostky, písmo, řez i barevný akcent zůstávají stejné.
-      Nikdy se nemění tvar značky ani se nepřidává další symbol.</p>
+      <strong>mění druhé slovo, barevný stupeň a délka řetězce</strong> — písmo a řez zůstávají stejné.
+      Symbol roste podle úrovně (viz <a href="#urovne">Ikony pro úrovně programu</a>): RESTART má 2 prvky,
+      UPGRADE 3, PARTNER 4. Prémiové stupně (UPGRADE, PARTNER) přecházejí do <strong>zlatého designu</strong>.
+      Nikdy se nepřidává jiný symbol než řetězec.</p>
   </div>
 
   <div class="grid g3" style="margin-bottom:1.2rem">
@@ -483,19 +495,22 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
       </svg>
     </div>
     <div class="logobox bg-dark">
-      <span class="cap">Dlouhodobý program</span>
+      <span class="cap">Dlouhodobý program — zlatý design · řetězec 3 prvky</span>
       <svg width="170" viewBox="0 0 380 100" aria-hidden="true">
-        <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+        <mask id="lrMUp" maskUnits="userSpaceOnUse" x="0" y="0" width="380" height="100"><g fill="#fff" transform="translate(6,6) scale(1.0476)"><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M56 0H84V28H56Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/></g></mask>
+        <rect x="6" y="6" width="88" height="88" fill="url(#lrGoldLogo)" mask="url(#lrMUp)"/>
         <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
-        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">UP<tspan fill="#EFEEEC">GRADE</tspan></text>
+        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#E9B64F">UP<tspan fill="#EFEEEC">GRADE</tspan></text>
       </svg>
     </div>
     <div class="logobox bg-dark">
-      <span class="cap">Partnerské &amp; VIP spolupráce</span>
+      <span class="cap">Partnerské &amp; VIP — zlatý obrys · řetězec 4 prvky</span>
       <svg width="170" viewBox="0 0 380 100" aria-hidden="true">
-        <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGrad)"/>
+        <mask id="lrMPa" maskUnits="userSpaceOnUse" x="0" y="0" width="380" height="100"><g fill="#fff" transform="translate(6,6) scale(0.7857)"><path d="M0 98a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M35 56H49A7 7 0 0 1 56 63V77A7 7 0 0 1 49 84H35A7 7 0 0 1 28 77V63A7 7 0 0 1 35 56Z"/><path d="M63 28H77A7 7 0 0 1 84 35V49A7 7 0 0 1 77 56H63A7 7 0 0 1 56 49V35A7 7 0 0 1 63 28Z"/><path d="M84 0H112V28H84Z"/><path d="M14 84A14 14 0 0 0 28 70H42V84A14 14 0 0 0 28 98H14Z"/><path d="M42 56A14 14 0 0 0 56 42H70V56A14 14 0 0 0 56 70H42Z"/><path d="M70 28A14 14 0 0 0 84 14H98V28A14 14 0 0 0 84 42H70Z"/></g></mask>
+        <rect x="6" y="6" width="88" height="88" fill="url(#lrGoldLogo)" mask="url(#lrMPa)"/>
         <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
-        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">PART<tspan fill="#EFEEEC">NER</tspan></text>
+        <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30"
+          fill="none" stroke="url(#lrGoldLogo)" stroke-width="1.4" letter-spacing="1">PARTNER</text>
       </svg>
     </div>
   </div>
@@ -503,11 +518,13 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
   <div class="grid g2">
     <div class="glass card">
       <h4 style="margin-bottom:.7rem">Co se mění a co ne</h4>
-      <div class="rule ok"><b>✓</b><span>Mění se <strong>jen druhé slovo</strong>: RESTART → UPGRADE → PARTNER.</span></div>
-      <div class="rule ok"><b>✓</b><span>Barevný akcent drží vždy <strong>první dvě až čtyři písmena</strong> druhého slova (RE, UP, PART) v modré <code>#377EF7</code>, zbytek v barvě textu.</span></div>
+      <div class="rule ok"><b>✓</b><span>Mění se <strong>druhé slovo a délka řetězce</strong>: RESTART (2 prvky) → UPGRADE (3) → PARTNER (4). Kruh na začátku = otevřený vstup, kostka na konci = hotový výsledek.</span></div>
+      <div class="rule ok"><b>✓</b><span><strong>RESTART</strong> = základní značka: dvě kostky v modro-oranžovém přechodu, akcent <em>RE</em> v modré <code>#377EF7</code>.</span></div>
+      <div class="rule ok"><b>✓</b><span><strong>UPGRADE</strong> = zlatý design: řetězec kruh → zaoblená → kostka ve zlatém přechodu, akcent <em>UP</em> ve zlaté <code>#E9B64F</code>, zbytek v barvě textu.</span></div>
+      <div class="rule ok"><b>✓</b><span><strong>PARTNER</strong> = nejexkluzivnější stupeň: řetězec kruh → zaoblená → zaoblená → kostka ve zlatém přechodu a celé slovo <em>PARTNER</em> <strong>bez výplně, jen zlatým obrysem</strong>.</span></div>
       <div class="rule ok"><b>✓</b><span>Podtitul <em>ZA 21 DNÍ</em> patří <strong>výhradně k RESTART</strong>. Ostatní varianty jsou bez něj, nebo s vlastním popiskem produktu (např. <em>VIP Partner</em>).</span></div>
-      <div class="rule no"><b>×</b><span>Nikdy neměň tvar kostek, jejich barvu ani vzájemné proporce.</span></div>
-      <div class="rule no"><b>×</b><span>Nevytvářej variantu se třemi slovy ani nepřidávej symbol vedle kostek.</span></div>
+      <div class="rule no"><b>×</b><span>Nikdy neměň tvar prvků, jejich proporce ani pořadí v řetězci. Barva se řídí stupněm značky: základní přechod pro RESTART, zlatý pro UPGRADE a PARTNER — nikdy jiná.</span></div>
+      <div class="rule no"><b>×</b><span>Nevytvářej variantu se třemi slovy, nepřidávej symbol vedle řetězce ani nevymýšlej řetězec jiné délky než 2 / 3 / 4.</span></div>
       <div class="rule no"><b>×</b><span>Nepoužívej variantu, která nemá schválený produkt — rodina není otevřená.</span></div>
     </div>
     <div class="glass card">
@@ -529,7 +546,10 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
   <div class="sec-head">
     <p class="eyebrow">02 — Barvy</p>
     <h2>Barevná paleta</h2>
-    <p class="lead">Modrá a oranžová jsou značka. Zlatá je odměna — používá se střídmě, jen tam, kde jde o výsledek nebo prémiovou úroveň. Klikni na kterýkoliv vzorek a HEX se zkopíruje.</p>
+    <p class="lead">Modrá a oranžová jsou značka. Zlatá je odměna — používá se střídmě, jen tam, kde jde
+    o výsledek nebo prémiovou úroveň. U <strong>prémiových produktů</strong> (Up-Grade, Partner, Elite)
+    se role obrací a zlatá se stává hlavní barvou — viz Zlatý styl níže.
+    Klikni na kterýkoliv vzorek a HEX se zkopíruje.</p>
   </div>
 
   <h4 style="margin-bottom:.9rem">Základní</h4>
@@ -593,6 +613,47 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
         <span>180° · #CE9D37 → #F4D077</span>
       </div>
       <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.7rem">Zlatý přechod. Certifikáty, odznaky za dokončení, Premium balíček. Nikdy jako pozadí celé stránky.</p>
+    </div>
+  </div>
+
+  <h4 style="margin:2.5rem 0 .9rem">Zlatý styl — Up-Grade, Partner &amp; prémiové produkty</h4>
+  <div class="grid g4" style="margin-bottom:1.2rem">
+    <button class="swatch" data-hex="#F6D47C">
+      <span class="fill" style="background:#F6D47C"></span>
+      <span class="info"><span class="nm">Světlá zlatá</span><span class="hx">#F6D47C</span>
+      <span class="use">Začátek zlatého přechodu. Zvýrazněná slova, kickery, odkazy.</span></span>
+    </button>
+    <button class="swatch" data-hex="#E9B64F">
+      <span class="fill" style="background:#E9B64F"></span>
+      <span class="info"><span class="nm">Zlatá</span><span class="hx">#E9B64F</span>
+      <span class="use">Hlavní akcent: logo UP, rámečky karet, ikonky, tlačítka.</span></span>
+    </button>
+    <button class="swatch" data-hex="#C8952F">
+      <span class="fill" style="background:#C8952F"></span>
+      <span class="info"><span class="nm">Tmavá zlatá</span><span class="hx">#C8952F</span>
+      <span class="use">Konec přechodu, hlubší tóny, stíny a záře.</span></span>
+    </button>
+    <button class="swatch" data-hex="#0C0B09">
+      <span class="fill" style="background:#0C0B09;border:1px solid var(--line)"></span>
+      <span class="info"><span class="nm">Teplá tmavá</span><span class="hx">#0C0B09</span>
+      <span class="use">Pozadí zlatého designu — teplé, místo chladné #1E1E1E.</span></span>
+    </button>
+  </div>
+  <div class="grid g2" style="margin-bottom:2.5rem">
+    <div>
+      <div class="gradbar" style="background:linear-gradient(100deg,#F6D47C 0%,#E9B64F 45%,#C8952F 100%)">
+        <span>100° · #F6D47C → #E9B64F → #C8952F</span>
+      </div>
+      <p style="font-size:.85rem;color:var(--fg-dim);margin-top:.7rem">Zlatý značkový přechod prémiových
+      produktů: logo Up-Grade, nadpisy, CTA a rámečky. Text na zlaté je vždy tmavý <code>#1A1206</code>,
+      nikdy bílý.</p>
+    </div>
+    <div class="glass card">
+      <h3 style="margin-bottom:.6rem">Pravidla zlatého stylu</h3>
+      <div class="rule ok"><b>✓</b><span>U prémiových produktů zlatá <strong>přebírá roli modré</strong>: nadpisy, CTA, kickery, rámečky, záře v pozadí.</span></div>
+      <div class="rule ok"><b>✓</b><span>Modrá a oranžová zůstávají jako <strong>mini akcenty</strong> — rozlišení balíčků, drobné prvky. Nikdy nezmizí úplně.</span></div>
+      <div class="rule ok"><b>✓</b><span>Pozadí je <strong>teplá tmavá</strong> <code>#0C0B09</code>, záře v pozadí zlaté místo modré/oranžové.</span></div>
+      <div class="rule no"><b>×</b><span>Zlatou nikdy jako pozadí celé stránky ani jako barvu běžného textu.</span></div>
     </div>
   </div>
 
@@ -717,7 +778,7 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
 
   <h4 style="margin-bottom:.8rem">Slovník tvarů</h4>
   <div class="glass card" style="margin-bottom:1.6rem">
-    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.3rem">Z těch tří prvků vzniká pět tvarů se stálým významem. Nepoužívej je zaměnitelně jen proto, že se hodí do místa.</p>
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.3rem">Z těch tří prvků vzniká pět tvarů se stálým významem. Nepoužívej je zaměnitelně jen proto, že se hodí do místa. <strong style="color:var(--fg)">Tvary nejsou ikonky u textu</strong> — patří do značky, do označení úrovní a do textury v pozadí. Ikonku vedle nadpisu nebo odrážky dělá sada ikon (viz <a href="#ikony">Ikony a fotografie</a>).</p>
     <div class="vocab">
       <div class="vitem"><svg viewBox="0 0 56 56" width="100%" aria-hidden="true"><mask id="lrM2" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56"><g fill="#fff"><path d="M0 28H28V56H0Z"/><path d="M28 0H56V28H28Z"/><path d="M14 28A14 14 0 0 0 28 14H42V28A14 14 0 0 0 28 42H14Z"/></g></mask><rect x="0" y="0" width="56" height="56" fill="url(#lrGrad)" mask="url(#lrM2)"/></svg>
         <b>Krok</b><span>Dvě kostky přes spojku. <em>Toto je značka</em> — v téhle podobě se nikdy nemění.</span></div>
@@ -732,7 +793,7 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
     </div>
   </div>
 
-  <h4 style="margin-bottom:.8rem">Ikony pro úrovně programu</h4>
+  <h4 style="margin-bottom:.8rem" id="urovne">Ikony pro úrovně programu</h4>
   <div class="glass card" style="margin-bottom:1.6rem">
     <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.3rem">Úroveň se pozná podle <strong>délky řetězce</strong>, ne podle barvy. A podle toho, čím řetězec začíná: kruh na začátku znamená otevřený vstup, kostka na konci hotový výsledek. Čím dál klient došel, tím delší cesta.</p>
     <div class="levels">
@@ -748,6 +809,45 @@ footer{padding:3rem 0 4rem; border-top:1px solid var(--line); color:var(--fg-dim
     <div class="note" style="margin-top:1.3rem">
       <span class="accent" style="color:var(--lr-orange)">Pozor:</span>
       Zlatá patří <em>jen</em> nejvyšší úrovni. Kdyby ji dostal každý stupeň, přestane cokoliv znamenat.
+    </div>
+  </div>
+
+  <h4 style="margin-bottom:.8rem" id="ikony">Ikony a fotografie</h4>
+  <div class="glass card" style="margin-bottom:1.6rem">
+    <p style="font-size:.92rem;color:var(--fg-dim);margin-bottom:1.2rem">Kostky, kruhy a spojky nesou <strong style="color:var(--fg)">význam značky</strong>, ne význam obsahu. Když potřebuješ říct „cíl“, „lidé“ nebo „růst“, sáhni po <strong style="color:var(--fg)">ikoně</strong>; když potřebuješ náladu nebo důkaz, po <strong style="color:var(--fg)">fotografii</strong>. Tvary ze slovníku zůstávají pro logo, úrovně programu a texturu.</p>
+
+    <div class="grid g2" style="margin-bottom:1.3rem">
+      <div>
+        <p style="font-size:.85rem;color:var(--fg-dim);margin-bottom:.6rem"><strong style="color:var(--fg)">Sada ikon: Lucide</strong> (MIT, <a href="https://lucide.dev" target="_blank" rel="noopener">lucide.dev</a>)</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.9rem">
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span>
+          <span class="ico-demo"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+        </div>
+        <div class="rule ok"><b>✓</b><span>Obrysové (stroke) ikony, tloušťka <code>2</code> na mřížce <code>24 px</code>, zakulacené konce. Nikdy vyplněné, nikdy jiná sada vedle Lucide.</span></div>
+        <div class="rule ok"><b>✓</b><span>Barva = barva textu, nebo akcent (modrá; u prémiových produktů zlatá). Ikonka v boxu: rámeček <code>--line</code>, podklad akcent na 10 %.</span></div>
+        <div class="rule ok"><b>✓</b><span>Velikost 18–22 px u textu, 22–24 px v boxu 44 px. Vždy <code>aria-hidden</code>, význam nese text vedle.</span></div>
+        <div class="rule no"><b>✗</b><span>Nepoužívej kostky/kruhy jako ikonky u odrážek nebo nadpisů — nic neříkají o obsahu.</span></div>
+        <div class="rule no"><b>✗</b><span>Emoji jen v neformálním textu (chat, Telegram), ne v layoutu stránky.</span></div>
+      </div>
+      <div>
+        <p style="font-size:.85rem;color:var(--fg-dim);margin-bottom:.6rem"><strong style="color:var(--fg)">Fotografie</strong> — nálada a důkaz</p>
+        <div class="rule ok"><b>✓</b><span>Tmavé, teplé, jeden jasný motiv (socha, ruka s kompasem, pohár, mlha). Fotobanka webu je v <code>assets/img/</code> a <code>assets/img/symf/</code>.</span></div>
+        <div class="rule ok"><b>✓</b><span>Fotka v kartě = horní třetina nebo levý panel, vždy s přechodem do barvy pozadí (<code>linear-gradient</code> na 90 % krytí dole), text až na přechodu.</span></div>
+        <div class="rule ok"><b>✓</b><span>Fotka v pozadí sekce: krytí 15–20 %, sytost stažená, maska po okrajích. Text nikdy přímo na ostré fotce.</span></div>
+        <div class="rule ok"><b>✓</b><span>Lidé z týmu: stejný ořez (4:5), stejná velikost boxu, tvář v horní třetině. Jeden styl pro všechny.</span></div>
+        <div class="rule no"><b>✗</b><span>Žádné stockové úsměvy s bílým pozadím, žádné koláže, žádné barevné filtry mimo tmavé/zlaté ladění.</span></div>
+      </div>
+    </div>
+    <div class="note">
+      <span class="accent" style="color:var(--lr-blue)">Pravidlo palce:</span>
+      <em>značka</em> = tvary ze slovníku · <em>obsah</em> = ikona Lucide · <em>nálada / důkaz</em> = fotka. Když váháš, sáhni po fotce nebo ikoně — ne po kostce.
     </div>
   </div>
 
@@ -861,6 +961,7 @@ color: transparent;</pre>
       <div class="rule no"><b>✗</b><span>Nepiš text v barvách záře (#B3CEEE, #ECBAA9) — neposkytnou kontrast.</span></div>
       <div class="rule no"><b>✗</b><span>Nemíchej Caveat do běžného textu ani do tlačítek.</span></div>
       <div class="rule no"><b>✗</b><span>Nestav sklo na sklo. Jedna vrstva na plochu stačí.</span></div>
+      <div class="rule no"><b>✗</b><span>Nepoužívej kostky a kruhy jako ikonky u obsahu. Na to jsou ikony Lucide a fotky.</span></div>
     </div>
   </div>
 

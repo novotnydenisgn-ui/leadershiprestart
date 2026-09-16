@@ -99,6 +99,11 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function (e) { io.observe(e); });
+    /* Fallback: po 5 s odkrýt vše — DOM snímky (Clarity heatmapy) jinak
+       zachytí prvky pod ohybem s opacity:0 a screenshot vyjde prázdný. */
+    setTimeout(function () {
+      els.forEach(function (e) { e.classList.add('in'); io.unobserve(e); });
+    }, 5000);
   }
 
   /* Video facáda — iframe (Vimeo/YouTube) se načte až po kliknutí na Play.
@@ -214,6 +219,62 @@
     });
   }
 
+  /* --- Wistia přehrávač (A/B varianta videa) -----------------------------
+     Skripty se načítají jen na stránce, kde slot [data-lr-wistia] opravdu je. */
+  var wistiaDone = false;
+
+  function loadWistia(host, id) {
+    if (wistiaDone) return;
+    wistiaDone = true;
+    var s1 = document.createElement('script');
+    s1.src = 'https://fast.wistia.com/player.js';
+    s1.async = true;
+    var s2 = document.createElement('script');
+    s2.src = 'https://fast.wistia.com/embed/' + id + '.js';
+    s2.async = true;
+    s2.type = 'module';
+    document.head.appendChild(s1);
+    document.head.appendChild(s2);
+    host.innerHTML = '<wistia-player media-id="' + id + '" aspect="1.7777777777777777"></wistia-player>';
+  }
+
+  function mountWistia() {
+    /* Přehrávač je zařazený mezi nezbytné technologie (bez něj video nejde
+       přehrát), takže se načítá vždy — v panelu je uvedený v kategorii
+       Nezbytné, která nejde vypnout. */
+    var host = document.querySelector('[data-lr-wistia]');
+    if (!host) return;
+    var id = (host.getAttribute('data-lr-wistia') || '').replace(/[^a-z0-9]/gi, '');
+    if (id) loadWistia(host, id);
+  }
+
+  /* --- Microsoft Clarity (heatmapy, nahrávky) ---------------------------
+     Načítá se jen se souhlasem s funkčními cookies. Každé sezení označíme
+     testem a variantou (window.__AB), aby šly nahrávky a heatmapy v Clarity
+     filtrovat po variantách — všechny varianty žijí na stejné URL. */
+  var CLARITY_ID = 'y8r8i1rby4';
+
+  function loadClarity() {
+    if (!CLARITY_ID || window.clarity) return;
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY_ID);
+    if (AB.t && AB.v) {
+      clarity('set', 'ab_test', AB.t);
+      clarity('set', 'ab_variant', AB.v);
+    }
+  }
+
+  function mountClarity() {
+    var c = readConsent();
+    if (c && c.analytics) loadClarity();
+    document.addEventListener('lr:consent', function (e) {
+      if (e.detail && e.detail.analytics) loadClarity();
+    });
+  }
+
   function mountPixel() {
     /* Pixel se načte jen se souhlasem s marketingovými cookies a hned, jakmile
        ho návštěvník udělí. Odvolání souhlasu se projeví po znovunačtení stránky
@@ -258,7 +319,8 @@
         { n: 'ab_v', p: 'Leadership Restart', d: '90 dní', u: 'Která verze stránky se ti zobrazila, ať se ti obsah při návratu nemění.' },
         { n: 'ab_utm', p: 'Leadership Restart', d: '30 dní', u: 'Technické označení zdroje návštěvy (odkud jsi přišel).' },
         { n: 'ab_x', p: 'Leadership Restart', d: '1 rok', u: 'Výluka z měření — používá ji provozovatel pro vlastní návštěvy.' },
-        { n: 'lr-consent', p: 'Leadership Restart', d: 'trvale', u: 'Tvoje volba v tomhle okně, ať se tě neptáme pořád dokola.' }
+        { n: 'lr-consent', p: 'Leadership Restart', d: 'trvale', u: 'Tvoje volba v tomhle okně, ať se tě neptáme pořád dokola.' },
+        { n: 'Wistia (přehrávač videa)', p: 'Wistia, Inc., USA', d: 'až 1 rok', u: 'Technické přehrání videa přímo na stránce — pamatuje si hlasitost a místo, kde jsi přestal. Bez přehrávače by video nešlo pustit.' }
       ]
     },
     {
@@ -266,7 +328,8 @@
       name: 'Funkční',
       desc: 'Tyto technologie nám umožňují analyzovat chování uživatelů za účelem měření a zlepšování výkonu.',
       items: [
-        { n: 'Měření obsahu', p: 'Leadership Restart', d: 'neukládá cookies', u: 'Anonymní součty zobrazení a prokliků. Neukládáme jméno ani e-mail a jednotlivce z toho nepoznáme.' }
+        { n: 'Měření obsahu', p: 'Leadership Restart', d: 'neukládá cookies', u: 'Anonymní součty zobrazení a prokliků. Neukládáme jméno ani e-mail a jednotlivce z toho nepoznáme.' },
+        { n: 'Microsoft Clarity', p: 'Microsoft Ireland Operations Ltd.', d: 'až 1 rok', u: 'Anonymní záznam pohybu po stránce (kliky, posouvání) a teplotní mapy — pomáhá nám web zlepšovat. Bez tvého souhlasu se nespustí.' }
       ]
     },
     {
@@ -392,8 +455,8 @@
       var revoked = prev && prev.marketing && !marketing; /* odvolání souhlasu */
       saveConsent({ necessary: true, analytics: analytics, marketing: marketing });
       close();
-      /* Jednou načtený pixel nejde z běžící stránky odstranit — po odvolání
-         souhlasu proto stránku znovu načteme, aby se opravdu přestal měřit. */
+      /* Jednou načtený pixel ani přehrávač nejdou z běžící stránky odstranit —
+         po odvolání souhlasu proto stránku znovu načteme, ať se opravdu vypnou. */
       if (revoked) setTimeout(function () { location.reload(); }, 300);
     }
     function picked(key) {
@@ -496,5 +559,7 @@
     mountCookies();
     abClicks();
     mountPixel();
+    mountClarity();
+    mountWistia();
   });
 })();
