@@ -236,6 +236,34 @@
   .ob-card.o-warm .ob-ico{filter:drop-shadow(0 10px 30px rgba(246,212,124,.5))}
   .ob-card.o-warm .ob-tag{color:var(--lr-gold)}
 
+
+  /* ---------- OBSAH (LP): velké bloky ---------- */
+  .big-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px;text-align:left;position:relative}
+  .big-card{display:flex;gap:24px;align-items:flex-start;padding:clamp(26px,3.2vw,40px);position:relative;overflow:hidden;
+    border:1.5px solid rgba(233,182,79,.22);background:linear-gradient(160deg,rgba(233,182,79,.07),rgba(255,255,255,.03) 60%)}
+  .big-card:hover{border-color:rgba(233,182,79,.7);box-shadow:0 34px 110px rgba(233,182,79,.18)}
+  .big-card.big-wide{grid-column:1/-1;background:linear-gradient(120deg,rgba(233,182,79,.13),rgba(255,255,255,.03) 65%)}
+  .big-card .big-num{position:absolute;top:6px;right:20px;font-family:"League Spartan",sans-serif;font-weight:800;
+    font-size:clamp(64px,7vw,104px);line-height:1;opacity:.07;color:#f6d47c;pointer-events:none}
+  .big-card .big-ico{flex:none;width:76px;height:76px;border-radius:22px;display:grid;place-items:center;font-size:40px;line-height:1;
+    background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.35);filter:drop-shadow(0 10px 30px rgba(233,182,79,.35))}
+  .big-card .big-body{min-width:0}
+  .big-card .big-tag{display:inline-flex;align-items:center;font-family:"League Spartan",sans-serif;font-weight:800;
+    text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:#f6d47c;margin-bottom:10px}
+  .big-card h3{font-size:clamp(20px,2.2vw,26px);color:#fff;margin-bottom:10px;line-height:1.1}
+  .big-card p{font-size:15.5px;color:var(--dk-muted);line-height:1.65}
+  .big-card p b{color:var(--dk-text)}
+  .big-extra{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .big-extra-item{display:flex;gap:16px;align-items:center;padding:18px 22px;border-radius:18px;
+    border:1px dashed rgba(233,182,79,.45);background:rgba(233,182,79,.05)}
+  .big-extra-item.big-extra-gold{border:1.5px solid transparent;background:var(--c-gold-grad,linear-gradient(120deg,#f6d47c,#c8952f));color:#1a1206}
+  .big-extra-item .big-extra-ico{font-size:30px;line-height:1;flex:none}
+  .big-extra-item b{display:block;font-family:"League Spartan",sans-serif;font-weight:800;font-size:17px;color:#fff;letter-spacing:-.01em}
+  .big-extra-item span:not(.big-extra-ico){font-size:13.5px;color:var(--dk-muted);line-height:1.5}
+  .big-extra-item.big-extra-gold b{color:#1a1206}.big-extra-item.big-extra-gold span:not(.big-extra-ico){color:rgba(26,18,6,.78)}
+  @media(max-width:760px){.big-grid,.big-extra{grid-template-columns:1fr}.big-card{flex-direction:column;gap:16px}
+    .big-card .big-ico{width:62px;height:62px;font-size:32px;border-radius:18px}}
+
   /* ---------- BONUSY ---------- */
   .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;
     max-width:920px;margin:40px auto 0;position:relative}
@@ -479,43 +507,108 @@
   </div>
 </section>
 
-<!-- ======================= OBSAH — CO ČLENSTVÍ OBSAHUJE ======================= -->
+<!-- ======================= OBSAH — CO ČLENSTVÍ OBSAHUJE (LP: velké bloky) ======================= -->
 <section class="section sec-dark sec-tint-blue">
   <div class="wrap" style="text-align:center">
     <span class="lr-kicker">Obsah</span>
     <h2 class="display h-section">Co v Up-Grade <span class="lr-grad-text">dostáváš</span></h2>
-    <p class="h-sub" style="margin:0 auto;max-width:680px">Čtyři pilíře, které <b>spustí tvou
-    business mašinu</b> — a ve kterých s tebou stavíme akviziční systém,
-    automatizace a škálovací postupy.</p>
-    <div class="obsah-grid">
-      <div class="lr-card ob-card o-warm reveal">
-        <div class="ob-ico">💪</div>
-        <span class="ob-tag">Pilíř 1</span>
-        <h3 class="display">Motivační statusy</h3>
-        <p><b>2× týdně</b> — motivační status ve skupině: rytmus a tah na branku,
-        který tě nenechá vypadnout ze hry.</p>
+    <p class="h-sub" style="margin:0 auto;max-width:680px">Sedm věcí, které <b>spustí tvou
+    business mašinu</b> — postup, AI agenti, šablony, hovory, mentoring a software.
+    Nic z toho neděláš ručně a sám.</p>
+
+    <div class="big-grid">
+
+      <div class="lr-card big-card big-wide reveal">
+        <span class="big-num">01</span>
+        <div class="big-ico">🗺️</div>
+        <div class="big-body">
+          <span class="big-tag">Postup</span>
+          <h3 class="display">Marketingový funnel krok za krokem</h3>
+          <p>Konkrétní postup pro nasazení <b>marketingového funnelu</b>, který má
+          <b>100% úspěšnost už od 2 dnů od spuštění</b>. Žádná teorie — přesné kroky
+          v přesném pořadí, od první reklamy po první poptávku.</p>
+        </div>
       </div>
-      <div class="lr-card ob-card reveal">
-        <div class="ob-ico">🎯</div>
-        <span class="ob-tag">Pilíř 2</span>
-        <h3 class="display">Strategické hovory</h3>
-        <p><b>2× měsíčně</b> strategický hovor — vyhodnotíme, kde jsi,
-        nastavíme další kroky a jedeš.</p>
+
+      <div class="lr-card big-card reveal">
+        <span class="big-num">02</span>
+        <div class="big-ico">🤖</div>
+        <div class="big-body">
+          <span class="big-tag">AI agenti</span>
+          <h3 class="display">Stylový web se srdcem tvé firmy</h3>
+          <p>AI agenti, kteří za tebe <b>postaví web</b> — s designem, tónem a příběhem,
+          jako bys ho <b>navrhoval sám</b>. Ty dodáš vizi, oni ji přetaví do stránek.</p>
+        </div>
       </div>
-      <div class="lr-card ob-card o-warm reveal">
-        <div class="ob-ico">📲</div>
-        <span class="ob-tag">Pilíř 3</span>
-        <h3 class="display">Denní podpora</h3>
-        <p>Možnost <b>24/7 podpory</b> přes hlasové i textové zprávy.
-        Zasekneš se? Napiš — nečekáš týden na další call.</p>
+
+      <div class="lr-card big-card reveal">
+        <span class="big-num">03</span>
+        <div class="big-ico">⚡</div>
+        <div class="big-body">
+          <span class="big-tag">AI agenti</span>
+          <h3 class="display">Přes 36 hodin práce ušetřených</h3>
+          <p>Agenti, kteří ti ušetří <b>36+ hodin ruční práce</b> — nebo
+          <b>26 000 Kč</b>, které bys jinak zaplatil někomu jinému. Rutina jede sama,
+          ty děláš jen to, co byznys posouvá.</p>
+        </div>
       </div>
-      <div class="lr-card ob-card reveal">
-        <div class="ob-ico">🧰</div>
-        <span class="ob-tag">Pilíř 4</span>
-        <h3 class="display">Šablony &amp; návody</h3>
-        <p><b>Krok za krokem</b> — šablony a návody
-        pro spuštění tvé business mašiny.</p>
+
+      <div class="lr-card big-card big-wide reveal">
+        <span class="big-num">04</span>
+        <div class="big-ico">🧩</div>
+        <div class="big-body">
+          <span class="big-tag">Šablony</span>
+          <h3 class="display">Nabídka a model podnikání, které vydělávají 4× víc</h3>
+          <p><b>Zábavné šablony</b>, které tě krok za krokem provedou stavbou <b>nabídky</b>
+          a <b>modelu tvého podnikání</b> tak, aby bylo <b>4× a více ziskovější</b>.
+          Vyplňuješ, ne vymýšlíš od nuly.</p>
+        </div>
       </div>
+
+      <div class="lr-card big-card reveal">
+        <span class="big-num">05</span>
+        <div class="big-ico">🎯</div>
+        <div class="big-body">
+          <span class="big-tag">Skupina</span>
+          <h3 class="display">Skupinové strategické hovory</h3>
+          <p>Pravidelné <b>strategické hovory</b> pro <b>implementaci celého systému</b> —
+          vyhodnotíme, kde jsi, odblokujeme, co drhne, a nastavíme další kroky.</p>
+        </div>
+      </div>
+
+      <div class="lr-card big-card reveal">
+        <span class="big-num">06</span>
+        <div class="big-ico">🧭</div>
+        <div class="big-body">
+          <span class="big-tag">1 : 1</span>
+          <h3 class="display">Individuální mentoring s Denisem</h3>
+          <p><b>Osobní vedení</b> nad tvým byznysem — strategie, čísla, rozhodnutí.
+          Nečekáš na obecnou radu, řešíš přesně svou situaci.</p>
+        </div>
+      </div>
+
+      <div class="lr-card big-card big-wide reveal">
+        <span class="big-num">07</span>
+        <div class="big-ico">📊</div>
+        <div class="big-body">
+          <span class="big-tag">Software</span>
+          <h3 class="display">Software, který ti ušetří 2 000+ Kč měsíčně</h3>
+          <p>Nástroje, které bys jinak platil zvlášť, máš <b>v ceně členství</b> —
+          <b>2 000+ Kč měsíčně</b>, které zůstanou tobě. Vč. Interaktivního Remind Systému.</p>
+        </div>
+      </div>
+
+      <div class="big-extra reveal">
+        <div class="big-extra-item">
+          <span class="big-extra-ico">🎁</span>
+          <div><b>Další bonusy</b><span>Ke každé úrovni členství navíc — viz níže.</span></div>
+        </div>
+        <div class="big-extra-item big-extra-gold">
+          <span class="big-extra-ico">📦</span>
+          <div><b>Vstupní balíček pro implementaci</b><span>Všechno, co potřebuješ, abys systém rozjel hned první týden — ne až „někdy".</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
