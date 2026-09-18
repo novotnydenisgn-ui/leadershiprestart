@@ -35,7 +35,7 @@ export default {
     // písmen (/Up-Great, /up-grade, /up-great.html…) -> 301 na /up-great
     {
       const lower = url.pathname.toLowerCase();
-      const aliases = ['/up-great', '/up-great.html', '/up-grade', '/up-grade.html'];
+      const aliases = ['/up-great', '/up-great.html', '/up-grade', '/up-grade.html', '/up-great-lp', '/up-great-lp.html'];
       if (aliases.includes(lower) && url.pathname !== '/up-great') {
         return Response.redirect(new URL('/up-great', url).toString(), 301);
       }
