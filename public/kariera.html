@@ -124,7 +124,7 @@ section+section{border-top:1px solid var(--line)}
 .hero{padding:clamp(4rem,12vh,8rem) 0 clamp(3rem,8vh,5rem); min-height:80vh; display:flex; align-items:center}
 .hero-photo{position:absolute; top:-6vh; bottom:-6vh; left:40%; right:calc(50% - 50vw); z-index:0; pointer-events:none; overflow:hidden;
   -webkit-mask-image:radial-gradient(ellipse 55% 62% at 58% 50%, #000 15%, transparent 70%); mask-image:radial-gradient(ellipse 55% 62% at 58% 50%, #000 15%, transparent 70%)}
-.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:center; display:block; opacity:var(--hero-op); mix-blend-mode:var(--hero-blend); filter:var(--hero-filter)}
+.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:center 35%; display:block; opacity:var(--hero-op); mix-blend-mode:var(--hero-blend); filter:var(--hero-filter)}
 .hero .inner{position:relative; z-index:1; max-width:760px}
 .hero-logo{width:clamp(220px,26vw,320px); height:auto; display:block; margin-bottom:2rem; color:var(--fg)}
 .hero h1{font-size:clamp(2.2rem,5.4vw,4.3rem); margin:0 0 1.4rem; line-height:1.06}
@@ -305,7 +305,7 @@ footer a:hover{color:var(--acc)}
 
 <!-- ══════════════ HERO ══════════════ -->
 <section class="hero" id="uvod">
-  <div class="hero-photo" aria-hidden="true"><img src="assets/img/symf/symf-koucink.jpg" alt=""></div>
+  <div class="hero-photo" aria-hidden="true"><img src="assets/img/kariera-hero.webp" alt=""></div>
   <div class="inner">
     <svg class="hero-logo" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart"><use href="#lrLogoUpgrade"/></svg>
     <p class="eyebrow">Kariéra · Coach · Leadership Restart</p>
