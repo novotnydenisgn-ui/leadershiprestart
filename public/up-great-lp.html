@@ -210,6 +210,7 @@
   .anchor-card{flex:1;min-width:230px;text-align:center;padding:26px 20px 22px;
     display:flex;flex-direction:column;justify-content:center}
   .anchor-card:hover{transform:none}
+  .anchor-card small .ico{width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px}
   .anchor-card small{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;
     text-transform:uppercase;color:var(--dk-muted);margin-bottom:8px}
   .anchor-card b{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(26px,2.8vw,38px);line-height:1.05;color:#fff}
@@ -226,8 +227,10 @@
   /* ---------- OBSAH — tři pilíře členství ---------- */
   .obsah-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px;position:relative}
   .ob-card{text-align:center;padding:32px 24px 30px;position:relative}
-  .ob-card .ob-ico{font-size:52px;line-height:1;margin-bottom:16px;
-    filter:drop-shadow(0 10px 30px rgba(233,182,79,.45))}
+  .ob-card .ob-ico{width:64px;height:64px;margin:0 auto 16px;border-radius:20px;display:grid;place-items:center;
+    color:var(--lr-gold-light);background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.35);
+    filter:drop-shadow(0 10px 30px rgba(233,182,79,.35))}
+  .ob-card .ob-ico .ico{width:30px;height:30px}
   .ob-card .ob-tag{display:inline-block;font-family:"League Spartan",sans-serif;font-weight:700;
     text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--lr-gold-light);margin-bottom:8px}
   .ob-card h3{font-size:18px;margin-bottom:10px;color:#fff}
@@ -237,6 +240,10 @@
   .ob-card.o-warm .ob-tag{color:var(--lr-gold)}
 
 
+  /* ---------- ikony (Lucide) ---------- */
+  .ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;flex:none}
+  .big-card .big-ico .ico{width:36px;height:36px}
+
   /* ---------- OBSAH (LP): velké bloky ---------- */
   .big-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px;text-align:left;position:relative}
   .big-card{display:flex;gap:24px;align-items:flex-start;padding:clamp(26px,3.2vw,40px);position:relative;overflow:hidden;
@@ -245,7 +252,7 @@
   .big-card.big-wide{grid-column:1/-1;background:linear-gradient(120deg,rgba(233,182,79,.13),rgba(255,255,255,.03) 65%)}
   .big-card .big-num{position:absolute;top:6px;right:20px;font-family:"League Spartan",sans-serif;font-weight:800;
     font-size:clamp(64px,7vw,104px);line-height:1;opacity:.07;color:#f6d47c;pointer-events:none}
-  .big-card .big-ico{flex:none;width:76px;height:76px;border-radius:22px;display:grid;place-items:center;font-size:40px;line-height:1;
+  .big-card .big-ico{flex:none;width:76px;height:76px;border-radius:22px;display:grid;place-items:center;color:var(--lr-gold-light);
     background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.35);filter:drop-shadow(0 10px 30px rgba(233,182,79,.35))}
   .big-card .big-body{min-width:0}
   .big-card .big-tag{display:inline-flex;align-items:center;font-family:"League Spartan",sans-serif;font-weight:800;
@@ -257,12 +264,14 @@
   .big-extra-item{display:flex;gap:16px;align-items:center;padding:18px 22px;border-radius:18px;
     border:1px dashed rgba(233,182,79,.45);background:rgba(233,182,79,.05)}
   .big-extra-item.big-extra-gold{border:1.5px solid transparent;background:var(--c-gold-grad,linear-gradient(120deg,#f6d47c,#c8952f));color:#1a1206}
-  .big-extra-item .big-extra-ico{font-size:30px;line-height:1;flex:none}
+  .big-extra-item .big-extra-ico{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#f6d47c;background:rgba(233,182,79,.12);border:1px solid rgba(233,182,79,.4)}
+  .big-extra-item.big-extra-gold .big-extra-ico{color:#1a1206;background:rgba(26,18,6,.12);border-color:rgba(26,18,6,.25)}
+  .big-extra-item .big-extra-ico .ico{width:22px;height:22px}
   .big-extra-item b{display:block;font-family:"League Spartan",sans-serif;font-weight:800;font-size:17px;color:#fff;letter-spacing:-.01em}
   .big-extra-item span:not(.big-extra-ico){font-size:13.5px;color:var(--dk-muted);line-height:1.5}
   .big-extra-item.big-extra-gold b{color:#1a1206}.big-extra-item.big-extra-gold span:not(.big-extra-ico){color:rgba(26,18,6,.78)}
   @media(max-width:760px){.big-grid,.big-extra{grid-template-columns:1fr}.big-card{flex-direction:column;gap:16px}
-    .big-card .big-ico{width:62px;height:62px;font-size:32px;border-radius:18px}}
+    .big-card .big-ico{width:62px;height:62px;border-radius:18px}.big-card .big-ico .ico{width:28px;height:28px}}
 
   /* ---------- BONUSY ---------- */
   .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;
@@ -276,8 +285,12 @@
     font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:11.5px;color:#f6d47c;
     background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.4);
     border-radius:999px;padding:7px 13px 5px;margin-bottom:14px}
-  .bonus-card .b-ico{font-size:40px;line-height:1;display:block;margin-bottom:12px;
-    filter:drop-shadow(0 10px 30px rgba(233,182,79,.4))}
+  .bonus-card .b-ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;margin-bottom:12px;
+    color:var(--lr-gold-light);background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.35);
+    filter:drop-shadow(0 10px 30px rgba(233,182,79,.35))}
+  .bonus-card .b-ico .ico{width:26px;height:26px}
+  .bonus-card .b-tag .ico{width:14px;height:14px}
+  .b-value .ico{width:17px;height:17px;flex:none}
   .bonus-card h3{font-size:clamp(18px,2vw,22px);color:#fff;margin-bottom:10px}
   .bonus-card p{font-size:14.5px;color:var(--dk-muted);line-height:1.6}
   .bonus-card p b{color:var(--dk-text)}
@@ -305,9 +318,8 @@
   .c-eur{font-size:14.5px;font-weight:700;color:var(--dk-muted);letter-spacing:.01em;margin:0 0 20px}
   .c-list{list-style:none;flex:1;text-align:left;display:grid;gap:12px;margin-top:6px;align-content:start}
   .c-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:#cdd4de}
-  .c-list li::before{content:attr(data-ico);flex:none;width:27px;height:27px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;font-size:13.5px;
-    background:rgba(255,255,255,.07);margin-top:0}
+  .c-list li>.ico{flex:none;width:27px;height:27px;padding:6px;border-radius:50%;box-sizing:border-box;
+    background:rgba(255,255,255,.07);color:var(--dk-text);margin-top:-1px}
   .cena-card .btn{margin-top:24px;width:100%}
   .c-pop{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--dk-muted);
     background:rgba(255,255,255,.04);border:1px solid var(--dk-brd);border-radius:999px;
@@ -341,7 +353,7 @@
   .c-list li.gift{color:#f6d47c;font-weight:700;align-items:center;
     border:1px solid rgba(233,182,79,.45);background:rgba(233,182,79,.06);
     border-radius:14px;padding:10px 14px 10px 12px}
-  .c-list li.gift::before{content:"🎁";background:none;width:auto;height:auto;font-size:18px}
+  .c-list li.gift>.ico{background:none;padding:0;width:20px;height:20px;color:#f6d47c}
   .v-basic .c-pop i{background:var(--c-basic)}
   .v-standard .c-pop i{background:var(--c-standard)}
   .v-gold .c-pop i{background:var(--c-gold-grad)}
@@ -404,6 +416,36 @@
 </head>
 <body>
 
+<!-- Ikony: Lucide (MIT), stroke 2 / 24px — sada podle brand.html #ikony (tvary ≠ ikonky, emoji nepoužíváme) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-magnet" viewBox="0 0 24 24"><path d="m6 15-4-4 6.75-6.77a7.79 7.79 0 0 1 11 11L13 22l-4-4 6.39-6.36a2.14 2.14 0 0 0-3-3L6 15"/><path d="m5 8 4 4"/><path d="m12 15 4 4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M19.44 7.56a2.7 2.7 0 0 1 .8 3.3l-.06.13c-.16.3-.24.56-.24.83 0 .38.2.7.5.85.34.18.7.2 1.04.05l.13-.06a2.7 2.7 0 0 1 3.4.9"/><path d="M15.4 2.6a2.7 2.7 0 0 0-3.3.8l-.06.13a1.6 1.6 0 0 1-.83.5c-.38.03-.7-.16-.85-.5-.18-.34-.2-.7-.05-1.04l.06-.13a2.7 2.7 0 0 0-.9-3.4"/><path d="M14 7 9.5 2.5a2.12 2.12 0 0 0-3 3L11 10"/><path d="m14 7 3.5-3.5"/><path d="M10 11 4.5 16.5a2.12 2.12 0 0 0 3 3L13 14"/><path d="m10 11 3 3"/><path d="M19 12v9"/><path d="M15 21h8"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-toolbox" viewBox="0 0 24 24"><path d="M10 15h4"/><path d="M4 11h16"/><path d="M12 7V4a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/><path d="M16 7V4a1 1 0 0 0-1-1h-2"/><rect x="2" y="7" width="20" height="14" rx="2"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-feather" viewBox="0 0 24 24"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
+  </defs>
+</svg>
+
 <div id="siteNav"></div>
 
 <!-- ======================= HERO + KOTVA HODNOTY ======================= -->
@@ -411,7 +453,7 @@
 <section class="hero-up">
   <div class="wrap">
     <span class="lr-kicker">Pokračování pro absolventy</span>
-    <h1 class="display">Leadership <span class="morph-word" id="morphWord"><span class="w-restart lr-grad-text">Restart</span><span class="w-upgrade lr-grad-text">Up-Grade</span></span> 🔥</h1>
+    <h1 class="display">Leadership <span class="morph-word" id="morphWord"><span class="w-restart lr-grad-text">Restart</span><span class="w-upgrade lr-grad-text">Up-Grade</span></span></h1>
 
     <div class="sub-stack">
       <p class="h-sub sub-a" style="font-size:clamp(16px,1.6vw,19px);max-width:640px;margin:0 auto">
@@ -445,7 +487,7 @@
       <div class="stage stage-upgrade">
         <div class="anchor-band">
           <div class="lr-card anchor-card">
-            <small>🚀 Plný potenciál</small>
+            <small><svg class="ico"><use href="#i-rocket"/></svg>Plný potenciál</small>
             <b>Tvoř naplno</b>
             <span>dej plný potenciál tomu, co tvoříš — a doručuj to efektivně</span>
           </div>
@@ -455,7 +497,7 @@
             <span>znásob své zisky s recurring businessem, který roste s tebou</span>
           </div>
           <div class="lr-card anchor-card">
-            <small>🕊️ Svoboda</small>
+            <small><svg class="ico"><use href="#i-feather"/></svg>Svoboda</small>
             <b>Žij svobodně</b>
             <span>opravdová podnikatelská svoboda — příjem se opakuje, i když zrovna nepracuješ</span>
           </div>
@@ -483,21 +525,21 @@
     na 3- až 6násobek tvého businessu.</p>
     <div class="obsah-grid">
       <div class="lr-card ob-card o-warm reveal">
-        <div class="ob-ico">🧲</div>
+        <div class="ob-ico"><svg class="ico"><use href="#i-magnet"/></svg></div>
         <span class="ob-tag">Akvizice</span>
         <h3 class="display">Akviziční systém</h3>
         <p>Předvídatelný přísun poptávek — <b>víš, odkud přijde další klient</b>,
         místo čekání na doporučení.</p>
       </div>
       <div class="lr-card ob-card reveal">
-        <div class="ob-ico">⚙️</div>
+        <div class="ob-ico"><svg class="ico"><use href="#i-settings"/></svg></div>
         <span class="ob-tag">Automatizace</span>
         <h3 class="display">Automatizace</h3>
         <p>Rutina jede sama — <b>systémy pracují za tebe</b> a ty řešíš jen to,
         co byznys posouvá.</p>
       </div>
       <div class="lr-card ob-card o-warm reveal">
-        <div class="ob-ico">📈</div>
+        <div class="ob-ico"><svg class="ico"><use href="#i-trend"/></svg></div>
         <span class="ob-tag">Škálování</span>
         <h3 class="display">Škálovací procesy a postupy</h3>
         <p>Kroky, které růst <b>udrží a znásobí</b> — od nabídky přes ceny
@@ -520,7 +562,7 @@
 
       <div class="lr-card big-card big-wide reveal">
         <span class="big-num">01</span>
-        <div class="big-ico">🗺️</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-route"/></svg></div>
         <div class="big-body">
           <span class="big-tag">Postup</span>
           <h3 class="display">Marketingový funnel krok za krokem</h3>
@@ -532,7 +574,7 @@
 
       <div class="lr-card big-card reveal">
         <span class="big-num">02</span>
-        <div class="big-ico">🤖</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-bot"/></svg></div>
         <div class="big-body">
           <span class="big-tag">AI agenti</span>
           <h3 class="display">Stylový web se srdcem tvé firmy</h3>
@@ -543,7 +585,7 @@
 
       <div class="lr-card big-card reveal">
         <span class="big-num">03</span>
-        <div class="big-ico">⚡</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-zap"/></svg></div>
         <div class="big-body">
           <span class="big-tag">AI agenti</span>
           <h3 class="display">Přes 36 hodin práce ušetřených</h3>
@@ -555,7 +597,7 @@
 
       <div class="lr-card big-card big-wide reveal">
         <span class="big-num">04</span>
-        <div class="big-ico">🧩</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-puzzle"/></svg></div>
         <div class="big-body">
           <span class="big-tag">Šablony</span>
           <h3 class="display">Nabídka a model podnikání, které vydělávají 4× víc</h3>
@@ -567,7 +609,7 @@
 
       <div class="lr-card big-card reveal">
         <span class="big-num">05</span>
-        <div class="big-ico">🎯</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-target"/></svg></div>
         <div class="big-body">
           <span class="big-tag">Skupina</span>
           <h3 class="display">Skupinové strategické hovory</h3>
@@ -578,7 +620,7 @@
 
       <div class="lr-card big-card reveal">
         <span class="big-num">06</span>
-        <div class="big-ico">🧭</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-compass"/></svg></div>
         <div class="big-body">
           <span class="big-tag">1 : 1</span>
           <h3 class="display">Individuální mentoring s Denisem</h3>
@@ -589,7 +631,7 @@
 
       <div class="lr-card big-card big-wide reveal">
         <span class="big-num">07</span>
-        <div class="big-ico">📊</div>
+        <div class="big-ico"><svg class="ico"><use href="#i-chart"/></svg></div>
         <div class="big-body">
           <span class="big-tag">Software</span>
           <h3 class="display">Software, který ti ušetří 2 000+ Kč měsíčně</h3>
@@ -600,11 +642,11 @@
 
       <div class="big-extra reveal">
         <div class="big-extra-item">
-          <span class="big-extra-ico">🎁</span>
+          <span class="big-extra-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
           <div><b>Další bonusy</b><span>Ke každé úrovni členství navíc — viz níže.</span></div>
         </div>
         <div class="big-extra-item big-extra-gold">
-          <span class="big-extra-ico">📦</span>
+          <span class="big-extra-ico"><svg class="ico"><use href="#i-package"/></svg></span>
           <div><b>Vstupní balíček pro implementaci</b><span>Všechno, co potřebuješ, abys systém rozjel hned první týden — ne až „někdy".</span></div>
         </div>
       </div>
@@ -621,21 +663,21 @@
     <div class="bonus-grid">
       <div class="lr-card bonus-card reveal">
         <span class="b-num">1</span>
-        <span class="b-tag">🎁 Bonus 1</span>
-        <span class="b-ico">📊</span>
+        <span class="b-tag"><svg class="ico"><use href="#i-gift"/></svg>Bonus 1</span>
+        <span class="b-ico"><svg class="ico"><use href="#i-monitor"/></svg></span>
         <h3 class="display">Interaktivní Remind Systém [software]</h3>
         <p>Metodické lekce self-coachingu v aplikaci Telegram a na webu.
         <b>AI coaching, který tě přesně provede</b> aplikováním všeho do praxe.</p>
-        <span class="b-value">🤑 Rok předplatného <s>11 400 Kč</s> zdarma</span>
+        <span class="b-value"><svg class="ico"><use href="#i-coins"/></svg>Rok předplatného <s>11 400 Kč</s> zdarma</span>
       </div>
       <div class="lr-card bonus-card reveal">
         <span class="b-num">2</span>
-        <span class="b-tag">🎁 Bonus 2</span>
-        <span class="b-ico">🚀</span>
+        <span class="b-tag"><svg class="ico"><use href="#i-gift"/></svg>Bonus 2</span>
+        <span class="b-ico"><svg class="ico"><use href="#i-rocket"/></svg></span>
         <h3 class="display">1× vstupní 60min MENTORING Diagnóza</h3>
         <p>Nastavení strategie na následující <b>3 měsíce</b> a vytvoření
         road mapy pro realizaci. Začínáš s jasným plánem, ne naslepo.</p>
-        <span class="b-value">💎 V hodnotě 4 500 Kč — zdarma</span>
+        <span class="b-value"><svg class="ico"><use href="#i-gem"/></svg>V hodnotě 4 500 Kč — zdarma</span>
       </div>
     </div>
   </div>
@@ -655,10 +697,10 @@
         <div class="c-name">Basic</div>
         <div class="c-tag">Měsíční členství ve skupině</div>
         <ul class="c-list">
-          <li class="gift">Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
-          <li data-ico="👥">8× měsíčně skupinový coaching (30–60 min, 2× týdně)</li>
-          <li data-ico="🧭">1× za 3 měsíce revize situace</li>
-          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+          <li class="gift"><svg class="ico"><use href="#i-gift"/></svg>Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
+          <li><svg class="ico"><use href="#i-users"/></svg>8× měsíčně skupinový coaching (30–60 min, 2× týdně)</li>
+          <li><svg class="ico"><use href="#i-compass"/></svg>1× za 3 měsíce revize situace</li>
+          <li><svg class="ico"><use href="#i-monitor"/></svg>Interaktivní Remind Systém — rok zdarma</li>
         </ul>
         <a class="btn btn-basic" data-cta-pos="upgrade_basic" href="/up-great-dotaznik">Chci Basic</a>
         <span class="c-pop"><i></i>Vstupní úroveň — držíš rytmus skupiny</span>
@@ -670,12 +712,12 @@
         <div class="c-name">Prémium lvl1</div>
         <div class="c-tag">Skupina + individuální vedení</div>
         <ul class="c-list">
-          <li class="gift">Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
-          <li data-ico="👥">8× měsíčně skupinový coaching (60 min, 2× týdně — Po &amp; Pá 8:30)</li>
-          <li data-ico="🎯">1× měsíčně individuální coaching</li>
-          <li data-ico="🎥">Osobní natáčení</li>
-          <li data-ico="💬">Denní podpora 24/7 — hlasové i textové zprávy</li>
-          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+          <li class="gift"><svg class="ico"><use href="#i-gift"/></svg>Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
+          <li><svg class="ico"><use href="#i-users"/></svg>8× měsíčně skupinový coaching (60 min, 2× týdně — Po &amp; Pá 8:30)</li>
+          <li><svg class="ico"><use href="#i-target"/></svg>1× měsíčně individuální coaching</li>
+          <li><svg class="ico"><use href="#i-video"/></svg>Osobní natáčení</li>
+          <li><svg class="ico"><use href="#i-message"/></svg>Denní podpora 24/7 — hlasové i textové zprávy</li>
+          <li><svg class="ico"><use href="#i-monitor"/></svg>Interaktivní Remind Systém — rok zdarma</li>
         </ul>
         <a class="btn btn-standard" data-cta-pos="upgrade_lvl1" href="/up-great-dotaznik">Chci Prémium lvl1</a>
         <span class="c-pop"><i></i>Nejlepší poměr hloubky a ceny</span>
@@ -686,13 +728,13 @@
         <div class="c-name">Prémium lvl2</div>
         <div class="c-tag">Maximální intenzita + šablony</div>
         <ul class="c-list">
-          <li class="gift">Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
-          <li data-ico="👥">8× měsíčně skupinový coaching (60 min, 2× týdně)</li>
-          <li data-ico="🎯">2× měsíčně individuální coaching + mentoring</li>
-          <li data-ico="🎥">Osobní natáčení</li>
-          <li data-ico="🧰">Business &amp; marketing šablony</li>
-          <li data-ico="💬">Denní podpora 24/7 — hlasové i textové zprávy</li>
-          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+          <li class="gift"><svg class="ico"><use href="#i-gift"/></svg>Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
+          <li><svg class="ico"><use href="#i-users"/></svg>8× měsíčně skupinový coaching (60 min, 2× týdně)</li>
+          <li><svg class="ico"><use href="#i-target"/></svg>2× měsíčně individuální coaching + mentoring</li>
+          <li><svg class="ico"><use href="#i-video"/></svg>Osobní natáčení</li>
+          <li><svg class="ico"><use href="#i-toolbox"/></svg>Business &amp; marketing šablony</li>
+          <li><svg class="ico"><use href="#i-message"/></svg>Denní podpora 24/7 — hlasové i textové zprávy</li>
+          <li><svg class="ico"><use href="#i-monitor"/></svg>Interaktivní Remind Systém — rok zdarma</li>
         </ul>
         <a class="btn btn-gold" data-cta-pos="upgrade_lvl2" href="/up-great-dotaznik">Chci Prémium lvl2</a>
         <span class="c-pop"><i></i>Pro ty, kdo chtějí jet naplno</span>
@@ -704,11 +746,11 @@
         <div class="c-name">Elite</div>
         <div class="c-tag">Vše uděláme za tebe</div>
         <ul class="c-list">
-          <li class="gift">Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
-          <li data-ico="👑">Vše z Prémium lvl2 — skupina, 2× individuální coaching, šablony</li>
-          <li data-ico="🛠️">Realizace za tebe — strategii nejen nastavíme, ale rovnou implementujeme</li>
-          <li data-ico="🧰">Business &amp; marketing šablony připravené na míru a nasazené do praxe</li>
-          <li data-ico="📞">Prioritní přístup 24/7 — jsi vždy první na řadě</li>
+          <li class="gift"><svg class="ico"><use href="#i-gift"/></svg>Oba bonusy zdarma — Remind Systém na rok + Mentoring Diagnóza</li>
+          <li><svg class="ico"><use href="#i-crown"/></svg>Vše z Prémium lvl2 — skupina, 2× individuální coaching, šablony</li>
+          <li><svg class="ico"><use href="#i-wrench"/></svg>Realizace za tebe — strategii nejen nastavíme, ale rovnou implementujeme</li>
+          <li><svg class="ico"><use href="#i-toolbox"/></svg>Business &amp; marketing šablony připravené na míru a nasazené do praxe</li>
+          <li><svg class="ico"><use href="#i-phone"/></svg>Prioritní přístup 24/7 — jsi vždy první na řadě</li>
         </ul>
         <a class="btn btn-elite" data-cta-pos="upgrade_elite" href="/up-great-dotaznik">Chci Elite</a>
         <span class="c-pop"><i></i>Omezená kapacita — na osobní domluvu</span>
