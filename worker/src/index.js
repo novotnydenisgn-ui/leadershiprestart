@@ -14,6 +14,7 @@ import {
 import { isBot, isExcluded, previewVariant } from './bots.js';
 import { logView, logClick, logGoal, deviceFrom } from './log.js';
 import { handleAdmin } from './admin.js';
+import { handleForms } from './forms.js';
 
 const APEX = 'leadershiprestart.cz';
 
@@ -48,6 +49,9 @@ export default {
     if (url.pathname === '/ab' || url.pathname.startsWith('/ab/')) {
       return handleAdmin(request, env, ctx);
     }
+    // Dotazníky (aplikace Dotazníky): /up-great-dotaznik, /engine/*, /api/submit/* …
+    const formsResp = await handleForms(request, env, url);
+    if (formsResp) return formsResp;
     return handlePage(request, env, ctx, url);
   },
 };
