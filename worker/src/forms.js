@@ -7,6 +7,9 @@ export const FORM_PATHS = {
   // Leadership Up-Grade: LP /up-great-lp → dotazník → informační schůzka (Calendly)
   '/up-great-dotaznik': 'up-great',
   '/up-great-dotazník': 'up-great',
+  // Kariéra: stránka /kariera → náborový dotazník „Výběrové řízení: Coach“ (Dotazníky, složka Leadership Restart)
+  '/kariera-dotaznik': 'kariera-coach',
+  '/kariera-dotazník': 'kariera-coach',
 };
 // Rezervace termínu (po kvalifikaci v dotazníku): /<cesta> → stránka /r/<slug> v aplikaci Dotazníky
 export const BOOKING_PATHS = {};

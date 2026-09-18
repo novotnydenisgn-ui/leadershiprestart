@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="cs" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kariéra: Coach — Leadership Restart</title>
+<meta name="description" content="Hledáme zkušeného a lidsky zralého kouče do týmu Leadership Restart. 100 % online, 4 nebo 8 hodin denně, odměna 25–75 tisíc Kč plus bonusy.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   LEADERSHIP RESTART — KARIÉRA: COACH · zlatý styl (brand.html v1.2)
+   Sdílený základ se stránkou Mise (tokeny, sklo, hlavička, patka).
+   ============================================================ */
+:root{
+  --lr-blue:   #377EF7;
+  --lr-orange: #ED6D47;
+  --gold-1: #F6D47C;
+  --gold-2: #E9B64F;
+  --gold-3: #C8952F;
+  --gold-ink: #1A1206;
+  --grad-gold: linear-gradient(100deg, #F6D47C 0%, #E9B64F 45%, #C8952F 100%);
+  --grad-brand: linear-gradient(135deg, #377EF7 0%, #7A729C 50%, #ED6D47 100%);
+  --font-display: "League Spartan", "Arial Black", sans-serif;
+  --font-body:    "Montserrat", "Segoe UI", Arial, sans-serif;
+  --font-accent:  "Caveat", "Bradley Hand", cursive;
+  --gap: clamp(1rem, 2.5vw, 2rem);
+  --radius: 14px;
+  --maxw: 1180px;
+}
+:root{
+  --bg: #0C0B09;
+  --bg-elev: rgba(255,255,255,.045);
+  --fg: #EFEEEC; --fg-dim: #A39E93;
+  --line: rgba(233,182,79,.16);
+  --acc: #E9B64F; --acc-text: #F6D47C;
+  --glow-a: rgba(233,182,79,.20); --glow-b: rgba(200,149,47,.14);
+  --tex: #EFEEEC; --tex-op: .05;
+  --photo-fade: #0C0B09;
+  --hero-op:.72; --hero-blend:normal; --hero-filter:saturate(.85);
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+  --bg: #F1EDE4; --bg-elev: rgba(255,255,255,.62);
+  --fg: #1A1206; --fg-dim: #6B6252;
+  --line: rgba(120,90,30,.18);
+  --acc: #C8952F; --acc-text: #A5761F;
+  --glow-a: rgba(246,212,124,.55); --glow-b: rgba(233,182,79,.35);
+  --tex: #1A1206; --tex-op: .055;
+  --photo-fade: #F1EDE4;
+  --hero-op:.55; --hero-blend:multiply; --hero-filter:saturate(.7) contrast(.95);
+} }
+:root[data-theme="light"]{
+  --bg: #F1EDE4; --bg-elev: rgba(255,255,255,.62);
+  --fg: #1A1206; --fg-dim: #6B6252;
+  --line: rgba(120,90,30,.18);
+  --acc: #C8952F; --acc-text: #A5761F;
+  --glow-a: rgba(246,212,124,.55); --glow-b: rgba(233,182,79,.35);
+  --tex: #1A1206; --tex-op: .055;
+  --photo-fade: #F1EDE4;
+  --hero-op:.55; --hero-blend:multiply; --hero-filter:saturate(.7) contrast(.95);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--font-body); font-weight:400; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden; transition:background .35s ease, color .35s ease}
+
+.glowfield{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden}
+.glowfield i{position:absolute; border-radius:50%; filter:blur(90px); display:block}
+.glowfield i:nth-child(1){width:52vw;height:34vw;left:-12vw;top:-8vw;background:var(--glow-b)}
+.glowfield i:nth-child(2){width:60vw;height:38vw;right:-18vw;top:22vh;background:var(--glow-a)}
+.glowfield i:nth-child(3){width:48vw;height:30vw;left:8vw;bottom:-14vw;background:var(--glow-a);opacity:.6}
+
+.wrap{position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 var(--gap)}
+
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:800; line-height:1.05; letter-spacing:-.02em; margin:0}
+h2{font-size:clamp(1.8rem,3.6vw,2.9rem)}
+h3{font-size:clamp(1.15rem,2vw,1.5rem); font-weight:700}
+h4{font-size:1rem; font-weight:700}
+p{margin:0 0 1em}
+a{color:var(--acc)}
+.grad-text{background:var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent; display:inline-block}
+.eyebrow{font-size:.7rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--acc-text); margin:0 0 .8rem}
+.lead{font-size:clamp(1rem,1.5vw,1.15rem); color:var(--fg-dim); max-width:62ch}
+.lead strong{color:var(--fg); font-weight:600}
+
+.ic{width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex:none}
+.ic-box{width:44px; height:44px; border-radius:12px; display:grid; place-items:center; color:var(--acc); border:1px solid var(--line); background:color-mix(in srgb, var(--acc) 10%, transparent); flex:none}
+.glass{background:var(--bg-elev); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); border:1px solid var(--line); border-radius:var(--radius)}
+
+/* Tlačítka */
+.btn{display:inline-flex; align-items:center; gap:.6rem; padding:.95rem 1.6rem .85rem; border-radius:99px; font-family:var(--font-body); font-weight:700; font-size:.95rem; color:var(--gold-ink); background:var(--grad-gold); text-decoration:none; border:1.5px solid transparent; box-shadow:0 14px 38px rgba(233,182,79,.28); transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s, filter .3s; white-space:nowrap}
+.btn:hover{transform:translateY(-3px); box-shadow:0 18px 44px rgba(233,182,79,.38); filter:brightness(1.04)}
+.btn .ic{width:18px; height:18px; stroke-width:2.4}
+.btn.ghost{background:var(--bg-elev); color:var(--fg); border-color:var(--line); box-shadow:none}
+.btn.ghost:hover{border-color:var(--acc); box-shadow:0 14px 34px rgba(0,0,0,.2)}
+.btn.lg{font-size:1.05rem; padding:1.1rem 2rem 1rem}
+
+/* Navigace */
+header.top{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--line)}
+.topbar{display:flex; align-items:center; gap:1.2rem; max-width:var(--maxw); margin:0 auto; padding:.7rem var(--gap)}
+.topbar .logotype{height:34px; width:auto; flex:none; color:var(--fg); display:block}
+.topbar .name{font-family:var(--font-display); font-weight:800; font-size:.95rem; letter-spacing:-.01em; white-space:nowrap; flex:none}
+.topbar .name span{color:var(--acc)}
+nav.jump{display:flex; gap:.2rem; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+nav.jump::-webkit-scrollbar{display:none}
+nav.jump a{font-size:.78rem; font-weight:500; color:var(--fg-dim); text-decoration:none; padding:.4rem .6rem; border-radius:8px; white-space:nowrap}
+nav.jump a:hover{color:var(--fg); background:var(--bg-elev)}
+.toggle{flex:none; font:inherit; font-size:.75rem; font-weight:600; cursor:pointer; background:var(--bg-elev); color:var(--fg); border:1px solid var(--line); border-radius:99px; padding:.4rem .8rem; text-decoration:none}
+.toggle:hover{border-color:var(--acc)}
+.topbar .btn{padding:.55rem 1rem .5rem; font-size:.8rem; box-shadow:none}
+@media(max-width:960px){a.backlink,.topbar .btn{display:none}}
+
+/* Sekce */
+section{padding:clamp(3.5rem,8vw,6.5rem) 0; scroll-margin-top:70px; position:relative}
+section+section{border-top:1px solid var(--line)}
+.sec-head{margin-bottom:2.5rem; max-width:70ch}
+.sec-head h2{margin-bottom:.6rem}
+
+/* Hero */
+.hero{padding:clamp(4rem,12vh,8rem) 0 clamp(3rem,8vh,5rem); min-height:80vh; display:flex; align-items:center}
+.hero-photo{position:absolute; top:-6vh; bottom:-6vh; left:40%; right:calc(50% - 50vw); z-index:0; pointer-events:none; overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse 55% 62% at 58% 50%, #000 15%, transparent 70%); mask-image:radial-gradient(ellipse 55% 62% at 58% 50%, #000 15%, transparent 70%)}
+.hero-photo img{width:100%; height:100%; object-fit:cover; object-position:center; display:block; opacity:var(--hero-op); mix-blend-mode:var(--hero-blend); filter:var(--hero-filter)}
+.hero .inner{position:relative; z-index:1; max-width:760px}
+.hero-logo{width:clamp(220px,26vw,320px); height:auto; display:block; margin-bottom:2rem; color:var(--fg)}
+.hero h1{font-size:clamp(2.2rem,5.4vw,4.3rem); margin:0 0 1.4rem; line-height:1.06}
+.hero .sub{font-size:clamp(1.05rem,1.7vw,1.3rem); color:var(--fg-dim); max-width:54ch; line-height:1.55}
+.hero .sub strong{color:var(--fg); font-weight:600}
+.hero .sub2{margin-top:-.2rem; font-size:clamp(.95rem,1.4vw,1.1rem); color:var(--fg-dim); border-left:2px solid var(--acc); padding-left:1rem; font-family:var(--font-accent); font-size:1.5rem; line-height:1.2; color:var(--acc)}
+.hero .meta{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2rem}
+.hero .actions{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; align-items:center}
+.chip{font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:.4rem .8rem; border-radius:99px; border:1px solid var(--line); color:var(--fg-dim); display:inline-flex; align-items:center; gap:.45rem; background:color-mix(in srgb, var(--bg) 60%, transparent)}
+.chip i{width:8px; height:8px; border-radius:2px; display:inline-block}
+.chip.blue i{background:var(--lr-blue)} .chip.gold i{background:var(--grad-gold)} .chip.orange i{background:var(--lr-orange)}
+
+/* Textura symbolů — jen v patce */
+.tex{position:absolute; pointer-events:none; z-index:0}
+.tex svg{display:block; width:100%; height:100%; fill:var(--tex); opacity:var(--tex-op)}
+.tex.foot-tex{left:0; right:0; bottom:0; height:120px; -webkit-mask-image:linear-gradient(to top,#000,transparent); mask-image:linear-gradient(to top,#000,transparent)}
+
+/* Mřížky a karty */
+.grid{display:grid; gap:1rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{padding:1.5rem 1.5rem 1.4rem; overflow:hidden}
+.card h3{margin-bottom:.55rem}
+.card p{color:var(--fg-dim); font-size:.95rem}
+.card p:last-child{margin-bottom:0}
+.card .head{display:flex; align-items:center; gap:.9rem; margin-bottom:1rem}
+.card .num{font-family:var(--font-display); font-weight:800; font-size:.78rem; letter-spacing:.14em; color:var(--acc-text)}
+.note{font-size:.86rem; color:var(--fg-dim); border-left:3px solid var(--acc); padding:.6rem .9rem; background:var(--bg-elev); border-radius:8px; margin-top:.9rem}
+.note em{font-style:normal; color:var(--fg); font-weight:600}
+
+/* Mise — dvě karty + citát */
+.mise-cards .card p{font-size:.97rem}
+.mise-cards .card ul{margin:.4rem 0 1rem 1.1rem; padding:0; color:var(--fg-dim); font-size:.95rem}
+.mise-cards .card li{margin:.3rem 0}
+.mise-cards .card li::marker{color:var(--acc)}
+.mantra{margin-top:1.6rem; display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap}
+.mantra .lbl{font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; color:var(--fg-dim); font-weight:600}
+.mantra .txt{font-family:var(--font-accent); font-weight:600; font-size:1.75rem; line-height:1.1; color:var(--acc)}
+
+/* Role — 7 činností + citát mise */
+.role-grid .card{display:flex; flex-direction:column; gap:.2rem}
+.role-grid .card h3{font-size:1.1rem}
+.role-grid .card p{font-size:.9rem; margin:0}
+.creed{margin-top:1.2rem; display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); overflow:hidden}
+.creed .txt{padding:clamp(1.5rem,3vw,2.4rem)}
+.creed .q{font-family:var(--font-display); font-weight:800; font-size:clamp(1.4rem,2.6vw,2.1rem); line-height:1.12; letter-spacing:-.02em; margin:0 0 1rem}
+.creed .q span{color:var(--acc)}
+.creed p{color:var(--fg-dim); font-size:.97rem}
+.creed p strong{color:var(--fg); font-weight:600}
+.creed .photo{position:relative; min-height:260px}
+.creed .photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.creed .photo::after{content:""; position:absolute; inset:0; background:linear-gradient(to right, var(--photo-fade) 0%, transparent 45%); opacity:.9}
+@media(max-width:820px){.creed{grid-template-columns:1fr}.creed .photo{min-height:200px; order:-1}.creed .photo::after{background:linear-gradient(to top, var(--photo-fade) 0%, transparent 55%)}}
+
+/* Výsledky — řádky s ikonou */
+.results{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:1.2rem; align-items:stretch}
+.results .rows{padding:.5rem 1.6rem}
+.results .row{display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:start; padding:1.05rem 0; border-bottom:1px solid var(--line)}
+.results .row:last-child{border-bottom:0}
+.results .row b{display:block; font-family:var(--font-display); font-weight:700; font-size:1.05rem; margin:.35rem 0 .2rem}
+.results .row span{color:var(--fg-dim); font-size:.93rem}
+.results .row span em{color:var(--fg); font-style:normal; font-weight:600}
+.expect{padding:1.6rem 1.7rem; display:flex; flex-direction:column}
+.expect h3{margin-bottom:.4rem}
+.expect p{color:var(--fg-dim); font-size:.95rem}
+.pills{display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.4rem}
+.pills span{font-size:.74rem; font-weight:600; letter-spacing:.03em; padding:.42rem .75rem; border-radius:99px; border:1px solid var(--line); color:var(--acc-text); background:color-mix(in srgb, var(--acc) 8%, transparent)}
+.expect .big{margin-top:auto; padding-top:1.4rem; font-family:var(--font-accent); font-size:1.6rem; line-height:1.15; color:var(--acc)}
+@media(max-width:820px){.results{grid-template-columns:1fr}}
+
+/* Podmínky — čísla + benefity */
+.terms .card{position:relative}
+.terms .val{font-family:var(--font-display); font-weight:800; font-size:clamp(1.9rem,3.4vw,2.6rem); line-height:1; letter-spacing:-.03em; margin:.4rem 0 .35rem}
+.terms .val small{font-size:.55em; font-weight:700; letter-spacing:0}
+.terms .val.gold{background:var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent; display:inline-block}
+.terms .lbl{font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--acc-text); font-weight:600}
+.benefits{margin-top:1rem; padding:1.6rem 1.7rem 1.5rem}
+.benefits h3{margin-bottom:1rem}
+.benefits .grid{gap:1.2rem}
+.benefit{display:flex; gap:.9rem; align-items:flex-start}
+.benefit b{display:block; font-family:var(--font-display); font-weight:700; font-size:1rem; margin:.3rem 0 .15rem}
+.benefit span{color:var(--fg-dim); font-size:.9rem}
+
+/* Výběr — 4 kroky */
+.steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; counter-reset:step}
+.step{padding:1.5rem 1.5rem 1.4rem; position:relative; display:flex; flex-direction:column}
+.step .n{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; font-family:var(--font-display); font-weight:800; font-size:1.2rem; padding-top:3px; color:var(--gold-ink); background:var(--grad-gold); box-shadow:0 0 0 6px rgba(233,182,79,.14); margin-bottom:1rem}
+.step h3{font-size:1.15rem; margin-bottom:.4rem}
+.step p{color:var(--fg-dim); font-size:.9rem; margin:0}
+.step .dur{margin-top:auto; padding-top:1rem; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--acc-text); font-weight:600}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* Závěrečná výzva */
+.cta{padding:clamp(2rem,5vw,3.5rem); text-align:center; position:relative; overflow:hidden}
+.cta::before{content:""; position:absolute; inset:-40%; background:radial-gradient(ellipse at 50% 60%, rgba(233,182,79,.22), transparent 55%); pointer-events:none}
+.cta>*{position:relative}
+.cta h2{margin-bottom:.8rem}
+.cta p{max-width:60ch; margin:0 auto 1.4rem; color:var(--fg-dim)}
+.cta p strong{color:var(--fg); font-weight:600}
+.cta .small{font-size:.82rem; color:var(--fg-dim); margin:1.2rem auto 0}
+.cta .actions{display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem}
+
+/* Patka */
+footer{padding:3rem 0 4rem; border-top:1px solid var(--line); position:relative; font-size:.82rem; color:var(--fg-dim)}
+footer .wrap{display:flex; flex-wrap:wrap; gap:1rem; align-items:center; justify-content:space-between}
+footer a{color:var(--fg-dim); text-decoration:none}
+footer a:hover{color:var(--acc)}
+
+/* Odhalení při scrollu */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+@media print{.glowfield,header.top,.tex,.hero-photo{display:none}body{background:#fff;color:#1A1206}.glass{backdrop-filter:none;background:#fff;border-color:#ddd;break-inside:avoid}section{padding:2rem 0}}
+</style>
+</head>
+<body>
+
+<div class="glowfield" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- Sdílené SVG definice: logo, textura, ikony (Lucide, MIT) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lrGoldLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F6D47C"/><stop offset="45%" stop-color="#E9B64F"/><stop offset="100%" stop-color="#C8952F"/>
+    </linearGradient>
+    <symbol id="lrLogoUpgrade" viewBox="0 0 380 100">
+      <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrGoldLogo)"/>
+      <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="currentColor">Leadership</text>
+      <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#E9B64F">RE<tspan fill="currentColor">START</tspan></text>
+    </symbol>
+    <symbol id="lrTexture" viewBox="0 0 140 140"><g><path d="M0 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M7 112H21A7 7 0 0 1 28 119V133A7 7 0 0 1 21 140H7A7 7 0 0 1 0 133V119A7 7 0 0 1 7 112Z"/><path d="M35 28H49A7 7 0 0 1 56 35V49A7 7 0 0 1 49 56H35A7 7 0 0 1 28 49V35A7 7 0 0 1 35 28Z"/><path d="M28 84H56V112H28Z"/><path d="M56 0H84V28H56Z"/><path d="M56 56H84V84H56Z"/><path d="M56 126a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M84 42a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M91 84H105A7 7 0 0 1 112 91V105A7 7 0 0 1 105 112H91A7 7 0 0 1 84 105V91A7 7 0 0 1 91 84Z"/><path d="M119 0H133A7 7 0 0 1 140 7V21A7 7 0 0 1 133 28H119A7 7 0 0 1 112 21V7A7 7 0 0 1 119 0Z"/><path d="M112 70a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z"/><path d="M112 112H140V140H112Z"/><path d="M14 56A14 14 0 0 0 28 42H42V56A14 14 0 0 0 28 70H14Z"/><path d="M28 70A14 14 0 0 0 42 84V98H28A14 14 0 0 0 14 84V70Z"/><path d="M14 112A14 14 0 0 0 28 98H42V112A14 14 0 0 0 28 126H14Z"/><path d="M42 28A14 14 0 0 0 56 14H70V28A14 14 0 0 0 56 42H42Z"/><path d="M56 42A14 14 0 0 0 70 56V70H56A14 14 0 0 0 42 56V42Z"/><path d="M42 84A14 14 0 0 0 56 70H70V84A14 14 0 0 0 56 98H42Z"/><path d="M56 98A14 14 0 0 0 70 112V126H56A14 14 0 0 0 42 112V98Z"/><path d="M84 14A14 14 0 0 0 98 28V42H84A14 14 0 0 0 70 28V14Z"/><path d="M70 56A14 14 0 0 0 84 42H98V56A14 14 0 0 0 84 70H70Z"/><path d="M84 70A14 14 0 0 0 98 84V98H84A14 14 0 0 0 70 84V70Z"/><path d="M70 112A14 14 0 0 0 84 98H98V112A14 14 0 0 0 84 126H70Z"/><path d="M98 28A14 14 0 0 0 112 14H126V28A14 14 0 0 0 112 42H98Z"/><path d="M112 42A14 14 0 0 0 126 56V70H112A14 14 0 0 0 98 56V42Z"/><path d="M98 84A14 14 0 0 0 112 70H126V84A14 14 0 0 0 112 98H98Z"/><path d="M112 98A14 14 0 0 0 126 112V126H112A14 14 0 0 0 98 112V98Z"/></g></symbol>
+
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-calcheck" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="topbar">
+    <svg class="logotype" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart"><use href="#lrLogoUpgrade"/></svg>
+    <span class="name">· Kariéra</span>
+    <nav class="jump">
+      <a href="#mise">Mise</a>
+      <a href="#role">Role</a>
+      <a href="#vysledky">Výsledky</a>
+      <a href="#podminky">Podmínky</a>
+      <a href="#vyber">Jak výběr probíhá</a>
+    </nav>
+    <a class="toggle backlink" href="index.html">← Zpět na web</a>
+    <button class="toggle" id="themeBtn" type="button">Světlý režim</button>
+    <a class="btn" href="/kariera-dotaznik">Přihlásit se</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" id="uvod">
+  <div class="hero-photo" aria-hidden="true"><img src="assets/img/symf/symf-koucink.jpg" alt=""></div>
+  <div class="inner">
+    <svg class="hero-logo" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart"><use href="#lrLogoUpgrade"/></svg>
+    <p class="eyebrow">Kariéra · Coach · Leadership Restart</p>
+    <h1>Hledáme kouče, který bude <span class="grad-text">srdcem</span> proměny našich klientů.</h1>
+    <p class="sub">Zkušený a lidsky zralý kouč, který bude dennodenně provázet podnikatele a lídry na cestě k lepšímu vedení lidí a osobnímu růstu. <strong>Práce 100 % online, 4 nebo 8 hodin denně.</strong></p>
+    <p class="sub sub2">„Vracíme podnikatelům zpátky jejich sílu tvořit lepší svět.“</p>
+    <div class="meta">
+      <span class="chip gold"><i></i>4 nebo 8 hodin denně</span>
+      <span class="chip blue"><i></i>100 % online</span>
+      <span class="chip orange"><i></i>25–75 tis. Kč + bonusy</span>
+    </div>
+    <div class="actions">
+      <a class="btn lg" href="/kariera-dotaznik">Zjistit, zda splňuji kritéria <svg class="ic"><use href="#i-arrow"/></svg></a>
+      <a class="btn ghost" href="#vyber">Jak výběr probíhá</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 01 MISE ══════════════ -->
+<section id="mise">
+  <div class="sec-head reveal">
+    <p class="eyebrow">01 — Proč to děláme</p>
+    <h2>Věříme, že podnikatelé <span class="grad-text">tvoří lepší svět</span></h2>
+    <p class="lead">Vidí příležitosti tam, kde je ostatní nevidí, vytvářejí pracovní místa a zlepšují ekonomiku své země. Naším cílem je, aby díky této práci vznikalo <strong>férové a udržitelné podnikání</strong>, které stojí na hodnotě a výsledcích.</p>
+  </div>
+  <div class="grid g2 mise-cards">
+    <article class="glass card reveal">
+      <div class="head"><div class="ic-box"><svg class="ic"><use href="#i-layers"/></svg></div><span class="num">JAK TO DĚLÁME</span></div>
+      <h3>Koučink + ověřené systémy</h3>
+      <p>Propojujeme koučovací přístup a transformační techniky, které pomáhají:</p>
+      <ul>
+        <li>vracet pozornost k tomu podstatnému,</li>
+        <li>posilovat smysluplnou motivaci a disciplínu,</li>
+        <li>zavádět ověřené postupy a strategie do praxe.</li>
+      </ul>
+      <p>Doplňujeme je o systémy, postupy a strategie (včetně marketingu a vedení firmy), které fungují i v zahraničí, aby podnikání nestálo jen na vůli, ale na <strong>předvídatelném procesu</strong>, který zvyšuje hodnotu firmy.</p>
+    </article>
+    <article class="glass card reveal">
+      <div class="head"><div class="ic-box"><svg class="ic"><use href="#i-globe"/></svg></div><span class="num">PROČ TO DĚLÁME</span></div>
+      <h3>Exekutivní kapacita a dopad</h3>
+      <p>To vše děláme proto, aby podnikatelé rozšiřovali svou <strong>exekutivní kapacitu</strong> (co zvládnou řídit a doručit) a zároveň zvyšovali <strong>dopad na trh</strong>, na kterém působí.</p>
+      <p>Výsledkem má být podnikání, které přináší pozitivní dopad pro klienty, týmy i společnost. A vy můžete být těchto změn součástí.</p>
+      <div class="mantra"><span class="lbl">Mise</span><span class="txt">„Vracíme podnikatelům sílu budovat lepší svět.“</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ══════════════ 02 ROLE ══════════════ -->
+<section id="role">
+  <div class="sec-head reveal">
+    <p class="eyebrow">02 — Role Coach</p>
+    <h2>Čemu se budete <span class="grad-text">věnovat</span></h2>
+    <p class="lead">Když si klient představí Leadership Restart, spojí si ho z velké části právě s proměnou, kterou mu pomůžete prožít vy. Máte možnost zanechat <strong>hlubokou a trvalou změnu</strong> v každém klientovi, se kterým přijdete do kontaktu.</p>
+  </div>
+  <div class="grid g3 role-grid">
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-user"/></svg></div><span class="num">01</span></div><h3>Individuální koučinky</h3><p>Vedení osobních koučovacích sezení, práce s klientem na jeho cílech, výzvách a rozvoji.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-users"/></svg></div><span class="num">02</span></div><h3>Skupinové koučinky</h3><p>Facilitace skupinových sezení, vytváření bezpečného prostoru a dynamiky, ve které klienti rostou společně.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-megaphone"/></svg></div><span class="num">03</span></div><h3>Prezentace služby</h3><p>Představení přínosů programu a provázení zájemců k rozhodnutí (tzv. sales support).</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-message"/></svg></div><span class="num">04</span></div><h3>Komunikace s klienty</h3><p>Průběžná péče, sledování progresu, motivace mezi sezeními a udržování vztahu.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-file"/></svg></div><span class="num">05</span></div><h3>Sebeprezentační materiály</h3><p>Příprava vlastního profilu, prezentací a podkladů, které podpoří vaši práci a důvěru klientů.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-thumb"/></svg></div><span class="num">06</span></div><h3>Zpětná vazba</h3><p>Aktivní sběr feedbacku od klientů pro neustálé zlepšování našich služeb.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-heart"/></svg></div><span class="num">07</span></div><h3>Budování komunity</h3><p>Vytváření skvělé atmosféry a dlouhodobých vztahů s našimi členy.</p></article>
+  </div>
+  <div class="glass creed reveal">
+    <div class="txt">
+      <p class="eyebrow">S čím se potřebujete ztotožnit</p>
+      <p class="q">„Věříme, že kvalitní leadership mění nejen firmy, ale i <span>životy lidí</span> v nich.“</p>
+      <p>Když pomůžeme lídrům růst, vytváříme zdravější pracovní prostředí a lepší společnost. Pro mnoho klientů budete skutečným <strong>srdcem naší společnosti</strong>. Proto je klíčové, abyste se s naší misí ztotožnil/a.</p>
+    </div>
+    <div class="photo"><img src="assets/img/symf/symf-status.jpg" alt="Skupinový videohovor na obrazovce notebooku" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ══════════════ 03 VÝSLEDKY ══════════════ -->
+<section id="vysledky">
+  <div class="sec-head reveal">
+    <p class="eyebrow">03 — Za co budete odpovídat</p>
+    <h2>Výsledky, ne <span class="grad-text">aktivita</span></h2>
+    <p class="lead">Vaší úlohou bude vést klienty procesem tak, aby dosahovali reálných výsledků, cítili se opečovávaní a měli veškerou podporu pro svůj růst.</p>
+  </div>
+  <div class="results">
+    <div class="glass rows reveal">
+      <div class="row"><div class="ic-box"><svg class="ic"><use href="#i-target"/></svg></div><div><b>Výsledky klientů</b><span>Klienti dosahují <em>reálných, měřitelných posunů</em> ve svém vedení i osobním rozvoji.</span></div></div>
+      <div class="row"><div class="ic-box"><svg class="ic"><use href="#i-star"/></svg></div><div><b>Spokojenost klientů</b><span>Klienti jsou nadmíru spokojeni (<em>9+ z 10</em>) s kvalitou vašich koučinků i komunikace.</span></div></div>
+      <div class="row"><div class="ic-box"><svg class="ic"><use href="#i-zap"/></svg></div><div><b>Úspěšné zapojení</b><span>Pomáháte lidem překonat váhání a <em>naplno se zapojit</em> do programu i mezi sezeními.</span></div></div>
+      <div class="row"><div class="ic-box"><svg class="ic"><use href="#i-trend"/></svg></div><div><b>Kvalita a růst</b><span>První měsíc společně pracujeme s <em>nahrávkami vašich sezení</em>, aby váš progres a kvalita služeb byly na špičkové úrovni.</span></div></div>
+    </div>
+    <div class="glass expect reveal">
+      <p class="eyebrow">Co od vás očekáváme</p>
+      <h3>Zkušenost a lidská zralost</h3>
+      <p>Tato pozice vyžaduje skvělé koučovací a komunikační dovednosti, empatii, tah na branku a schopnost vést jednotlivce i skupiny.</p>
+      <div class="pills"><span>Koučovací praxe</span><span>Empatie</span><span>Tah na branku</span><span>Facilitace skupin</span><span>Komunikace</span><span>Práce s kamerou</span></div>
+      <p class="big">Hledáme člověka, který rád pracuje s lidmi a chce se učit od nejlepších.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 04 PODMÍNKY ══════════════ -->
+<section id="podminky">
+  <div class="sec-head reveal">
+    <p class="eyebrow">04 — Odměna a podmínky</p>
+    <h2>Co <span class="grad-text">nabízíme</span></h2>
+    <p class="lead">Rozsah spolupráce si volíte podle svých časových možností. Odměna se odvíjí od zvoleného rozsahu hodin a vašich zkušeností.</p>
+  </div>
+  <div class="grid g3 terms">
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-clock"/></svg></div><span class="lbl">Úvazek</span></div><div class="val">4 <small>nebo</small> 8 <small>h / den</small></div><p>Možnost volby úvazku podle vašich časových možností. Vyžadujeme spolehlivost a aktivitu v dohodnutých časových blocích.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-banknote"/></svg></div><span class="lbl">Odměna</span></div><div class="val gold">25–75 tis. Kč</div><p>Měsíčně, plus bonusy. Konkrétní výše se odvíjí od zvoleného rozsahu hodin a vašich zkušeností.</p></article>
+    <article class="glass card reveal"><div class="head"><div class="ic-box"><svg class="ic"><use href="#i-laptop"/></svg></div><span class="lbl">Kde</span></div><div class="val">100 % <small>online</small></div><p>Můžete pracovat odkudkoli, kde máte klid a stabilní internet. Sezení probíhají přes kameru a mikrofon.</p></article>
+  </div>
+  <div class="glass benefits reveal">
+    <h3>Benefity</h3>
+    <div class="grid g3">
+      <div class="benefit"><div class="ic-box"><svg class="ic"><use href="#i-cap"/></svg></div><div><b>Vzdělávání zdarma</b><span>Přístup ke všem našim tréninkům a know-how v oblasti leadershipu a soft skills.</span></div></div>
+      <div class="benefit"><div class="ic-box"><svg class="ic"><use href="#i-repeat"/></svg></div><div><b>Osobní mentoring</b><span>Pravidelný trénink a zpětná vazba, která vás posune v koučování i v prezentaci služby.</span></div></div>
+      <div class="benefit"><div class="ic-box"><svg class="ic"><use href="#i-sparkles"/></svg></div><div><b>Smysluplná práce</b><span>Vidíte přímý dopad své práce na rozvoji konkrétních lidí a lídrů.</span></div></div>
+    </div>
+    <div class="note"><em>Tato práce vám může navždy změnit kariéru i pohled na podnikání.</em></div>
+  </div>
+</section>
+
+<!-- ══════════════ 05 VÝBĚR ══════════════ -->
+<section id="vyber">
+  <div class="sec-head reveal">
+    <p class="eyebrow">05 — Jak výběr probíhá</p>
+    <h2>Čtyři kroky k <span class="grad-text">zapojení</span></h2>
+    <p class="lead">Žádné překvapení. Víte dopředu, co vás čeká a podle čeho se rozhodujeme.</p>
+  </div>
+  <div class="steps">
+    <article class="glass step reveal"><div class="n">1</div><h3>Přihláška</h3><p>Dotazník na jedné stránce: motivace, praxe, čtyři modelové situace z koučinku, kapacita a odměna. Přiložíte odkaz na CV a krátký video medailonek (1–5 minut). Rozepsané odpovědi se průběžně ukládají.</p><div class="dur">20–30 minut</div></article>
+    <article class="glass step reveal"><div class="n">2</div><h3>Online hovor</h3><p>Poznáme se naživo. Projdeme vaši praxi, představu spolupráce a odpovíme na vaše otázky. Ozveme se do 5 pracovních dnů od přihlášky.</p><div class="dur">30–45 minut</div></article>
+    <article class="glass step reveal"><div class="n">3</div><h3>Zkušební měsíc</h3><p>První měsíc společně pracujeme s nahrávkami vašich sezení. Pravidelný trénink a zpětná vazba, aby kvalita byla od začátku na špičkové úrovni.</p><div class="dur">1 měsíc</div></article>
+    <article class="glass step reveal"><div class="n">4</div><h3>Plná spolupráce</h3><p>Dohodnutý úvazek 4 nebo 8 hodin denně, vlastní klienti, komunita a dlouhodobý růst s podporou týmu.</p><div class="dur">Dlouhodobě</div></article>
+  </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section id="prihlaska">
+  <div class="glass cta reveal">
+    <p class="eyebrow">Chcete být součástí Leadership Restart?</p>
+    <h2>Zjistěte, zda <span class="grad-text">splňujete kritéria</span></h2>
+    <p>Pokud vás tato role vystihuje, jste <strong>pozitivní a optimistický člověk</strong>, který rád pracuje s lidmi a chce se učit od nejlepších, přihlaste se přes dotazník.</p>
+    <div class="actions">
+      <a class="btn lg" href="/kariera-dotaznik">Vyplnit přihlášku <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+    <p class="small">Dotazník zabere 20–30 minut. Odpovědi se průběžně ukládají ve vašem prohlížeči, takže se k němu můžete kdykoli vrátit.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="tex foot-tex" aria-hidden="true"><svg viewBox="0 0 140 140" preserveAspectRatio="xMidYMid slice"><use href="#lrTexture"/></svg></div>
+  <div class="wrap">
+    <span>Leadership Restart · Kariéra: Coach</span>
+    <span><a href="mise.html">Mise a tým</a> &nbsp;·&nbsp; <a href="gdpr.html">Ochrana osobních údajů</a> &nbsp;·&nbsp; <a href="index.html">leadershiprestart.cz</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  var saved=null; try{saved=localStorage.getItem('lr-theme')}catch(e){}
+  if(saved==='light'||saved==='dark'){root.setAttribute('data-theme',saved)}
+  function cur(){return root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}
+  function label(){btn.textContent=cur()==='dark'?'Světlý režim':'Tmavý režim'}
+  label();
+  btn.addEventListener('click',function(){
+    var next=cur()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next); label();
+    try{localStorage.setItem('lr-theme',next)}catch(e){}
+  });
+  // Odhalení bloků při scrollu
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
