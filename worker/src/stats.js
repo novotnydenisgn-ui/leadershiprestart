@@ -20,6 +20,7 @@ export async function testStats(env, test) {
       id: v.id,
       token: v.token || null,
       note: v.note || '',
+      content: v.content ?? null, // připravený text varianty (Velín ho zobrazuje 1:1; null = kontrola)
       weight: v.weight ?? 1,
       views: r.views || 0,
       clicks: r.clicks || 0,

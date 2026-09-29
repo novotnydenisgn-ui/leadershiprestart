@@ -21,7 +21,7 @@ async function summarize(env, state, t, queueIds) {
     for (const g of gRows) (goals[g.variant_id] ||= {})[g.goal] = g.n;
     tier = sampleTier(t, variants, isActive ? state.started_at : null);
     probs = t.archived || tier.tier !== 'collecting' ? pBest(variants, 4000) : null;
-  } catch (e) { variants = t.variants.map((v) => ({ id: v.id, token: v.token || null, note: v.note || '', weight: v.weight ?? 1, views: 0, clicks: 0, goals: 0, cr: 0 })); }
+  } catch (e) { variants = t.variants.map((v) => ({ id: v.id, token: v.token || null, note: v.note || '', content: v.content ?? null, weight: v.weight ?? 1, views: 0, clicks: 0, goals: 0, cr: 0 })); }
   return {
     id: t.id, label: t.label, slot: t.slot, page: t.page, type: t.type || 'inner_html', hypothesis: t.hypothesis || '', queue_order: t.queue_order ?? null,
     archived: !!t.archived, winner: t.winner || state.locked?.[t.id] || null, ran: t.ran || null, result: t.result || '',
