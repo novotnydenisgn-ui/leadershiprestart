@@ -534,6 +534,47 @@
   .c-stack .cs-total{border-top:1px dashed rgba(233,182,79,.35);margin-top:6px;padding-top:9px;font-weight:800;color:#f6d47c}
   .c-stack .cs-total b{font-family:"League Spartan",sans-serif;font-size:17px;white-space:nowrap}
 
+  /* ---------- přepínač Restart / Up-Grade ---------- */
+  .plan-switch{position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:80;display:flex;gap:4px;padding:4px;
+    border-radius:999px;background:rgba(13,16,22,.88);border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 36px rgba(0,0,0,.5)}
+  .plan-switch button{font:800 12px/1 "Manrope",sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--dk-muted);
+    background:none;border:0;border-radius:999px;padding:10px 16px 9px;cursor:pointer;white-space:nowrap;transition:color .2s,background .2s}
+  .plan-switch button:hover{color:#fff}
+  .plan-switch button[aria-pressed="true"][data-plan="restart"]{background:var(--lr-grad);color:#fff}
+  .plan-switch button[aria-pressed="true"][data-plan="upgrade"]{background:var(--c-gold-grad);color:#1a1206}
+  body[data-plan="upgrade"] > section:not(.ug-sec){display:none}
+  body:not([data-plan="upgrade"]) > section.ug-sec{display:none}
+  .ug-sec{padding-top:clamp(120px,14vw,160px)}
+  .ug-sec .cenik{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .ug-sec .h-sub{margin:0 auto;max-width:640px}
+  .ug-sec .c-price{font-size:clamp(34px,3.1vw,44px);white-space:nowrap}
+  .ug-sec .c-name{padding:0 30px}
+  .cena-card.v-elite{border:1.5px solid transparent;
+    background:linear-gradient(var(--dk-bg-2),var(--dk-bg-2)) padding-box,var(--lr-grad) border-box;
+    box-shadow:0 24px 90px rgba(233,182,79,.2)}
+  .cena-card.v-elite:hover{box-shadow:0 36px 120px rgba(233,182,79,.38)}
+  .v-elite .c-list li::before{background:rgba(255,255,255,.1)}
+  .c-price.p-elite{background:var(--lr-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .c-per{font-size:.34em;font-weight:700;color:var(--dk-muted);letter-spacing:.02em}
+  .btn-elite{background:var(--lr-grad);color:#fff;box-shadow:0 14px 34px rgba(233,182,79,.3)}
+  .btn-elite:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(233,182,79,.45)}
+  .c-ribbon.r-grad{background:var(--c-gold-grad);color:#1a1206}
+  .c-note{margin-top:18px;padding:12px 14px;border-radius:14px;text-align:left;font-size:13px;line-height:1.55;
+    background:rgba(255,255,255,.04);border:1px dashed var(--dk-brd);color:var(--dk-muted)}
+  .c-note b{color:var(--dk-text)}
+  .cap-band{max-width:680px;margin:38px auto 0;text-align:center;position:relative;padding:clamp(24px,3vw,34px);
+    border-radius:22px;border:1.5px solid rgba(233,182,79,.5);background:rgba(233,182,79,.06)}
+  .cap-band b{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(20px,2.2vw,26px);color:#fff;display:block;margin-bottom:8px}
+  .cap-band p{color:var(--dk-muted);font-size:14.5px}
+  .cap-band p b{display:inline;font-size:inherit;color:#f6d47c}
+  .ug-bonus{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px;position:relative}
+  .ug-bonus span{font-size:13.5px;font-weight:700;color:#f6d47c;border:1px solid rgba(233,182,79,.4);
+    background:rgba(233,182,79,.06);border-radius:999px;padding:8px 14px 7px}
+  .ug-sec .plan-back{text-align:center;margin-top:30px;position:relative}
+  .ug-sec .plan-back a{color:#4da3ff;font-weight:700;font-size:14.5px;cursor:pointer}
+  @media(max-width:560px){.plan-switch{top:66px}.plan-switch button{padding:9px 12px 8px;font-size:11px}}
+
   /* srovnávací tabulka */
   .cmp-wrap{margin:56px auto 0;max-width:980px;position:relative;overflow-x:auto;
     border:1px solid var(--dk-brd);border-radius:20px;background:rgba(255,255,255,.02)}
@@ -564,6 +605,10 @@
 
 <div id="siteNav"></div>
 <div class="draft-pill">Draft ceníku · neveřejné</div>
+<div class="plan-switch" role="group" aria-label="Přepnout ceník">
+  <button type="button" data-plan="restart" aria-pressed="true">Leadership Restart</button>
+  <button type="button" data-plan="upgrade" aria-pressed="false">Up-Grade</button>
+</div>
 
 <!-- ======================= HERO + KOTVA HODNOTY (tmavá) ======================= -->
 <section class="hero-cena">
@@ -785,6 +830,114 @@
       Ceny v eurech jsou orientační (přepočet kurzem 25 Kč/€, zaokrouhleno nahoru).
       Fakturujeme v korunách.
     </p>
+  </div>
+</section>
+
+<!-- ======================= UP-GRADE (přepínač) — ceny z /up-great-prezentace ======================= -->
+<section class="section sec-dark cenik-sec ug-sec" id="upgrade">
+  <div class="wrap">
+    <div style="text-align:center;position:relative">
+      <span class="lr-kicker">Navazující členství pro absolventy</span>
+      <h2 class="display h-section" style="color:#fff">Leadership <span class="lr-grad-text">Up-Grade</span></h2>
+      <p class="h-sub">Po Restartu nezůstaneš sám. Motivační statusy Po &amp; Pá, strategické hovory, denní podpora
+      a šablony, které ti pomůžou postavit akviziční systém a automatizace. <a href="up-great" style="color:#f6d47c;font-weight:700">Více o Up-Grade →</a></p>
+      <div class="ug-bonus"><span>🎁 Remind Systém na rok · 11 400 Kč</span><span>💎 Mentoring Diagnóza 60 min · 4 500 Kč</span><span>= bonusy 15 900 Kč zdarma</span></div>
+    </div>
+    <div class="cenik">
+
+      <!-- BASIC (modrá) -->
+      <div class="lr-card cena-card v-basic reveal">
+        <div class="c-name">Basic</div>
+        <div class="c-tag">Měsíční členství ve skupině</div>
+        <div class="c-was">běžná cena 9 250 Kč</div>
+        <div class="c-price">2 950<small>Kč</small> <span class="c-per">/ měsíc</span></div>
+        <div class="c-eur">≈ 117 € měsíčně</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👥">8× měsíčně skupinový coaching (30–60 min, 2× týdně)</li>
+          <li data-ico="🧭">1× za 3 měsíce revize situace</li>
+          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+        </ul>
+        <a class="btn btn-basic" data-cta-pos="upgrade_basic" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Basic</a>
+        <span class="c-pop"><i></i>Vstupní úroveň — držíš rytmus skupiny</span>
+      </div>
+
+      <!-- PRÉMIUM LVL1 (oranžová) -->
+      <div class="lr-card cena-card v-standard reveal">
+        <div class="c-ribbon">Nejoblíbenější</div>
+        <div class="c-name">Prémium lvl1</div>
+        <div class="c-tag">Skupina + individuální vedení</div>
+        <div class="c-was">běžná cena 12 500 Kč</div>
+        <div class="c-price p-standard">4 450<small>Kč</small> <span class="c-per">/ měsíc</span></div>
+        <div class="c-eur">≈ 176 € měsíčně</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👥">8× měsíčně skupinový coaching (60 min, 2× týdně — Po &amp; Pá 8:30)</li>
+          <li data-ico="🎯">1× měsíčně individuální coaching</li>
+          <li data-ico="🎥">Osobní natáčení</li>
+          <li data-ico="💬">Denní podpora 24/7 — hlasové i textové zprávy</li>
+          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+        </ul>
+        <div class="c-note"><b>Příplatek za 1× individuální coaching</b> je zde reálně
+        1 500 Kč oproti základu.</div>
+        <a class="btn btn-standard" data-cta-pos="upgrade_lvl1" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Prémium lvl1</a>
+        <span class="c-pop"><i></i>Nejlepší poměr hloubky a ceny</span>
+      </div>
+
+      <!-- PRÉMIUM LVL2 (zlatá) -->
+      <div class="lr-card cena-card v-gold reveal">
+        <div class="c-name">Prémium lvl2</div>
+        <div class="c-tag">Maximální intenzita + šablony</div>
+        <div class="c-was">běžná cena 18 250 Kč</div>
+        <div class="c-price p-gold">7 450<small>Kč</small> <span class="c-per">/ měsíc</span></div>
+        <div class="c-eur">≈ 294 € měsíčně</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👥">8× měsíčně skupinový coaching (60 min, 2× týdně)</li>
+          <li data-ico="🎯">2× měsíčně individuální coaching + mentoring</li>
+          <li data-ico="🎥">Osobní natáčení</li>
+          <li data-ico="🧰">Business &amp; marketing šablony</li>
+          <li data-ico="💬">Denní podpora 24/7 — hlasové i textové zprávy</li>
+          <li data-ico="📊">Interaktivní Remind Systém — rok zdarma</li>
+        </ul>
+        <div class="c-note"><b>Příplatek za 2× coaching + mentoring a šablony</b>
+        je 4 500 Kč oproti základu.</div>
+        <a class="btn btn-gold" data-cta-pos="upgrade_lvl2" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Prémium lvl2</a>
+        <span class="c-pop"><i></i>Pro ty, kdo chtějí jet naplno</span>
+      </div>
+
+      <!-- ELITE (gradient) — vše za klienta -->
+      <div class="lr-card cena-card v-elite reveal">
+        <div class="c-ribbon r-grad">Done for you</div>
+        <div class="c-name">Elite</div>
+        <div class="c-tag">Vše uděláme za tebe</div>
+        <div class="c-price p-elite">99 000<small>Kč</small></div>
+        <div class="c-eur">≈ 3 960 €</div>
+        <ul class="c-list">
+          <li class="gift">Oba bonusy v hodnotě 15 900 Kč zdarma</li>
+          <li data-ico="👑">Vše z Prémium lvl2 — skupina, 2× individuální coaching, šablony</li>
+          <li data-ico="🛠️">Realizace za tebe — strategii nejen nastavíme, ale rovnou implementujeme</li>
+          <li data-ico="🧰">Business &amp; marketing šablony připravené na míru a nasazené do praxe</li>
+          <li data-ico="📞">Prioritní přístup 24/7 — jsi vždy první na řadě</li>
+        </ul>
+        <div class="c-note"><b>Pro ty, kdo chtějí výsledek, ne další úkoly.</b>
+        Ty vedeš — my dodáváme. Kapacita jen pro pár klientů současně.</div>
+        <a class="btn btn-elite" data-cta-pos="upgrade_elite" href="https://calendly.com/novotny-denis-gn/uvodni-konzultace-zdarma-clone-1" target="_blank" rel="noopener">Chci Elite</a>
+        <span class="c-pop"><i></i>Omezená kapacita — na osobní domluvu</span>
+      </div>
+
+    </div>
+
+    <div class="cap-band reveal">
+      <b>⚡ Akční ceny platí pro prvních 50 lidí</b>
+      <p>Jakmile se kapacita naplní, vracíme se na běžné ceny
+      <b>9 250 / 12 500 / 18 250 Kč</b>. Kdo je uvnitř, drží akční cenu dál.</p>
+    </div>
+
+    <p class="cena-note" style="margin-top:14px;font-size:13px;opacity:.8">
+      Ceny v eurech jsou orientační (přepočet kurzem 25 Kč/€, zaokrouhleno). Fakturujeme v korunách.
+    </p>
+    <p class="plan-back"><a data-plan-go="restart">← Zpět na ceník Leadership Restart</a></p>
   </div>
 </section>
 
@@ -1107,6 +1260,26 @@
 
 <div id="siteFooter"></div>
 
+<script>
+/* přepínač Restart / Up-Grade — stav v #upgrade, aby šel sdílet odkaz */
+(function(){
+  var btns = document.querySelectorAll('.plan-switch button');
+  function set(plan, scroll){
+    document.body.dataset.plan = plan;
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.plan === plan ? 'true' : 'false'); });
+    if (plan === 'upgrade') {
+      document.querySelectorAll('.ug-sec .reveal').forEach(function(e){ e.classList.add('visible'); });
+      if (location.hash !== '#upgrade') history.replaceState(null, '', '#upgrade');
+    } else if (location.hash === '#upgrade') history.replaceState(null, '', location.pathname);
+    if (scroll) window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.plan, true); }); });
+  document.querySelectorAll('[data-plan-go]').forEach(function(a){
+    a.addEventListener('click', function(){ set(a.dataset.planGo, true); });
+  });
+  set(location.hash === '#upgrade' ? 'upgrade' : 'restart', false);
+})();
+</script>
 <script src="assets/site.js?v=21"></script>
 </body>
 </html>
