@@ -720,9 +720,11 @@
       </div>
     </div>
 
-    <!-- cena do data (hodnoty v URGENCY dole ve skriptu; počet volných míst záměrně nezobrazujeme) -->
-    <div class="cap-strip reveal" data-u-strip data-u-intro>
-      <span>Aktuální ceny platí do <b data-u="until">31. 10.</b></span>
+    <!-- volná místa + cena do data (hodnoty v URGENCY dole ve skriptu; celkovou kapacitu záměrně neukazujeme) -->
+    <div class="cap-strip reveal" data-u-strip>
+      <span><b data-u="month">Říjen</b> · volná místa pro nové klienty: <b data-u="left">8</b></span>
+      <span class="sep" data-u-intro></span>
+      <span data-u-intro>Aktuální ceny platí do <b data-u="until">31. 10.</b></span>
     </div>
 
     <div class="cenik">
@@ -1180,8 +1182,10 @@
 </script>
 <script>
 /* ===== Urgence — JEDNO místo, kde se mění čísla =====
+   slotsLeft = počet volných míst pro nové klienty v daném měsíci (přepisovat ručně).
    until = poslední den aktuálních cen (YYYY-MM-DD); po něm se řádky „cena platí do…“ samy skryjí. */
 const URGENCY = {
+  month: 'Říjen', slotsLeft: 8,
   until: '2026-10-31',
   next: { pMomentum: '27 850 Kč', pPrivate: '95 000 Kč' },
   fast: '72 hodin'
@@ -1190,6 +1194,7 @@ const URGENCY = {
   var end = new Date(U.until + 'T23:59:59'), after = new Date(end.getTime() + 1000);
   var fmt = function(d){ return d.getDate() + '. ' + (d.getMonth() + 1) + '.'; };
   var put = function(k, v){ document.querySelectorAll('[data-u="' + k + '"]').forEach(function(e){ e.textContent = v; }); };
+  put('month', U.month); put('left', U.slotsLeft);
   put('until', fmt(end)); put('next', fmt(after)); put('fast', U.fast);
   Object.keys(U.next).forEach(function(k){ put(k, U.next[k]); });
   if (Date.now() > end.getTime()) document.querySelectorAll('[data-u-intro]').forEach(function(e){ e.style.display = 'none'; });
