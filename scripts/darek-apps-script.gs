@@ -9,6 +9,8 @@
  *    npx wrangler secret put DAREK_SHEET_URL
  * Při změně kódu: Nasadit → Spravovat nasazení → tužka → Verze: Nová verze (jinak běží starý kód).
  */
+// ID tabulky „Balíček_leadership restart“ — skript tak funguje, i když není vytvořený přímo z tabulky.
+var SHEET_ID = '1-8oJe3NvCIte0XnyzbdUeXumZ0VJ3msgYAaNsRS13Ro';
 var LIST = 'Objednávky';
 var TZ = 'Europe/Prague';
 
@@ -17,7 +19,7 @@ function doPost(e) {
   lock.waitLock(20000);
   try {
     var d = JSON.parse(e.postData.contents);
-    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(LIST);
+    var sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName(LIST);
     if (!sh) return out({ ok: false, error: 'List ' + LIST + ' neexistuje' });
     var now = new Date();
     // Sloupce A–H: Jméno | Email | Telefon | Adresa | Sport | Pohyb | Datum | Čas (Status a Poznámky ručně).
