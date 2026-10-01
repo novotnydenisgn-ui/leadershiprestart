@@ -10,6 +10,9 @@ export const FORM_PATHS = {
   // Kariéra: stránka /kariera → náborový dotazník „Výběrové řízení: Coach“ (Dotazníky, složka Leadership Restart)
   '/kariera-dotaznik': 'kariera-coach',
   '/kariera-dotazník': 'kariera-coach',
+  // Dárek pro účastníky programu: dotazník pro doručení balíčku (styl „Výrazný“) → Google tabulka „Balíček_leadership restart“
+  '/darek': 'darek',
+  '/dárek': 'darek',
 };
 // Rezervace termínu (po kvalifikaci v dotazníku): /<cesta> → stránka /r/<slug> v aplikaci Dotazníky
 export const BOOKING_PATHS = {};

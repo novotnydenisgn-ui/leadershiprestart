@@ -1,5 +1,5 @@
 /**
- * Google tabulka „Balíček_leadership restart“ ← dotazník leadershiprestart.cz/darek
+ * Google tabulka „Balíček_leadership restart“ ← dotazník leadershiprestart.cz/darek (Velín, dotazník „Dárek“)
  *
  * Nasazení (jednorázově):
  * 1. V tabulce: Rozšíření → Apps Script, smazat obsah Code.gs a vložit celý tento soubor, uložit.
@@ -19,6 +19,13 @@ function doPost(e) {
   lock.waitLock(20000);
   try {
     var d = JSON.parse(e.postData.contents);
+    // Velín (Dotazníky → Napojení → Google tabulka) posílá { _sheet, _cols: [{k, l, v}] } → převod na pole podle klíčů otázek
+    if (d._cols) {
+      var m = {};
+      d._cols.forEach(function (c) { m[c.k] = c.v; });
+      if (m.test === 'ano') return out({ ok: true, skipped: 'test' }); // testovací odpovědi z Velínu do objednávek nepatří
+      d = { name: m.name, email: m.email, phone: m.phone, address: m['q:address'], sport: m['q:sport'], hours: m['q:hours'] };
+    }
     var sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName(LIST);
     if (!sh) return out({ ok: false, error: 'List ' + LIST + ' neexistuje' });
     var now = new Date();
