@@ -11,7 +11,7 @@
  */
 // ID tabulky „Balíček_leadership restart“ — skript tak funguje, i když není vytvořený přímo z tabulky.
 var SHEET_ID = '1-8oJe3NvCIte0XnyzbdUeXumZ0VJ3msgYAaNsRS13Ro';
-var LIST = 'Objednávky';
+var LIST = 'Objedn\u00e1vky'; // = Objednávky (zapsáno escapovaně, ať se název nerozbije při kopírování)
 var TZ = 'Europe/Prague';
 
 function doPost(e) {
