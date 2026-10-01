@@ -1,76 +1,37 @@
-// Zápis událostí do D1. Volá se přes ctx.waitUntil — nesmí blokovat odpověď.
+// Měření A/B testů se posílá do Velínu (POST <FORMS_ORIGIN>/api/public/ab/event), statistiky jsou tam.
+// Volá se přes ctx.waitUntil — nesmí blokovat odpověď. Deduplikaci kliků a kroků trychtýře dělá Velín.
 
 export function deviceFrom(ua) {
   return /Mobi|Android|iPhone|iPad/i.test(ua || '') ? 'mobile' : 'desktop';
 }
 
-export async function logView(env, { testId, variantId, page, utm, device, visitor }) {
+async function send(env, event) {
+  if (!env.FORMS_ORIGIN || !env.VELIN_SITE) return;
   try {
-    await env.DB.prepare(
-      `INSERT INTO events (type, test_id, variant_id, page, utm_source, utm_medium, utm_campaign, device, visitor)
-       VALUES ('view', ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)`
-    )
-      .bind(
-        testId,
-        variantId,
-        page,
-        utm.get('utm_source') || null,
-        utm.get('utm_medium') || null,
-        utm.get('utm_campaign') || null,
-        device,
-        visitor
-      )
-      .run();
+    const r = await fetch(`${env.FORMS_ORIGIN}/api/public/ab/event`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ site: env.VELIN_SITE, ...event }),
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!r.ok) console.error('ab event', r.status);
   } catch (e) {
-    console.error('logView failed', e);
+    console.error('ab event failed', e);
   }
 }
 
-// Navazující krok trychtýře (vyplněný formulář na silabytsebou.cz…).
-// Název kroku jde do cta_pos. Dedup 10 minut — thank-you page se dá refreshnout.
-export async function logGoal(env, { testId, variantId, goal, device, visitor }) {
-  try {
-    const dup = await env.DB.prepare(
-      `SELECT 1 FROM events
-       WHERE type='goal' AND visitor = ?1 AND cta_pos = ?2 AND test_id = ?3
-         AND ts > strftime('%Y-%m-%dT%H:%M:%SZ','now','-10 minutes')
-       LIMIT 1`
-    )
-      .bind(visitor, goal, testId)
-      .first();
-    if (dup) return;
-
-    await env.DB.prepare(
-      `INSERT INTO events (type, test_id, variant_id, cta_pos, device, visitor)
-       VALUES ('goal', ?1, ?2, ?3, ?4, ?5)`
-    )
-      .bind(testId, variantId, goal, device, visitor)
-      .run();
-  } catch (e) {
-    console.error('logGoal failed', e);
-  }
+export function logView(env, { testId, variantId, page, utm, device, visitor }) {
+  return send(env, {
+    type: 'view', test: testId, variant: variantId, page, device, visitor,
+    utm: { source: utm.get('utm_source') || null, medium: utm.get('utm_medium') || null, campaign: utm.get('utm_campaign') || null },
+  });
 }
 
-export async function logClick(env, { testId, variantId, page, ctaPos, device, visitor }) {
-  try {
-    // Dedup: stejný návštěvník + stejná pozice CTA < 30 s => duplicitní klik ignoruj.
-    const dup = await env.DB.prepare(
-      `SELECT 1 FROM events
-       WHERE type='click' AND visitor = ?1 AND cta_pos = ?2 AND test_id = ?3
-         AND ts > strftime('%Y-%m-%dT%H:%M:%SZ','now','-30 seconds')
-       LIMIT 1`
-    )
-      .bind(visitor, ctaPos, testId)
-      .first();
-    if (dup) return;
+export function logClick(env, { testId, variantId, page, ctaPos, device, visitor }) {
+  return send(env, { type: 'click', test: testId, variant: variantId, page, pos: ctaPos, device, visitor });
+}
 
-    await env.DB.prepare(
-      `INSERT INTO events (type, test_id, variant_id, page, cta_pos, device, visitor)
-       VALUES ('click', ?1, ?2, ?3, ?4, ?5, ?6)`
-    )
-      .bind(testId, variantId, page, ctaPos, device, visitor)
-      .run();
-  } catch (e) {
-    console.error('logClick failed', e);
-  }
+// Navazující krok trychtýře (vyplněný formulář, rezervace…) podle kódu varianty z adresy (v=…).
+export function logGoal(env, { token, goal, device, visitor }) {
+  return send(env, { type: 'goal', token, goal, device, visitor });
 }

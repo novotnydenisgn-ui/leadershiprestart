@@ -16,24 +16,16 @@
     "run_worker_first": ["/*", "!/assets/*"]
   },
 
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "lr-ab",
-      "database_id": "98b91cdd-09d1-4192-8271-7c5fcbdf4474"
-    }
-  ],
-
-  "kv_namespaces": [
-    {
-      "binding": "AB_KV",
-      "id": "0f140e2a86fa4f2ebd1decb34152b680"
-    }
-  ],
+  // A/B testy: dřív D1 `lr-ab` + KV `AB_KV` (tests.json) – teď vše ve Velínu (worker `dotazniky`).
+  // Zdroje v Cloudflare zůstaly jako archiv starých měření, web je už nepoužívá.
 
   "vars": {
     // aplikace Dotazníky (formulář /up-great-dotaznik se přeposílá sem; NE admin.leadershiprestart.cz – stejná zóna)
-    "FORMS_ORIGIN": "https://dotazniky.novotny-denis-gn.workers.dev"
+    "FORMS_ORIGIN": "https://dotazniky.novotny-denis-gn.workers.dev",
+    // A/B testy: id projektu ve Velínu (konfigurace /api/public/ab/config, měření /api/public/ab/event)
+    "VELIN_SITE": "fo-lr",
+    "SITE_HOST": "leadershiprestart.cz",
+    "AB_ADMIN_URL": "https://admin.leadershiprestart.cz/admin/#/ab/fo-lr"
   },
 
   // Logy requestů v dashboardu (Workers → leadershiprestart → Logs).

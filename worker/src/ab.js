@@ -87,7 +87,7 @@ export function resolveUtm(url, cookies) {
   return { utm: new URLSearchParams(), setCookie: null };
 }
 
-// Veřejný kód varianty pro URL: nečitelný `token` z tests.json (návštěvník nesmí
+// Veřejný kód varianty pro URL: nečitelný `token` varianty (generuje Velín) (návštěvník nesmí
 // poznat, že jde o test). Fallback na <slot>_<id> jen kdyby token chyběl.
 export function variantToken(test, variantId) {
   const v = test.variants.find((x) => x.id === variantId);

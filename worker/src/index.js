@@ -1,5 +1,5 @@
-// Entry point: router + request flow A/B testování.
-import { getState, getTestById, getTests } from './config.js';
+// Entry point: router + request flow A/B testování (testy a statistiky žijí ve Velínu, viz config.js).
+import { getAb, testById } from './config.js';
 import {
   parseCookies,
   cookie,
@@ -13,7 +13,6 @@ import {
 } from './ab.js';
 import { isBot, isExcluded, previewVariant } from './bots.js';
 import { logView, logClick, logGoal, deviceFrom } from './log.js';
-import { handleAdmin } from './admin.js';
 import { handleForms } from './forms.js';
 
 const APEX = 'leadershiprestart.cz';
@@ -47,7 +46,11 @@ export default {
       return handleGoal(request, env, ctx, url);
     }
     if (url.pathname === '/ab' || url.pathname.startsWith('/ab/')) {
-      return handleAdmin(request, env, ctx);
+      // A/B se řídí ve Velínu; návštěva /ab/ zároveň vyřadí tento prohlížeč z měření (jako dřív)
+      return new Response(null, {
+        status: 302,
+        headers: { Location: env.AB_ADMIN_URL || 'https://admin.leadershiprestart.cz/admin/#/ab', 'Set-Cookie': cookie(COOKIE_EXCLUDE, '1', 365 * 86400), 'Cache-Control': 'no-store' },
+      });
     }
     // Dotazníky (aplikace Dotazníky): /up-great-dotaznik, /engine/*, /api/submit/* …
     const formsResp = await handleForms(request, env, url);
@@ -56,7 +59,7 @@ export default {
   },
 };
 
-// Kanonický klíč stránky pro párování s `page` v tests.json:
+// Kanonický klíč stránky pro párování s `page` testu ve Velínu:
 // /vyzva.html i /vyzva -> /vyzva, /index.html i / -> /
 function normalizePath(pathname) {
   if (pathname === '/index.html' || pathname === '' || pathname === '/') return '/';
@@ -95,8 +98,9 @@ async function handlePage(request, env, ctx, url) {
   const cookies = parseCookies(request);
   const setCookies = [];
 
-  const state = await getState(env);
-  const activeTest = state.active_test_id ? getTestById(state.active_test_id) : null;
+  const ab = await getAb(env, ctx);
+  const state = ab.state;
+  const activeTest = testById(ab, state.active_test_id);
   const bot = isBot(ua);
   const excluded = isExcluded(cookies, url);
   const preview = previewVariant(url);
@@ -104,7 +108,7 @@ async function handlePage(request, env, ctx, url) {
   // Zamčené testy: vítěz se servíruje všem (i botům) na stránce testu,
   // dokud není zapečen do HTML a test archivován.
   const slotApplications = [];
-  for (const t of getTests()) {
+  for (const t of ab.tests) {
     const winnerId = state.locked?.[t.id];
     if (!winnerId || t.page !== page) continue;
     if (activeTest && t.id === activeTest.id) continue; // lock aktivního řeší větev níže
@@ -115,7 +119,7 @@ async function handlePage(request, env, ctx, url) {
   // ?preview=<id|token> funguje pro KTERÝKOLIV test na této stránce (i ve
   // frontě) — na prohlídku variant před spuštěním. Nikdy se neloguje.
   if (preview) {
-    for (const t of getTests()) {
+    for (const t of ab.tests) {
       if (t.page !== page || (activeTest && t.id === activeTest.id)) continue;
       const pv = t.variants.find((x) => x.id === preview || x.token === preview);
       if (pv) slotApplications.push({ test: t, variant: pv });
@@ -239,41 +243,20 @@ function pixelResponse() {
   });
 }
 
-// GET/POST /api/goal?v=<slot>_<varianta>&g=form&k=<GOAL_KEY>
+// GET/POST /api/goal?v=<kód varianty>&g=form   (starší kódy posílají i &k=…, to se už nekontroluje –
+// klíč byl beztak vidět ve zdrojáku děkovné stránky; variantu ověří Velín podle kódu).
 // Vkládá se jako <img> na thank-you page silabytsebou.cz — parametr v tam doteče
 // v URL dotazníku (CTA rewrite). Vždy vrací pixel, i při nezápisu (žádné oracle).
 async function handleGoal(request, env, ctx, url) {
-  const key = url.searchParams.get('k') || '';
-  const v = url.searchParams.get('v') || '';
+  const v = (url.searchParams.get('v') || '').slice(0, 64);
   const goal = (url.searchParams.get('g') || 'form').slice(0, 32);
   const ua = request.headers.get('User-Agent') || '';
   const ip = request.headers.get('CF-Connecting-IP') || '0.0.0.0';
 
-  if (!env.GOAL_KEY || key !== env.GOAL_KEY || isBot(ua)) return pixelResponse();
-
-  // v = nečitelný `token` varianty (viz tests.json); fallback "<slot>_<id>"
-  // pro případ variant bez tokenu.
-  let match = null;
-  outer: for (const t of getTests()) {
-    for (const x of t.variants) {
-      if (x.token === v || `${t.slot}_${x.id}` === v) {
-        match = { test: t, variantId: x.id };
-        break outer;
-      }
-    }
-  }
-  if (!match) return pixelResponse();
+  if (!v || isBot(ua)) return pixelResponse();
 
   ctx.waitUntil(
-    visitorHash(ip, ua).then((visitor) =>
-      logGoal(env, {
-        testId: match.test.id,
-        variantId: match.variantId,
-        goal,
-        device: deviceFrom(ua),
-        visitor,
-      })
-    )
+    visitorHash(ip, ua).then((visitor) => logGoal(env, { token: v, goal, device: deviceFrom(ua), visitor }))
   );
   return pixelResponse();
 }
@@ -287,8 +270,8 @@ async function handleClick(request, env, ctx) {
     return new Response(null, { status: 204 });
   }
   const [tid, vid] = (cookies.ab_v || '').split(':');
-  const state = await getState(env);
-  const test = tid ? getTestById(tid) : null;
+  const { state, ...ab } = await getAb(env, ctx);
+  const test = testById(ab, tid);
   // Klik počítáme jen pro aktivní běžící test a platnou variantu z cookie.
   if (!test || state.active_test_id !== tid || state.status !== 'running' || state.locked?.[tid]) {
     return new Response(null, { status: 204 });
