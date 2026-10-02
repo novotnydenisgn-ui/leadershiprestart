@@ -13,6 +13,14 @@ export const FORM_PATHS = {
   // Dárek pro účastníky programu: dotazník pro doručení balíčku (styl „Výrazný“) → Google tabulka „Balíček_leadership restart“
   '/darek': 'darek',
   '/dárek': 'darek',
+  // Výzva (kopie Tilda funnelu silabytsebou.cz): kvalifikace → rezervace
+  '/kvalifikace-vyzva': 'kvalifikace-vyzva',
+  '/kvalifikace_do_vyzvy': 'kvalifikace-vyzva',
+};
+// Stránky funnelu z Velínu (Velín → projekt → Stránky): /<cesta> → /p/<slug>
+export const PAGE_PATHS = {
+  '/rezervace-vyzva': 'rezervace-vyzva',
+  '/rezervace_vyzva': 'rezervace-vyzva',
 };
 // Rezervace termínu (po kvalifikaci v dotazníku): /<cesta> → stránka /r/<slug> v aplikaci Dotazníky
 export const BOOKING_PATHS = {};
@@ -27,6 +35,7 @@ export async function handleForms(request, env, url) {
   let target = null;
   if (FORM_PATHS[path]) target = `/f/${FORM_PATHS[path]}${url.search}`;
   else if (BOOKING_PATHS[path]) target = `/r/${BOOKING_PATHS[path]}${url.search}`;
+  else if (PAGE_PATHS[path]) target = `/p/${PAGE_PATHS[path]}${url.search}`;
   else if (PASS_PREFIXES.some(p => url.pathname.startsWith(p))) target = url.pathname + url.search;
   if (!target) return null;
   const upstream = new Request(origin + target, request);
@@ -38,6 +47,6 @@ export async function handleForms(request, env, url) {
   const headers = new Headers(r.headers);
   // fetch tělo už dekódoval – hlavičky o kompresi by rozbily odpověď
   ['content-encoding', 'content-length', 'transfer-encoding'].forEach(h => headers.delete(h));
-  if (target.startsWith('/f/') || target.startsWith('/r/')) headers.set('cache-control', 'no-store');
+  if (target.startsWith('/f/') || target.startsWith('/r/') || target.startsWith('/p/')) headers.set('cache-control', 'no-store');
   return new Response(r.body, { status: r.status, headers });
 }
