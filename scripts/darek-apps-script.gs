@@ -24,7 +24,11 @@ function doPost(e) {
       var m = {};
       d._cols.forEach(function (c) { m[c.k] = c.v; });
       if (m.test === 'ano') return out({ ok: true, skipped: 'test' }); // testovací odpovědi z Velínu do objednávek nepatří
-      d = { name: m.name, email: m.email, phone: m.phone, address: m['q:address'], sport: m['q:sport'], hours: m['q:hours'] };
+      // země doručení (otázka „zeme“: 🇨🇿 Česko / 🇸🇰 Slovensko) → zkratka na začátek adresy, ať je na první pohled jasná
+      var zeme = String(m['q:zeme'] || '');
+      var cc = /slovensk/i.test(zeme) ? 'SK' : /česk|cesk/i.test(zeme) ? 'CZ' : zeme;
+      var adresa = String(m['q:address'] || '');
+      d = { name: m.name, email: m.email, phone: m.phone, address: (cc ? cc + ' – ' : '') + adresa, sport: m['q:sport'], hours: m['q:hours'] };
     }
     var sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName(LIST);
     if (!sh) return out({ ok: false, error: 'List ' + LIST + ' neexistuje' });
