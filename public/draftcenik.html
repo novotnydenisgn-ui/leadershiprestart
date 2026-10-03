@@ -728,14 +728,21 @@
       <span data-u-intro>Aktuální ceny platí do <b data-u="until">31. 10.</b></span>
     </div>
 
+    <div class="pt-wrap reveal">
+      <div class="pt-tabs" data-price-toggle role="group" aria-label="Zobrazení ceny">
+        <button type="button" data-pt="start" aria-pressed="true">Při startu</button>
+        <button type="button" data-pt="end" aria-pressed="false">Po dokončení programu <span class="pt-badge">−5 000 Kč</span></button>
+      </div>
+    </div>
+
     <div class="cenik">
 
       <!-- STANDARD (modrá) — nově vstupní balíček -->
       <div class="lr-card cena-card v-basic reveal">
         <div class="c-name">Standard</div>
         <div class="c-tag">21denní výzva · 1 měsíc</div>
-        <div class="c-price">16 850<small>Kč</small></div>
-        <div class="c-eur">≈ 679 €</div>
+        <div class="c-price"><span class="pt-num" data-end="11850">16 850</span><small>Kč</small></div>
+        <div class="c-eur" data-pt-end="≈ 479 € · po slevě za plné nasazení">≈ 679 €</div>
         <ul class="c-list">
           <li class="gift">Dárek při nástupu do 72 h: Optimalizační balíček na obnovu pozornosti, energie a reflektování svého růstu</li>
           <li data-ico="🧭">On-boarding protokol — interaktivní lekce pro optimalizaci před programem</li>
@@ -758,10 +765,10 @@
         <div class="c-name">Momentum</div>
         <div class="c-tag">Výzva + ukotvení · 2 měsíce</div>
         <div class="c-was">hodnota 79 100 Kč / ≈ 3 170 €</div>
-        <div class="c-price p-standard">24 850<small>Kč</small></div>
-        <div class="c-eur">≈ 999 €</div>
+        <div class="c-price p-standard"><span class="pt-num" data-end="19850">24 850</span><small>Kč</small></div>
+        <div class="c-eur" data-pt-end="≈ 799 € · po slevě za plné nasazení">≈ 999 €</div>
         <div class="c-intro" data-u-intro>Cena platí do <span data-u="until">31. 10.</span> · od <span data-u="next">1. 11.</span> <b data-u="pMomentum">27 850 Kč</b></div>
-        <div class="c-month">12 425 Kč <em>/ měsíc</em></div>
+        <div class="c-month"><span class="pt-num" data-end="9925">12 425</span> Kč <em>/ měsíc</em></div>
         <span class="c-save">Ušetříš 8 850 Kč oproti 2× Standard</span>
         <ul class="c-list">
           <li class="gift">Dárek při nástupu do 72 h: Optimalizační balíček na obnovu pozornosti, energie a reflektování svého růstu</li>
@@ -1190,5 +1197,6 @@ const URGENCY = {
 })(URGENCY);
 </script>
 <script src="assets/site.js?v=21"></script>
+<script src="assets/price-toggle.js?v=2"></script>
 </body>
 </html>
