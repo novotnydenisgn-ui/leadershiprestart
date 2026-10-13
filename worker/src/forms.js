@@ -7,6 +7,9 @@ export const FORM_PATHS = {
   // Leadership Up-Grade: LP /up-great-lp → dotazník → informační schůzka (Calendly)
   '/up-great-dotaznik': 'up-great',
   '/up-great-dotazník': 'up-great',
+  // Diagnóza po nástupu (Up-Grade / Launch Boost / Elite): kopie dotazníku leadershipupgreat.denisnovotny.cz + připravenost na implementaci
+  '/up-great-diagnoza': 'up-great-diagnoza',
+  '/up-great-diagnóza': 'up-great-diagnoza',
   // Kariéra: stránka /kariera → náborový dotazník „Výběrové řízení: Coach“ (Dotazníky, složka Leadership Restart)
   '/kariera-dotaznik': 'kariera-coach',
   '/kariera-dotazník': 'kariera-coach',
