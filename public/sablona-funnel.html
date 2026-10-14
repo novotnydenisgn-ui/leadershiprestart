@@ -25,7 +25,7 @@
       6. Transformace (3 fáze)
       7. Garance
       8. O zakladateli (+ čísla)
-      9. Flex (ukázky / důkazy)
+      9. Flex (bento mřížka: ocenění, certifikace, čísla, benefity)
      10. FAQ
      11. Závěrečná výzva
      12. Patička
@@ -201,11 +201,49 @@ section > .container{position:relative;z-index:1}
 .stat .lbl{margin-top:8px;font-size:.9rem;color:var(--muted);font-weight:500}
 @media (max-width:860px){.founder{grid-template-columns:1fr;gap:32px}.stats{grid-template-columns:1fr}}
 
-/* --- 9. Flex --- */
-.flex-hero{display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:center;margin-bottom:24px}
-.flex-hero h3{font-size:1.6rem;margin-bottom:10px}
-@media (max-width:860px){.flex-hero{grid-template-columns:1fr}}
-.flex-card h3{margin:20px 0 8px}
+/* --- 9. Flex (bento mřížka důkazů autority) --- */
+/* Rozložení: velká karta (2×2) + 2 karty vpravo + spodní řada 3 karet.
+   Barvy se odvozují z tokenů --accent / --text v :root. */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(220px,auto);gap:20px}
+.bento-card{position:relative;overflow:hidden;border-radius:calc(var(--radius) + 8px);padding:36px;display:flex;flex-direction:column;border:1px solid var(--glass-border);background:var(--glass);backdrop-filter:blur(var(--glass-blur)) saturate(1.3);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.3);box-shadow:0 8px 32px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .35s ease,box-shadow .35s ease}
+.bento-card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.12)}
+.bento-card p{font-size:1rem}
+.bento-big{grid-column:span 2;grid-row:span 2;justify-content:flex-end;min-height:480px;color:#fff;border-color:transparent;
+  background:radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--accent) 35%,#fff) 0%,transparent 55%),
+             linear-gradient(135deg,color-mix(in srgb,var(--accent) 70%,#fff) 0%,var(--accent) 45%,color-mix(in srgb,var(--accent) 80%,#000) 100%)}
+/* Fotka na pozadí: <div class="bento-card bento-big" style="--img:url('foto.jpg')"> */
+.bento-big::before{content:"";position:absolute;inset:0;background:var(--img,none) center/cover;opacity:.35;mix-blend-mode:luminosity}
+.bento-big::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.45))}
+.bento-big > *{position:relative;z-index:1}
+.bento-big h3{font-size:clamp(1.9rem,3.6vw,3rem);letter-spacing:-.03em;line-height:1.05;margin:16px 0 14px;max-width:560px}
+.bento-big p{color:rgba(255,255,255,.88);max-width:520px;font-size:1.08rem}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;font-size:.88rem;font-weight:600;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 4px rgba(52,211,153,.25)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chips span{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;font-size:.88rem;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)}
+.bento-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:var(--accent-text);margin-bottom:22px;flex:none}
+.bento-num{font-family:var(--font-head);font-size:clamp(2.4rem,4.4vw,3.4rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.bento-lbl{margin-top:10px;font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bento-card h4{font-size:1.45rem;margin:auto 0 10px;letter-spacing:-.02em}
+.bento-stat{justify-content:center}
+.bento-stat .bento-sub{margin-top:12px;font-size:.95rem}
+/* tmavá karta */
+.bento-dark{background:radial-gradient(90% 80% at 100% 0%,color-mix(in srgb,var(--accent) 30%,transparent),transparent 60%),color-mix(in srgb,var(--text) 92%,var(--accent));color:var(--bg);border-color:transparent}
+.bento-dark .bento-num{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 30%,#fff),var(--bg));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bento-dark .bento-lbl,.bento-dark p{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.bento-dark .live{position:absolute;top:22px;right:22px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 25%,transparent);outline:2px solid color-mix(in srgb,var(--bg) 40%,transparent)}
+/* akcentová karta */
+.bento-accent{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 88%,#fff),color-mix(in srgb,var(--accent) 62%,#fff));color:var(--accent-text);border-color:transparent}
+.bento-accent .bento-lbl,.bento-accent p{color:color-mix(in srgb,var(--accent-text) 80%,transparent)}
+/* karta-výzva (odkaz) */
+.bento-cta{justify-content:space-between}
+.bento-cta .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.bento-cta .tag{padding:7px 14px;border-radius:999px;background:var(--accent-soft);font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.bento-cta .arrow{width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--accent-text);display:flex;align-items:center;justify-content:center;flex:none;transition:transform .3s ease}
+.bento-cta:hover .arrow{transform:rotate(45deg)}
+.bento-cta h4{margin:28px 0 0}
+@media (max-width:960px){.bento{grid-template-columns:repeat(2,1fr)}.bento-big{grid-column:span 2;grid-row:auto;min-height:420px}}
+@media (max-width:640px){.bento{grid-template-columns:1fr;grid-auto-rows:auto}.bento-big{grid-column:auto;min-height:380px}.bento-card{padding:28px}}
 
 /* --- 10. FAQ --- */
 .faq{max-width:760px;margin:0 auto}
@@ -215,6 +253,11 @@ section > .container{position:relative;z-index:1}
 .faq summary::after{content:"+";font-size:1.5rem;font-weight:400;color:var(--muted);transition:transform .2s}
 .faq details[open] summary::after{transform:rotate(45deg)}
 .faq details p{padding:0 0 20px}
+.faq details[open]{border-color:var(--border)}
+.faq details[open] summary{padding-bottom:12px}
+.faq .answer{overflow:hidden}
+.faq details[open] .answer{animation:faqIn .35s cubic-bezier(.2,.65,.2,1)}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
 /* --- 11. Závěrečná výzva --- */
 .final{background:var(--text);color:var(--bg);text-align:center;padding:104px 0}
@@ -462,27 +505,75 @@ section > .container{position:relative;z-index:1}
 </section>
 
 <!-- ============ 9. FLEX ============ -->
+<!-- Bento mřížka důkazů autority: ocenění, certifikace, výsledky, počet klientů, benefity spolupráce.
+     Velká karta = nejsilnější důkaz (fotku na pozadí přidáš přes style="--img:url('…')").
+     Ukázkové texty v [ ] přepiš skutečnými čísly – jen ověřitelná fakta. -->
 <section class="alt" id="flex">
   <div class="glow glow-a"></div><div class="glow glow-b"></div>
   <div class="container">
-    <div class="flex-hero">
-      <div class="ph ph-16x9"><span>[Obrázek – flex 1]</span></div>
-      <div>
-        <h3>[Flex 1]</h3>
-        <p>[Popis – ukázka, ocenění, média, výsledek, který stojí za to ukázat.]</p>
-      </div>
+    <div class="section-head">
+      <span class="eyebrow">Proč mi věřit</span>
+      <h2>[Výsledky, které mluví za mě]</h2>
     </div>
-    <div class="grid grid-2">
-      <div class="flex-card">
-        <div class="ph ph-4x3"><span>[Obrázek – flex 2]</span></div>
-        <h3>[Flex 2]</h3>
-        <p>[Popis]</p>
+    <div class="bento">
+
+      <!-- Velká karta – hlavní ocenění / výhra -->
+      <div class="bento-card bento-big">
+        <span class="pill"><span class="dot"></span>[Ocenění 2025]</span>
+        <h3>[Kouč roku – Czech Coaching Awards]</h3>
+        <p>[Za 7 let jsem provedl/a víc než 1 200 lidí cestou od přetížení k jasnému směru. Spolupráce se mnou znamená plán na míru, podporu i mezi sezeními a výsledky, které jdou změřit.]</p>
+        <div class="chips">
+          <span>✓ [Individuální plán na míru]</span>
+          <span>✓ [Podpora mezi sezeními]</span>
+          <span>✓ [Měřitelné výsledky]</span>
+        </div>
       </div>
-      <div class="flex-card">
-        <div class="ph ph-4x3"><span>[Obrázek – flex 3]</span></div>
-        <h3>[Flex 3]</h3>
-        <p>[Popis]</p>
+
+      <!-- Číslo – počet klientů -->
+      <div class="bento-card bento-stat">
+        <div class="bento-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="bento-num">[1 200+]</div>
+        <p class="bento-sub">[klientů, kteří prošli programem]</p>
       </div>
+
+      <!-- Certifikace -->
+      <div class="bento-card">
+        <div class="bento-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <h4>[Certifikace ICF · PCC]</h4>
+        <p>[Mezinárodně uznávaný standard koučování – 500+ hodin praxe pod supervizí.]</p>
+      </div>
+
+      <!-- Výzva ke spolupráci (odkaz) -->
+      <a class="bento-card bento-cta" href="#prihlaska">
+        <div class="top">
+          <span class="tag">[Spolupráce]</span>
+          <span class="arrow" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </span>
+        </div>
+        <h4>[Co získáš spoluprací se mnou]</h4>
+        <p>[Jasný směr do 30 dní, plán krok za krokem a parťáka, který tě podrží.]</p>
+      </a>
+
+      <!-- Výsledek klientů (tmavá) -->
+      <div class="bento-card bento-dark bento-stat">
+        <span class="live" aria-hidden="true"></span>
+        <div class="bento-num">[+18 mil.]</div>
+        <div class="bento-lbl">[Kč obratu navíc u klientů]</div>
+        <p class="bento-sub">[Souhrnný růst klientů za rok 2025]</p>
+      </div>
+
+      <!-- Spokojenost (akcent) -->
+      <div class="bento-card bento-accent bento-stat">
+        <div class="bento-num">[94 %]</div>
+        <div class="bento-lbl">[Klientů mě doporučuje]</div>
+        <p class="bento-sub">[Hodnocení 4,9/5 z 320 recenzí]</p>
+      </div>
+
     </div>
     <div class="cta-row"><a class="btn" href="#prihlaska">Chci [výsledek] zdarma</a></div>
   </div>
@@ -495,18 +586,19 @@ section > .container{position:relative;z-index:1}
     <div class="section-head">
       <h2>Na co se účastníci nejvíce ptají?</h2>
     </div>
+    <!-- Jako první otevři otázku, která odstraňuje nejčastější námitku. Otevřená může být vždy jen jedna. -->
     <div class="faq">
       <details open>
         <summary>[Otázka 1 – např. Pro koho je program určený?]</summary>
-        <p>[Odpověď 1]</p>
+        <div class="answer"><p>[Odpověď 1 – např. Pro [cílovou skupinu], která chce [vysněný výsledek], ale [hlavní překážka]. Pokud [jasné vyloučení – pro koho to není], program pro tebe není.]</p></div>
       </details>
       <details>
         <summary>[Otázka 2 – např. Kolik času mi to zabere?]</summary>
-        <p>[Odpověď 2]</p>
+        <div class="answer"><p>[Odpověď 2 – např. Stačí [X] minut denně / [X] hodin týdně. Vše je nahrané, takže si tempo určuješ sám/sama.]</p></div>
       </details>
       <details>
         <summary>[Otázka 3 – např. Co když nemám žádné zkušenosti?]</summary>
-        <p>[Odpověď 3]</p>
+        <div class="answer"><p>[Odpověď 3 – např. Nevadí. Začínáme od základů a [X] % účastníků začínalo úplně od nuly.]</p></div>
       </details>
     </div>
   </div>
@@ -548,7 +640,7 @@ section > .container{position:relative;z-index:1}
 (function(){
   const sel=['.hero .eyebrow','.hero h1','.hero .btn','.hero .proof','.logos',
              '.section-head','.card','.stage','.guarantee','.founder > *','.stat',
-             '.flex-hero > *','.flex-card','.faq details','.final .badge','.final h2','.final .btn','.final p',
+             '.bento-card','.faq details','.final .badge','.final h2','.final .btn','.final p',
              '.video-wrap','.video-desc','.cta-row'];
   const items=document.querySelectorAll(sel.join(','));
   items.forEach(el=>{
@@ -563,8 +655,39 @@ section > .container{position:relative;z-index:1}
   },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   items.forEach(el=>io.observe(el));
 })();
+
+/* FAQ: otevřená je vždy jen jedna otázka */
+document.querySelectorAll('.faq details').forEach(d=>{
+  d.addEventListener('toggle',()=>{
+    if(d.open) document.querySelectorAll('.faq details[open]').forEach(o=>{ if(o!==d) o.open=false; });
+  });
+});
 </script>
 <!--TPL-TOOL-START-->
+<!--
+  ============================================================
+  ⚠️  POZOR – VŠE OD TÉTO ZNAČKY DO KONCE BLOKU JE JEN PRO NÁHLED ŠABLONY
+  ============================================================
+  Tento blok (mezi značkami TPL-TOOL-START a TPL-TOOL-END) se při
+  „Zkopírovat HTML" / „Stáhnout .html" AUTOMATICKY VYSTŘIHNE – klient
+  dostane čistou šablonu bez něj.
+
+  Patří sem:
+    • plovoucí lišta (Zkopírovat / Stáhnout / Jak použít?)
+    • INFO PANELY sekcí (při hoveru vyjede „k čemu sekce slouží")
+    • jakékoli DALŠÍ VYLEPŠENÍ PODOBNÉHO TYPU – nápovědy, popisky,
+      vodítka, ukázky, tooltipy… cokoli, co má vidět jen ten, kdo si
+      šablonu prohlíží, a NE návštěvník hotového webu.
+
+  Pravidla:
+    1. Nové vysvětlivky přidávej SEM (CSS + HTML + JS), nikdy do sekcí
+       nahoře – jinak se zkopírují klientovi.
+    2. Do sekcí šablony nepřidávej žádné atributy kvůli nápovědě;
+       texty info panelů se párují podle id sekce (viz TPL_INFO níže).
+    3. Uvnitř bloku nikdy nepiš doslovný text značek START/END
+       (vystřihuje se podle prvního START a posledního END).
+  ============================================================
+-->
 <style>
 .tpl-bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:#111;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.28);font:500 14px/1 'Inter',system-ui,sans-serif;max-width:calc(100vw - 32px)}
 .tpl-bar b{padding:0 10px 0 12px;font-weight:700;white-space:nowrap}
@@ -588,12 +711,14 @@ section > .container{position:relative;z-index:1}
     <li>Barvy, písmo a zaoblení změníš jen v bloku <code>:root</code> nahoře v souboru.</li>
     <li>Obrázky: <code>&lt;div class="ph"&gt;</code> nahraď za <code>&lt;img&gt;</code>, video za <code>&lt;iframe&gt;</code>.</li>
     <li>Tlačítka míří na <code>#prihlaska</code>, změň je na odkaz na svůj formulář.</li>
+    <li>Najeď myší na sekci – vyjede <b>info panel</b>, k čemu slouží. Do zkopírovaného HTML se nedostane.</li>
   </ol>
 </div>
 <div class="tpl-bar" role="toolbar" aria-label="Šablona funnelu">
   <b>Šablona funnelu</b>
   <button type="button" class="tpl-main" id="tplCopy">Zkopírovat HTML</button>
   <button type="button" id="tplDl">Stáhnout .html</button>
+  <button type="button" id="tplInfoBtn" aria-pressed="true" title="Info panely: při najetí na sekci ukážou, k čemu slouží">Info ✓</button>
   <button type="button" class="tpl-help-btn" id="tplHelpBtn" aria-expanded="false">Jak použít?</button>
 </div>
 <script>
@@ -626,6 +751,72 @@ section > .container{position:relative;z-index:1}
   hb.addEventListener('click',function(){help.hidden=!help.hidden;hb.setAttribute('aria-expanded',String(!help.hidden));});
 })();
 </script>
+<!-- ===== INFO PANELY SEKCÍ (jen náhled šablony) ===== -->
+<style>
+.tpl-hl{outline:2px dashed rgba(17,17,17,.35);outline-offset:-10px;transition:outline-color .2s}
+.final.tpl-hl{outline-color:rgba(255,255,255,.45)}
+.tpl-info{position:fixed;top:88px;right:20px;z-index:9998;width:min(340px,calc(100vw - 32px));background:rgba(17,17,17,.92);color:#fff;border-radius:18px;padding:18px 20px 16px;box-shadow:0 18px 50px rgba(0,0,0,.3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font:400 14px/1.55 'Inter',system-ui,sans-serif;opacity:0;transform:translateX(24px);pointer-events:none;transition:opacity .28s ease,transform .35s cubic-bezier(.2,.65,.2,1)}
+.tpl-info.show{opacity:1;transform:none}
+.tpl-info .tpl-k{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
+.tpl-info .tpl-k i{font-style:normal;width:20px;height:20px;border-radius:50%;background:#fff;color:#111;display:inline-flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0;opacity:1}
+.tpl-info h4{margin:8px 0 6px;font-size:17px;font-weight:800;letter-spacing:-.01em;color:#fff}
+.tpl-info p{margin:0;color:rgba(255,255,255,.82);font-size:14px}
+.tpl-info .tpl-tip{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:rgba(255,255,255,.7)}
+.tpl-info .tpl-tip b{color:#fff}
+.tpl-bar button[aria-pressed="true"]{background:rgba(255,255,255,.14)}
+@media (max-width:640px){.tpl-info{top:auto;bottom:76px;right:16px;transform:translateY(16px)}}
+</style>
+<div class="tpl-info" id="tplInfo" aria-live="polite"></div>
+<script>
+(function(){
+  /* Texty info panelů – klíč = id sekce (header/footer podle tagu). */
+  var TPL_INFO={
+    header:['1','Hlavička','Značka a jedno stálé tlačítko. Návštěvník má cestu k přihlášce po ruce v každém okamžiku.','Žádné menu – každý odkaz navíc odvádí pozornost od přihlášky.'],
+    top:['2','Hero','Během 3 sekund říká, JAKÝ výsledek návštěvník získá, ZA JAK DLOUHO a BEZ ČEHO. Čísla pod tlačítkem a pás log hned budují důvěru.','Nadpis = výsledek, ne název služby. Tlačítko opakuje výsledek („Chci…").'],
+    video:['3','Video „Říkají o programu"','Reference ve videu – lidé věří lidem víc než textu. Zvedá důvěru dřív, než přijdou detaily nabídky.','1–3 minuty, titulky, v první větě konkrétní výsledek.'],
+    benefity:['4','Hlavní benefity','Překládá službu do toho, co z ní klient reálně má. Odpovídá na otázku „co z toho budu mít já?".','Piš výsledek, ne vlastnost („klidné večery", ne „6 modulů").'],
+    vysledky:['5','Reálné výsledky','Konkrétní příběhy klientů. Návštěvník se ztotožní: „měl/a stejný problém jako já – a vyřešil/a ho".','Problém → změna → výsledek s číslem. Fotka + celé jméno = věrohodnost.'],
+    transformace:['6','Transformace (3 fáze)','Ukazuje cestu ve 3 krocích. Snižuje pocit, že je to složité, a dává jasnou představu o procesu.','Každá fáze = mini-výsledek, ne jen název modulu.'],
+    garance:['7','Garance','Odstraňuje riziko rozhodnutí – návštěvník nemá co ztratit.','Bez slov „vrácení peněz" a „investice". Formuluj, co garantuješ ty.'],
+    zakladatel:['8','O zakladateli','Kdo za tím stojí a proč mu věřit: krátký příběh + 3 tvrdá čísla.','Příběh, se kterým se návštěvník ztotožní („byl/a jsem tam, kde jsi teď ty").'],
+    flex:['9','Flex – důkazy autority','Bento mřížka na „ukázání se": ocenění, certifikace, počet klientů, výsledky v číslech a benefity spolupráce na jednom místě.','Velká karta = nejsilnější důkaz. Jen ověřitelná fakta – přehánění důvěru zabíjí.'],
+    faq:['10','FAQ','Vyvrací poslední námitky těsně před rozhodnutím (čas, cena, zkušenosti, pro koho to není).','První otevřená otázka = ta nejčastější námitka. Otevřená je vždy jen jedna.'],
+    prihlaska:['11','Závěrečná výzva','Poslední tlačítko: zopakuje výsledek a přidá naléhavost (omezená místa).','Jedna věta, jedno tlačítko – žádné nové informace.'],
+    footer:['12','Patička','Povinné právní údaje (IČO, sídlo, GDPR, cookies). Zároveň buduje důvěru – nevynechávat.','Odkazy na GDPR a cookies musí vést na skutečné stránky.']
+  };
+  var box=document.getElementById('tplInfo'),btn=document.getElementById('tplInfoBtn');
+  var on=true; try{on=localStorage.getItem('tpl-info')!=='off';}catch(e){}
+  var cur=null,hideT=null;
+  function keyOf(el){return el.id&&TPL_INFO[el.id]?el.id:(TPL_INFO[el.tagName.toLowerCase()]?el.tagName.toLowerCase():null);}
+  function show(el){
+    var k=keyOf(el); if(!on||!k) return;
+    clearTimeout(hideT);
+    if(cur&&cur!==el) cur.classList.remove('tpl-hl');
+    cur=el; el.classList.add('tpl-hl');
+    var d=TPL_INFO[k];
+    box.innerHTML='<span class="tpl-k"><i>'+d[0]+'</i>Sekce šablony</span><h4>'+d[1]+'</h4><p>'+d[2]+'</p><div class="tpl-tip"><b>Tip:</b> '+d[3]+'</div>';
+    box.classList.add('show');
+  }
+  function hide(){hideT=setTimeout(function(){box.classList.remove('show');if(cur){cur.classList.remove('tpl-hl');cur=null;}},120);}
+  var secs=[].slice.call(document.querySelectorAll('body > header, body > section, body > footer')).filter(keyOf);
+  var hover=window.matchMedia('(hover:hover)').matches;
+  if(hover){
+    secs.forEach(function(el){el.addEventListener('mouseenter',function(){show(el);});el.addEventListener('mouseleave',hide);});
+  }else{
+    /* dotyková zařízení: panel ukáže sekci uprostřed obrazovky */
+    var tick=false;
+    window.addEventListener('scroll',function(){ if(tick) return; tick=true; requestAnimationFrame(function(){
+      tick=false; var y=innerHeight/2,hit=null;
+      secs.forEach(function(el){var r=el.getBoundingClientRect(); if(r.top<y&&r.bottom>y) hit=el;});
+      if(hit&&hit!==cur) show(hit); else if(!hit) hide();
+    });},{passive:true});
+  }
+  function sync(){btn.setAttribute('aria-pressed',String(on));btn.textContent=on?'Info ✓':'Info'; if(!on) hide();}
+  btn.addEventListener('click',function(){on=!on;try{localStorage.setItem('tpl-info',on?'on':'off');}catch(e){} sync();});
+  sync();
+})();
+</script>
+<!-- ===== /INFO PANELY ===== -->
 <!--TPL-TOOL-END-->
 </body>
 </html>
