@@ -540,6 +540,11 @@
     padding:6px 9px 5px;border-radius:6px;text-decoration:none;transition:color .2s,background .2s}
   .hdr-switch a:hover{color:rgba(255,255,255,.8)}
   .hdr-switch a.on{color:rgba(255,255,255,.85);background:rgba(255,255,255,.07)}
+  /* 3 záložky se na telefon do lišty nevejdou → plovoucí pilulka pod lištou */
+  .hdr-switch a{white-space:nowrap}
+  @media(max-width:600px){.nav-in{position:relative}
+    .hdr-switch{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);margin:0;
+      background:rgba(12,11,9,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,.35)}}
 
   /* ---------- urgence: cena odkladu, kapacita, cena do data, bonus za rychlé rozhodnutí ---------- */
   .delay-box{max-width:820px;margin:30px auto 0;position:relative;text-align:center}
@@ -1170,7 +1175,7 @@
     var b = document.querySelector('.nav-in .nav-brand'); if (!b) return false;
     if (document.querySelector('.hdr-switch')) return true;
     var d = document.createElement('div'); d.className = 'hdr-switch';
-    d.innerHTML = '<a href="/cenik" class="on">Restart</a><a href="/cenik-upgrade">Up-Grade</a>';
+    d.innerHTML = '<a href="/cenik" class="on">Restart</a><a href="/cenik-upgrade">Up-Grade</a><a href="/cenik-implementace">Implementace</a>';
     b.insertAdjacentElement('afterend', d); return true;
   }
   if (!add()) { var n = 0, t = setInterval(function(){ if (add() || ++n > 30) clearInterval(t); }, 100); }

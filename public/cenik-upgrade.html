@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ceník Up-Grade — Leadership Restart | leadershiprestart.cz</title>
 <link rel="canonical" href="https://leadershiprestart.cz/cenik-upgrade.html">
-<meta name="description" content="Leadership Up-Grade: akviziční systém, automatizace a škálování pro absolventy Restartu a podnikatele. Vstupní diagnóza a pět úrovní: Basic, Grow, Mastery, Launch Boost, Elite — vyplň dotazník a domluv si informační schůzku.">
+<meta name="description" content="Leadership Up-Grade: akviziční systém, automatizace a škálování pro absolventy Restartu a podnikatele. Vstupní diagnóza a tři úrovně členství Basic, Grow, Mastery; implementace Launch Boost a Elite. Vyplň dotazník a domluv si informační schůzku.">
 <!--
   /up-great – LANDING PAGE Leadership Up-Grade (z /links a reklam), publikováno 18. 9. 2026.
   Odvozeno z prodejní prezentace s ceníkem (teď /up-great-prezentace): stejné sekce, ale BEZ CEN.
@@ -15,6 +15,10 @@
   /draftupgrade (7. 10. 2026): nová struktura nabídky — vstup 3 000 Kč (diagnóza) → Basic 3 000 /
   Grow 5 450 / Mastery 8 800 Kč měs. → Launch Boost 45 000 (3 měsíce) → Elite 120 000; žebřík
   odpovědnosti, Mastery + správa, software samostatně. Finální kopie = /cenik-upgrade (bez .draft-notes); drafty dál na /draftupgrade.
+  14. 10. 2026: Launch Boost podle odpovědi Peterovi (mentoring 2–4×/měs., 8 focus + 8 strategických hovorů,
+  prodej s Denisem, garance 1 : 3), sekce #velin (funkce, bezpečnost, ceny: zdarma v programu / 400 Kč jen
+  absolventi / kopie kódu 20 000 Kč); karta „Software samostatně 600/1 200“ nahrazena Velínem.
+  Launch Boost + Elite se přesunuly na /cenik-implementace (tady jen odkazové karty); přepínač Restart | Up-Grade | Implementace.
 -->
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/favicon.png">
@@ -425,6 +429,11 @@
     padding:6px 9px 5px;border-radius:6px;text-decoration:none;transition:color .2s,background .2s}
   .hdr-switch a:hover{color:rgba(255,255,255,.8)}
   .hdr-switch a.on{color:rgba(255,255,255,.85);background:rgba(255,255,255,.07)}
+  /* 3 záložky se na telefon do lišty nevejdou → plovoucí pilulka pod lištou */
+  .hdr-switch a{white-space:nowrap}
+  @media(max-width:600px){.nav-in{position:relative}
+    .hdr-switch{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);margin:0;
+      background:rgba(12,11,9,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,.35)}}
   .draft-pill{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:90;font:800 11px/1 "Manrope",sans-serif;
     letter-spacing:.12em;text-transform:uppercase;color:#1a0d06;background:#f6d47c;border-radius:999px;
     padding:9px 14px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
@@ -507,6 +516,13 @@
   .extra-price small{font-size:13px;color:var(--dk-muted);font-weight:700}
   .extra-card p{font-size:14.5px;color:var(--dk-muted);line-height:1.6}
   .extra-card p b{font:inherit;font-weight:700;color:var(--dk-text)}
+
+  /* aplikace Velín */
+  .velin-grid{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:1080px){.velin-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.velin-grid{grid-template-columns:1fr}}
+  .velin-price{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;text-align:left;position:relative}
+  @media(max-width:900px){.velin-price{grid-template-columns:1fr}}
 
   /* poznámky k draftu — před publikací smazat */
   .draft-notes{max-width:920px;margin:40px auto 0;padding:20px 24px;border-radius:16px;position:relative;
@@ -739,9 +755,10 @@
         <div class="big-ico"><svg class="ico"><use href="#i-chart"/></svg></div>
         <div class="big-body">
           <span class="big-tag">Software</span>
-          <h3 class="display">Software, který ti ušetří 2 000+ Kč měsíčně</h3>
-          <p>Nástroje, které bys jinak platil zvlášť, máš <b>v ceně členství</b> —
-          <b>2 000+ Kč měsíčně</b>, které zůstanou tobě. Vč. Interaktivního Remind Systému.</p>
+          <h3 class="display">Aplikace Velín, která ti ušetří 2 000+ Kč měsíčně</h3>
+          <p>CRM, dotazníky, rezervace, e-maily, stránky, fakturace i přehledy na jednom místě — <b>v ceně členství</b>.
+          <b>2 000+ Kč měsíčně</b> za nástroje, které bys jinak platil zvlášť, zůstane tobě. Vč. Interaktivního Remind Systému.
+          <a href="#velin" style="color:var(--lr-gold-light)">Více o Velínu ↓</a></p>
         </div>
       </div>
 
@@ -789,8 +806,8 @@
 <section class="section sec-dark cenik-sec">
   <div class="wrap">
     <div style="text-align:center;position:relative">
-      <span class="lr-kicker">Pět úrovní</span>
-      <h2 class="display h-section" style="color:#fff">Pět úrovní <span class="lr-grad-text">Up-Grade</span></h2>
+      <span class="lr-kicker">Členství</span>
+      <h2 class="display h-section" style="color:#fff">Tři úrovně <span class="lr-grad-text">Up-Grade</span></h2>
       <p class="h-sub" style="margin:0 auto;max-width:700px">Čím vyšší úroveň, tím víc individuální podpory,
       rychlejší implementace a větší zapojení našeho týmu. <b>Mezi úrovněmi můžeš přecházet</b> podle toho,
       co zrovna potřebuješ — nemusíš pokaždé kupovat nový program.</p>
@@ -863,34 +880,27 @@
       </div>
     </div>
 
-    <div class="cenik-group-h"><b>Implementace</b><span>když nechceš jen vedení, ale postavit a spustit systém</span></div>
+    <div class="cenik-group-h"><b>Implementace</b><span>když nechceš jen vedení, ale postavit a spustit systém — detail na stránce Implementace</span></div>
     <div class="cenik cenik-2">
 
-      <!-- LAUNCH BOOST (oranžovo-zlatý gradient) -->
+      <!-- LAUNCH BOOST — zjednodušeně, detail na /cenik-implementace -->
       <div class="lr-card cena-card v-launch reveal">
         <div class="c-ribbon r-launch">3 měsíce</div>
         <div class="c-name">Launch Boost</div>
         <div class="c-tag">3měsíční implementační program</div>
         <div class="c-motto">Postavme a spusťme systém společně.</div>
         <div class="c-price p-launch">45 000<small>Kč</small></div>
-        <div class="c-eur">≈ 1 800 € jednorázově · nebo 3× 16 000 Kč (48 000 Kč)</div>
+        <div class="c-eur">≈ 1 800 € jednorázově · nebo 3× 16 000 Kč</div>
         <ul class="c-list">
-          <li class="gift"><svg class="ico"><use href="#i-rocket"/></svg>Funkční akviziční systém vybudovaný a spuštěný do 3 měsíců</li>
-          <li><svg class="ico"><use href="#i-route"/></svg><span><b>Ty připravíš základ</b> podle našich postupů — brand manuál, nabídku, první texty, otázky do dotazníku, fotky</span></li>
-          <li><svg class="ico"><use href="#i-wrench"/></svg><span><b>My dotáhneme klíčové části</b> — marketingovou logiku, texty, funnel do použitelné podoby a technické propojení</span></li>
-          <li><svg class="ico"><use href="#i-magnet"/></svg><span><b>Nastavíme reklamu</b>, napojíme systém na software a pomůžeme ho spustit</span></li>
-          <li><svg class="ico"><use href="#i-video"/></svg><span><b>1–2 půldenní natáčení</b> podle potřeby projektu</span></li>
-          <li><svg class="ico"><use href="#i-compass"/></svg><span>Individuální mentoring, skupinové hovory, vzdělávání, software, šablony a prompty</span></li>
-          <li><svg class="ico"><use href="#i-chart"/></svg><span><b>Vyhodnocování a průběžná optimalizace</b> výsledků</span></li>
+          <li class="gift"><svg class="ico"><use href="#i-rocket"/></svg>Funkční akviziční systém spuštěný do 3 měsíců</li>
+          <li><svg class="ico"><use href="#i-wrench"/></svg><span><b>Stavíme společně</b> — ty připravíš základ, klíčové části dotáhneme my</span></li>
+          <li><svg class="ico"><use href="#i-compass"/></svg><span><b>Mentoring 2–4× měsíčně</b> + focus a strategické hovory</span></li>
+          <li><svg class="ico"><use href="#i-check"/></svg><span><b>Garance návratnosti 1 : 3</b></span></li>
         </ul>
-        <div class="c-note"><b>Cílová metrika: návratnost 1 : 3</b> — např. 10 000 Kč do reklamy →
-        min. 30 000 Kč podle přesně definované ekonomiky kampaně. Technické kroky se můžeš učit,
-        ale nemusíš — kde by tě brzdily, uděláme je za tebe.</div>
-        <a class="btn btn-launch" data-cta-pos="upgrade_launch" href="/up-great-dotaznik">Chci Launch Boost</a>
-        <span class="c-pop"><i></i>„Chci do 3 měsíců funkční akviziční systém.“</span>
+        <a class="btn btn-launch" data-cta-pos="upgrade_launch_detail" href="/cenik-implementace">Detail Launch Boost →</a>
       </div>
 
-      <!-- ELITE (gradient) — done for you -->
+      <!-- ELITE — zjednodušeně, detail na /cenik-implementace -->
       <div class="lr-card cena-card v-elite reveal">
         <div class="c-ribbon r-grad">Done for you</div>
         <div class="c-name">Elite</div>
@@ -899,16 +909,12 @@
         <div class="c-price p-elite">120 000<small>Kč</small></div>
         <div class="c-eur">≈ 4 800 €</div>
         <ul class="c-list">
-          <li class="gift"><svg class="ico"><use href="#i-crown"/></svg>Většinu marketingové exekuce přebírá náš tým</li>
-          <li><svg class="ico"><use href="#i-wrench"/></svg><span><b>Vymyslíme, vytvoříme, nastavíme a spustíme</b> — nabídku, komunikaci, funnel i kampaně</span></li>
-          <li><svg class="ico"><use href="#i-message"/></svg><span><b>Ty jen rozhoduješ</b> — strategická rozhodnutí, kreativní konzultace, schválení nabídky a komunikace</span></li>
-          <li><svg class="ico"><use href="#i-video"/></svg><span><b>Dodáš sebe a informace</b> — natáčení a podklady, zbytek je na nás</span></li>
-          <li><svg class="ico"><use href="#i-users"/></svg><span>Komunita, skupinové hovory, software a celý systém Up-Grade</span></li>
+          <li class="gift"><svg class="ico"><use href="#i-crown"/></svg>Jen pár meetingů — vše spustíme za tebe</li>
+          <li><svg class="ico"><use href="#i-trend"/></svg><span><b>Strategie s předvídatelným růstem</b>, akviziční systém a follow-up na klíč</span></li>
+          <li><svg class="ico"><use href="#i-magnet"/></svg><span><b>Kampaně, obsah i prodej</b> — vymyslíme, vytvoříme a spustíme</span></li>
+          <li class="gift"><svg class="ico"><use href="#i-gift"/></svg>Licence Velín v hodnotě 20 000 Kč zdarma</li>
         </ul>
-        <div class="c-note"><b>„Nevysvětlíme ti jen, jak to máš udělat.</b> Vymyslíme to, vytvoříme,
-        nastavíme a spustíme za tebe.“ Kapacitně omezené — maximálně 4 klienti současně.</div>
-        <a class="btn btn-elite" data-cta-pos="upgrade_elite" href="/up-great-dotaznik">Chci Elite</a>
-        <span class="c-pop"><i></i>„Nechci marketing stavět sám. Chci ho delegovat.“</span>
+        <a class="btn btn-elite" data-cta-pos="upgrade_elite_detail" href="/cenik-implementace">Detail Elite →</a>
       </div>
     </div>
 
@@ -942,10 +948,11 @@
       <div class="lr-card extra-card reveal">
         <span class="extra-ico"><svg class="ico"><use href="#i-monitor"/></svg></span>
         <div>
-          <b>Software samostatně</b>
-          <div class="extra-price">600 / 1 200 Kč <small>/ měsíc</small></div>
-          <p>U aktivních členství je marketingový software <b>v ceně programu</b>.
-          Když mentoring ukončíš a chceš software používat dál, stačí samostatné předplatné.</p>
+          <b>Aplikace Velín samostatně</b>
+          <div class="extra-price">400 Kč <small>/ měsíc · ≈ 16 €</small></div>
+          <p>Během programu máš Velín <b>v ceně</b>. Samostatné předplatné je dostupné
+          <b>jen absolventům programů</b> (Leadership Restart, Launch Boost a další).
+          Nebo si pořídíš <b>kopii celého kódu za 20 000 Kč</b>. <a href="#velin" style="color:var(--lr-gold-light)">Co Velín umí ↓</a></p>
         </div>
       </div>
     </div>
@@ -959,6 +966,89 @@
       Ceny v eurech jsou orientační (přepočet kurzem 25 Kč/€, zaokrouhleno). Fakturujeme v korunách.
     </p>
 
+  </div>
+</section>
+
+<!-- ======================= APLIKACE VELÍN ======================= -->
+<section class="section sec-dark sec-tint-blue" id="velin">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Aplikace Velín</span>
+    <h2 class="display h-section">Velín — <span class="lr-grad-text">centrála</span> tvého byznysu</h2>
+    <p class="h-sub" style="margin:0 auto;max-width:700px">Celý akviziční systém na jednom místě. Velín si propojíš
+    se svou AI (ChatGPT, Claude, Gemini…) a <b>ovládáš ho běžnou řečí v chatu</b> — tam ho spolu postavíme
+    a ty ho pak rozšiřuješ o další kanály a služby.</p>
+
+    <div class="obsah-grid velin-grid">
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-users"/></svg></div>
+        <span class="ob-tag">Klienti</span>
+        <h3 class="display">CRM</h3>
+        <p>Stavy, štítky, poznámky a <b>celá historie</b> každého klienta — od poptávky po platbu.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-calendar"/></svg></div>
+        <span class="ob-tag">Funnel</span>
+        <h3 class="display">Dotazníky a rezervace</h3>
+        <p><b>Kvalifikace zájemců</b> a rezervace termínů napojená na tvůj kalendář.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-message"/></svg></div>
+        <span class="ob-tag">E-maily</span>
+        <h3 class="display">Automatizace a kampaně</h3>
+        <p><b>Follow-up e-maily běží samy</b>, kampaně a newslettery rozešleš na pár kliknutí.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-route"/></svg></div>
+        <span class="ob-tag">Web</span>
+        <h3 class="display">Stránky a A/B testy</h3>
+        <p>Landing pages a microsites, <b>A/B testy</b> a mapa celého funnelu.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-coins"/></svg></div>
+        <span class="ob-tag">Provoz</span>
+        <h3 class="display">Fakturace</h3>
+        <p>Faktury s QR platbou, <b>automatické připomínky plateb</b> a párování plateb z banky.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-chart"/></svg></div>
+        <span class="ob-tag">Čísla</span>
+        <h3 class="display">Přehledy a reporty</h3>
+        <p>Útrata za reklamu, leady, <b>cena za lead</b>, schůzky, tržby a zisk — za libovolné období.</p>
+      </div>
+      <div class="lr-card ob-card o-warm reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-bot"/></svg></div>
+        <span class="ob-tag">AI agenti</span>
+        <h3 class="display">Všechny role pokryté</h3>
+        <p>Marketing, redakce, designer, obchodník, provoz i programátor — <b>optimalizované na výsledek</b>,
+        ne na počet agentů. Autonomii zapneš po vyladění.</p>
+      </div>
+      <div class="lr-card ob-card reveal">
+        <div class="ob-ico"><svg class="ico"><use href="#i-check"/></svg></div>
+        <span class="ob-tag">Bezpečnost</span>
+        <h3 class="display">Tvoje data, tvoje vlastnictví</h3>
+        <p>Běží na <b>Cloudflare</b> (šifrování, ISO 27001, SOC 2), data v EU na přání.
+        Kdykoli je <b>zdarma vyexportuješ</b> a přeneseš.</p>
+      </div>
+    </div>
+
+    <div class="velin-price reveal">
+      <div class="big-extra-item big-extra-gold">
+        <span class="big-extra-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
+        <div><b>V programu zdarma</b><span>Po celou dobu členství Up-Grade, Launch Boostu nebo Elite.</span></div>
+      </div>
+      <div class="big-extra-item">
+        <span class="big-extra-ico"><svg class="ico"><use href="#i-monitor"/></svg></span>
+        <div><b>400 Kč / měsíc</b><span>Samostatné předplatné — jen pro absolventy programů (Leadership Restart, Launch Boost a další). ≈ 16 €</span></div>
+      </div>
+      <div class="big-extra-item">
+        <span class="big-extra-ico"><svg class="ico"><use href="#i-package"/></svg></span>
+        <div><b>20 000 Kč jednorázově</b><span>Kopie celého kódu Velínu — vlastní verze k přizpůsobení, provozuješ ji u sebe. ≈ 800 €</span></div>
+      </div>
+    </div>
+    <p class="cena-note" style="margin-top:18px;font-size:13.5px">
+      Sociální sítě napojíme přes Metu a nástroj, který rozesílá příspěvky na všechny platformy — spouštíme je,
+      až akviziční systém stabilně vydělává 1 : 3. Velín jde ovládat i z Telegramu, jakmile je systém postavený.
+    </p>
   </div>
 </section>
 
@@ -982,7 +1072,7 @@
     var b = document.querySelector('.nav-in .nav-brand'); if (!b) return false;
     if (document.querySelector('.hdr-switch')) return true;
     var d = document.createElement('div'); d.className = 'hdr-switch';
-    d.innerHTML = '<a href="/cenik">Restart</a><a href="/cenik-upgrade" class="on">Up-Grade</a>';
+    d.innerHTML = '<a href="/cenik">Restart</a><a href="/cenik-upgrade" class="on">Up-Grade</a><a href="/cenik-implementace">Implementace</a>';
     b.insertAdjacentElement('afterend', d); return true;
   }
   if (!add()) { var n = 0, t = setInterval(function(){ if (add() || ++n > 30) clearInterval(t); }, 100); }
