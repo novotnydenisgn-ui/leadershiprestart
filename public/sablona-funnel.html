@@ -659,12 +659,17 @@ document.querySelectorAll('.faq details').forEach(d=>{
   ============================================================
 -->
 <style>
-.tpl-bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:#111;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,.28);font:500 14px/1 'Inter',system-ui,sans-serif;max-width:calc(100vw - 32px)}
-.tpl-bar b{padding:0 10px 0 12px;font-weight:700;white-space:nowrap}
-.tpl-bar button{all:unset;cursor:pointer;padding:10px 14px;border-radius:999px;white-space:nowrap;transition:background .2s}
-.tpl-bar button:hover{background:rgba(255,255,255,.14)}
-.tpl-bar button.tpl-main{background:#fff;color:#111;font-weight:700}
-.tpl-bar button.tpl-main:hover{background:#e9e9e6}
+/* Lišta nástroje – záměrně jiný vzhled než šablona (fialová „nástrojová" barva, čárkovaný
+   okraj, sklo), aby nepůsobila jako součást webu. V klidu ztlumená, při najetí plná. */
+.tpl-bar{--tpl:#8b7bff;position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:rgba(22,20,34,.82);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);color:#e9e7ff;border:1px dashed rgba(139,123,255,.55);box-shadow:0 0 0 4px rgba(139,123,255,.10),0 14px 40px rgba(0,0,0,.30);font:500 13.5px/1 'Inter',system-ui,sans-serif;max-width:calc(100vw - 32px);opacity:.42;transition:opacity .3s ease,box-shadow .3s ease}
+.tpl-bar:hover,.tpl-bar:focus-within,.tpl-bar.tpl-active{opacity:1;box-shadow:0 0 0 4px rgba(139,123,255,.18),0 18px 48px rgba(0,0,0,.36)}
+.tpl-bar b{display:inline-flex;align-items:center;gap:7px;padding:0 10px 0 9px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tpl);white-space:nowrap}
+.tpl-bar b svg{flex:none}
+.tpl-bar button{all:unset;cursor:pointer;padding:9px 14px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+.tpl-bar button:hover{background:rgba(139,123,255,.18)}
+.tpl-bar button:focus-visible{outline:2px solid var(--tpl);outline-offset:1px}
+.tpl-bar button.tpl-main{background:var(--tpl);color:#fff;font-weight:700}
+.tpl-bar button.tpl-main:hover{background:#9d90ff}
 .tpl-help{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);z-index:9999;width:min(460px,calc(100vw - 32px));background:#fff;color:#111;border:1px solid #e8e8e4;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.18);padding:18px 20px;font:400 14px/1.55 'Inter',system-ui,sans-serif}
 .tpl-help[hidden]{display:none}
 .tpl-help h3{margin:0 0 8px;font-size:16px}
@@ -672,6 +677,7 @@ document.querySelectorAll('.faq details').forEach(d=>{
 .tpl-help li{margin:4px 0}
 .tpl-help code{background:#f1f1ee;padding:1px 5px;border-radius:5px;font-size:13px}
 @media (max-width:560px){.tpl-bar b,.tpl-bar .tpl-help-btn{display:none}.tpl-bar button{padding:10px 12px}}
+@media (hover:none){.tpl-bar{opacity:.75}}
 </style>
 <div class="tpl-help" id="tplHelp" hidden>
   <h3>Jak šablonu použít</h3>
@@ -685,7 +691,7 @@ document.querySelectorAll('.faq details').forEach(d=>{
   </ol>
 </div>
 <div class="tpl-bar" role="toolbar" aria-label="Šablona funnelu">
-  <b>Šablona funnelu</b>
+  <b><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Šablona</b>
   <button type="button" class="tpl-main" id="tplCopy">Zkopírovat HTML</button>
   <button type="button" id="tplDl">Stáhnout .html</button>
   <button type="button" id="tplInfoBtn" aria-pressed="true" title="Info panely: při najetí na sekci ukážou, k čemu slouží">Info ✓</button>
@@ -702,7 +708,8 @@ document.querySelectorAll('.faq details').forEach(d=>{
       return clean;
     });
   }
-  function flash(btn,txt){var o=btn.textContent;btn.textContent=txt;setTimeout(function(){btn.textContent=o;},1800);}
+  var bar=document.querySelector('.tpl-bar');
+  function flash(btn,txt){var o=btn.textContent;btn.textContent=txt;bar.classList.add('tpl-active');setTimeout(function(){btn.textContent=o;if(help.hidden)bar.classList.remove('tpl-active');},1800);}
   var copyBtn=document.getElementById('tplCopy');
   copyBtn.addEventListener('click',function(){
     getClean().then(function(t){return navigator.clipboard.writeText(t);})
@@ -718,7 +725,7 @@ document.querySelectorAll('.faq details').forEach(d=>{
     });
   });
   var help=document.getElementById('tplHelp'),hb=document.getElementById('tplHelpBtn');
-  hb.addEventListener('click',function(){help.hidden=!help.hidden;hb.setAttribute('aria-expanded',String(!help.hidden));});
+  hb.addEventListener('click',function(){help.hidden=!help.hidden;hb.setAttribute('aria-expanded',String(!help.hidden));bar.classList.toggle('tpl-active',!help.hidden);});
 })();
 </script>
 <!-- ===== INFO PANELY SEKCÍ (jen náhled šablony) ===== -->
@@ -733,7 +740,7 @@ document.querySelectorAll('.faq details').forEach(d=>{
 .tpl-info p{margin:0;color:rgba(255,255,255,.82);font-size:14px}
 .tpl-info .tpl-tip{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:rgba(255,255,255,.7)}
 .tpl-info .tpl-tip b{color:#fff}
-.tpl-bar button[aria-pressed="true"]{background:rgba(255,255,255,.14)}
+.tpl-bar button[aria-pressed="true"]{background:rgba(139,123,255,.18);color:#fff}
 @media (max-width:640px){.tpl-info{top:auto;bottom:76px;right:16px;transform:translateY(16px)}}
 </style>
 <div class="tpl-info" id="tplInfo" aria-live="polite"></div>
