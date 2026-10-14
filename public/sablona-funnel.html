@@ -24,11 +24,10 @@
       5. Reálné výsledky (reference)
       6. Transformace (3 fáze)
       7. Garance
-      8. O zakladateli (+ čísla)
-      9. Flex (bento mřížka: ocenění, certifikace, čísla, benefity)
-     10. FAQ
-     11. Závěrečná výzva
-     12. Patička
+      8. O zakladateli + důkazy autority (bento: příběh, ocenění, certifikace, čísla, benefity)
+      9. FAQ
+     10. Závěrečná výzva
+     11. Patička
   • Obrázky: nahraď <div class="ph"> za <img src="…" alt="…">.
   • Video: nahraď <div class="video-ph"> za <iframe> (YouTube/Vimeo) nebo <video>.
   • Odkazy CTA: všechna tlačítka míří na #prihlaska → změň href na formulář / URL.
@@ -190,19 +189,8 @@ section > .container{position:relative;z-index:1}
 .guarantee h2{margin-bottom:14px}
 .guarantee p{max-width:560px;margin:0 auto}
 
-/* --- 8. O zakladateli --- */
-.founder{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center}
-.founder .eyebrow{margin-bottom:8px}
-.founder h1{font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:18px}
-.founder p + p{margin-top:14px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-.stat{text-align:center;padding:26px 16px;border:1px solid var(--glass-border);border-radius:var(--radius);background:var(--glass);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));box-shadow:0 8px 32px rgba(0,0,0,.05),inset 0 1px 0 rgba(255,255,255,.6)}
-.stat .num{font-family:var(--font-head);font-size:2.2rem;font-weight:800;letter-spacing:-.03em;line-height:1}
-.stat .lbl{margin-top:8px;font-size:.9rem;color:var(--muted);font-weight:500}
-@media (max-width:860px){.founder{grid-template-columns:1fr;gap:32px}.stats{grid-template-columns:1fr}}
-
-/* --- 9. Flex (bento mřížka důkazů autority) --- */
-/* Rozložení: velká karta (2×2) + 2 karty vpravo + spodní řada 3 karet.
+/* --- 8. O zakladateli + důkazy autority (bento mřížka) --- */
+/* Rozložení: velká karta zakladatele (2×2) + 2 karty vpravo + spodní řada 3 karet.
    Barvy se odvozují z tokenů --accent / --text v :root. */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(220px,auto);gap:20px}
 .bento-card{position:relative;overflow:hidden;border-radius:calc(var(--radius) + 8px);padding:36px;display:flex;flex-direction:column;border:1px solid var(--glass-border);background:var(--glass);backdrop-filter:blur(var(--glass-blur)) saturate(1.3);-webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.3);box-shadow:0 8px 32px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .35s ease,box-shadow .35s ease}
@@ -215,6 +203,10 @@ section > .container{position:relative;z-index:1}
 .bento-big::before{content:"";position:absolute;inset:0;background:var(--img,none) center/cover;opacity:.35;mix-blend-mode:luminosity}
 .bento-big::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.45))}
 .bento-big > *{position:relative;z-index:1}
+/* štítek „sem patří fotka" – po vložení fotky ho smaž */
+.bento-big .bento-ph{position:absolute;top:28px;right:28px;max-width:220px;padding:10px 14px;border:1.5px dashed rgba(255,255,255,.5);border-radius:12px;font-size:.82rem;font-weight:500;line-height:1.4;color:rgba(255,255,255,.85);text-align:right}
+.bento-big .eyebrow{color:rgba(255,255,255,.75);margin:18px 0 0}
+.bento-big .eyebrow + h3{margin-top:4px}
 .bento-big h3{font-size:clamp(1.9rem,3.6vw,3rem);letter-spacing:-.03em;line-height:1.05;margin:16px 0 14px;max-width:560px}
 .bento-big p{color:rgba(255,255,255,.88);max-width:520px;font-size:1.08rem}
 .pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;font-size:.88rem;font-weight:600;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -243,9 +235,9 @@ section > .container{position:relative;z-index:1}
 .bento-cta:hover .arrow{transform:rotate(45deg)}
 .bento-cta h4{margin:28px 0 0}
 @media (max-width:960px){.bento{grid-template-columns:repeat(2,1fr)}.bento-big{grid-column:span 2;grid-row:auto;min-height:420px}}
-@media (max-width:640px){.bento{grid-template-columns:1fr;grid-auto-rows:auto}.bento-big{grid-column:auto;min-height:380px}.bento-card{padding:28px}}
+@media (max-width:640px){.bento{grid-template-columns:1fr;grid-auto-rows:auto}.bento-big{grid-column:auto;min-height:520px}.bento-card{padding:28px}.bento-big{justify-content:flex-start}.bento-big .bento-ph{position:relative;top:auto;right:auto;max-width:none;text-align:left;margin-bottom:auto;padding-bottom:10px}.bento-big .bento-ph + .pill{margin-top:24px}}
 
-/* --- 10. FAQ --- */
+/* --- 9. FAQ --- */
 .faq{max-width:760px;margin:0 auto}
 .faq details{border:1px solid var(--glass-border);background:var(--glass);backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));border-radius:var(--radius);padding:4px 22px;margin-bottom:12px;box-shadow:0 8px 32px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.6)}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-family:var(--font-head);font-weight:700;font-size:1.08rem}
@@ -259,7 +251,7 @@ section > .container{position:relative;z-index:1}
 .faq details[open] .answer{animation:faqIn .35s cubic-bezier(.2,.65,.2,1)}
 @keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
-/* --- 11. Závěrečná výzva --- */
+/* --- 10. Závěrečná výzva --- */
 .final{background:var(--text);color:var(--bg);text-align:center;padding:104px 0}
 .final .glow{background:rgba(255,255,255,.08)}
 .final .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:26px}
@@ -269,7 +261,7 @@ section > .container{position:relative;z-index:1}
 .final .btn:hover{color:var(--accent-text)}
 .final p{margin-top:18px;color:inherit;opacity:.7;font-size:.95rem}
 
-/* --- 12. Patička --- */
+/* --- 11. Patička --- */
 .footer{padding:40px 0 36px;background:var(--bg-alt);color:var(--text);text-align:center}
 .footer .links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 0;font-family:var(--font-head);font-weight:700;font-size:.82rem;letter-spacing:-.01em}
 .footer .links a,.footer .links span{padding:0 10px;position:relative}
@@ -480,35 +472,11 @@ section > .container{position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ============ 8. O ZAKLADATELI ============ -->
-<section id="zakladatel">
-  <div class="glow glow-a"></div><div class="glow glow-b"></div>
-  <div class="container">
-    <div class="founder">
-      <div class="ph ph-3x4"><span>[Foto zakladatele]</span></div>
-      <div>
-        <span class="eyebrow">O zakladateli</span>
-        <h1>[ZDE DOPLŇ JMÉNO]</h1>
-        <p>[Tvé výsledky, úspěchy, důkazy – proč ti má návštěvník věřit.]</p>
-        <p>[Krátký příběh: odkud jsi vyšel, co jsi překonal a proč děláš to, co děláš.]</p>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="num">[XY]</div><div class="lbl">[xyz – např. spokojených klientů]</div></div>
-      <div class="stat"><div class="num">[XY]</div><div class="lbl">[xyz – např. let zkušeností]</div></div>
-      <div class="stat"><div class="num">[XY]</div><div class="lbl">[xyz – např. hodin obsahu]</div></div>
-    </div>
-
-    <div class="cta-row"><a class="btn" href="#prihlaska">Chci [výsledek] zdarma</a></div>
-  </div>
-</section>
-
-<!-- ============ 9. FLEX ============ -->
-<!-- Bento mřížka důkazů autority: ocenění, certifikace, výsledky, počet klientů, benefity spolupráce.
-     Velká karta = nejsilnější důkaz (fotku na pozadí přidáš přes style="--img:url('…')").
+<!-- ============ 8. O ZAKLADATELI + DŮKAZY AUTORITY ============ -->
+<!-- Bento mřížka: velká karta = zakladatel (fotka, příběh, hlavní ocenění, benefity spolupráce),
+     kolem ní důkazy – počet klientů, certifikace, výsledky v číslech, spokojenost.
      Ukázkové texty v [ ] přepiš skutečnými čísly – jen ověřitelná fakta. -->
-<section class="alt" id="flex">
+<section id="zakladatel">
   <div class="glow glow-a"></div><div class="glow glow-b"></div>
   <div class="container">
     <div class="section-head">
@@ -517,11 +485,13 @@ section > .container{position:relative;z-index:1}
     </div>
     <div class="bento">
 
-      <!-- Velká karta – hlavní ocenění / výhra -->
+      <!-- Velká karta – zakladatel: fotka na pozadí přes style="--img:url('foto.jpg')" -->
       <div class="bento-card bento-big">
-        <span class="pill"><span class="dot"></span>[Ocenění 2025]</span>
-        <h3>[Kouč roku – Czech Coaching Awards]</h3>
-        <p>[Za 7 let jsem provedl/a víc než 1 200 lidí cestou od přetížení k jasnému směru. Spolupráce se mnou znamená plán na míru, podporu i mezi sezeními a výsledky, které jdou změřit.]</p>
+        <span class="bento-ph">[Foto zakladatele – vlož přes style="--img:url('…')" a tento štítek smaž]</span>
+        <span class="pill"><span class="dot"></span>[Kouč roku 2025 – Czech Coaching Awards]</span>
+        <span class="eyebrow">O zakladateli</span>
+        <h3>[ZDE DOPLŇ JMÉNO]</h3>
+        <p>[Krátký příběh: odkud jsi vyšel/a, co jsi překonal/a a proč děláš to, co děláš. Např.: Za 7 let jsem provedl/a víc než 1 200 lidí cestou od přetížení k jasnému směru.]</p>
         <div class="chips">
           <span>✓ [Individuální plán na míru]</span>
           <span>✓ [Podpora mezi sezeními]</span>
@@ -535,7 +505,7 @@ section > .container{position:relative;z-index:1}
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div class="bento-num">[1 200+]</div>
-        <p class="bento-sub">[klientů, kteří prošli programem]</p>
+        <p class="bento-sub">[klientů za 7 let praxe]</p>
       </div>
 
       <!-- Certifikace -->
@@ -579,8 +549,8 @@ section > .container{position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ============ 10. FAQ ============ -->
-<section id="faq">
+<!-- ============ 9. FAQ ============ -->
+<section class="alt" id="faq">
   <div class="glow glow-a"></div><div class="glow glow-b"></div>
   <div class="container">
     <div class="section-head">
@@ -604,7 +574,7 @@ section > .container{position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ============ 11. ZÁVĚREČNÁ VÝZVA ============ -->
+<!-- ============ 10. ZÁVĚREČNÁ VÝZVA ============ -->
 <section class="final" id="prihlaska">
   <div class="glow glow-a"></div><div class="glow glow-b"></div>
   <div class="container">
@@ -615,7 +585,7 @@ section > .container{position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ============ 12. PATIČKA ============ -->
+<!-- ============ 11. PATIČKA ============ -->
 <footer class="footer">
   <div class="container">
     <div class="links">
@@ -639,7 +609,7 @@ section > .container{position:relative;z-index:1}
 /* Scroll-reveal: přidá .reveal prvkům a zobrazí je při vjetí do viewportu */
 (function(){
   const sel=['.hero .eyebrow','.hero h1','.hero .btn','.hero .proof','.logos',
-             '.section-head','.card','.stage','.guarantee','.founder > *','.stat',
+             '.section-head','.card','.stage','.guarantee',
              '.bento-card','.faq details','.final .badge','.final h2','.final .btn','.final p',
              '.video-wrap','.video-desc','.cta-row'];
   const items=document.querySelectorAll(sel.join(','));
@@ -778,11 +748,10 @@ document.querySelectorAll('.faq details').forEach(d=>{
     vysledky:['5','Reálné výsledky','Konkrétní příběhy klientů. Návštěvník se ztotožní: „měl/a stejný problém jako já – a vyřešil/a ho".','Problém → změna → výsledek s číslem. Fotka + celé jméno = věrohodnost.'],
     transformace:['6','Transformace (3 fáze)','Ukazuje cestu ve 3 krocích. Snižuje pocit, že je to složité, a dává jasnou představu o procesu.','Každá fáze = mini-výsledek, ne jen název modulu.'],
     garance:['7','Garance','Odstraňuje riziko rozhodnutí – návštěvník nemá co ztratit.','Bez slov „vrácení peněz" a „investice". Formuluj, co garantuješ ty.'],
-    zakladatel:['8','O zakladateli','Kdo za tím stojí a proč mu věřit: krátký příběh + 3 tvrdá čísla.','Příběh, se kterým se návštěvník ztotožní („byl/a jsem tam, kde jsi teď ty").'],
-    flex:['9','Flex – důkazy autority','Bento mřížka na „ukázání se": ocenění, certifikace, počet klientů, výsledky v číslech a benefity spolupráce na jednom místě.','Velká karta = nejsilnější důkaz. Jen ověřitelná fakta – přehánění důvěru zabíjí.'],
-    faq:['10','FAQ','Vyvrací poslední námitky těsně před rozhodnutím (čas, cena, zkušenosti, pro koho to není).','První otevřená otázka = ta nejčastější námitka. Otevřená je vždy jen jedna.'],
-    prihlaska:['11','Závěrečná výzva','Poslední tlačítko: zopakuje výsledek a přidá naléhavost (omezená místa).','Jedna věta, jedno tlačítko – žádné nové informace.'],
-    footer:['12','Patička','Povinné právní údaje (IČO, sídlo, GDPR, cookies). Zároveň buduje důvěru – nevynechávat.','Odkazy na GDPR a cookies musí vést na skutečné stránky.']
+    zakladatel:['8','O zakladateli + důkazy autority','Kdo za tím stojí a proč mu věřit – na jednom místě: příběh a fotka zakladatele, hlavní ocenění, počet klientů, certifikace, výsledky v číslech a benefity spolupráce.','Velká karta = ty + nejsilnější důkaz. Jen ověřitelná fakta – přehánění důvěru zabíjí.'],
+    faq:['9','FAQ','Vyvrací poslední námitky těsně před rozhodnutím (čas, cena, zkušenosti, pro koho to není).','První otevřená otázka = ta nejčastější námitka. Otevřená je vždy jen jedna.'],
+    prihlaska:['10','Závěrečná výzva','Poslední tlačítko: zopakuje výsledek a přidá naléhavost (omezená místa).','Jedna věta, jedno tlačítko – žádné nové informace.'],
+    footer:['11','Patička','Povinné právní údaje (IČO, sídlo, GDPR, cookies). Zároveň buduje důvěru – nevynechávat.','Odkazy na GDPR a cookies musí vést na skutečné stránky.']
   };
   var box=document.getElementById('tplInfo'),btn=document.getElementById('tplInfoBtn');
   var on=true; try{on=localStorage.getItem('tpl-info')!=='off';}catch(e){}
