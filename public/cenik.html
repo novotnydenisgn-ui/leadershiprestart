@@ -292,6 +292,9 @@
   .btn-gold:hover{transform:translateY(-3px);background:var(--c-gold-grad);border-color:transparent;
     color:#1a1206;box-shadow:0 18px 44px rgba(233,182,79,.35)}
 
+  /* stužka v ořezovém obalu — overflow+border-radius neořízne rotovanou stužku spolehlivě (WebKit),
+     clip-path na obalu ji ořízne do zaobleného rohu a nechá stín karty být */
+  .c-rib-clip{position:absolute;inset:0;clip-path:inset(0 round 22.5px);pointer-events:none;z-index:2}
   .c-ribbon{position:absolute;top:28px;right:-34px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
     font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
     background:var(--c-standard);padding:6px 44px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
@@ -766,7 +769,7 @@
 
       <!-- MOMENTUM (oranžová) — nový 2měsíční balíček, cíl prodeje -->
       <div class="lr-card cena-card v-standard reveal">
-        <div class="c-ribbon">Nejlepší volba</div>
+        <div class="c-rib-clip"><div class="c-ribbon">Nejlepší volba</div></div>
         <div class="c-name">Momentum</div>
         <div class="c-tag">Výzva + ukotvení · 2 měsíce</div>
         <div class="c-was">hodnota 79 100 Kč / ≈ 3 170 €</div>

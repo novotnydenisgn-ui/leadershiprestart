@@ -387,6 +387,9 @@
   .btn-elite{background:var(--lr-grad);color:var(--cta-ink);box-shadow:0 14px 34px rgba(233,182,79,.3)}
   .btn-elite:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(233,182,79,.45)}
 
+  /* stužka v ořezovém obalu — overflow+border-radius neořízne rotovanou stužku spolehlivě (WebKit),
+     clip-path na obalu ji ořízne do zaobleného rohu a nechá stín karty být */
+  .c-rib-clip{position:absolute;inset:0;clip-path:inset(0 round 22.5px);pointer-events:none;z-index:2}
   .c-ribbon{position:absolute;top:28px;right:-34px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
     font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
     background:var(--c-standard);padding:6px 44px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
@@ -660,7 +663,7 @@
 
       <!-- LAUNCH BOOST (oranžovo-zlatý gradient) -->
       <div class="lr-card cena-card v-launch reveal">
-        <div class="c-ribbon r-launch">3 měsíce</div>
+        <div class="c-rib-clip"><div class="c-ribbon r-launch">3 měsíce</div></div>
         <div class="c-name">Launch Boost</div>
         <div class="c-tag">3měsíční implementační program</div>
         <div class="c-motto">Postavme a spusťme systém společně.</div>
@@ -689,7 +692,7 @@
 
       <!-- ELITE (gradient) — done for you -->
       <div class="lr-card cena-card v-elite reveal">
-        <div class="c-ribbon r-grad">Done for you</div>
+        <div class="c-rib-clip"><div class="c-ribbon r-grad">Done for you</div></div>
         <div class="c-name">Elite</div>
         <div class="c-tag">VIP spolupráce · max. 4 klienti</div>
         <div class="c-motto">Udělejte to za mě.</div>
