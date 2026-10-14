@@ -387,6 +387,8 @@
 
   /* stužka v ořezovém obalu — overflow+border-radius neořízne rotovanou stužku spolehlivě (WebKit),
      clip-path na obalu ji ořízne do zaobleného rohu a nechá stín karty být */
+  .c-list.c-list-top{flex:none}
+  .c-purpose{margin:12px 0 16px;padding:0 6px;text-align:left;font-size:13.5px;line-height:1.55;color:var(--dk-muted)}
   .c-rib-clip{position:absolute;inset:0;clip-path:inset(0 round 22.5px);pointer-events:none;z-index:2}
   .c-ribbon{position:absolute;top:28px;right:-34px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
     font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
@@ -519,6 +521,53 @@
   .extra-price small{font-size:13px;color:var(--dk-muted);font-weight:700}
   .extra-card p{font-size:14.5px;color:var(--dk-muted);line-height:1.6}
   .extra-card p b{font:inherit;font-weight:700;color:var(--dk-text)}
+
+  /* Co v Up-Grade dostáváš — rozbalovací karty (hover/klik/fokus rozbalí kartu) */
+  .xc-group{margin-top:44px;text-align:left;position:relative}
+  .xc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid var(--dk-brd)}
+  .xc-head b{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:13px;color:var(--lr-gold-light)}
+  .xc-head span{font-size:14px;color:var(--dk-muted)}
+  .xcards{list-style:none;margin:0;padding:0;display:grid;gap:10px;height:470px;
+    transition:grid-template-columns .55s cubic-bezier(.2,.7,.2,1),grid-template-rows .55s cubic-bezier(.2,.7,.2,1)}
+  .xcard{position:relative;overflow:hidden;border-radius:22px;border:1px solid var(--dk-brd);cursor:pointer;
+    min-width:0;min-height:0;background:#0d0c0a;outline:none;isolation:isolate;transition:border-color .35s,box-shadow .35s}
+  .xcard[data-active="true"]{border-color:rgba(233,182,79,.55);box-shadow:0 24px 70px rgba(233,182,79,.14);cursor:default}
+  .xcard:focus-visible{outline:2px solid var(--lr-gold-light);outline-offset:3px}
+  .xcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.5);
+    transform:scale(1.1);transition:filter .45s ease,transform .7s ease}
+  .xcard[data-active="true"] img{filter:grayscale(0) brightness(.72);transform:scale(1)}
+  .xc-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,7,5,.97) 0%,rgba(8,7,5,.78) 36%,rgba(8,7,5,.18) 72%,rgba(8,7,5,.05))}
+  .xc-num{position:absolute;top:14px;right:18px;font:800 44px/1 "League Spartan",sans-serif;color:rgba(233,182,79,.28);transition:color .35s}
+  .xcard[data-active="true"] .xc-num{color:rgba(233,182,79,.5)}
+  .xc-vt{position:absolute;left:50%;bottom:26px;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;
+    font:800 14px/1.6 "League Spartan",sans-serif;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.85);
+    white-space:nowrap;max-height:calc(100% - 90px);overflow:hidden;text-overflow:ellipsis;transition:opacity .3s}
+  .xcard[data-active="true"] .xc-vt{opacity:0}
+  .xc-body{position:absolute;left:0;bottom:0;width:100%;min-width:300px;padding:clamp(20px,2.4vw,30px);
+    display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .xc-body>*{opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .35s ease}
+  .xcard[data-active="true"] .xc-body>*{opacity:1;transform:none}
+  .xcard[data-active="true"] .xc-body>:nth-child(1){transition-delay:.12s}
+  .xcard[data-active="true"] .xc-body>:nth-child(2){transition-delay:.18s}
+  .xcard[data-active="true"] .xc-body>:nth-child(3){transition-delay:.24s}
+  .xcard[data-active="true"] .xc-body>:nth-child(4){transition-delay:.3s}
+  .xc-ico{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:var(--lr-gold-light);
+    background:rgba(233,182,79,.12);border:1px solid rgba(233,182,79,.4);margin-bottom:4px}
+  .xc-ico .ico{width:24px;height:24px}
+  .xc-tag{font-family:"League Spartan",sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lr-gold-light)}
+  .xc-body h3{font-size:clamp(20px,2.1vw,27px);line-height:1.15;color:#fff;margin:0;max-width:560px}
+  .xc-body p{font-size:15px;line-height:1.6;color:#cfd2d6;max-width:560px;margin:0}
+  .xc-body p b{color:#fff}
+  .xc-body p a{color:var(--lr-gold-light)}
+  @media(max-width:767px){
+    .xcards{height:auto;min-height:0}
+    .xcards[data-n="5"]{height:680px}.xcards[data-n="4"]{height:600px}
+    .xc-vt{writing-mode:horizontal-tb;transform:translateY(50%);left:20px;right:70px;bottom:50%;max-height:none;font-size:13px}
+    .xc-num{font-size:30px;top:50%;transform:translateY(-50%)}
+    .xcard[data-active="true"] .xc-num{top:14px;transform:none}
+    .xc-body{min-width:0}
+  }
+  @media(prefers-reduced-motion:reduce){.xcards,.xcard img,.xc-body>*{transition:none}}
 
   /* aplikace Velín */
   .velin-grid{grid-template-columns:repeat(4,1fr)}
@@ -682,100 +731,124 @@
     Propojujeme <b>mentoring, komunitu podnikatelů, skupinové hovory, vzdělávání, marketingové postupy
     a šablony, software i praktickou implementaci</b> — na podnikání už nejsi sám.</p>
 
-    <div class="big-grid">
+    <div class="xc-group">
+      <div class="xc-head"><b>Postupy a nástroje</b><span>co tě naučíme a čím systém postavíš</span></div>
+      <ul class="xcards" data-xcards>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-onboarding.jpg" alt="Kompas v ruce" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">01</span>
+          <span class="xc-vt">Marketingový funnel</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-route"/></svg></span>
+            <span class="xc-tag">Postup</span>
+            <h3 class="display">Marketingový funnel krok za krokem</h3>
+            <p>Konkrétní postup pro nasazení <b>marketingového funnelu</b>, který má <b>100% úspěšnost už od 2 dnů od spuštění</b>. Žádná teorie — přesné kroky v přesném pořadí, od první reklamy po první poptávku.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/gold-graph.webp" alt="Zlatý rostoucí graf" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">02</span>
+          <span class="xc-vt">Šablony 4× zisk</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-template"/></svg></span>
+            <span class="xc-tag">Šablony</span>
+            <h3 class="display">Nabídka a model podnikání — 4× ziskovější</h3>
+            <p><b>Zábavné šablony</b>, které tě krok za krokem provedou a <b>vytvoří ti nabídku</b> i <b>model tvého podnikání</b> tak, aby bylo <b>4× a více ziskovější</b>. Vyplňuješ, ne vymýšlíš od nuly.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/marble-face.webp" alt="Mramorové oko" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">03</span>
+          <span class="xc-vt">Web s AI agenty</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-bot"/></svg></span>
+            <span class="xc-tag">AI agenti</span>
+            <h3 class="display">Stylový web se srdcem tvé firmy</h3>
+            <p>AI agenti, kteří za tebe <b>postaví web</b> — s designem, tónem a příběhem, jako bys ho <b>navrhoval sám</b>. Ty dodáš vizi, oni ji přetaví do stránek.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-reflexe.jpg" alt="Aplikace v telefonu" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">04</span>
+          <span class="xc-vt">36 hodin ušetřených</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-zap"/></svg></span>
+            <span class="xc-tag">AI agenti</span>
+            <h3 class="display">Přes 36 hodin práce ušetřených</h3>
+            <p>Agenti, kteří ti ušetří <b>36+ hodin ruční práce</b> — nebo <b>26 000 Kč</b>, které bys jinak zaplatil někomu jinému. Rutina jede sama, ty děláš jen to, co byznys posouvá.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-materialy.jpg" alt="Přehledy na obrazovkách" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">05</span>
+          <span class="xc-vt">Aplikace Velín</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-chart"/></svg></span>
+            <span class="xc-tag">Software</span>
+            <h3 class="display">Aplikace Velín — ušetří 2 000+ Kč měsíčně</h3>
+            <p>CRM, dotazníky, rezervace, e-maily, stránky, fakturace i přehledy na jednom místě — <b>v ceně členství</b>. Vč. Interaktivního Remind Systému. <a href="#velin">Více o Velínu ↓</a></p>
+          </article>
+        </li>
+      </ul>
+    </div>
 
-      <div class="lr-card big-card big-wide reveal">
-        <span class="big-num">01</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-route"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">Postup</span>
-          <h3 class="display">Marketingový funnel krok za krokem</h3>
-          <p>Konkrétní postup pro nasazení <b>marketingového funnelu</b>, který má
-          <b>100% úspěšnost už od 2 dnů od spuštění</b>. Žádná teorie — přesné kroky
-          v přesném pořadí, od první reklamy po první poptávku.</p>
-        </div>
-      </div>
-
-      <div class="lr-card big-card reveal">
-        <span class="big-num">02</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-bot"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">AI agenti</span>
-          <h3 class="display">Stylový web se srdcem tvé firmy</h3>
-          <p>AI agenti, kteří za tebe <b>postaví web</b> — s designem, tónem a příběhem,
-          jako bys ho <b>navrhoval sám</b>. Ty dodáš vizi, oni ji přetaví do stránek.</p>
-        </div>
-      </div>
-
-      <div class="lr-card big-card reveal">
-        <span class="big-num">03</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-zap"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">AI agenti</span>
-          <h3 class="display">Přes 36 hodin práce ušetřených</h3>
-          <p>Agenti, kteří ti ušetří <b>36+ hodin ruční práce</b> — nebo
-          <b>26 000 Kč</b>, které bys jinak zaplatil někomu jinému. Rutina jede sama,
-          ty děláš jen to, co byznys posouvá.</p>
-        </div>
-      </div>
-
-      <div class="lr-card big-card big-wide reveal">
-        <span class="big-num">04</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-template"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">Šablony</span>
-          <h3 class="display">Šablony, které ti vytvoří nabídku a model podnikání — 4× ziskovější</h3>
-          <p><b>Zábavné šablony</b>, které tě krok za krokem provedou a <b>vytvoří ti nabídku</b>
-          i <b>model tvého podnikání</b> tak, aby bylo <b>4× a více ziskovější</b>.
-          Vyplňuješ, ne vymýšlíš od nuly.</p>
-        </div>
-      </div>
-
-      <div class="lr-card big-card reveal">
-        <span class="big-num">05</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-target"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">Skupina</span>
-          <h3 class="display">Skupinové strategické hovory</h3>
-          <p>Pravidelné <b>strategické hovory</b> pro <b>implementaci celého systému</b> —
-          vyhodnotíme, kde jsi, odblokujeme, co drhne, a nastavíme další kroky.</p>
-        </div>
-      </div>
-
-      <div class="lr-card big-card reveal">
-        <span class="big-num">06</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-compass"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">1 : 1</span>
-          <h3 class="display">Individuální mentoring s Denisem</h3>
-          <p><b>Osobní vedení</b> nad tvým byznysem — strategie, čísla, rozhodnutí.
-          Nečekáš na obecnou radu, řešíš přesně svou situaci.</p>
-        </div>
-      </div>
-
-      <div class="lr-card big-card big-wide reveal">
-        <span class="big-num">07</span>
-        <div class="big-ico"><svg class="ico"><use href="#i-chart"/></svg></div>
-        <div class="big-body">
-          <span class="big-tag">Software</span>
-          <h3 class="display">Aplikace Velín, která ti ušetří 2 000+ Kč měsíčně</h3>
-          <p>CRM, dotazníky, rezervace, e-maily, stránky, fakturace i přehledy na jednom místě — <b>v ceně členství</b>.
-          <b>2 000+ Kč měsíčně</b> za nástroje, které bys jinak platil zvlášť, zůstane tobě. Vč. Interaktivního Remind Systému.
-          <a href="#velin" style="color:var(--lr-gold-light)">Více o Velínu ↓</a></p>
-        </div>
-      </div>
-
-      <div class="big-extra reveal">
-        <div class="big-extra-item">
-          <span class="big-extra-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
-          <div><b>Osobní akce se slevou až 50 %</b><span>Basic 20 %, Grow 30 %, Mastery 50 % — viz úrovně níže.</span></div>
-        </div>
-        <div class="big-extra-item big-extra-gold">
-          <span class="big-extra-ico"><svg class="ico"><use href="#i-package"/></svg></span>
-          <div><b>Vstupní balíček pro implementaci</b><span>Všechno, co potřebuješ, abys systém rozjel hned první týden — ne až „někdy".</span></div>
-        </div>
-      </div>
-
+    <div class="xc-group">
+      <div class="xc-head"><b>Vedení a komunita</b><span>kdo tě vede a co dostaneš navíc</span></div>
+      <ul class="xcards" data-xcards>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/denis.webp" alt="Denis Novotný" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">06</span>
+          <span class="xc-vt">Mentoring 1 : 1</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-compass"/></svg></span>
+            <span class="xc-tag">1 : 1</span>
+            <h3 class="display">Individuální mentoring s Denisem</h3>
+            <p><b>Osobní vedení</b> nad tvým byznysem — strategie, čísla, rozhodnutí. Nečekáš na obecnou radu, řešíš přesně svou situaci.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-status.jpg" alt="Skupinový online hovor" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">07</span>
+          <span class="xc-vt">Skupinové hovory</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-target"/></svg></span>
+            <span class="xc-tag">Skupina</span>
+            <h3 class="display">Skupinové strategické hovory</h3>
+            <p>Pravidelné <b>strategické hovory</b> pro <b>implementaci celého systému</b> — vyhodnotíme, kde jsi, odblokujeme, co drhne, a nastavíme další kroky. Plus komunita podnikatelů, se kterými sdílíš cestu.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/welcome-box.webp" alt="Zlatě zářící krabice" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">08</span>
+          <span class="xc-vt">Vstupní balíček</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-package"/></svg></span>
+            <span class="xc-tag">Start</span>
+            <h3 class="display">Vstupní balíček pro implementaci</h3>
+            <p>Všechno, co potřebuješ, abys systém <b>rozjel hned první týden</b> — ne až „někdy".</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/bg-consistency.webp" alt="Trénink za úsvitu" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">09</span>
+          <span class="xc-vt">Akce až −50 %</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
+            <span class="xc-tag">Výhody</span>
+            <h3 class="display">Osobní akce se slevou až 50 %</h3>
+            <p>Retreaty, workshopy a živé akce za zvýhodněnou cenu — <b>Basic 20 %, Grow 30 %, Mastery 50 %</b>.</p>
+          </article>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
@@ -894,8 +967,11 @@
         <div class="c-motto">Postavme a spusťme systém společně.</div>
         <div class="c-price p-launch">45 000<small>Kč</small></div>
         <div class="c-eur">≈ 1 800 € jednorázově · nebo 3× 16 000 Kč</div>
-        <ul class="c-list">
+        <ul class="c-list c-list-top">
           <li class="gift"><svg class="ico"><use href="#i-rocket"/></svg>Funkční akviziční systém spuštěný do 3 měsíců</li>
+        </ul>
+        <p class="c-purpose">Pro ty, kdo chtějí systém postavit spolu s námi, naučit se ho řídit a mít předvídatelný přísun platících zákazníků.</p>
+        <ul class="c-list">
           <li><svg class="ico"><use href="#i-wrench"/></svg><span><b>Stavíme společně</b> — ty připravíš základ, klíčové části dotáhneme my</span></li>
           <li><svg class="ico"><use href="#i-compass"/></svg><span><b>Mentoring 2–4× měsíčně</b> + focus a strategické hovory</span></li>
           <li><svg class="ico"><use href="#i-check"/></svg><span><b>Garance návratnosti 1 : 3</b></span></li>
@@ -911,8 +987,11 @@
         <div class="c-motto">Udělejte to za mě.</div>
         <div class="c-price p-elite">120 000<small>Kč</small></div>
         <div class="c-eur">≈ 4 800 €</div>
-        <ul class="c-list">
+        <ul class="c-list c-list-top">
           <li class="gift"><svg class="ico"><use href="#i-crown"/></svg>Jen pár meetingů — vše spustíme za tebe</li>
+        </ul>
+        <p class="c-purpose">Pro ty, kdo nemají čas marketing stavět — dodáš sebe a rozhodnutí, celý systém postavíme a spustíme my.</p>
+        <ul class="c-list">
           <li><svg class="ico"><use href="#i-trend"/></svg><span><b>Strategie s předvídatelným růstem</b>, akviziční systém a follow-up na klíč</span></li>
           <li><svg class="ico"><use href="#i-magnet"/></svg><span><b>Kampaně, obsah i prodej</b> — vymyslíme, vytvoříme a spustíme</span></li>
           <li class="gift"><svg class="ico"><use href="#i-gift"/></svg>Licence Velín v hodnotě 20 000 Kč zdarma</li>
@@ -1082,6 +1161,30 @@
 })();
 </script>
 <script src="assets/site.js?v=21"></script>
+<script>
+/* rozbalovací karty „Co v Up-Grade dostáváš“ — aktivní karta 5fr, ostatní 1fr (desktop sloupce, mobil řádky) */
+(function(){
+  var mq=window.matchMedia('(min-width:768px)');
+  document.querySelectorAll('[data-xcards]').forEach(function(ul){
+    var items=[].slice.call(ul.children), act=0;
+    ul.setAttribute('data-n',items.length);
+    function set(i){
+      act=i;
+      items.forEach(function(li,k){li.setAttribute('data-active',k===i?'true':'false');});
+      var tpl=items.map(function(_,k){return k===i?'5fr':'1fr';}).join(' ');
+      if(mq.matches){ul.style.gridTemplateColumns=tpl;ul.style.gridTemplateRows='1fr';}
+      else{ul.style.gridTemplateRows=tpl;ul.style.gridTemplateColumns='1fr';}
+    }
+    items.forEach(function(li,k){
+      li.addEventListener('mouseenter',function(){set(k);});
+      li.addEventListener('focus',function(){set(k);});
+      li.addEventListener('click',function(){set(k);});
+    });
+    (mq.addEventListener?mq.addEventListener('change',function(){set(act);}):mq.addListener(function(){set(act);}));
+    set(0);
+  });
+})();
+</script>
 <script>
 // LP: CTA v navigaci vede na dotazník Up-Grade (site.js jinak staví odkaz na kvalifikaci do výzvy)
 (function(){

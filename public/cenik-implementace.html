@@ -389,6 +389,8 @@
 
   /* stužka v ořezovém obalu — overflow+border-radius neořízne rotovanou stužku spolehlivě (WebKit),
      clip-path na obalu ji ořízne do zaobleného rohu a nechá stín karty být */
+  .c-list.c-list-top{flex:none}
+  .c-purpose{margin:12px 0 16px;padding:0 6px;text-align:left;font-size:13.5px;line-height:1.55;color:var(--dk-muted)}
   .c-rib-clip{position:absolute;inset:0;clip-path:inset(0 round 22.5px);pointer-events:none;z-index:2}
   .c-ribbon{position:absolute;top:28px;right:-34px;transform:rotate(38deg);font-family:"League Spartan",sans-serif;
     font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff;
@@ -669,8 +671,11 @@
         <div class="c-motto">Postavme a spusťme systém společně.</div>
         <div class="c-price p-launch">45 000<small>Kč</small></div>
         <div class="c-eur">≈ 1 800 € jednorázově · nebo 3× 16 000 Kč (48 000 Kč)</div>
-        <ul class="c-list">
+        <ul class="c-list c-list-top">
           <li class="gift"><svg class="ico"><use href="#i-rocket"/></svg>Funkční akviziční systém vybudovaný a spuštěný do 3 měsíců</li>
+        </ul>
+        <p class="c-purpose">Pro ty, kdo chtějí systém postavit spolu s námi, naučit se ho řídit a mít předvídatelný přísun platících zákazníků.</p>
+        <ul class="c-list">
           <li><svg class="ico"><use href="#i-target"/></svg><span><b>Úvodní strategická konzultace</b> — cíle, nabídka, ekonomika kampaně a plán na 3 měsíce</span></li>
           <li><svg class="ico"><use href="#i-route"/></svg><span><b>Ty připravíš základ</b> podle našich postupů — brand manuál, nabídku, první texty, otázky do dotazníku, fotky</span></li>
           <li><svg class="ico"><use href="#i-wrench"/></svg><span><b>My dotáhneme klíčové části</b> — marketingovou logiku, texty, funnel do použitelné podoby a technické propojení</span></li>
@@ -698,8 +703,11 @@
         <div class="c-motto">Udělejte to za mě.</div>
         <div class="c-price p-elite">120 000<small>Kč</small></div>
         <div class="c-eur">≈ 4 800 €</div>
-        <ul class="c-list">
+        <ul class="c-list c-list-top">
           <li class="gift"><svg class="ico"><use href="#i-crown"/></svg>Vše z Launch Boostu — jen pár meetingů a vše spustíme za tebe</li>
+        </ul>
+        <p class="c-purpose">Pro ty, kdo nemají čas marketing stavět — dodáš sebe a rozhodnutí, celý systém postavíme a spustíme my.</p>
+        <ul class="c-list">
           <li><svg class="ico"><use href="#i-trend"/></svg><span><b>Strategie s předvídatelným růstem</b> — nabídka, ekonomika kampaně a plán, který jde spočítat</span></li>
           <li><svg class="ico"><use href="#i-magnet"/></svg><span><b>Akviziční systém na klíč</b> — funnel, stránky, dotazníky, rezervace a CRM</span></li>
           <li><svg class="ico"><use href="#i-settings"/></svg><span><b>Follow-up a automatizace</b> — e-maily, kvalifikace zájemců, připomínky, reporty</span></li>
