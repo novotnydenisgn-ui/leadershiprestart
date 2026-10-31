@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DRAFT · Up-Grade jako celý balíček — Launch Boost | Leadership Restart</title>
+<title>DRAFT ceník · Launch Boost / Launch Boost Master | Leadership Restart</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Draft: Leadership Up-Grade jako jeden balíček Launch Boost — splátky 14× 5 450 / 9× 8 450 Kč, při koupi hned −15 % (od 47 900 Kč se slevou za pokračování z Restartu).">
 <!--
@@ -11,6 +11,8 @@
   2. verze: splátky 14× 5 450 = 76 300 / 9× 8 450 = 76 050, kupuješ hned −15 % zaokrouhleno na …900, sleva za pokračování 5 000 z Restartu ×4 (draft přepínač ×3)).
   Postaveno z cenik-implementace.html; kalkulačka = inline skript dole. Jen draft (noindex) — oficiální
   /cenik-upgrade a /cenik-implementace se nemění. Předchozí draft (úrovně Basic/Grow/Mastery) je v gitu.
+  31. 10. 2026 (v3): varianty pojmenované Launch Boost (14× 5 450) / Launch Boost Master (9× 8 450); stránka je na /draftcenik
+  (Denis: „dej to na /draftcenik“ — Restart draft = kopie /cenik, je v gitu); draftupgrade.html je stejná kopie.
   ---- původní poznámka: ----
   /cenik-implementace (14. 10. 2026): odvozeno z /cenik-upgrade — jen Launch Boost + Elite, statický hero (bez scroll morphu, --gp zůstává 1), sekce Velín, Co dál.
   Při změně Launch Boost / Elite / Velín upravit i cenik-upgrade.html (Velín + Co dál jsou na obou).
@@ -578,6 +580,7 @@
     max-width:1060px;margin:44px auto 0;padding:clamp(24px,3.2vw,42px)}
   .lb-card:hover{transform:none}
   .lb-left .c-name,.lb-left .c-tag,.lb-left .c-motto{text-align:left}
+  @media(max-width:900px){.lb-left .c-name{padding-right:84px}}
   .lb-right{display:flex;flex-direction:column;padding-left:clamp(0px,3vw,40px);border-left:1px solid rgba(233,182,79,.22)}
   @media(max-width:900px){.lb-card{grid-template-columns:1fr}.lb-right{padding-left:0;border-left:0;padding-top:24px;border-top:1px solid rgba(233,182,79,.22)}}
 
@@ -807,7 +810,7 @@
 
       <!-- levá strana: co je v balíčku -->
       <div class="lb-left">
-        <div class="c-name">Launch Boost</div>
+        <div class="c-name" id="lbName">Launch Boost</div>
         <div class="c-tag">kompletní balíček Leadership Up-Grade</div>
         <div class="c-motto">Postavme, spusťme a znásobme to společně.</div>
         <ul class="c-list c-list-top">
@@ -830,8 +833,8 @@
       <div class="lb-right">
         <div class="lb-tabs" role="group" aria-label="Způsob platby">
           <button type="button" data-pay="once" aria-pressed="false"><b>Kupuješ hned</b><small class="lb-badge">−15 %</small></button>
-          <button type="button" data-pay="m14" aria-pressed="true"><b>14 splátek</b><small>po 5 450 Kč</small></button>
-          <button type="button" data-pay="m9" aria-pressed="false"><b>9 splátek</b><small>po 8 450 Kč</small></button>
+          <button type="button" data-pay="m14" aria-pressed="true"><b>Launch Boost</b><small>14× 5 450 Kč</small></button>
+          <button type="button" data-pay="m9" aria-pressed="false"><b>Launch Boost Master</b><small>9× 8 450 Kč</small></button>
         </div>
 
         <div class="lb-price">
@@ -912,6 +915,7 @@
           </span> — přepni a uvidíš dopad na cenu (jde i přes adresu <code>?x=3</code>).</li>
         <li><b>Ceny v2:</b> splátky drží velikost členství (5 450 = Grow, 8 450 = pod Mastery 8 800) → 14× 5 450 = 76 300 Kč, 9× 8 450 = 76 050 Kč.
           Kupuješ hned = −15 % z 76 300, zaokrouhleno na „…900“: <b>64 900 Kč</b>; se slevou za pokračování ×4 <b>47 900 Kč</b> (×3 → 51 900 Kč).</li>
+        <li><b>Launch Boost / Launch Boost Master</b> se teď liší jen splátkami (14× 5 450 / 9× 8 450), obsah je stejný. Má Master dostat něco navíc (např. 2× 1 : 1 měsíčně a kontrolu práce jako dřív Mastery)?</li>
         <li><b>Kombinace slev:</b> obě platí — nejdřív sleva za pokračování, ze zbytku pak −15 % za koupi hned.</li>
         <li><b>Sleva u splátek</b> se odečítá z posledních splátek (např. 14× 5 450 → 10× 5 450 + 1× 1 800 = 11 splátek). Alternativa: nižší měsíční částka.</li>
         <li><b>Délka balíčku:</b> splátky 12× / 9× neříkají, jak dlouho program běží. Garance „do 3 měsíců spuštěno“ zůstala — co je potom (optimalizace do konce splátek)?</li>
@@ -1026,7 +1030,7 @@
     var b = document.querySelector('.nav-in .nav-brand'); if (!b) return false;
     if (document.querySelector('.hdr-switch')) return true;
     var d = document.createElement('div'); d.className = 'hdr-switch';
-    d.innerHTML = '<a href="/draftcenik">Restart</a><a href="/draftupgrade" class="on">Up-Grade</a>';
+    d.innerHTML = '<a href="/cenik">Restart</a><a href="/draftcenik" class="on">Up-Grade</a>';
     b.insertAdjacentElement('afterend', d); return true;
   }
   if (!add()) { var n = 0, t = setInterval(function(){ if (add() || ++n > 30) clearInterval(t); }, 100); }
@@ -1156,8 +1160,8 @@
    Pořadí: nejdřív sleva za pokračování, z rozdílu −15 % za platbu najednou; u splátek odpadnou poslední splátky. */
 (function(){
   var BASE_DISCOUNT = 5000, ONCE_OFF = 0.15, EUR = 25;
-  var PLANS = { m14: { rate: 5450, n: 14, hint: 'Měsíčně jako dřív Grow — ale máš celý balíček' },
-                m9:  { rate: 8450, n: 9,  hint: 'Méně než dřív Mastery (8 800) — a splaceno za 9 měsíců' } };
+  var PLANS = { m14: { name: 'Launch Boost', rate: 5450, n: 14, hint: 'Měsíčně jako dřív Grow — ale máš celý balíček' },
+                m9:  { name: 'Launch Boost Master', rate: 8450, n: 9,  hint: 'Méně než dřív Mastery (8 800) — a splaceno za 9 měsíců' } };
   var PRICE = PLANS.m14.rate * PLANS.m14.n;           /* 76 300 — kotva pro koupi hned */
   var charm = function (x) { return Math.round((x - 900) / 1000) * 1000 + 900; };  /* 64 855 → 64 900 */
   var q = new URLSearchParams(location.search);
@@ -1214,6 +1218,7 @@
       $('lbHint').textContent = plan.hint;
     }
 
+    $('lbName').textContent = pay === 'once' ? 'Launch Boost' : plan.name;
     $('lbListLbl').textContent = pay === 'once' ? 'Cena balíčku' : 'Cena na splátky';
     $('lbList').textContent = fmt(list);
     $('lbRowV').hidden = !disc;
@@ -1294,6 +1299,6 @@
   render(false);
 })();
 </script>
-<div class="draft-pill">Draft · Up-Grade jako celý balíček</div>
+<div class="draft-pill">Draft ceník · Launch Boost</div>
 </body>
 </html>
