@@ -16,6 +16,10 @@ export const FORM_PATHS = {
   // Dárek pro účastníky programu: dotazník pro doručení balíčku (styl „Výrazný“) → Google tabulka „Balíček_leadership restart“
   '/darek': 'darek',
   '/dárek': 'darek',
+  // Black Friday – dárková karta: po platbě (Stripe → /black-friday-dekujeme) kupující doplní údaje pro kartu
+  // (dotazník „Dárková karta – údaje“, slug darkova-karta) → Velín pošle e-mail s kartou a upozorní Denise
+  '/darkova-karta': 'darkova-karta',
+  '/dárková-karta': 'darkova-karta',
   // Výzva (kopie Tilda funnelu silabytsebou.cz): kvalifikace → rezervace
   '/kvalifikace-vyzva': 'kvalifikace-vyzva',
   '/kvalifikace_do_vyzvy': 'kvalifikace-vyzva',

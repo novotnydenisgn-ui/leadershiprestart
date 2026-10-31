@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Friday skončil | Leadership Restart</title>
+<meta name="description" content="Black Friday akce na dárkovou kartu Leadership Restart skončila.">
+<meta name="robots" content="noindex,nofollow">
+<!--
+  /black-friday-konec – AKCE SKONČILA / VYPRODÁNO.
+  Kam vést lidi, až platební odkaz Stripe vypne limit 30 plateb nebo odpočet 6. 11. 2026 23:59 doběhne
+  (ve Stripe: Payment link → „Limit the number of payments“ → po dosažení přesměrovat sem; LP /black-friday
+  může po konci odpočtu přesměrovat také – zatím jen přepíše lištu na „Akce skončila“).
+  Design = landing page /black-friday (styly v assets/bf.css).
+-->
+<link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=22">
+<link rel="stylesheet" href="assets/bf.css?v=1">
+<style>
+  .konec-bf{min-height:calc(100vh - 58px - 56px);display:grid;place-items:center;text-align:center;padding:72px 0}
+  .konec-bf .sub{font-size:18px;line-height:30px;color:var(--dk-muted);max-width:600px;margin:18px auto 0}
+  .konec-bf .hero-cta{margin-top:32px}
+  .konec-bf .card-stage{margin-top:40px;opacity:.55;filter:saturate(.6)}
+  .konec-bf .card-float{width:min(100%,420px)}
+</style>
+</head>
+<body class="bf no-bar">
+
+<div id="siteNav"></div>
+
+<section class="konec-bf">
+  <div class="wrap">
+    <span class="kicker-bf">Black Friday · akce skončila</span>
+    <h1 style="font-size:52px">Dárkové karty jsou <span class="grad grad-gold">vyprodané</span> 🎄</h1>
+    <p class="sub">Všech 30 karet se slevou 80 % je pryč – nebo akce skončila 6. 11. 2026. Děkujeme za obrovský zájem!
+      Program Leadership Restart ale jede dál a za běžných podmínek do něj můžeš vstoupit kdykoli.</p>
+    <div class="hero-cta cta-row">
+      <a class="cta-bf" data-cta-pos="bf_konec_cenik" href="cenik.html">Podívat se na ceník</a>
+      <a class="cta-ghost" data-cta-pos="bf_konec_home" href="index.html">Zpět na hlavní stránku</a>
+    </div>
+    <p class="cta-note">Chceš vědět o příští akci jako první? Napiš nám na <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a>.</p>
+
+    <div class="card-stage">
+      <div class="card-float still">
+        <div class="gcard" role="img" aria-label="Dárková karta Leadership Restart – vyprodáno">
+          <div class="rb-h" aria-hidden="true"></div>
+          <div class="rb-v" aria-hidden="true"></div>
+          <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
+            <path d="M60 40 C 42 6, 4 12, 11 36 C 16 56, 46 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M60 40 C 78 6, 116 12, 109 36 C 104 56, 74 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M55 45 L 38 77 L 49 72 L 53 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <path d="M65 45 L 82 77 L 71 72 L 67 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <circle cx="60" cy="40" r="9" fill="#f6d47c" stroke="#8a6318" stroke-opacity=".4"/>
+          </svg>
+          <svg class="g-logo" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart za 21 dní">
+            <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrLogoCard)"/>
+            <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
+            <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#EFEEEC">START</tspan></text>
+            <text x="128" y="92" font-family="Manrope, sans-serif" font-weight="600" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>
+          </svg>
+          <div class="g-text">
+            <div class="g-label">Dárková karta</div>
+            <div class="g-value"><span class="pr"><span class="grad grad-num">Vyprodáno</span></span></div>
+            <div class="g-use">Black Friday 2026 · 30 z 30 karet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bf-footer">
+  <div class="wrap">
+    <p class="bf-f-brand">Leadership Restart</p>
+    <p class="bf-f-op">Provozovatel: Denis Novotný, Vranov 198, Vranov u Brna · IČO 05876664 · Nejsem plátce DPH ·
+      <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a></p>
+    <nav class="bf-f-legal">
+      <a href="gdpr.html">Ochrana osobních údajů</a>
+      <a href="odstoupeni.html">Odstoupení od smlouvy</a>
+      <button type="button" class="bf-f-ck" id="bfCookies">Nastavení cookies</button>
+    </nav>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lrLogoCard" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#377EF7"/><stop offset="100%" stop-color="#ED6D47"/>
+    </linearGradient>
+    <linearGradient id="lrBow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#E9B64F"/><stop offset="1" stop-color="#A8762A"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<script src="assets/site.js?v=21"></script>
+<script>
+(function(){
+  function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
+    c.href='cenik.html'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf_konec'; c.textContent='Ceník programu'; return true; }
+  if(!fix()){ var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
+  document.getElementById('bfCookies').addEventListener('click', function(){ var fab=document.getElementById('ckFab'); if(fab) fab.click(); });
+})();
+</script>
+</body>
+</html>

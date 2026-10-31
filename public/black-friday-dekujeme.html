@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Děkujeme – dárková karta je na cestě | Leadership Restart</title>
+<meta name="description" content="Platba proběhla. Dárková karta Leadership Restart v hodnotě 22 990 Kč ti přijde e-mailem.">
+<meta name="robots" content="noindex,nofollow">
+<!--
+  /black-friday-dekujeme – POTVRZOVACÍ STRÁNKA po platbě dárkové karty (Black Friday).
+  Sem míří „success URL“ platebního odkazu Stripe (doporučeno s parametrem ?s={CHECKOUT_SESSION_ID},
+  ten se jen přenese do odkazu na dotazník, aby šla objednávka spárovat s platbou).
+  Design, hlavička, karta a patička = landing page /black-friday (styly sdílené v assets/bf.css).
+  Tok: 1) Stripe pošle potvrzení platby · 2) kupující doplní údaje pro kartu v dotazníku /darkova-karta
+  (Velín, dotazník „Dárková karta – údaje“) · 3) Velín pošle e-mail s kartou a upozorní Denise.
+-->
+<link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=22">
+<link rel="stylesheet" href="assets/bf.css?v=1">
+<style>
+  .hero-bf .check{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;margin:0 auto 18px;
+    color:#1a1206;background:var(--lr-grad);box-shadow:0 14px 40px rgba(233,182,79,.35)}
+  .hero-bf .check .ico{width:30px;height:30px;stroke-width:2.6}
+  .hero-bf .card-stage{margin-top:40px}
+  .step.hot{border-color:rgba(233,182,79,.45);background:rgba(233,182,79,.08)}
+  .contact{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:22px;font-size:15px;line-height:24px;color:var(--dk-muted)}
+  .contact a{color:#fff;text-decoration:none;font-weight:700}
+  .contact a:hover{color:var(--lr-gold-light)}
+</style>
+</head>
+<body class="bf">
+
+<!-- Ikony: Lucide (MIT), stroke 2 / 24px — podle brand.html #ikony -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  </defs>
+</svg>
+
+<div id="siteNav"></div>
+
+<!-- ======================= 1) ZLATÁ LIŠTA ======================= -->
+<div class="bf-bar" role="status">
+  <span>Black Friday · dárková karta</span>
+  <span class="ok"><i>✓</i>Platba proběhla</span>
+</div>
+
+<!-- ======================= 2) HERO ======================= -->
+<section class="hero-bf">
+  <div class="wrap">
+    <div class="check"><svg class="ico"><use href="#i-check"/></svg></div>
+    <span class="kicker-bf">Děkujeme · objednávka přijata</span>
+    <h1>Hotovo! Právě z tebe je <span class="grad grad-gold">nejštědřejší člověk</span> pod stromečkem 🎄</h1>
+    <p class="sub">Tvoje dárková karta v hodnotě <b><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></b>
+      je na cestě. Ještě jeden krok – doplň, <b>komu ji daruješ</b>, a pošleme ti ji e-mailem.</p>
+
+    <div class="hero-cta">
+      <a class="cta-bf" id="ctaForm" data-cta-pos="bf_thanks_form" href="/darkova-karta">Doplnit údaje pro kartu (1 minuta)</a>
+      <p class="cta-note">Karta přijde na e-mail, který v dotazníku uvedeš · obvykle do pár minut</p>
+    </div>
+
+    <div class="card-stage">
+      <div class="card-float">
+        <div class="gcard" role="img" aria-label="Dárková karta Leadership Restart v hodnotě 22 990 Kč (920 €)">
+          <div class="rb-h" aria-hidden="true"></div>
+          <div class="rb-v" aria-hidden="true"></div>
+          <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
+            <path d="M60 40 C 42 6, 4 12, 11 36 C 16 56, 46 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M60 40 C 78 6, 116 12, 109 36 C 104 56, 74 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M55 45 L 38 77 L 49 72 L 53 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <path d="M65 45 L 82 77 L 71 72 L 67 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <circle cx="60" cy="40" r="9" fill="#f6d47c" stroke="#8a6318" stroke-opacity=".4"/>
+          </svg>
+          <div class="shine" aria-hidden="true"></div>
+          <svg class="g-logo" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart za 21 dní">
+            <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrLogoCard)"/>
+            <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
+            <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#EFEEEC">START</tspan></text>
+            <text x="128" y="92" font-family="Manrope, sans-serif" font-weight="600" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>
+          </svg>
+          <div class="g-text">
+            <div class="g-label">Dárková karta</div>
+            <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
+            <div class="g-use">Na jakékoli služby Leadership Restart</div>
+            <div class="g-valid">Platí od 24. 12. 2026 do 31. 12. 2027</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 3) CO TEĎ BUDE ======================= -->
+<section class="sec-bf">
+  <div class="wrap">
+    <span class="kicker-bf">Co teď bude</span>
+    <h2>Tři kroky <span class="grad grad-gold">a karta je pod stromečkem</span></h2>
+
+    <div class="steps">
+      <div class="step">
+        <span class="s-num">1</span>
+        <h3>Potvrzení platby máš v e-mailu</h3>
+        <p>Stripe ti právě poslal potvrzení o zaplacení 4 532 Kč (181 €) za dárkovou kartu. Kdyby nedorazilo do pár minut,
+          mrkni do spamu nebo hromadných zpráv.</p>
+      </div>
+      <div class="step hot">
+        <span class="s-num">2</span>
+        <h3>Doplň, komu kartu daruješ</h3>
+        <p>V krátkém dotazníku uvedeš svoje jméno (bude na kartě jako „od koho“), e-mail pro doručení a jméno obdarovaného,
+          pokud ho chceš mít na kartě napsané. Zabere to minutu.</p>
+        <a class="s-link" href="/darkova-karta" data-cta-pos="bf_thanks_step2" data-form-link>Vyplnit údaje pro kartu →</a>
+      </div>
+      <div class="step">
+        <span class="s-num">3</span>
+        <h3>Karta ti přijde e-mailem</h3>
+        <p>Dostaneš e-mail s dárkovou kartou v hodnotě 22 990 Kč (920 €). Na kartě není uvedená žádná sleva ani cena, kterou jsi zaplatil.
+          Vytiskni ji a dej pod stromeček 🎄, nebo ji obdarovanému pošli v den Vánoc digitálně 📩.</p>
+      </div>
+    </div>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="r-ico"><svg class="ico"><use href="#i-gift"/></svg></div>
+        <p><b>Karta je jen na darování</b><span>Uplatnit ji může jen obdarovaný – ne ten, kdo ji koupil.</span></p>
+      </div>
+      <div class="rule">
+        <div class="r-ico"><svg class="ico"><use href="#i-cal"/></svg></div>
+        <p><b>Platí od 24. 12. 2026 do 31. 12. 2027</b><span>Na jakékoli služby Leadership Restart – stačí nám napsat a domluvíme detaily.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 4) ČASTÉ OTÁZKY ======================= -->
+<section class="faq-bf">
+  <div class="wrap">
+    <h2>Časté <span class="grad grad-gold">otázky</span></h2>
+    <div class="list">
+      <details>
+        <summary>Nepřišel mi e-mail s kartou. Co teď?</summary>
+        <div class="a">Nejdřív zkontroluj spam a hromadné zprávy. Karta odchází až po vyplnění údajů v dotazníku výše – pokud jsi ho ještě nevyplnil,
+          udělej to teď. Když e-mail nedorazí ani do hodiny, napiš nám na
+          <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a kartu ti pošleme ručně.</div>
+      </details>
+      <details>
+        <summary>Koupil jsem dvě karty. Vyplňuju dotazník dvakrát?</summary>
+        <div class="a">Ne. Vyplň ho jednou a v otázce „Kolik karet jsi koupil“ zvol 2 – dostaneš dvě karty, každou s vlastním jménem obdarovaného.</div>
+      </details>
+      <details>
+        <summary>Jak kartu daruju?</summary>
+        <div class="a">Vytiskni ji z e-mailu (nejlépe barevně na pevnější papír) a dej ji pod stromeček, nebo e-mail s kartou jednoduše přepošli
+          obdarovanému v den Vánoc. Na kartě je jen hodnota 22 990 Kč, platnost a jméno – žádná sleva ani cena.</div>
+      </details>
+      <details>
+        <summary>Jak obdarovaný kartu uplatní?</summary>
+        <div class="a">Od 24. 12. 2026 do 31. 12. 2027 nám napíše na <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a>
+          (nebo odpoví na e-mail s kartou) a domluvíme, na jakou službu Leadership Restart hodnotu karty použije.</div>
+      </details>
+      <details>
+        <summary>Potřebuju doklad o zaplacení</summary>
+        <div class="a">Potvrzení platby posílá Stripe automaticky na e-mail zadaný při platbě. Pokud potřebuješ doklad na firmu,
+          napiš nám IČO a fakturační údaje – pošleme ti ho zpět e-mailem.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 5) KONTAKT ======================= -->
+<section class="final-bf">
+  <div class="wrap">
+    <h2>Potřebuješ s něčím <span class="grad grad-gold">pomoct?</span></h2>
+    <p class="text">Napiš nám, odpovídáme obvykle do 24 hodin. A díky, že jsi letos ten, na čí dárek se tak brzy nezapomene. 😍</p>
+    <div class="contact">
+      <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a>
+      <a href="index.html">leadershiprestart.cz</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 6) PATIČKA ======================= -->
+<footer class="bf-footer">
+  <div class="wrap">
+    <p class="bf-f-brand">Leadership Restart</p>
+    <p class="bf-f-op">Provozovatel: Denis Novotný, Vranov 198, Vranov u Brna · IČO 05876664 · Nejsem plátce DPH ·
+      <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a></p>
+    <nav class="bf-f-legal">
+      <a href="gdpr.html">Ochrana osobních údajů</a>
+      <a href="odstoupeni.html">Odstoupení od smlouvy</a>
+      <button type="button" class="bf-f-ck" id="bfCookies">Nastavení cookies</button>
+    </nav>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lrLogoCard" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#377EF7"/><stop offset="100%" stop-color="#ED6D47"/>
+    </linearGradient>
+    <linearGradient id="lrBow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#E9B64F"/><stop offset="1" stop-color="#A8762A"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<script src="assets/site.js?v=21"></script>
+<script>
+// CTA v navigaci: na potvrzovací stránce vede na dotazník s údaji pro kartu
+(function(){
+  function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
+    c.href='/darkova-karta'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf_thanks'; c.textContent='Doplnit údaje pro kartu'; return true; }
+  if(!fix()){ document.addEventListener('DOMContentLoaded', fix); var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
+})();
+// Parametry z návratu ze Stripe (?s={CHECKOUT_SESSION_ID} …) přenést do odkazů na dotazník, ať jde objednávka spárovat s platbou
+(function(){
+  var q = location.search; if(!q || q.length < 2) return;
+  document.querySelectorAll('#ctaForm,[data-form-link]').forEach(function(a){ a.href = '/darkova-karta' + q; });
+})();
+// Patička: „Nastavení cookies“ otevře sdílený cookie panel ze site.js
+document.getElementById('bfCookies').addEventListener('click', function(){
+  var fab=document.getElementById('ckFab'); if(fab) fab.click();
+});
+</script>
+</body>
+</html>
