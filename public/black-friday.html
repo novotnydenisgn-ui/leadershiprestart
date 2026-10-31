@@ -18,7 +18,8 @@
   Struktura 1:1: zlatá lišta s odpočtem → hero s kartou → „Jen teď −80 %“ + 2 pravidla → 3 kroky → FAQ →
   závěrečné CTA s kartou → patička podle vzoru (značka · provozovatel · nastavení cookies) s údaji LR.
   Hlavička je sdílený prvek webu (site.js).
-  CTA tlačítka zatím vedou na [DOPLNIT: odkaz na platbu] (3 místa, hledej „odkaz na platbu“).
+  CTA tlačítka (3 místa, hledej „buy.stripe.com“) vedou na Stripe Payment Link; parametr ?prefilled_promo_code=BLACKFRIDAY80
+  je nutný – předvyplní promo kód, bez něj by pokladna účtovala plných 22 990 Kč. Po platbě Stripe přesměruje na /black-friday-dekujeme.
 -->
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/favicon.png">
@@ -353,7 +354,7 @@
     </div>
 
     <div class="hero-cta">
-      <a class="cta-bf" data-cta-pos="bf_hero" href="[DOPLNIT: odkaz na platbu]">Chci darovat dárkový poukaz v hodnotě 22 990 Kč (920 €) jen za 4 599 Kč (184 €)</a>
+      <a class="cta-bf" data-cta-pos="bf_hero" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Chci darovat dárkový poukaz v hodnotě 22 990 Kč (920 €) jen za 4 599 Kč (184 €)</a>
       <p class="cta-note">Bezpečná platba přes Stripe · poukaz ti přijde hned e-mailem</p>
     </div>
   </div>
@@ -479,7 +480,7 @@
     </div>
 
     <div class="hero-cta">
-      <a class="cta-bf" data-cta-pos="bf_final" href="[DOPLNIT: odkaz na platbu]">Chci se stát nejštědřejším člověkem pod stromečkem</a>
+      <a class="cta-bf" data-cta-pos="bf_final" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Chci se stát nejštědřejším člověkem pod stromečkem</a>
       <p class="cta-note">Bezpečná platba přes Stripe · poukaz ti přijde hned e-mailem</p>
     </div>
   </div>
@@ -519,7 +520,7 @@
 // LP: CTA v navigaci vede na platbu dárkového poukazu (site.js jinak staví odkaz na kvalifikaci do výzvy)
 (function(){
   function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
-    c.href='[DOPLNIT: odkaz na platbu]'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf'; c.textContent='Chci darovat dárkový poukaz'; return true; }
+    c.href='https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf'; c.textContent='Chci darovat dárkový poukaz'; return true; }
   if(!fix()){ document.addEventListener('DOMContentLoaded', fix); var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
 })();
 // Patička: „Nastavení cookies“ otevře sdílený cookie panel ze site.js (sušenka vlevo dole)
