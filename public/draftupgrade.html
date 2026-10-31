@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DRAFT · Up-Grade jako celý balíček — Launch Boost | Leadership Restart</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Draft: Leadership Up-Grade jako jeden balíček Launch Boost — 72 000 Kč, splátky 12× 6 000 / 9× 8 000 Kč, −15 % najednou, sleva za pokračování z Restartu.">
+<meta name="description" content="Draft: Leadership Up-Grade jako jeden balíček Launch Boost — splátky 14× 5 450 / 9× 8 450 Kč, při koupi hned −15 % (od 47 900 Kč se slevou za pokračování z Restartu).">
 <!--
-  /draftupgrade (31. 10. 2026): NOVÁ FILOZOFIE Up-Grade = koupě celého balíčku Launch Boost (72 000 Kč,
-  splátky 12× 6 000 / 9× 8 000, najednou −15 %, sleva za pokračování 5 000 z Restartu ×4 (draft přepínač ×3)).
+  /draftupgrade (31. 10. 2026): NOVÁ FILOZOFIE Up-Grade = koupě celého balíčku Launch Boost (1. verze 72 000 Kč / 12× 6 000 / 9× 8 000;
+  2. verze: splátky 14× 5 450 = 76 300 / 9× 8 450 = 76 050, kupuješ hned −15 % zaokrouhleno na …900, sleva za pokračování 5 000 z Restartu ×4 (draft přepínač ×3)).
   Postaveno z cenik-implementace.html; kalkulačka = inline skript dole. Jen draft (noindex) — oficiální
   /cenik-upgrade a /cenik-implementace se nemění. Předchozí draft (úrovně Basic/Grow/Mastery) je v gitu.
   ---- původní poznámka: ----
@@ -602,6 +602,7 @@
   .lb-price .c-eur{margin:0 0 6px}
   .lb-plan{font-size:14px;font-weight:700;color:var(--dk-text)}
   .lb-plan b{color:var(--lr-gold-light)}
+  .lb-hint{margin-top:6px;font-size:12.5px;font-weight:700;color:var(--dk-muted)}
   .lb-pop{animation:lb-pop .7s cubic-bezier(.34,1.4,.64,1)}
   @keyframes lb-pop{0%{transform:scale(1)}35%{transform:scale(1.12)}100%{transform:scale(1)}}
 
@@ -706,8 +707,8 @@
       </div>
       <div class="lr-card anchor-card">
         <small><svg class="ico"><use href="#i-calendar"/></svg>Splátky</small>
-        <b>od 6 000 Kč</b>
-        <span>měsíčně — nebo zaplať předem a ušetři 15 %</span>
+        <b>od 5 450 Kč</b>
+        <span>měsíčně jako dřív Grow — nebo kup hned a ušetři 15 %</span>
       </div>
     </div>
 
@@ -797,8 +798,8 @@
     <div style="text-align:center;position:relative">
       <span class="lr-kicker">Investice</span>
       <h2 class="display h-section" style="color:#fff">Launch Boost — <span class="lr-grad-text">celý balíček</span></h2>
-      <p class="h-sub" style="margin:0 auto;max-width:680px">Jedna cena za celé řešení. Zaplať najednou se slevou 15 %,
-      nebo si ji rozlož do měsíčních splátek.</p>
+      <p class="h-sub" style="margin:0 auto;max-width:680px">Jedna cena za celé řešení. Kup hned se slevou 15 %, nebo splácej stejně jako dřív měsíční členství —
+      jen <b>méně plateb</b> a máš celý balíček.</p>
     </div>
 
     <div class="lr-card cena-card v-launch lb-card reveal">
@@ -828,16 +829,17 @@
       <!-- pravá strana: kalkulačka ceny -->
       <div class="lb-right">
         <div class="lb-tabs" role="group" aria-label="Způsob platby">
-          <button type="button" data-pay="once" aria-pressed="false"><b>Najednou</b><small class="lb-badge">−15 %</small></button>
-          <button type="button" data-pay="m12" aria-pressed="true"><b>12 splátek</b><small>po 6 000 Kč</small></button>
-          <button type="button" data-pay="m9" aria-pressed="false"><b>9 splátek</b><small>po 8 000 Kč</small></button>
+          <button type="button" data-pay="once" aria-pressed="false"><b>Kupuješ hned</b><small class="lb-badge">−15 %</small></button>
+          <button type="button" data-pay="m14" aria-pressed="true"><b>14 splátek</b><small>po 5 450 Kč</small></button>
+          <button type="button" data-pay="m9" aria-pressed="false"><b>9 splátek</b><small>po 8 450 Kč</small></button>
         </div>
 
         <div class="lb-price">
           <s class="lb-was" id="lbWas"></s>
-          <div class="c-price p-launch"><span id="lbBig">6 000</span><small>Kč</small><em id="lbPer">/ měsíc</em></div>
-          <div class="c-eur" id="lbEur">≈ 240 € měsíčně</div>
-          <div class="lb-plan" id="lbPlan">12× 6 000 Kč · celkem 72 000 Kč</div>
+          <div class="c-price p-launch"><span id="lbBig">5 450</span><small>Kč</small><em id="lbPer">/ měsíc</em></div>
+          <div class="c-eur" id="lbEur">≈ 218 € měsíčně</div>
+          <div class="lb-plan" id="lbPlan">14× 5 450 Kč · celkem 76 300 Kč</div>
+          <div class="lb-hint" id="lbHint">Měsíčně jako dřív Grow — ale máš celý balíček</div>
         </div>
 
         <!-- sleva za pokračování -->
@@ -853,10 +855,10 @@
 
         <!-- rozpis -->
         <dl class="lb-sum">
-          <div><dt>Cena balíčku</dt><dd>72 000 Kč</dd></div>
+          <div><dt id="lbListLbl">Cena na splátky</dt><dd><span id="lbList">76 300</span> Kč</dd></div>
           <div id="lbRowV" hidden><dt>Sleva za pokračování <span class="lb-x">×4</span></dt><dd class="neg">−<span class="lb-dval">20 000</span> Kč</dd></div>
-          <div id="lbRowO" hidden><dt>Platba najednou −15 %</dt><dd class="neg">−<span id="lbOnceVal">10 800</span> Kč</dd></div>
-          <div class="tot"><dt>Celkem zaplatíš</dt><dd><span id="lbTotal">72 000</span> Kč</dd></div>
+          <div id="lbRowO" hidden><dt>Kupuješ hned −15 %</dt><dd class="neg">−<span id="lbOnceVal">10 800</span> Kč</dd></div>
+          <div class="tot"><dt>Celkem zaplatíš</dt><dd><span id="lbTotal">76 300</span> Kč</dd></div>
         </dl>
         <div class="lb-save" id="lbSave" hidden>Ušetříš <b><span id="lbSaveVal">0</span> Kč</b></div>
 
@@ -908,9 +910,10 @@
           <span class="lb-xswitch" role="group" aria-label="Násobek slevy">
             <button type="button" data-mult="3">×3 = 15 000 Kč</button><button type="button" data-mult="4" class="on">×4 = 20 000 Kč</button>
           </span> — přepni a uvidíš dopad na cenu (jde i přes adresu <code>?x=3</code>).</li>
-        <li><b>Kombinace slev:</b> teď platí obě — nejdřív se odečte sleva za pokračování, z toho pak −15 % za platbu najednou
-          (×4 → 44 200 Kč, ×3 → 48 450 Kč). Chceš je sčítat, nebo jen jednu z nich?</li>
-        <li><b>Sleva u splátek</b> se odečítá z posledních splátek (např. 12× 6 000 → 8× 6 000 + 1× 4 000). Alternativa: nižší měsíční částka.</li>
+        <li><b>Ceny v2:</b> splátky drží velikost členství (5 450 = Grow, 8 450 = pod Mastery 8 800) → 14× 5 450 = 76 300 Kč, 9× 8 450 = 76 050 Kč.
+          Kupuješ hned = −15 % z 76 300, zaokrouhleno na „…900“: <b>64 900 Kč</b>; se slevou za pokračování ×4 <b>47 900 Kč</b> (×3 → 51 900 Kč).</li>
+        <li><b>Kombinace slev:</b> obě platí — nejdřív sleva za pokračování, ze zbytku pak −15 % za koupi hned.</li>
+        <li><b>Sleva u splátek</b> se odečítá z posledních splátek (např. 14× 5 450 → 10× 5 450 + 1× 1 800 = 11 splátek). Alternativa: nižší měsíční částka.</li>
         <li><b>Délka balíčku:</b> splátky 12× / 9× neříkají, jak dlouho program běží. Garance „do 3 měsíců spuštěno“ zůstala — co je potom (optimalizace do konce splátek)?</li>
         <li><b>Nárok na slevu za pokračování:</b> jen absolventi Restartu, kteří splnili plné nasazení? Do kdy od konce Restartu ji musí uplatnit?</li>
         <li><b>Měsíční úrovně Basic / Grow / Mastery:</b> v draftu nejsou — zrušit úplně, nebo nechat jen jako pokračování po balíčku?</li>
@@ -1148,20 +1151,23 @@
 </script>
 <script>
 /* Kalkulačka ceny balíčku Launch Boost (draft 31. 10. 2026)
-   Cena 72 000 Kč · splátky 12× 6 000 / 9× 8 000 · najednou −15 %
+   Splátky 14× 5 450 (= 76 300 Kč) / 9× 8 450 (= 76 050 Kč) · kupuješ hned −15 % z 76 300, výsledek zaokrouhlený na „…900“
    Sleva za pokračování = 5 000 Kč z Restartu × MULT (×4 výchozí, ?x=3 nebo přepínač v poznámkách draftu).
    Pořadí: nejdřív sleva za pokračování, z rozdílu −15 % za platbu najednou; u splátek odpadnou poslední splátky. */
 (function(){
-  var PRICE = 72000, BASE_DISCOUNT = 5000, ONCE_OFF = 0.15, EUR = 25;
-  var PLANS = { m12: 6000, m9: 8000 };
+  var BASE_DISCOUNT = 5000, ONCE_OFF = 0.15, EUR = 25;
+  var PLANS = { m14: { rate: 5450, n: 14, hint: 'Měsíčně jako dřív Grow — ale máš celý balíček' },
+                m9:  { rate: 8450, n: 9,  hint: 'Méně než dřív Mastery (8 800) — a splaceno za 9 měsíců' } };
+  var PRICE = PLANS.m14.rate * PLANS.m14.n;           /* 76 300 — kotva pro koupi hned */
+  var charm = function (x) { return Math.round((x - 900) / 1000) * 1000 + 900; };  /* 64 855 → 64 900 */
   var q = new URLSearchParams(location.search);
   var mult = q.get('x') === '3' ? 3 : 4;
-  var pay = 'm12', voucher = false;
+  var pay = 'm14', voucher = false;
 
   var $ = function (id) { return document.getElementById(id); };
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fmt = function (n) { return Math.round(n).toLocaleString('cs-CZ'); };
-  var big = $('lbBig'); big._cur = 6000;
+  var big = $('lbBig'); big._cur = 5450;
 
   function tween(el, to) {
     cancelAnimationFrame(el._raf); clearTimeout(el._done);
@@ -1179,41 +1185,43 @@
 
   function render(pop) {
     var disc = voucher ? BASE_DISCOUNT * mult : 0;
-    var base = PRICE - disc;
-    var onceOff = pay === 'once' ? Math.round(base * ONCE_OFF) : 0;
-    var total = base - onceOff;
+    var plan = PLANS[pay], list, total;
 
     [].forEach.call(document.querySelectorAll('.lb-x'), function (e) { e.textContent = '×' + mult; });
     [].forEach.call(document.querySelectorAll('.lb-dval'), function (e) { e.textContent = fmt(BASE_DISCOUNT * mult); });
     $('lbVoucherSum').textContent = fmt(BASE_DISCOUNT * mult);
 
     if (pay === 'once') {
+      list = PRICE;
+      total = charm((list - disc) * (1 - ONCE_OFF));
       tween(big, total);
       $('lbPer').textContent = 'jednorázově';
-      $('lbWas').textContent = fmt(PRICE) + ' Kč';
+      $('lbWas').textContent = fmt(list) + ' Kč';
       $('lbEur').textContent = '≈ ' + fmt(total / EUR) + ' €';
-      $('lbPlan').innerHTML = 'Jedna platba · <b>−15 %</b> za platbu najednou';
+      $('lbPlan').innerHTML = 'Jedna platba · <b>−15 %</b> za to, že kupuješ hned';
+      $('lbHint').textContent = 'Nejvýhodnější cena za celý balíček';
     } else {
-      var rate = PLANS[pay], n = PRICE / rate;
-      var full = Math.floor(base / rate), rest = base - full * rate, count = full + (rest ? 1 : 0);
-      tween(big, rate);
+      list = plan.rate * plan.n;
+      total = list - disc;
+      var full = Math.floor(total / plan.rate), rest = total - full * plan.rate, count = full + (rest ? 1 : 0);
+      tween(big, plan.rate);
       $('lbPer').textContent = '/ měsíc';
-      $('lbEur').textContent = '≈ ' + fmt(rate / EUR) + ' € měsíčně';
-      if (disc) {
-        $('lbWas').textContent = '';
-        $('lbPlan').innerHTML = full + '× ' + fmt(rate) + (rest ? ' + 1× ' + fmt(rest) : '') + ' Kč · <b>jen ' + count + ' splátek místo ' + n + '</b>';
-      } else {
-        $('lbWas').textContent = '';
-        $('lbPlan').innerHTML = n + '× ' + fmt(rate) + ' Kč · celkem ' + fmt(PRICE) + ' Kč';
-      }
+      $('lbWas').textContent = '';
+      $('lbEur').textContent = '≈ ' + fmt(plan.rate / EUR) + ' € měsíčně';
+      $('lbPlan').innerHTML = disc
+        ? full + '× ' + fmt(plan.rate) + (rest ? ' + 1× ' + fmt(rest) : '') + ' Kč · <b>jen ' + count + ' splátek místo ' + plan.n + '</b>'
+        : plan.n + '× ' + fmt(plan.rate) + ' Kč · celkem ' + fmt(list) + ' Kč';
+      $('lbHint').textContent = plan.hint;
     }
 
+    $('lbListLbl').textContent = pay === 'once' ? 'Cena balíčku' : 'Cena na splátky';
+    $('lbList').textContent = fmt(list);
     $('lbRowV').hidden = !disc;
-    $('lbRowO').hidden = !onceOff;
-    $('lbOnceVal').textContent = fmt(onceOff);
+    $('lbRowO').hidden = pay !== 'once';
+    $('lbOnceVal').textContent = fmt(list - disc - total);
     $('lbTotal').textContent = fmt(total);
-    $('lbSave').hidden = total === PRICE;
-    $('lbSaveVal').textContent = fmt(PRICE - total);
+    $('lbSave').hidden = total === list;
+    $('lbSaveVal').textContent = fmt(list - total);
 
     if (pop) {
       var p = big.closest('.c-price');
