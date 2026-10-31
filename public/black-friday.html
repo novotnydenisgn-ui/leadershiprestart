@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Friday – dárkový voucher na 21denní výzvu | Leadership Restart</title>
+<meta name="description" content="Black Friday 2026: dárkový voucher na 21denní transformační výzvu Leadership Restart. Daruj někomu nezničitelné návyky, disciplínu a fokus – jednorázová akce do 27. 11. 2026.">
+<link rel="canonical" href="https://leadershiprestart.cz/black-friday">
+<meta name="robots" content="noindex,follow">
+<!--
+  /black-friday – LANDING PAGE Black Friday 2026 (27. 11.): dárkový voucher na 21denní výzvu.
+  Struktura 1:1 podle vzoru start.erevenue.cz/black-friday (lišta s odpočtem → hero s kartou →
+  nabídka + 2 pravidla → 3 kroky → FAQ → závěrečné CTA s kartou → patička).
+  Dvě cílové skupiny: klienti programu voucher JEN DARUJÍ (nesmí ho koupit sobě),
+  ostatní si ho mohou koupit sobě i darovat.
+  Místa označená [DOPLNIT: …] čekají na Denise (ceny, počty, platnost, odkaz na platbu).
+  Odpočet běží k 27. 11. 2026 23:59 Europe/Prague (konstanta BF_END v JS dole).
+-->
+<link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
+<link rel="alternate icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=21">
+<style>
+  /* ======================================================================
+     BLACK FRIDAY — zlatý prémiový design (stejný jako Up-Grade):
+     #F6D47C → #E9B64F → #C8952F na teplé tmavé
+     ====================================================================== */
+  :root{
+    --lr-gold:#e9b64f;
+    --lr-gold-light:#f6d47c;
+    --lr-gold-deep:#c8952f;
+    --lr-grad:linear-gradient(100deg,var(--lr-gold-light) 0%,var(--lr-gold) 50%,var(--lr-gold-deep) 100%);
+    --dk-bg:#0c0b09;
+    --dk-bg-2:#14110b;
+    --dk-card:rgba(255,255,255,.035);
+    --dk-brd:rgba(255,255,255,.09);
+    --dk-text:#f1eee6;
+    --dk-muted:#a89f8d;
+    --tint-blue:#121008;
+    --tint-warm:#151009;
+    --bar-h:44px;
+  }
+  body{background:var(--dk-bg);color:var(--dk-text);overflow-x:clip;
+    /* 58 px menu + lišta s odpočtem */
+    padding-top:calc(58px + var(--bar-h))}
+
+  /* ---------- přepis sdílené navigace na zlatou tmavou ---------- */
+  .nav{background:rgba(12,11,9,.72);border-bottom:1px solid rgba(233,182,79,.14);
+    box-shadow:0 8px 32px rgba(0,0,0,.45)}
+  .nav-brand b{color:var(--dk-text)}
+  .nav-brand small{color:var(--dk-muted)}
+  .nav-brand img{background:transparent}
+  .nav-links a{color:var(--dk-muted);font-size:13.5px;padding:8px 12px;position:relative;border-radius:9px}
+  .nav-links a:hover{background:rgba(255,255,255,.05);color:var(--dk-text)}
+  .nav-links a.nav-cta{background:var(--lr-grad);color:#1a1206;box-shadow:0 10px 24px rgba(233,182,79,.3);
+    padding:7px 15px 6px;border-radius:9px;font-size:12px}
+  .nav-burger{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15);color:var(--dk-text)}
+  .nav-in{padding:7px clamp(18px,4vw,44px);gap:20px}
+  @media(max-width:960px){
+    .nav-links{top:58px;background:rgba(16,13,9,.98);border-color:rgba(233,182,79,.16);
+      box-shadow:0 30px 70px rgba(0,0,0,.6)}
+  }
+
+  /* ---------- obecné prvky ---------- */
+  .lr-grad-text{
+    background:var(--lr-grad);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    padding:.16em .04em .06em;margin:-.16em -.04em -.06em;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  }
+  .lr-kicker{display:inline-flex;align-items:center;gap:10px;
+    font-family:"League Spartan",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:12.5px;letter-spacing:.16em;
+    color:var(--lr-gold-light);background:rgba(233,182,79,.07);
+    border:1px solid rgba(233,182,79,.35);padding:10px 18px 8px;border-radius:999px;
+    flex-wrap:wrap;justify-content:center;row-gap:4px;text-align:center;max-width:100%}
+  .lr-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lr-grad);flex:none}
+  @media(max-width:480px){.lr-kicker{font-size:11px;letter-spacing:.1em;padding:8px 14px 6px;gap:8px}}
+
+  .lr-card{background:var(--dk-card);border:1px solid var(--dk-brd);border-radius:24px;
+    padding:clamp(22px,3vw,34px);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+  .lr-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.18)}
+
+  .btn{padding:10px 22px 8px;font-size:12.5px;letter-spacing:.07em;border-radius:11px;font-weight:700}
+  .btn-lr{background:var(--lr-grad);color:#1a1206;box-shadow:0 14px 34px rgba(233,182,79,.28)}
+  .btn-lr:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(233,182,79,.4)}
+  /* dlouhé CTA ze vzoru se na mobilu musí zalomit */
+  .btn-wide{display:inline-block;white-space:normal;text-align:center;line-height:1.3;padding:14px 26px 12px;font-size:13.5px;max-width:100%}
+  .btn-wide .todo{white-space:normal}
+
+  .ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;flex:none}
+
+  /* ---------- sekce ---------- */
+  .sec-dark{background:var(--dk-bg);color:var(--dk-text);position:relative;overflow:hidden}
+  .sec-dark .h-sub{color:var(--dk-muted)}
+  .sec-dark h2{color:#fff}
+  .sec-dark .h-sub b{color:var(--dk-text)}
+  .sec-tint-blue{background:var(--tint-blue)}
+  .sec-tint-blue::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(820px 480px at 80% 0%,rgba(233,182,79,.12),transparent 62%),
+      radial-gradient(560px 380px at 8% 100%,rgba(233,182,79,.05),transparent 60%)}
+  .sec-tint-warm{background:var(--tint-warm)}
+  .sec-tint-warm::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(820px 480px at 15% 0%,rgba(246,212,124,.11),transparent 62%),
+      radial-gradient(560px 380px at 92% 100%,rgba(233,182,79,.05),transparent 60%)}
+  .sec-tint-blue > .wrap,.sec-tint-warm > .wrap{position:relative}
+  .faq summary::after{color:var(--lr-gold)}
+  .faq details{background:var(--dk-card);border-color:var(--dk-brd)}
+  .faq details:hover{border-color:rgba(233,182,79,.4)}
+  .faq .faq-a{color:var(--dk-muted)}
+  .faq .faq-a b{color:var(--dk-text)}
+
+  /* ======================================================================
+     1) LIŠTA S ODPOČTEM (přišpendlená pod menu)
+     ====================================================================== */
+  .bf-bar{position:fixed;top:58px;left:0;right:0;z-index:99;height:var(--bar-h);
+    display:flex;align-items:center;justify-content:center;gap:clamp(10px,2.5vw,28px);
+    padding:0 clamp(12px,3vw,24px);
+    background:linear-gradient(90deg,#1a1206,#231a09 50%,#1a1206);
+    border-bottom:1px solid rgba(233,182,79,.28);
+    font-size:12.5px;color:var(--dk-text);white-space:nowrap;overflow:hidden}
+  .bf-bar .bf-left{font-weight:700;letter-spacing:.02em}
+  .bf-bar .bf-left b{color:var(--lr-gold-light)}
+  .bf-bar .bf-right{display:inline-flex;align-items:center;gap:8px;color:var(--dk-muted)}
+  .bf-bar .cd{display:inline-flex;align-items:baseline;gap:6px;
+    font-family:"League Spartan",sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.02em}
+  .bf-bar .cd b{font-variant-numeric:tabular-nums;min-width:2ch;display:inline-block;text-align:right}
+  .bf-bar .cd i{font-style:normal;font-family:"Manrope",sans-serif;font-weight:600;font-size:11px;color:var(--lr-gold);margin-right:2px}
+  @media(max-width:640px){
+    /* na mobilu dva řádky: text o počtu + odpočet */
+    :root{--bar-h:60px}
+    .bf-bar{flex-direction:column;justify-content:center;gap:2px;font-size:11.5px;line-height:1.25;
+      white-space:normal;text-align:center;padding:4px 10px}
+    .bf-bar .bf-left{font-size:11px}
+    .bf-bar .bf-right{gap:6px}
+    .bf-bar .bf-right .lbl{font-size:11px}
+    .bf-bar .cd{font-size:14px;gap:4px}
+  }
+  @media(max-width:400px){.bf-bar .todo{padding:0 3px;font-size:10px}}
+
+  /* ======================================================================
+     2) HERO
+     ====================================================================== */
+  .hero-bf{position:relative;text-align:center;overflow:hidden;background:var(--dk-bg)}
+  .hero-bf::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(760px 460px at 18% 8%,rgba(246,212,124,.13),transparent 60%),
+      radial-gradient(820px 520px at 85% 20%,rgba(200,149,47,.17),transparent 62%)}
+  .hero-bf .wrap{padding:clamp(48px,7vw,92px) clamp(18px,4vw,44px) clamp(38px,5vw,64px);position:relative}
+  .hero-bf h1{font-size:clamp(32px,4.6vw,58px);margin:22px auto 16px;max-width:900px;color:#fff}
+  .hero-bf .h-sub{margin:0 auto;max-width:640px;font-size:clamp(16px,1.6vw,19px)}
+  .hero-bf .h-sub b{color:var(--dk-text)}
+  .hero-bf .h-sub .price{color:var(--lr-gold-light);font-family:"League Spartan",sans-serif;font-weight:800;font-size:1.15em}
+  .hero-cta{margin-top:30px}
+  .cta-note{font-size:13px;margin:14px auto 0;max-width:560px;color:var(--dk-muted)}
+
+  /* ---------- dárkový voucher (karta) ---------- */
+  .voucher-wrap{display:flex;justify-content:center;margin:40px auto 0;perspective:1200px}
+  .voucher{position:relative;width:min(100%,520px);aspect-ratio:1.62;border-radius:24px;
+    padding:clamp(18px,3.4vw,30px) clamp(20px,3.8vw,34px);text-align:left;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:space-between;
+    color:#1a1206;
+    background:
+      radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.42),transparent 48%),
+      radial-gradient(90% 70% at 0% 100%,rgba(120,80,10,.28),transparent 55%),
+      linear-gradient(118deg,#f6d47c 0%,#e9b64f 48%,#c8952f 100%);
+    box-shadow:0 34px 90px rgba(233,182,79,.22),0 12px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.55);
+    transform:rotateX(4deg) rotateY(-6deg);transition:transform .5s ease}
+  .voucher:hover{transform:rotateX(0) rotateY(0)}
+  .voucher::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.28) 45%,transparent 60%);
+    background-size:220% 100%;background-position:120% 0;animation:shine 7s ease-in-out infinite}
+  @keyframes shine{0%,55%{background-position:120% 0}85%,100%{background-position:-120% 0}}
+  @media(prefers-reduced-motion:reduce){.voucher::after{animation:none}.voucher{transform:none}}
+  .voucher .v-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .voucher .v-brand{display:flex;align-items:center;gap:10px;font-family:"League Spartan",sans-serif;font-weight:800;
+    text-transform:uppercase;letter-spacing:.06em;font-size:clamp(11px,1.6vw,13px);line-height:1.05}
+  .voucher .v-brand svg{width:34px;height:34px;flex:none}
+  .voucher .v-brand span{display:block;font-size:.78em;font-family:"Manrope",sans-serif;font-weight:700;letter-spacing:.14em;opacity:.7}
+  .voucher .v-tag{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.14em;
+    font-size:clamp(10px,1.4vw,11.5px);padding:7px 12px 5px;border-radius:999px;border:1.5px solid rgba(26,18,6,.45);white-space:nowrap}
+  .voucher .v-mid{margin-top:auto}
+  .voucher .v-label{font-family:"Manrope",sans-serif;font-weight:700;font-size:clamp(11px,1.7vw,13.5px);
+    letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+  .voucher .v-value{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(30px,5.6vw,52px);line-height:1;margin:4px 0 2px;letter-spacing:-.01em}
+  .voucher .v-value small{font-size:.42em;letter-spacing:.02em;font-weight:700;vertical-align:.35em;margin-left:4px}
+  .voucher .v-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;
+    border-top:1px solid rgba(26,18,6,.25);padding-top:clamp(8px,1.6vw,12px);margin-top:clamp(8px,1.6vw,12px);
+    font-size:clamp(10.5px,1.5vw,13px);font-weight:600}
+  .voucher .v-bot b{display:block;font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:.95em}
+  .voucher .v-bot span{opacity:.75}
+  .voucher .v-serial{font-family:ui-monospace,Menlo,monospace;font-size:.9em;letter-spacing:.14em;opacity:.55}
+  /* [DOPLNIT] placeholdery vizuálně odlišit, aby je Denis snadno našel */
+  .todo{background:rgba(255,99,57,.14);border:1px dashed rgba(255,99,57,.75);color:#ffb59f;border-radius:6px;padding:0 6px;font-weight:700;white-space:nowrap}
+  .voucher .todo{color:#5a1e0a;background:rgba(255,255,255,.35);border-color:rgba(90,30,10,.6)}
+
+  /* ======================================================================
+     3) NABÍDKA (−X % · ty zaplatíš … ale daruješ …)
+     ====================================================================== */
+  .offer-head{text-align:center;max-width:860px;margin:0 auto}
+  .offer-badge{display:inline-flex;align-items:center;gap:8px;font-family:"League Spartan",sans-serif;font-weight:800;
+    text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:#1a1206;background:var(--lr-grad);
+    padding:9px 16px 7px;border-radius:999px;box-shadow:0 10px 28px rgba(233,182,79,.3)}
+  .offer-sub{margin:14px 0 0;color:var(--dk-muted);font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .offer-head h2{margin:18px auto 20px}
+  .offer-text{color:var(--dk-muted);font-size:clamp(15px,1.4vw,17.5px);line-height:1.7;max-width:800px;margin:0 auto}
+  .offer-text b{color:var(--dk-text)}
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:900px;margin:40px auto 0}
+  .rule{display:flex;gap:18px;align-items:flex-start;text-align:left;padding:24px 24px 22px}
+  .rule .r-ico{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:var(--lr-gold-light);
+    background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.35);filter:drop-shadow(0 10px 30px rgba(233,182,79,.35))}
+  .rule h3{font-family:"League Spartan",sans-serif;font-weight:800;font-size:17px;color:#fff;margin:2px 0 6px;line-height:1.15}
+  .rule p{color:var(--dk-muted);font-size:14.5px;line-height:1.6}
+  .rule p b{color:var(--dk-text)}
+
+  /* ======================================================================
+     4) JAK TO FUNGUJE — 3 kroky
+     ====================================================================== */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px;text-align:left}
+  .step{position:relative;padding:30px 26px 28px}
+  .step .s-num{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;
+    font-family:"League Spartan",sans-serif;font-weight:800;font-size:20px;line-height:1;padding-top:3px;
+    color:#1a1206;background:var(--lr-grad);box-shadow:0 10px 28px rgba(233,182,79,.3);margin-bottom:18px}
+  .step .s-ghost{position:absolute;top:8px;right:20px;font-family:"League Spartan",sans-serif;font-weight:800;
+    font-size:clamp(64px,7vw,104px);line-height:1;opacity:.07;color:#f6d47c;pointer-events:none}
+  .step h3{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(18px,1.9vw,22px);color:#fff;margin-bottom:10px;line-height:1.15}
+  .step p{color:var(--dk-muted);font-size:15px;line-height:1.65}
+  .step p b{color:var(--dk-text)}
+
+  /* ======================================================================
+     6) ZÁVĚREČNÉ CTA
+     ====================================================================== */
+  .final h2{max-width:900px;margin-left:auto;margin-right:auto}
+  .final .h-sub{margin:0 auto;max-width:700px}
+
+  @media(max-width:640px){
+    .rule{flex-direction:column;gap:14px}
+    .voucher{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Ikony: Lucide (MIT), stroke 2 / 24px — podle brand.html #ikony (emoji nepoužíváme) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 2 7 9h3l-4 6h4l-4 5h12l-4-5h4l-4-6h3z"/><path d="M12 20v2"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  </defs>
+</svg>
+
+<div id="siteNav"></div>
+
+<!-- ======================= 1) LIŠTA S ODPOČTEM ======================= -->
+<div class="bf-bar" role="status" aria-live="off">
+  <span class="bf-left">Black Friday · zbývá <b><span class="todo">[DOPLNIT: počet]</span> z <span class="todo">[DOPLNIT: počet]</span> voucherů</b></span>
+  <span class="bf-right"><span class="lbl">Akce končí za</span>
+    <span class="cd" id="cd">
+      <b data-cd="d">--</b><i>d</i>
+      <b data-cd="h">--</b><i>h</i>
+      <b data-cd="m">--</b><i>m</i>
+      <b data-cd="s">--</b><i>s</i>
+    </span>
+  </span>
+</div>
+
+<!-- ======================= 2) HERO ======================= -->
+<section class="hero-bf">
+  <div class="wrap">
+    <span class="lr-kicker">Black Friday · sleva <span class="todo">[DOPLNIT: sleva v %]</span></span>
+    <h1 class="display">Staň se <span class="lr-grad-text">nejštědřejším člověkem</span> pod vánočním stromečkem</h1>
+    <p class="h-sub">Kup dárkový voucher na 21denní výzvu Leadership Restart v hodnotě
+      <b class="price"><span class="todo">[DOPLNIT: hodnota voucheru]</span></b> a zaplať za něj jen
+      <b class="price"><span class="todo">[DOPLNIT: Black Friday cena]</span></b>.</p>
+
+    <div class="voucher-wrap">
+      <div class="voucher" role="img" aria-label="Dárkový voucher na 21denní výzvu Leadership Restart">
+        <div class="v-top">
+          <div class="v-brand">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="#1a1206"/></svg>
+            <div>Leadership Restart<span>za 21 dní</span></div>
+          </div>
+          <span class="v-tag">Black Friday 2026</span>
+        </div>
+        <div class="v-mid">
+          <div class="v-label">Dárkový voucher</div>
+          <div class="v-value"><span class="todo">[DOPLNIT: hodnota]</span></div>
+          <div class="v-label" style="text-transform:none;letter-spacing:0;font-size:clamp(12px,1.8vw,14.5px);opacity:.85">Na 21denní transformační výzvu Leadership Restart</div>
+        </div>
+        <div class="v-bot">
+          <div><b>Platí</b><span><span class="todo">[DOPLNIT: platnost od]</span> – <span class="todo">[DOPLNIT: platnost do]</span></span></div>
+          <div class="v-serial">LR-BF-2026-····</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-lr btn-wide" data-cta-pos="bf_hero" href="[DOPLNIT: odkaz na platbu]">Chci darovat voucher v hodnotě <span class="todo">[DOPLNIT: hodnota]</span> jen za <span class="todo">[DOPLNIT: cena]</span></a>
+      <p class="cta-note">Bezpečná platba kartou · voucher ti přijde hned e-mailem</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 3) NABÍDKA ======================= -->
+<section class="section sec-dark sec-tint-warm">
+  <div class="wrap">
+    <div class="offer-head">
+      <span class="offer-badge"><svg class="ico" style="width:16px;height:16px"><use href="#i-gift"/></svg>Jen teď −<span class="todo">[DOPLNIT: sleva v %]</span></span>
+      <p class="offer-sub">Black Friday limitovaná sleva na dárkový voucher</p>
+      <h2 class="display h-section">Ty zaplatíš jen <span class="lr-grad-text"><span class="todo">[DOPLNIT: cena]</span></span>. Ale daruješ až <span class="lr-grad-text"><span class="todo">[DOPLNIT: hodnota]</span></span>.</h2>
+      <p class="offer-text">Toto je nejlepší Black Friday akce letošního roku! A to myslím opravdu vážně! Právě teď máš možnost stát se
+        nejštědřejším kamarádem pod vánočním stromečkem a darovat <b>21denní transformační výzvu Leadership Restart</b>
+        v hodnotě <span class="todo">[DOPLNIT: hodnota]</span> – a zaplatit za ni jen <span class="todo">[DOPLNIT: cena]</span>!
+        Obdarovaný dostane úplně běžný voucher s plnou hodnotou <span class="todo">[DOPLNIT: hodnota]</span>. Na voucheru nebude uvedená
+        žádná sleva ani cena, kterou jsi za něj zaplatil. Voucherů je jen <span class="todo">[DOPLNIT: počet]</span> kusů
+        a objednávky jsou omezené na maximálně <span class="todo">[DOPLNIT: max na osobu]</span> vouchery na osobu!</p>
+    </div>
+
+    <div class="rules">
+      <div class="lr-card rule reveal">
+        <div class="r-ico"><svg class="ico"><use href="#i-gift"/></svg></div>
+        <div>
+          <h3>Klienti Restartu voucher jen darují</h3>
+          <p>Prošel sis výzvou nebo v programu jsi? <b>Sám si voucher uplatnit nemůžeš</b> – musíš ho darovat někomu jinému.
+            Pokud v programu zatím nejsi, můžeš voucher <b>koupit sobě i darovat</b>.</p>
+        </div>
+      </div>
+      <div class="lr-card rule reveal">
+        <div class="r-ico"><svg class="ico"><use href="#i-users"/></svg></div>
+        <div>
+          <h3>Nejvíc <span class="todo">[DOPLNIT: max na osobu]</span> vouchery na osobu</h3>
+          <p>Můžeš koupit maximálně <span class="todo">[DOPLNIT: max na osobu]</span> dárkové vouchery.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 4) JAK TO FUNGUJE ======================= -->
+<section class="section sec-dark sec-tint-blue">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Jak to funguje</span>
+    <h2 class="display h-section">Jak to funguje? <span class="lr-grad-text">Ve třech krocích</span></h2>
+
+    <div class="steps">
+      <div class="lr-card step reveal">
+        <span class="s-ghost" aria-hidden="true">1</span>
+        <span class="s-num">1</span>
+        <h3>Objednej voucher se slevou <span class="todo">[DOPLNIT: sleva v %]</span></h3>
+        <p>Dárkový voucher na 21denní výzvu v hodnotě <span class="todo">[DOPLNIT: hodnota]</span> tě teď vyjde jen na
+          <span class="todo">[DOPLNIT: cena]</span>. Můžeš objednat maximálně <span class="todo">[DOPLNIT: max na osobu]</span> vouchery.</p>
+      </div>
+      <div class="lr-card step reveal">
+        <span class="s-ghost" aria-hidden="true">2</span>
+        <span class="s-num">2</span>
+        <h3>Voucher ti přijde e-mailem</h3>
+        <p>Na voucheru je napsaná hodnota <span class="todo">[DOPLNIT: hodnota]</span>. Vytiskni ho a dej pod stromeček, nebo ho pošli
+          obdarovanému digitálně. <b>Jsi klient Restartu? Musíš ho darovat</b>, pro sebe se uplatnit nedá.</p>
+      </div>
+      <div class="lr-card step reveal">
+        <span class="s-ghost" aria-hidden="true">3</span>
+        <span class="s-num">3</span>
+        <h3>Staň se nejštědřejším člověkem pod stromečkem</h3>
+        <p>Obdarovaný si voucher uplatní od <span class="todo">[DOPLNIT: platnost od]</span> do <span class="todo">[DOPLNIT: platnost do]</span>:
+          domluví si s Denisem nezávazný vstupní hovor 1:1 a start své 21denní výzvy. A ty jsi ten, na čí dárek se tak brzy nezapomene.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 5) ČASTÉ OTÁZKY ======================= -->
+<section class="section sec-dark">
+  <div class="wrap" style="text-align:center">
+    <h2 class="display h-section">Časté <span class="lr-grad-text">otázky</span></h2>
+    <div class="faq" style="text-align:left">
+      <details>
+        <summary>Na co se dá dárkový voucher použít?</summary>
+        <div class="faq-a">Voucher má hodnotu <span class="todo">[DOPLNIT: hodnota]</span> a obdarovaný ho může od
+          <span class="todo">[DOPLNIT: platnost od]</span> do <span class="todo">[DOPLNIT: platnost do]</span> použít na 21denní transformační výzvu
+          Leadership Restart: úvodní mentoring 1:1, 21 dní denních mikro-kroků s reflexí v aplikaci Dimi, dvakrát týdně společný call
+          a podpora 24/7 přes zprávy a hlasovky.</div>
+      </details>
+      <details>
+        <summary>Můžu voucher použít i sám pro sebe?</summary>
+        <div class="faq-a"><b>Záleží, kde jsi.</b> Pokud jsi klientem programu nebo sis výzvou už prošel, voucher je určený jen k darování –
+          uplatnit ho může jen obdarovaný, ne ten, kdo ho koupil. Pokud v programu zatím nejsi, můžeš voucher koupit sobě i darovat.</div>
+      </details>
+      <details>
+        <summary>Kolik voucherů můžu koupit?</summary>
+        <div class="faq-a">Maximálně <span class="todo">[DOPLNIT: max na osobu]</span> vouchery na osobu. V celé akci je jen
+          <span class="todo">[DOPLNIT: počet]</span> voucherů.</div>
+      </details>
+      <details>
+        <summary>Kdy a kam voucher dostanu a jak ho daruji?</summary>
+        <div class="faq-a">Hned po zaplacení ti přijde tvůj unikátní voucher e-mailem. Můžeš ho vytisknout a dát pod stromeček,
+          nebo ho obdarovanému poslat v den Vánoc digitálně.</div>
+      </details>
+      <details>
+        <summary>Do kdy můžu voucher koupit?</summary>
+        <div class="faq-a">Akce platí do <b>27. 11. 2026 (23:59)</b> nebo do vyprodání <span class="todo">[DOPLNIT: počet]</span> voucherů –
+          podle toho, co nastane dřív.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 6) ZÁVĚREČNÉ CTA ======================= -->
+<section class="section sec-dark sec-tint-warm final">
+  <div class="wrap" style="text-align:center">
+    <h2 class="display h-section">První krok je nejdůležitější, staň se <span class="lr-grad-text">nejštědřejším člověkem</span> pod vánočním stromečkem</h2>
+    <p class="h-sub">Většina lidí řeší vánoční dárky na poslední chvíli a ty nejlepší akce už jsou pryč. Udělej to letos jinak,
+      daruj něco opravdu hodnotného za zlomek ceny a získej obrovský obdiv u vánočního stromečku!</p>
+
+    <div class="voucher-wrap">
+      <div class="voucher" role="img" aria-label="Dárkový voucher na 21denní výzvu Leadership Restart">
+        <div class="v-top">
+          <div class="v-brand">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="#1a1206"/></svg>
+            <div>Leadership Restart<span>za 21 dní</span></div>
+          </div>
+          <span class="v-tag">Black Friday 2026</span>
+        </div>
+        <div class="v-mid">
+          <div class="v-label">Dárkový voucher</div>
+          <div class="v-value"><span class="todo">[DOPLNIT: hodnota]</span></div>
+          <div class="v-label" style="text-transform:none;letter-spacing:0;font-size:clamp(12px,1.8vw,14.5px);opacity:.85">Na 21denní transformační výzvu Leadership Restart</div>
+        </div>
+        <div class="v-bot">
+          <div><b>Platí</b><span><span class="todo">[DOPLNIT: platnost od]</span> – <span class="todo">[DOPLNIT: platnost do]</span></span></div>
+          <div class="v-serial">LR-BF-2026-····</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-lr btn-wide" data-cta-pos="bf_final" href="[DOPLNIT: odkaz na platbu]">Chci se stát nejštědřejším člověkem pod stromečkem</a>
+      <p class="cta-note">Bezpečná platba kartou · voucher ti přijde hned e-mailem</p>
+    </div>
+  </div>
+</section>
+
+<div id="siteFooter"></div>
+
+<script src="assets/site.js?v=21"></script>
+<script>
+// LP: CTA v navigaci vede na platbu voucheru (site.js jinak staví odkaz na kvalifikaci do výzvy)
+(function(){
+  function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
+    c.href='[DOPLNIT: odkaz na platbu]'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf'; c.textContent='Chci darovat voucher'; return true; }
+  if(!fix()){ document.addEventListener('DOMContentLoaded', fix); var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
+})();
+</script>
+<script>
+/* ===== Odpočet do konce akce: 27. 11. 2026 23:59 Europe/Prague (v listopadu CET = UTC+1) ===== */
+(function(){
+  var BF_END = new Date('2026-11-27T23:59:00+01:00').getTime();
+  var box = document.getElementById('cd'); if(!box) return;
+  var el = {};
+  ['d','h','m','s'].forEach(function(k){ el[k] = box.querySelector('[data-cd="'+k+'"]'); });
+  function pad(n){ return (n<10?'0':'')+n; }
+  function tick(){
+    var left = Math.max(0, BF_END - Date.now());
+    var s = Math.floor(left/1000);
+    el.d.textContent = Math.floor(s/86400);
+    el.h.textContent = pad(Math.floor(s%86400/3600));
+    el.m.textContent = pad(Math.floor(s%3600/60));
+    el.s.textContent = pad(s%60);
+    if(left<=0){ clearInterval(t); var l=document.querySelector('.bf-bar .lbl'); if(l) l.textContent='Akce skončila'; }
+  }
+  tick(); var t = setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
