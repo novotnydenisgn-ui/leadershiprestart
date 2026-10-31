@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Black Friday – dárkový voucher na 21denní výzvu | Leadership Restart</title>
-<meta name="description" content="Black Friday 2026: dárkový voucher na 21denní transformační výzvu Leadership Restart. Daruj někomu nezničitelné návyky, disciplínu a fokus – jednorázová akce do 27. 11. 2026.">
+<title>Black Friday – dárková karta se slevou 80 % | Leadership Restart</title>
+<meta name="description" content="Black Friday: dárková karta Leadership Restart v hodnotě 1 300 € jen za 260 €. Jen 30 karet, maximálně 2 na osobu. Akce končí 6. 11. 2026.">
 <link rel="canonical" href="https://leadershiprestart.cz/black-friday">
 <meta name="robots" content="noindex,follow">
 <!--
-  /black-friday – LANDING PAGE Black Friday 2026 (27. 11.): dárkový voucher na 21denní výzvu.
-  Struktura 1:1 podle vzoru start.erevenue.cz/black-friday (lišta s odpočtem → hero s kartou →
-  nabídka + 2 pravidla → 3 kroky → FAQ → závěrečné CTA s kartou → patička).
-  Dvě cílové skupiny: klienti programu voucher JEN DARUJÍ (nesmí ho koupit sobě),
-  ostatní si ho mohou koupit sobě i darovat.
-  Místa označená [DOPLNIT: …] čekají na Denise (ceny, počty, platnost, odkaz na platbu).
-  Odpočet běží k 27. 11. 2026 23:59 Europe/Prague (konstanta BF_END v JS dole).
+  /black-friday – LANDING PAGE Black Friday.
+  Texty = doslovný překlad vzoru start.erevenue.cz/black-friday (SK → CS), značka nahrazena
+  za „Leadership Restart“; ceny, čísla, termíny a odpočet (6. 11. 2026 23:59) jsou ze vzoru.
+  Struktura 1:1: lišta s odpočtem → hero s kartou → nabídka + 2 pravidla → 3 kroky → FAQ →
+  závěrečné CTA s kartou → sdílená patička (site.js).
+  Hlavička a patička jsou sdílené prvky webu (site.js), ne ze vzoru.
+  CTA tlačítka zatím vedou na [DOPLNIT: odkaz na platbu] (3 místa, hledej „odkaz na platbu“).
 -->
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/favicon.png">
@@ -88,7 +88,6 @@
   .btn-lr:hover{transform:translateY(-3px);box-shadow:0 22px 52px rgba(233,182,79,.4)}
   /* dlouhé CTA ze vzoru se na mobilu musí zalomit */
   .btn-wide{display:inline-block;white-space:normal;text-align:center;line-height:1.3;padding:14px 26px 12px;font-size:13.5px;max-width:100%}
-  .btn-wide .todo{white-space:normal}
 
   .ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block;flex:none}
 
@@ -112,7 +111,6 @@
   .faq details{background:var(--dk-card);border-color:var(--dk-brd)}
   .faq details:hover{border-color:rgba(233,182,79,.4)}
   .faq .faq-a{color:var(--dk-muted)}
-  .faq .faq-a b{color:var(--dk-text)}
 
   /* ======================================================================
      1) LIŠTA S ODPOČTEM (přišpendlená pod menu)
@@ -140,7 +138,6 @@
     .bf-bar .bf-right .lbl{font-size:11px}
     .bf-bar .cd{font-size:14px;gap:4px}
   }
-  @media(max-width:400px){.bf-bar .todo{padding:0 3px;font-size:10px}}
 
   /* ======================================================================
      2) HERO
@@ -154,11 +151,11 @@
   .hero-bf h1{font-size:clamp(32px,4.6vw,58px);margin:22px auto 16px;max-width:900px;color:#fff}
   .hero-bf .h-sub{margin:0 auto;max-width:640px;font-size:clamp(16px,1.6vw,19px)}
   .hero-bf .h-sub b{color:var(--dk-text)}
-  .hero-bf .h-sub .price{color:var(--lr-gold-light);font-family:"League Spartan",sans-serif;font-weight:800;font-size:1.15em}
+  .hero-bf .h-sub .price{color:var(--lr-gold-light);font-family:"League Spartan",sans-serif;font-weight:800;font-size:1.15em;white-space:nowrap}
   .hero-cta{margin-top:30px}
   .cta-note{font-size:13px;margin:14px auto 0;max-width:560px;color:var(--dk-muted)}
 
-  /* ---------- dárkový voucher (karta) ---------- */
+  /* ---------- dárková karta ---------- */
   .voucher-wrap{display:flex;justify-content:center;margin:40px auto 0;perspective:1200px}
   .voucher{position:relative;width:min(100%,520px);aspect-ratio:1.62;border-radius:24px;
     padding:clamp(18px,3.4vw,30px) clamp(20px,3.8vw,34px);text-align:left;overflow:hidden;
@@ -181,25 +178,17 @@
     text-transform:uppercase;letter-spacing:.06em;font-size:clamp(11px,1.6vw,13px);line-height:1.05}
   .voucher .v-brand svg{width:34px;height:34px;flex:none}
   .voucher .v-brand span{display:block;font-size:.78em;font-family:"Manrope",sans-serif;font-weight:700;letter-spacing:.14em;opacity:.7}
-  .voucher .v-tag{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.14em;
-    font-size:clamp(10px,1.4vw,11.5px);padding:7px 12px 5px;border-radius:999px;border:1.5px solid rgba(26,18,6,.45);white-space:nowrap}
   .voucher .v-mid{margin-top:auto}
   .voucher .v-label{font-family:"Manrope",sans-serif;font-weight:700;font-size:clamp(11px,1.7vw,13.5px);
     letter-spacing:.16em;text-transform:uppercase;opacity:.75}
-  .voucher .v-value{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(30px,5.6vw,52px);line-height:1;margin:4px 0 2px;letter-spacing:-.01em}
-  .voucher .v-value small{font-size:.42em;letter-spacing:.02em;font-weight:700;vertical-align:.35em;margin-left:4px}
-  .voucher .v-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;
-    border-top:1px solid rgba(26,18,6,.25);padding-top:clamp(8px,1.6vw,12px);margin-top:clamp(8px,1.6vw,12px);
+  .voucher .v-value{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1;margin:4px 0 2px;letter-spacing:-.01em}
+  .voucher .v-use{font-size:clamp(12px,1.8vw,14.5px);font-weight:600;opacity:.85}
+  .voucher .v-bot{border-top:1px solid rgba(26,18,6,.25);padding-top:clamp(8px,1.6vw,12px);margin-top:clamp(8px,1.6vw,12px);
     font-size:clamp(10.5px,1.5vw,13px);font-weight:600}
-  .voucher .v-bot b{display:block;font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:.95em}
-  .voucher .v-bot span{opacity:.75}
-  .voucher .v-serial{font-family:ui-monospace,Menlo,monospace;font-size:.9em;letter-spacing:.14em;opacity:.55}
-  /* [DOPLNIT] placeholdery vizuálně odlišit, aby je Denis snadno našel */
-  .todo{background:rgba(255,99,57,.14);border:1px dashed rgba(255,99,57,.75);color:#ffb59f;border-radius:6px;padding:0 6px;font-weight:700;white-space:nowrap}
-  .voucher .todo{color:#5a1e0a;background:rgba(255,255,255,.35);border-color:rgba(90,30,10,.6)}
+  .voucher .v-bot b{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:.95em;margin-right:6px}
 
   /* ======================================================================
-     3) NABÍDKA (−X % · ty zaplatíš … ale daruješ …)
+     3) NABÍDKA (−80 % · ty zaplatíš … ale daruješ …)
      ====================================================================== */
   .offer-head{text-align:center;max-width:860px;margin:0 auto}
   .offer-badge{display:inline-flex;align-items:center;gap:8px;font-family:"League Spartan",sans-serif;font-weight:800;
@@ -215,7 +204,6 @@
     background:rgba(233,182,79,.1);border:1px solid rgba(233,182,79,.35);filter:drop-shadow(0 10px 30px rgba(233,182,79,.35))}
   .rule h3{font-family:"League Spartan",sans-serif;font-weight:800;font-size:17px;color:#fff;margin:2px 0 6px;line-height:1.15}
   .rule p{color:var(--dk-muted);font-size:14.5px;line-height:1.6}
-  .rule p b{color:var(--dk-text)}
 
   /* ======================================================================
      4) JAK TO FUNGUJE — 3 kroky
@@ -229,7 +217,6 @@
     font-size:clamp(64px,7vw,104px);line-height:1;opacity:.07;color:#f6d47c;pointer-events:none}
   .step h3{font-family:"League Spartan",sans-serif;font-weight:800;font-size:clamp(18px,1.9vw,22px);color:#fff;margin-bottom:10px;line-height:1.15}
   .step p{color:var(--dk-muted);font-size:15px;line-height:1.65}
-  .step p b{color:var(--dk-text)}
 
   /* ======================================================================
      6) ZÁVĚREČNÉ CTA
@@ -245,13 +232,11 @@
 </head>
 <body>
 
-<!-- Ikony: Lucide (MIT), stroke 2 / 24px — podle brand.html #ikony (emoji nepoužíváme) -->
+<!-- Ikony: Lucide (MIT), stroke 2 / 24px — podle brand.html #ikony -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 2 7 9h3l-4 6h4l-4 5h12l-4-5h4l-4-6h3z"/><path d="M12 20v2"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
   </defs>
 </svg>
 
@@ -259,7 +244,7 @@
 
 <!-- ======================= 1) LIŠTA S ODPOČTEM ======================= -->
 <div class="bf-bar" role="status" aria-live="off">
-  <span class="bf-left">Black Friday · zbývá <b><span class="todo">[DOPLNIT: počet]</span> z <span class="todo">[DOPLNIT: počet]</span> voucherů</b></span>
+  <span class="bf-left">Black Friday · zbývá <b>30 z 30 karet</b></span>
   <span class="bf-right"><span class="lbl">Akce končí za</span>
     <span class="cd" id="cd">
       <b data-cd="d">--</b><i>d</i>
@@ -273,36 +258,30 @@
 <!-- ======================= 2) HERO ======================= -->
 <section class="hero-bf">
   <div class="wrap">
-    <span class="lr-kicker">Black Friday · sleva <span class="todo">[DOPLNIT: sleva v %]</span></span>
-    <h1 class="display">Staň se <span class="lr-grad-text">nejštědřejším člověkem</span> pod vánočním stromečkem</h1>
-    <p class="h-sub">Kup dárkový voucher na 21denní výzvu Leadership Restart v hodnotě
-      <b class="price"><span class="todo">[DOPLNIT: hodnota voucheru]</span></b> a zaplať za něj jen
-      <b class="price"><span class="todo">[DOPLNIT: Black Friday cena]</span></b>.</p>
+    <span class="lr-kicker">Black Friday · sleva 80 %</span>
+    <h1 class="display">Staň se <span class="lr-grad-text">nejštědřejším člověkem</span> pod vánočním stromečkem 🎄</h1>
+    <p class="h-sub">Kup dárkovou kartu v hodnotě <b class="price">1 300 €</b> a zaplať za ni jen <b class="price">260 €</b>.</p>
 
     <div class="voucher-wrap">
-      <div class="voucher" role="img" aria-label="Dárkový voucher na 21denní výzvu Leadership Restart">
+      <div class="voucher" role="img" aria-label="Dárková karta Leadership Restart v hodnotě 1 300 €">
         <div class="v-top">
           <div class="v-brand">
             <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="#1a1206"/></svg>
             <div>Leadership Restart<span>za 21 dní</span></div>
           </div>
-          <span class="v-tag">Black Friday 2026</span>
         </div>
         <div class="v-mid">
-          <div class="v-label">Dárkový voucher</div>
-          <div class="v-value"><span class="todo">[DOPLNIT: hodnota]</span></div>
-          <div class="v-label" style="text-transform:none;letter-spacing:0;font-size:clamp(12px,1.8vw,14.5px);opacity:.85">Na 21denní transformační výzvu Leadership Restart</div>
+          <div class="v-label">Dárková karta</div>
+          <div class="v-value">1 300 €</div>
+          <div class="v-use">Na jakékoli služby Leadership Restart</div>
         </div>
-        <div class="v-bot">
-          <div><b>Platí</b><span><span class="todo">[DOPLNIT: platnost od]</span> – <span class="todo">[DOPLNIT: platnost do]</span></span></div>
-          <div class="v-serial">LR-BF-2026-····</div>
-        </div>
+        <div class="v-bot"><b>Platí</b>od 24. 12. 2026 do 31. 12. 2027</div>
       </div>
     </div>
 
     <div class="hero-cta">
-      <a class="btn btn-lr btn-wide" data-cta-pos="bf_hero" href="[DOPLNIT: odkaz na platbu]">Chci darovat voucher v hodnotě <span class="todo">[DOPLNIT: hodnota]</span> jen za <span class="todo">[DOPLNIT: cena]</span></a>
-      <p class="cta-note">Bezpečná platba kartou · voucher ti přijde hned e-mailem</p>
+      <a class="btn btn-lr btn-wide" data-cta-pos="bf_hero" href="[DOPLNIT: odkaz na platbu]">Chci darovat dárkovou kartu v hodnotě 1 300 € jen za 260 €</a>
+      <p class="cta-note">Bezpečná platba přes Stripe · karta ti přijde hned e-mailem</p>
     </div>
   </div>
 </section>
@@ -311,31 +290,28 @@
 <section class="section sec-dark sec-tint-warm">
   <div class="wrap">
     <div class="offer-head">
-      <span class="offer-badge"><svg class="ico" style="width:16px;height:16px"><use href="#i-gift"/></svg>Jen teď −<span class="todo">[DOPLNIT: sleva v %]</span></span>
-      <p class="offer-sub">Black Friday limitovaná sleva na dárkový voucher</p>
-      <h2 class="display h-section">Ty zaplatíš jen <span class="lr-grad-text"><span class="todo">[DOPLNIT: cena]</span></span>. Ale daruješ až <span class="lr-grad-text"><span class="todo">[DOPLNIT: hodnota]</span></span>.</h2>
-      <p class="offer-text">Toto je nejlepší Black Friday akce letošního roku! A to myslím opravdu vážně! Právě teď máš možnost stát se
-        nejštědřejším kamarádem pod vánočním stromečkem a darovat <b>21denní transformační výzvu Leadership Restart</b>
-        v hodnotě <span class="todo">[DOPLNIT: hodnota]</span> – a zaplatit za ni jen <span class="todo">[DOPLNIT: cena]</span>!
-        Obdarovaný dostane úplně běžný voucher s plnou hodnotou <span class="todo">[DOPLNIT: hodnota]</span>. Na voucheru nebude uvedená
-        žádná sleva ani cena, kterou jsi za něj zaplatil. Voucherů je jen <span class="todo">[DOPLNIT: počet]</span> kusů
-        a objednávky jsou omezené na maximálně <span class="todo">[DOPLNIT: max na osobu]</span> vouchery na osobu!</p>
+      <span class="offer-badge"><svg class="ico" style="width:16px;height:16px"><use href="#i-gift"/></svg>Jen teď −80 %</span>
+      <p class="offer-sub">Black Friday limitovaná sleva na dárkovou kartu</p>
+      <h2 class="display h-section">Ty zaplatíš jen <span class="lr-grad-text">260 €</span>. Ale daruješ až <span class="lr-grad-text">1 300 €</span>.</h2>
+      <p class="offer-text">Toto je nejlepší Black Friday akce letošního roku! A to myslíme opravdu vážně! Právě teď máš možnost stát se
+        nejštědřejším kamarádem pod vánočním stromečkem a darovat dárkovou kartu v hodnotě 1 300 € a zaplatit za ni jen 260 €! 😍
+        Obdarovaný dostane úplně běžnou kartu s plnou částkou 1 300 €. Na kartě nebude uvedená žádná sleva ani cena, kterou jsi
+        za ni zaplatil. Karet je jen 30 kusů a objednávky jsou limitované na maximálně 2 karty na osobu!</p>
     </div>
 
     <div class="rules">
       <div class="lr-card rule reveal">
         <div class="r-ico"><svg class="ico"><use href="#i-gift"/></svg></div>
         <div>
-          <h3>Klienti Restartu voucher jen darují</h3>
-          <p>Prošel sis výzvou nebo v programu jsi? <b>Sám si voucher uplatnit nemůžeš</b> – musíš ho darovat někomu jinému.
-            Pokud v programu zatím nejsi, můžeš voucher <b>koupit sobě i darovat</b>.</p>
+          <h3>Karta je jen na darování</h3>
+          <p>Sám si ji uplatnit nemůžeš – musíš ji darovat někomu jinému.</p>
         </div>
       </div>
       <div class="lr-card rule reveal">
         <div class="r-ico"><svg class="ico"><use href="#i-users"/></svg></div>
         <div>
-          <h3>Nejvíc <span class="todo">[DOPLNIT: max na osobu]</span> vouchery na osobu</h3>
-          <p>Můžeš koupit maximálně <span class="todo">[DOPLNIT: max na osobu]</span> dárkové vouchery.</p>
+          <h3>Nejvíc 2 karty na osobu</h3>
+          <p>Můžeš koupit maximálně dvě dárkové karty.</p>
         </div>
       </div>
     </div>
@@ -352,23 +328,21 @@
       <div class="lr-card step reveal">
         <span class="s-ghost" aria-hidden="true">1</span>
         <span class="s-num">1</span>
-        <h3>Objednej voucher se slevou <span class="todo">[DOPLNIT: sleva v %]</span></h3>
-        <p>Dárkový voucher na 21denní výzvu v hodnotě <span class="todo">[DOPLNIT: hodnota]</span> tě teď vyjde jen na
-          <span class="todo">[DOPLNIT: cena]</span>. Můžeš objednat maximálně <span class="todo">[DOPLNIT: max na osobu]</span> vouchery.</p>
+        <h3>Objednej kartu s 80% slevou</h3>
+        <p>Dárková karta v hodnotě 1 300 € tě teď vyjde jen na 260 €. Můžeš objednat maximálně 2 karty.</p>
       </div>
       <div class="lr-card step reveal">
         <span class="s-ghost" aria-hidden="true">2</span>
         <span class="s-num">2</span>
-        <h3>Voucher ti přijde e-mailem</h3>
-        <p>Na voucheru je napsaná hodnota <span class="todo">[DOPLNIT: hodnota]</span>. Vytiskni ho a dej pod stromeček, nebo ho pošli
-          obdarovanému digitálně. <b>Jsi klient Restartu? Musíš ho darovat</b>, pro sebe se uplatnit nedá.</p>
+        <h3>Karta ti přijde e-mailem</h3>
+        <p>Na kartě je napsaná hodnota 1 300 €. Vytiskni ji a dej pod stromeček, nebo ji pošli obdarovanému digitálně.
+          Musíš ji darovat, nedá se uplatnit pro sebe.</p>
       </div>
       <div class="lr-card step reveal">
         <span class="s-ghost" aria-hidden="true">3</span>
         <span class="s-num">3</span>
-        <h3>Staň se nejštědřejším člověkem pod stromečkem</h3>
-        <p>Obdarovaný si voucher uplatní od <span class="todo">[DOPLNIT: platnost od]</span> do <span class="todo">[DOPLNIT: platnost do]</span>:
-          domluví si s Denisem nezávazný vstupní hovor 1:1 a start své 21denní výzvy. A ty jsi ten, na čí dárek se tak brzy nezapomene.</p>
+        <h3>Staň se nejštědřejším člověkem pod stromečkem 🎄</h3>
+        <p>Obdarovaný může kartu využít od 24. 12. 2026 do 31. 12. 2027 – a ty jsi ten, na čí dárek se tak brzy nezapomene.</p>
       </div>
     </div>
   </div>
@@ -380,31 +354,25 @@
     <h2 class="display h-section">Časté <span class="lr-grad-text">otázky</span></h2>
     <div class="faq" style="text-align:left">
       <details>
-        <summary>Na co se dá dárkový voucher použít?</summary>
-        <div class="faq-a">Voucher má hodnotu <span class="todo">[DOPLNIT: hodnota]</span> a obdarovaný ho může od
-          <span class="todo">[DOPLNIT: platnost od]</span> do <span class="todo">[DOPLNIT: platnost do]</span> použít na 21denní transformační výzvu
-          Leadership Restart: úvodní mentoring 1:1, 21 dní denních mikro-kroků s reflexí v aplikaci Dimi, dvakrát týdně společný call
-          a podpora 24/7 přes zprávy a hlasovky.</div>
+        <summary>Na co se dá dárková karta použít?</summary>
+        <div class="faq-a">Karta má hodnotu 1 300 € a obdarovaný ji může od 24. 12. 2026 do 31. 12. 2027 použít na jakékoli služby Leadership Restart.</div>
       </details>
       <details>
-        <summary>Můžu voucher použít i sám pro sebe?</summary>
-        <div class="faq-a"><b>Záleží, kde jsi.</b> Pokud jsi klientem programu nebo sis výzvou už prošel, voucher je určený jen k darování –
-          uplatnit ho může jen obdarovaný, ne ten, kdo ho koupil. Pokud v programu zatím nejsi, můžeš voucher koupit sobě i darovat.</div>
+        <summary>Můžu kartu použít i sám?</summary>
+        <div class="faq-a">Ne. Karta je určená na darování – uplatnit ji může jen obdarovaný, ne ten, kdo ji koupil.</div>
       </details>
       <details>
-        <summary>Kolik voucherů můžu koupit?</summary>
-        <div class="faq-a">Maximálně <span class="todo">[DOPLNIT: max na osobu]</span> vouchery na osobu. V celé akci je jen
-          <span class="todo">[DOPLNIT: počet]</span> voucherů.</div>
+        <summary>Kolik karet můžu koupit?</summary>
+        <div class="faq-a">Maximálně 2 karty na osobu. V celé akci je jen 30 karet.</div>
       </details>
       <details>
-        <summary>Kdy a kam voucher dostanu a jak ho daruji?</summary>
-        <div class="faq-a">Hned po zaplacení ti přijde tvůj unikátní voucher e-mailem. Můžeš ho vytisknout a dát pod stromeček,
-          nebo ho obdarovanému poslat v den Vánoc digitálně.</div>
+        <summary>Kdy a kam kartu dostanu a jak ji daruji?</summary>
+        <div class="faq-a">Hned po zaplacení ti přijde tvoje unikátní karta e-mailem. Můžeš ji vytisknout a dát pod stromeček 🎄,
+          nebo ji obdarovanému poslat v den Vánoc digitálně 📩.</div>
       </details>
       <details>
-        <summary>Do kdy můžu voucher koupit?</summary>
-        <div class="faq-a">Akce platí do <b>27. 11. 2026 (23:59)</b> nebo do vyprodání <span class="todo">[DOPLNIT: počet]</span> voucherů –
-          podle toho, co nastane dřív.</div>
+        <summary>Do kdy můžu kartu koupit?</summary>
+        <div class="faq-a">Akce platí do 6. 11. 2026 nebo do vyprodání 30 karet – podle toho, co nastane dřív.</div>
       </details>
     </div>
   </div>
@@ -413,34 +381,30 @@
 <!-- ======================= 6) ZÁVĚREČNÉ CTA ======================= -->
 <section class="section sec-dark sec-tint-warm final">
   <div class="wrap" style="text-align:center">
-    <h2 class="display h-section">První krok je nejdůležitější, staň se <span class="lr-grad-text">nejštědřejším člověkem</span> pod vánočním stromečkem</h2>
+    <h2 class="display h-section">První krok je nejdůležitější, staň se <span class="lr-grad-text">nejštědřejším člověkem</span> pod vánočním stromečkem 🎄</h2>
     <p class="h-sub">Většina lidí řeší vánoční dárky na poslední chvíli a ty nejlepší akce už jsou pryč. Udělej to letos jinak,
-      daruj něco opravdu hodnotného za zlomek ceny a získej obrovský obdiv u vánočního stromečku!</p>
+      daruj něco opravdu hodnotného za zlomek ceny a získej obrovský obdiv u vánočního stromečku! 😍</p>
 
     <div class="voucher-wrap">
-      <div class="voucher" role="img" aria-label="Dárkový voucher na 21denní výzvu Leadership Restart">
+      <div class="voucher" role="img" aria-label="Dárková karta Leadership Restart v hodnotě 1 300 €">
         <div class="v-top">
           <div class="v-brand">
             <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="#1a1206"/></svg>
             <div>Leadership Restart<span>za 21 dní</span></div>
           </div>
-          <span class="v-tag">Black Friday 2026</span>
         </div>
         <div class="v-mid">
-          <div class="v-label">Dárkový voucher</div>
-          <div class="v-value"><span class="todo">[DOPLNIT: hodnota]</span></div>
-          <div class="v-label" style="text-transform:none;letter-spacing:0;font-size:clamp(12px,1.8vw,14.5px);opacity:.85">Na 21denní transformační výzvu Leadership Restart</div>
+          <div class="v-label">Dárková karta</div>
+          <div class="v-value">1 300 €</div>
+          <div class="v-use">Na jakékoli služby Leadership Restart</div>
         </div>
-        <div class="v-bot">
-          <div><b>Platí</b><span><span class="todo">[DOPLNIT: platnost od]</span> – <span class="todo">[DOPLNIT: platnost do]</span></span></div>
-          <div class="v-serial">LR-BF-2026-····</div>
-        </div>
+        <div class="v-bot"><b>Platí</b>od 24. 12. 2026 do 31. 12. 2027</div>
       </div>
     </div>
 
     <div class="hero-cta">
       <a class="btn btn-lr btn-wide" data-cta-pos="bf_final" href="[DOPLNIT: odkaz na platbu]">Chci se stát nejštědřejším člověkem pod stromečkem</a>
-      <p class="cta-note">Bezpečná platba kartou · voucher ti přijde hned e-mailem</p>
+      <p class="cta-note">Bezpečná platba přes Stripe · karta ti přijde hned e-mailem</p>
     </div>
   </div>
 </section>
@@ -449,17 +413,17 @@
 
 <script src="assets/site.js?v=21"></script>
 <script>
-// LP: CTA v navigaci vede na platbu voucheru (site.js jinak staví odkaz na kvalifikaci do výzvy)
+// LP: CTA v navigaci vede na platbu dárkové karty (site.js jinak staví odkaz na kvalifikaci do výzvy)
 (function(){
   function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
-    c.href='[DOPLNIT: odkaz na platbu]'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf'; c.textContent='Chci darovat voucher'; return true; }
+    c.href='[DOPLNIT: odkaz na platbu]'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf'; c.textContent='Chci darovat dárkovou kartu'; return true; }
   if(!fix()){ document.addEventListener('DOMContentLoaded', fix); var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
 })();
 </script>
 <script>
-/* ===== Odpočet do konce akce: 27. 11. 2026 23:59 Europe/Prague (v listopadu CET = UTC+1) ===== */
+/* ===== Odpočet do konce akce (podle vzoru): 6. 11. 2026 23:59 Europe/Prague (v listopadu CET = UTC+1) ===== */
 (function(){
-  var BF_END = new Date('2026-11-27T23:59:00+01:00').getTime();
+  var BF_END = new Date('2026-11-06T23:59:00+01:00').getTime();
   var box = document.getElementById('cd'); if(!box) return;
   var el = {};
   ['d','h','m','s'].forEach(function(k){ el[k] = box.querySelector('[data-cd="'+k+'"]'); });
