@@ -169,13 +169,8 @@
     background:linear-gradient(115deg,transparent 30%,rgba(255,236,196,.16) 46%,rgba(255,255,255,.28) 50%,rgba(255,236,196,.16) 54%,transparent 70%) 130% 0/260% 100%;
     animation:shine 5.5s ease-in-out infinite}
   @keyframes shine{0%,55%{background-position:130% 0}100%{background-position:-130% 0}}
-  /* logo vlevo nahoře */
-  .gcard .g-brand{position:absolute;left:6%;top:8%;right:34%;display:flex;align-items:center;gap:2.2cqw;
-    font-family:"League Spartan",sans-serif;font-weight:800;line-height:1;letter-spacing:.02em;color:#fff;
-    font-size:clamp(10px,3.4cqw,21px)}
-  .gcard .g-brand svg{width:clamp(16px,5.6cqw,35px);height:clamp(16px,5.6cqw,35px);flex:none}
-  .gcard .g-brand span{display:block;font-family:"Manrope",sans-serif;font-weight:700;font-size:.5em;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--lr-gold-light);opacity:.85;margin-top:.35em}
+  /* logo vlevo nahoře – stejná značka jako v hlavičce (modro-oranžový přechod) */
+  .gcard .g-logo{position:absolute;left:6%;top:8%;width:clamp(110px,30cqw,190px);height:auto;display:block}
   /* textový blok vlevo dole */
   .gcard .g-text{position:absolute;left:6%;right:32%;bottom:8%;text-align:left}
   .gcard .g-label{font-size:clamp(8px,2.1cqw,13px);line-height:1.5;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,212,124,.7)}
@@ -341,10 +336,12 @@
             <circle cx="60" cy="40" r="9" fill="#f6d47c" stroke="#8a6318" stroke-opacity=".4"/>
           </svg>
           <div class="shine" aria-hidden="true"></div>
-          <div class="g-brand">
-            <svg aria-hidden="true" style="fill:url(#lrGoldCard)"><use href="#lr-mark"/></svg>
-            <div>Leadership Restart<span>za 21 dní</span></div>
-          </div>
+          <svg class="g-logo" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart za 21 dní">
+            <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrLogoCard)"/>
+            <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
+            <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#EFEEEC">START</tspan></text>
+            <text x="128" y="92" font-family="Manrope, sans-serif" font-weight="600" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>
+          </svg>
           <div class="g-text">
             <div class="g-label">Dárková karta</div>
             <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
@@ -465,10 +462,12 @@
             <circle cx="60" cy="40" r="9" fill="#f6d47c" stroke="#8a6318" stroke-opacity=".4"/>
           </svg>
           <div class="shine" aria-hidden="true"></div>
-          <div class="g-brand">
-            <svg aria-hidden="true" style="fill:url(#lrGoldCard)"><use href="#lr-mark"/></svg>
-            <div>Leadership Restart<span>za 21 dní</span></div>
-          </div>
+          <svg class="g-logo" viewBox="0 0 380 100" role="img" aria-label="Leadership Restart za 21 dní">
+            <path d="M52 6 L94 6 L94 48 L74 48 A22 22 0 0 0 52 70 L52 94 L6 94 L6 52 L26 52 A22 22 0 0 0 48 30 L48 6 Z" fill="url(#lrLogoCard)"/>
+            <text x="128" y="40" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#EFEEEC">Leadership</text>
+            <text x="128" y="74" font-family="League Spartan, sans-serif" font-weight="800" font-size="30" fill="#377EF7">RE<tspan fill="#EFEEEC">START</tspan></text>
+            <text x="128" y="92" font-family="Manrope, sans-serif" font-weight="600" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>
+          </svg>
           <div class="g-text">
             <div class="g-label">Dárková karta</div>
             <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
@@ -505,6 +504,9 @@
   <defs>
     <linearGradient id="lrGoldCard" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#F6D47C"/><stop offset="45%" stop-color="#E9B64F"/><stop offset="100%" stop-color="#C8952F"/>
+    </linearGradient>
+    <linearGradient id="lrLogoCard" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#377EF7"/><stop offset="100%" stop-color="#ED6D47"/>
     </linearGradient>
     <linearGradient id="lrBow" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#E9B64F"/><stop offset="1" stop-color="#A8762A"/>
