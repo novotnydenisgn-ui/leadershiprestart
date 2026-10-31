@@ -142,50 +142,51 @@
   .hero-bf .sub b{color:#fff;font-weight:700}
   .hero-cta{margin-top:36px}
 
-  /* ---------- dárková karta (tmavá se zlatem, podle vzoru) + animace vznášení ---------- */
+  /* ---------- dárková karta (rozměry a prvky podle vzoru: 620 px, poměr 1,54,
+     stuhy do kříže, mašle, lesk; barvy brand zlatá) + animace vznášení ---------- */
   .card-stage{display:flex;justify-content:center;margin:44px auto 0;perspective:1400px}
-  .card-float{animation:float 7s ease-in-out infinite;transform-style:preserve-3d;will-change:transform;
-    filter:drop-shadow(0 40px 60px rgba(0,0,0,.55))}
+  .card-float{width:min(100%,620px);container-type:inline-size;
+    animation:float 7s ease-in-out infinite;transform-style:preserve-3d;will-change:transform}
   @keyframes float{
-    0%,100%{transform:translateY(0) rotateX(6deg) rotateY(-9deg)}
-    50%{transform:translateY(-16px) rotateX(-2deg) rotateY(7deg)}
+    0%,100%{transform:translateY(0) rotate(-2deg) rotateX(4deg) rotateY(-6deg)}
+    50%{transform:translateY(-16px) rotate(-1deg) rotateX(-2deg) rotateY(5deg)}
   }
-  .gcard{position:relative;width:min(100%,460px);min-height:288px;border-radius:22px;overflow:hidden;
-    padding:24px 28px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;gap:18px;
-    color:#fff;
-    background:
-      radial-gradient(120% 90% at 100% 0%,rgba(233,182,79,.22),transparent 50%),
-      radial-gradient(90% 70% at 0% 100%,rgba(200,149,47,.14),transparent 55%),
-      linear-gradient(160deg,#17140d 0%,#0f0e0b 60%,#141109 100%);
-    border:1px solid rgba(233,182,79,.38);
-    box-shadow:0 0 0 1px rgba(0,0,0,.6) inset,0 30px 80px rgba(233,182,79,.14)}
-  /* zlatá stuha jako na vzoru */
-  .gcard::before{content:"";position:absolute;top:-10%;bottom:-10%;right:9%;width:10%;
-    background:linear-gradient(90deg,#c8952f,#f6d47c 45%,#e9b64f 70%,#b8872a);opacity:.9;
-    box-shadow:0 0 30px rgba(233,182,79,.3)}
-  .gcard::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.14) 47%,transparent 58%);
-    background-size:220% 100%;background-position:120% 0;animation:shine 7s ease-in-out infinite}
-  @keyframes shine{0%,50%{background-position:120% 0}85%,100%{background-position:-120% 0}}
-  .gcard>*{position:relative;z-index:1}
-  .gcard .g-brand{display:flex;align-items:center;gap:10px;font-family:"League Spartan",sans-serif;font-weight:800;
-    font-size:15px;line-height:1;letter-spacing:.02em;color:#fff}
-  .gcard .g-brand svg{width:30px;height:30px;flex:none}
-  .gcard .g-brand span{display:block;font-family:"Manrope",sans-serif;font-weight:700;font-size:9px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--lr-gold-light);opacity:.8;margin-top:4px}
-  .gcard .g-label{font-size:13px;line-height:1.5;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,212,124,.7)}
-  .gcard .g-value{font-family:"League Spartan",sans-serif;font-weight:800;font-size:72px;line-height:1;letter-spacing:-.05em;margin:2px 0 4px}
+  .gcard{position:relative;width:100%;aspect-ratio:1.54;border-radius:28px;overflow:hidden;color:#fff;
+    background:radial-gradient(130% 150% at 0 0,#4a3a1e 0%,#1b160e 42%,#0b0b0b 100%);
+    border:1px solid rgba(233,182,79,.3);
+    box-shadow:0 40px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,236,196,.18)}
+  /* stuhy do kříže */
+  .gcard .rb-v{position:absolute;top:0;bottom:0;left:72%;width:9%;
+    background:linear-gradient(90deg,rgba(200,149,47,.75),rgba(246,212,124,.95) 50%,rgba(184,135,42,.75));
+    box-shadow:0 0 24px rgba(0,0,0,.45)}
+  .gcard .rb-h{position:absolute;left:0;right:0;top:30%;height:9%;
+    background:linear-gradient(180deg,rgba(200,149,47,.75),rgba(246,212,124,.95) 50%,rgba(184,135,42,.75));
+    box-shadow:0 0 24px rgba(0,0,0,.45)}
+  .gcard .bow{position:absolute;left:76.5%;top:34.5%;width:26%;height:auto;transform:translate(-50%,-50%);
+    filter:drop-shadow(0 8px 16px rgba(0,0,0,.45))}
+  /* lesk přes kartu (jako vzor: 115°, 260 % šířky, každých 5,5 s, prolnutí screen) */
+  .gcard .shine{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,236,196,.16) 46%,rgba(255,255,255,.28) 50%,rgba(255,236,196,.16) 54%,transparent 70%) 130% 0/260% 100%;
+    animation:shine 5.5s ease-in-out infinite}
+  @keyframes shine{0%,55%{background-position:130% 0}100%{background-position:-130% 0}}
+  /* logo vlevo nahoře */
+  .gcard .g-brand{position:absolute;left:6%;top:8%;right:34%;display:flex;align-items:center;gap:2.2cqw;
+    font-family:"League Spartan",sans-serif;font-weight:800;line-height:1;letter-spacing:.02em;color:#fff;
+    font-size:clamp(10px,3.4cqw,21px)}
+  .gcard .g-brand svg{width:clamp(16px,5.6cqw,35px);height:clamp(16px,5.6cqw,35px);flex:none}
+  .gcard .g-brand span{display:block;font-family:"Manrope",sans-serif;font-weight:700;font-size:.5em;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--lr-gold-light);opacity:.85;margin-top:.35em}
+  /* textový blok vlevo dole */
+  .gcard .g-text{position:absolute;left:6%;right:32%;bottom:8%;text-align:left}
+  .gcard .g-label{font-size:clamp(8px,2.1cqw,13px);line-height:1.5;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(246,212,124,.7)}
+  .gcard .g-value{font-family:"League Spartan",sans-serif;font-weight:800;font-size:12cqw;line-height:1;letter-spacing:-.05em;margin-top:.4cqw;white-space:nowrap}
   .gcard .g-value .pr{justify-items:start}
-  .gcard .g-value .pr small{font-family:"Manrope",sans-serif;font-size:.28em;font-weight:700;letter-spacing:0;color:rgba(255,255,255,.6);margin-top:.1em}
-  .gcard .g-use{font-size:15.5px;line-height:1.5;font-weight:600;color:rgba(255,246,214,.85)}
-  .gcard .g-valid{font-size:13.6px;line-height:1.5;font-weight:500;color:rgba(255,255,255,.55);margin-top:6px}
-  /* menší karta v závěru (vzor: 46,5 px) */
-  .gcard.sm{width:min(100%,400px);min-height:240px;padding:22px 24px;gap:14px}
-  .gcard.sm .g-value{font-size:46px}
-  .gcard.sm .g-label{font-size:10px}
-  .gcard.sm .g-use{font-size:13px}
-  .gcard.sm .g-valid{font-size:11.5px}
-  @media(prefers-reduced-motion:reduce){.card-float,.gcard::after{animation:none}}
+  .gcard .g-value .pr small{font-family:"Manrope",sans-serif;font-size:.27em;font-weight:700;letter-spacing:0;color:rgba(255,255,255,.6);margin-top:.12em}
+  .gcard .g-use{font-size:clamp(9px,2.5cqw,16px);line-height:1.5;font-weight:600;color:rgba(255,246,214,.9);margin-top:1.4cqw}
+  .gcard .g-valid{font-size:clamp(8px,2.2cqw,14px);line-height:1.5;font-weight:500;color:rgba(255,255,255,.55);margin-top:.5cqw}
+  /* menší karta v závěru (vzor ≈ 360 px) */
+  .final-bf .card-float{width:min(100%,360px)}
+  @media(prefers-reduced-motion:reduce){.card-float,.gcard .shine{animation:none}}
 
   /* ======================================================================
      3) NABÍDKA — „Jen teď −80 %“
@@ -251,8 +252,8 @@
      ====================================================================== */
   .bf-footer{background:#0a0906;border-top:1px solid rgba(233,182,79,.14);padding:32px 24px calc(26px + 56px);
     text-align:center;color:rgba(241,238,230,.6);font-size:14px;line-height:20px}
-  .bf-f-brand{font-family:"League Spartan",sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em;color:#fff;margin-bottom:8px}
-  .bf-f-op{max-width:640px;margin:0 auto 16px}
+  .bf-footer .bf-f-brand{font-family:"League Spartan",sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em;color:#fff;margin-bottom:8px}
+  .bf-footer .bf-f-op{max-width:640px;margin:0 auto 16px}
   .bf-f-op a{color:inherit;text-decoration:none}
   .bf-f-op a:hover{color:var(--lr-gold-light)}
   .bf-f-legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(12px,3vw,30px)}
@@ -285,18 +286,11 @@
     .final-bf{padding:48px 0}
     .final-bf .text{font-size:16px;line-height:26px}
     .cta-bf{font-size:15px;padding:14px 28px}
-    .gcard{padding:20px 22px;border-radius:18px;min-height:0;gap:12px}
-    .gcard .g-value{font-size:46px}
-    .gcard .g-label{font-size:9px}
-    .gcard .g-use{font-size:12px}
-    .gcard .g-valid{font-size:11px}
-    .gcard .g-brand{font-size:12px}
-    .gcard .g-brand svg{width:24px;height:24px}
-    .gcard.sm{width:100%;padding:20px 22px}
     @keyframes float{
-      0%,100%{transform:translateY(0) rotateX(3deg) rotateY(-4deg)}
-      50%{transform:translateY(-10px) rotateX(-1deg) rotateY(3deg)}
+      0%,100%{transform:translateY(0) rotate(-1.5deg) rotateX(2deg) rotateY(-3deg)}
+      50%{transform:translateY(-10px) rotate(-.5deg) rotateX(-1deg) rotateY(2deg)}
     }
+    .gcard{border-radius:18px}
   }
 </style>
 </head>
@@ -337,11 +331,21 @@
     <div class="card-stage">
       <div class="card-float">
         <div class="gcard" role="img" aria-label="Dárková karta Leadership Restart v hodnotě 22 990 Kč (920 €)">
+          <div class="rb-h" aria-hidden="true"></div>
+          <div class="rb-v" aria-hidden="true"></div>
+          <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
+            <path d="M60 40 C 42 6, 4 12, 11 36 C 16 56, 46 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M60 40 C 78 6, 116 12, 109 36 C 104 56, 74 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M55 45 L 38 77 L 49 72 L 53 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <path d="M65 45 L 82 77 L 71 72 L 67 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <circle cx="60" cy="40" r="9" fill="#f6d47c" stroke="#8a6318" stroke-opacity=".4"/>
+          </svg>
+          <div class="shine" aria-hidden="true"></div>
           <div class="g-brand">
             <svg aria-hidden="true" style="fill:url(#lrGoldCard)"><use href="#lr-mark"/></svg>
             <div>Leadership Restart<span>za 21 dní</span></div>
           </div>
-          <div>
+          <div class="g-text">
             <div class="g-label">Dárková karta</div>
             <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
             <div class="g-use">Na jakékoli služby Leadership Restart</div>
@@ -451,11 +455,21 @@
     <div class="card-stage">
       <div class="card-float">
         <div class="gcard sm" role="img" aria-label="Dárková karta Leadership Restart v hodnotě 22 990 Kč (920 €)">
+          <div class="rb-h" aria-hidden="true"></div>
+          <div class="rb-v" aria-hidden="true"></div>
+          <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
+            <path d="M60 40 C 42 6, 4 12, 11 36 C 16 56, 46 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M60 40 C 78 6, 116 12, 109 36 C 104 56, 74 52, 60 40 Z" fill="url(#lrBow)"/>
+            <path d="M55 45 L 38 77 L 49 72 L 53 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <path d="M65 45 L 82 77 L 71 72 L 67 80 L 60 49 Z" fill="url(#lrBow)"/>
+            <circle cx="60" cy="40" r="9" fill="#f6d47c" stroke="#8a6318" stroke-opacity=".4"/>
+          </svg>
+          <div class="shine" aria-hidden="true"></div>
           <div class="g-brand">
             <svg aria-hidden="true" style="fill:url(#lrGoldCard)"><use href="#lr-mark"/></svg>
             <div>Leadership Restart<span>za 21 dní</span></div>
           </div>
-          <div>
+          <div class="g-text">
             <div class="g-label">Dárková karta</div>
             <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
             <div class="g-use">Na jakékoli služby Leadership Restart</div>
@@ -491,6 +505,9 @@
   <defs>
     <linearGradient id="lrGoldCard" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#F6D47C"/><stop offset="45%" stop-color="#E9B64F"/><stop offset="100%" stop-color="#C8952F"/>
+    </linearGradient>
+    <linearGradient id="lrBow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#E9B64F"/><stop offset="1" stop-color="#A8762A"/>
     </linearGradient>
   </defs>
 </svg>
