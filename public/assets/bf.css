@@ -1,5 +1,5 @@
 /* ======================================================================
-   Black Friday – sdílené styly PODSTRÁNEK dárkové karty
+   Black Friday – sdílené styly PODSTRÁNEK dárkového poukazu
    (/black-friday-dekujeme, /black-friday-karta, /black-friday-konec).
    Odvozeno 1:1 z inline stylů landing page public/black-friday.html
    (zlatý brand Leadership Restart: #F6D47C → #E9B64F → #C8952F na teplé tmavé).
@@ -101,7 +101,7 @@ body.no-bar{padding-top:58px}
 .hero-bf .sub b{color:#fff;font-weight:700}
 .hero-cta{margin-top:36px}
 
-/* ---------- dárková karta (1:1 s LP) ---------- */
+/* ---------- dárkový poukaz (1:1 s LP) ---------- */
 .card-stage{display:flex;justify-content:center;margin:44px auto 0;perspective:1400px}
 .card-float{width:min(100%,620px);container-type:inline-size;animation:float 7s ease-in-out infinite;transform-style:preserve-3d;will-change:transform}
 .card-float.still{animation:none;transform:none}
@@ -130,7 +130,7 @@ body.no-bar{padding-top:58px}
 .gcard .g-value .pr small{font-family:"Manrope",sans-serif;font-size:.27em;font-weight:700;letter-spacing:0;color:rgba(255,255,255,.6);margin-top:.12em}
 .gcard .g-use{font-size:clamp(9px,2.5cqw,16px);line-height:1.5;font-weight:600;color:rgba(255,246,214,.9);margin-top:1.4cqw}
 .gcard .g-valid{font-size:clamp(8px,2.2cqw,14px);line-height:1.5;font-weight:500;color:rgba(255,255,255,.55);margin-top:.5cqw}
-/* personalizace karty (stránka /black-friday-karta): komu / od koho / číslo */
+/* personalizace poukazu (stránka /black-friday-karta): komu / od koho / číslo */
 .gcard .g-who{font-size:clamp(8px,2.3cqw,15px);line-height:1.5;font-weight:600;color:rgba(246,212,124,.9);margin-top:1.2cqw}
 .gcard .g-who span{color:rgba(255,255,255,.6);font-weight:500}
 .gcard .g-num{position:absolute;right:6%;bottom:8%;text-align:right;font-size:clamp(7px,1.9cqw,12px);line-height:1.5;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}

@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Děkujeme – dárková karta je na cestě | Leadership Restart</title>
-<meta name="description" content="Platba proběhla. Dárková karta Leadership Restart v hodnotě 22 990 Kč ti přijde e-mailem.">
+<title>Děkujeme – dárkový poukaz je na cestě | Leadership Restart</title>
+<meta name="description" content="Platba proběhla. Dárkový poukaz Leadership Restart v hodnotě 22 990 Kč ti přijde e-mailem.">
 <meta name="robots" content="noindex,nofollow">
 <!--
-  /black-friday-dekujeme – POTVRZOVACÍ STRÁNKA po platbě dárkové karty (Black Friday).
+  /black-friday-dekujeme – POTVRZOVACÍ STRÁNKA po platbě dárkového poukazu (Black Friday).
   Sem míří „success URL“ platebního odkazu Stripe (doporučeno s parametrem ?s={CHECKOUT_SESSION_ID},
   ten se jen přenese do odkazu na dotazník, aby šla objednávka spárovat s platbou).
-  Design, hlavička, karta a patička = landing page /black-friday (styly sdílené v assets/bf.css).
-  Tok: 1) Stripe pošle potvrzení platby · 2) kupující doplní údaje pro kartu v dotazníku /darkova-karta
-  (Velín, dotazník „Dárková karta – údaje“) · 3) Velín pošle e-mail s kartou a upozorní Denise.
+  Design, hlavička, poukaz a patička = landing page /black-friday (styly sdílené v assets/bf.css).
+  Tok: 1) Stripe pošle potvrzení platby · 2) kupující doplní údaje pro poukaz v dotazníku /darkova-karta
+  (Velín, dotazník „Dárkový poukaz – údaje“) · 3) Velín pošle e-mail s poukazem a upozorní Denise.
 -->
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/favicon.png">
@@ -47,7 +47,7 @@
 
 <!-- ======================= 1) ZLATÁ LIŠTA ======================= -->
 <div class="bf-bar" role="status">
-  <span>Black Friday · dárková karta</span>
+  <span>Black Friday · dárkový poukaz</span>
   <span class="ok"><i>✓</i>Platba proběhla</span>
 </div>
 
@@ -57,17 +57,17 @@
     <div class="check"><svg class="ico"><use href="#i-check"/></svg></div>
     <span class="kicker-bf">Děkujeme · objednávka přijata</span>
     <h1>Hotovo! Právě z tebe je <span class="grad grad-gold">nejštědřejší člověk</span> pod stromečkem 🎄</h1>
-    <p class="sub">Tvoje dárková karta v hodnotě <b><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></b>
-      je na cestě. Ještě jeden krok – doplň, <b>komu ji daruješ</b>, a pošleme ti ji e-mailem.</p>
+    <p class="sub">Tvůj dárkový poukaz v hodnotě <b><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></b>
+      je na cestě. Ještě jeden krok – doplň, <b>komu ho daruješ</b>, a pošleme ti ho e-mailem.</p>
 
     <div class="hero-cta">
-      <a class="cta-bf" id="ctaForm" data-cta-pos="bf_thanks_form" href="/darkova-karta">Doplnit údaje pro kartu (1 minuta)</a>
-      <p class="cta-note">Karta přijde na e-mail, který v dotazníku uvedeš · obvykle do pár minut</p>
+      <a class="cta-bf" id="ctaForm" data-cta-pos="bf_thanks_form" href="/darkova-karta">Doplnit údaje pro poukaz (1 minuta)</a>
+      <p class="cta-note">Poukaz přijde na e-mail, který v dotazníku uvedeš · obvykle do pár minut</p>
     </div>
 
     <div class="card-stage">
       <div class="card-float">
-        <div class="gcard" role="img" aria-label="Dárková karta Leadership Restart v hodnotě 22 990 Kč (920 €)">
+        <div class="gcard" role="img" aria-label="Dárkový poukaz Leadership Restart v hodnotě 22 990 Kč (920 €)">
           <div class="rb-h" aria-hidden="true"></div>
           <div class="rb-v" aria-hidden="true"></div>
           <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
@@ -85,7 +85,7 @@
             <text x="128" y="92" font-family="Manrope, sans-serif" font-weight="600" font-size="12" letter-spacing="1.5" fill="#9A9A98">ZA 21 DNÍ</text>
           </svg>
           <div class="g-text">
-            <div class="g-label">Dárková karta</div>
+            <div class="g-label">Dárkový poukaz</div>
             <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
             <div class="g-use">Na jakékoli služby Leadership Restart</div>
             <div class="g-valid">Platí od 24. 12. 2026 do 31. 12. 2027</div>
@@ -100,26 +100,26 @@
 <section class="sec-bf">
   <div class="wrap">
     <span class="kicker-bf">Co teď bude</span>
-    <h2>Tři kroky <span class="grad grad-gold">a karta je pod stromečkem</span></h2>
+    <h2>Tři kroky <span class="grad grad-gold">a poukaz je pod stromečkem</span></h2>
 
     <div class="steps">
       <div class="step">
         <span class="s-num">1</span>
         <h3>Potvrzení platby máš v e-mailu</h3>
-        <p>Stripe ti právě poslal potvrzení o zaplacení 4 532 Kč (181 €) za dárkovou kartu. Kdyby nedorazilo do pár minut,
+        <p>Stripe ti právě poslal potvrzení o zaplacení 4 599 Kč (184 €) za dárkový poukaz. Kdyby nedorazilo do pár minut,
           mrkni do spamu nebo hromadných zpráv.</p>
       </div>
       <div class="step hot">
         <span class="s-num">2</span>
-        <h3>Doplň, komu kartu daruješ</h3>
-        <p>V krátkém dotazníku uvedeš svoje jméno (bude na kartě jako „od koho“), e-mail pro doručení a jméno obdarovaného,
-          pokud ho chceš mít na kartě napsané. Zabere to minutu.</p>
-        <a class="s-link" href="/darkova-karta" data-cta-pos="bf_thanks_step2" data-form-link>Vyplnit údaje pro kartu →</a>
+        <h3>Doplň, komu poukaz daruješ</h3>
+        <p>V krátkém dotazníku uvedeš svoje jméno (bude na poukazu jako „od koho“), e-mail pro doručení a jméno obdarovaného,
+          pokud ho chceš mít na poukazu napsané. Zabere to minutu.</p>
+        <a class="s-link" href="/darkova-karta" data-cta-pos="bf_thanks_step2" data-form-link>Vyplnit údaje pro poukaz →</a>
       </div>
       <div class="step">
         <span class="s-num">3</span>
-        <h3>Karta ti přijde e-mailem</h3>
-        <p>Dostaneš e-mail s dárkovou kartou v hodnotě 22 990 Kč (920 €). Na kartě není uvedená žádná sleva ani cena, kterou jsi zaplatil.
+        <h3>Poukaz ti přijde e-mailem</h3>
+        <p>Dostaneš e-mail s dárkovým poukazem v hodnotě 22 990 Kč (920 €). Na poukazu není uvedená žádná sleva ani cena, kterou jsi za něj zaplatil.
           Vytiskni ji a dej pod stromeček 🎄, nebo ji obdarovanému pošli v den Vánoc digitálně 📩.</p>
       </div>
     </div>
@@ -127,7 +127,7 @@
     <div class="rules">
       <div class="rule">
         <div class="r-ico"><svg class="ico"><use href="#i-gift"/></svg></div>
-        <p><b>Karta je jen na darování</b><span>Uplatnit ji může jen obdarovaný – ne ten, kdo ji koupil.</span></p>
+        <p><b>Poukaz je jen na darování</b><span>Uplatnit ho může jen obdarovaný – ne ten, kdo ho koupil.</span></p>
       </div>
       <div class="rule">
         <div class="r-ico"><svg class="ico"><use href="#i-cal"/></svg></div>
@@ -143,24 +143,24 @@
     <h2>Časté <span class="grad grad-gold">otázky</span></h2>
     <div class="list">
       <details>
-        <summary>Nepřišel mi e-mail s kartou. Co teď?</summary>
-        <div class="a">Nejdřív zkontroluj spam a hromadné zprávy. Karta odchází až po vyplnění údajů v dotazníku výše – pokud jsi ho ještě nevyplnil,
+        <summary>Nepřišel mi e-mail s poukazem. Co teď?</summary>
+        <div class="a">Nejdřív zkontroluj spam a hromadné zprávy. Poukaz odchází až po vyplnění údajů v dotazníku výše – pokud jsi ho ještě nevyplnil,
           udělej to teď. Když e-mail nedorazí ani do hodiny, napiš nám na
-          <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a kartu ti pošleme ručně.</div>
+          <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a poukaz ti pošleme ručně.</div>
       </details>
       <details>
-        <summary>Koupil jsem dvě karty. Vyplňuju dotazník dvakrát?</summary>
-        <div class="a">Ne. Vyplň ho jednou a v otázce „Kolik karet jsi koupil“ zvol 2 – dostaneš dvě karty, každou s vlastním jménem obdarovaného.</div>
+        <summary>Koupil jsem dva poukazy. Vyplňuju dotazník dvakrát?</summary>
+        <div class="a">Ne. Vyplň ho jednou a v otázce „Kolik poukazů jsi koupil“ zvol 2 – dostaneš dva poukazy, každý s vlastním jménem obdarovaného.</div>
       </details>
       <details>
-        <summary>Jak kartu daruju?</summary>
-        <div class="a">Vytiskni ji z e-mailu (nejlépe barevně na pevnější papír) a dej ji pod stromeček, nebo e-mail s kartou jednoduše přepošli
-          obdarovanému v den Vánoc. Na kartě je jen hodnota 22 990 Kč, platnost a jméno – žádná sleva ani cena.</div>
+        <summary>Jak poukaz daruju?</summary>
+        <div class="a">Vytiskni ho z e-mailu (nejlépe barevně na pevnější papír) a dej ho pod stromeček, nebo e-mail s poukazem jednoduše přepošli
+          obdarovanému v den Vánoc. Na poukazu je jen hodnota 22 990 Kč, platnost a jméno – žádná sleva ani cena.</div>
       </details>
       <details>
-        <summary>Jak obdarovaný kartu uplatní?</summary>
+        <summary>Jak obdarovaný poukaz uplatní?</summary>
         <div class="a">Od 24. 12. 2026 do 31. 12. 2027 nám napíše na <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a>
-          (nebo odpoví na e-mail s kartou) a domluvíme, na jakou službu Leadership Restart hodnotu karty použije.</div>
+          (nebo odpoví na e-mail s poukazem) a domluvíme, na jakou službu Leadership Restart hodnotu poukazu použije.</div>
       </details>
       <details>
         <summary>Potřebuju doklad o zaplacení</summary>
@@ -210,10 +210,10 @@
 
 <script src="assets/site.js?v=21"></script>
 <script>
-// CTA v navigaci: na potvrzovací stránce vede na dotazník s údaji pro kartu
+// CTA v navigaci: na potvrzovací stránce vede na dotazník s údaji pro poukaz
 (function(){
   function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
-    c.href='/darkova-karta'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf_thanks'; c.textContent='Doplnit údaje pro kartu'; return true; }
+    c.href='/darkova-karta'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf_thanks'; c.textContent='Doplnit údaje pro poukaz'; return true; }
   if(!fix()){ document.addEventListener('DOMContentLoaded', fix); var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
 })();
 // Parametry z návratu ze Stripe (?s={CHECKOUT_SESSION_ID} …) přenést do odkazů na dotazník, ať jde objednávka spárovat s platbou
