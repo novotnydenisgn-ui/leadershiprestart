@@ -615,11 +615,28 @@
   .vl-q,.vl-a{padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.45;box-shadow:0 12px 34px rgba(0,0,0,.45)}
   .vl-q{justify-self:end;background:#2a2620;color:#f1eee6;border:1px solid rgba(255,255,255,.1);border-bottom-right-radius:4px}
   .vl-a{background:linear-gradient(120deg,#f6d47c,#e9b64f);color:#1a1206;border-bottom-left-radius:4px}
+  .vl-chat{transition:opacity .3s}.vl-chat.off{opacity:0;visibility:hidden}
+  @media(max-width:700px){.vl-chat.off{display:none}}
   .vl-cap{margin:16px auto 0;max-width:640px;font-size:15px;color:var(--dk-muted);min-height:2.9em}
   @media(max-width:700px){.vl-chat{position:static;width:auto;padding:12px;background:#15130f}
     .vl-tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -16px 14px;padding:0 16px}
     .vl-tabs::-webkit-scrollbar{display:none}.vl-tabs button{flex:none}.vl-bar span{margin-right:0}}
   @media(prefers-reduced-motion:reduce){.vl-stage img{transition:none}}
+  .big-extra-item.big-extra-hl{border:1.5px solid rgba(233,182,79,.6);background:rgba(233,182,79,.08)}
+  .big-extra-item s{color:var(--dk-muted);text-decoration-color:var(--lr-gold)}
+  .vl-ints{max-width:1080px;margin:56px auto 0;padding:clamp(22px,3vw,36px);border-radius:24px;text-align:left;
+    background:var(--dk-card);border:1px solid var(--dk-brd)}
+  .vl-ints h3{font-size:clamp(22px,2.4vw,30px);color:#fff;text-align:center;margin:0}
+  .vl-ints>p{text-align:center;color:var(--dk-muted);font-size:15px;max-width:620px;margin:8px auto 24px}
+  .vl-int-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px 26px}
+  .vl-int-g small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--lr-gold-light);margin-bottom:10px}
+  .vl-int-g>div{display:flex;flex-wrap:wrap;gap:8px}
+  .vl-int{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;font-size:13.5px;font-weight:700;
+    color:var(--dk-text);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09)}
+  .vl-int i{display:grid;place-items:center;min-width:24px;height:24px;padding:0 5px;border-radius:999px;font-style:normal;font-size:10.5px;font-weight:800;
+    color:#fff;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+  @media(max-width:520px){.vl-int-grid{grid-template-columns:1fr}}
+
 
   @media(max-width:900px){.lb-left .c-name{padding-right:84px}}
   .lb-right{display:flex;flex-direction:column;padding-left:clamp(0px,3vw,40px);border-left:1px solid rgba(233,182,79,.22)}
@@ -808,34 +825,6 @@
   </div>
 </section>
 
-<!-- ======================= PROČ CELÝ BALÍČEK ======================= -->
-<section class="section sec-dark">
-  <div class="wrap" style="text-align:center">
-    <span class="lr-kicker">Nová filozofie Up-Grade</span>
-    <h2 class="display h-section">Proč už neprodáváme <span class="lr-grad-text">po měsících</span></h2>
-    <div class="lb-compare">
-      <div class="lr-card lb-col lb-old reveal">
-        <small>Dřív · měsíční úrovně</small>
-        <ul>
-          <li>Vybíráš si úroveň a platíš měsíc po měsíci</li>
-          <li>Implementace leží hlavně na tobě</li>
-          <li>Snadno se odkládá — „tenhle měsíc to nestihnu“</li>
-          <li>Výsledek se skládá z kousků</li>
-        </ul>
-      </div>
-      <div class="lr-card lb-col lb-new reveal">
-        <small>Teď · celý balíček</small>
-        <ul>
-          <li><b>Jeden jasný cíl</b> — 4× tvůj byznys, změřený na začátku</li>
-          <li><b>Klíčové části dotahujeme my</b>, ty se učíš řídit systém</li>
-          <li><b>Závazek na obou stranách</b> — garance 1 : 3</li>
-          <li><b>Celé řešení</b>: marketing, automatizace i zefektivnění</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ======================= INVESTICE — BALÍČEK + KALKULAČKA ======================= -->
 <section class="section sec-dark cenik-sec" id="investice">
   <div class="wrap">
@@ -929,7 +918,7 @@
           <b>Elite — udělejte to za mě</b>
           <div class="extra-price">120 000 Kč <small>· max. 4 klienti</small></div>
           <p>Vše z Launch Boostu, ale <b>celý systém postavíme a spustíme za tebe</b> — ty dodáš sebe
-          a rozhodnutí. Navíc licence Velínu v hodnotě 20 000 Kč zdarma.</p>
+          a rozhodnutí. Navíc licence Velínu v hodnotě 45 000 Kč zdarma.</p>
         </div>
       </div>
       <div class="lr-card extra-card reveal">
@@ -963,7 +952,7 @@
           </span> — přepni a uvidíš dopad na cenu (jde i přes adresu <code>?x=3</code>).</li>
         <li><b>Ceny v2:</b> splátky drží velikost členství (5 450 = Grow, 8 450 = pod Mastery 8 800) → 14× 5 450 = 76 300 Kč, 9× 8 450 = 76 050 Kč.
           Kupuješ hned = −15 % z 76 300, zaokrouhleno na „…900“: <b>64 900 Kč</b>; se slevou za pokračování ×4 <b>47 900 Kč</b> (×3 → 51 900 Kč).</li>
-        <li><b>Launch Boost Master</b> má navíc 2× měsíčně individuální coaching + licenci Velínu zdarma (místo 45 000 Kč). Pozor: sekce Velín a Elite dál uvádí kopii kódu / licenci za <b>20 000 Kč</b> — sjednotit na 45 000? A platí „Kupuješ hned“ (64 900) jen pro Launch Boost, nebo i pro Master?</li>
+        <li><b>Launch Boost Master</b> má navíc 2× měsíčně individuální coaching + licenci Velínu zdarma (místo 45 000 Kč). Licence Velínu je teď všude 45 000 Kč (dřív 20 000). Platí „Kupuješ hned“ (64 900) jen pro Launch Boost, nebo i pro Master?</li>
         <li><b>Kombinace slev:</b> obě platí — nejdřív sleva za pokračování, ze zbytku pak −15 % za koupi hned.</li>
         <li><b>Sleva u splátek</b> se odečítá z posledních splátek (např. 14× 5 450 → 10× 5 450 + 1× 1 800 = 11 splátek). Alternativa: nižší měsíční částka.</li>
         <li><b>Délka balíčku:</b> splátky 12× / 9× neříkají, jak dlouho program běží. Garance „do 3 měsíců spuštěno“ zůstala — co je potom (optimalizace do konce splátek)?</li>
@@ -985,16 +974,22 @@
     V balíčku ho spolu postavíme a ty ho pak rozšiřuješ.</p>
 
     <div class="vl-show reveal">
-      <div class="vl-tabs" role="tablist" aria-label="Ukázky z aplikace Velín"><button type="button" role="tab" data-shot="0" aria-selected="true"><svg class="ico"><use href="#i-chart"/></svg>Přehledy</button><button type="button" role="tab" data-shot="1" aria-selected="false"><svg class="ico"><use href="#i-users"/></svg>Klienti</button><button type="button" role="tab" data-shot="2" aria-selected="false"><svg class="ico"><use href="#i-calendar"/></svg>Rezervace</button><button type="button" role="tab" data-shot="3" aria-selected="false"><svg class="ico"><use href="#i-coins"/></svg>Fakturace</button><button type="button" role="tab" data-shot="4" aria-selected="false"><svg class="ico"><use href="#i-message"/></svg>Automatizace</button><button type="button" role="tab" data-shot="5" aria-selected="false"><svg class="ico"><use href="#i-bot"/></svg>AI asistent</button></div>
+      <div class="vl-tabs" role="tablist" aria-label="Ukázky z aplikace Velín"><button type="button" role="tab" data-shot="0" aria-selected="true"><svg class="ico"><use href="#i-chart"/></svg>Přehledy</button><button type="button" role="tab" data-shot="1" aria-selected="false"><svg class="ico"><use href="#i-template"/></svg>Stránky</button><button type="button" role="tab" data-shot="2" aria-selected="false"><svg class="ico"><use href="#i-route"/></svg>Mapa funnelu</button><button type="button" role="tab" data-shot="3" aria-selected="false"><svg class="ico"><use href="#i-users"/></svg>Klienti</button><button type="button" role="tab" data-shot="4" aria-selected="false"><svg class="ico"><use href="#i-calendar"/></svg>Rezervace</button><button type="button" role="tab" data-shot="5" aria-selected="false"><svg class="ico"><use href="#i-message"/></svg>Automatické e-maily</button><button type="button" role="tab" data-shot="6" aria-selected="false"><svg class="ico"><use href="#i-trend"/></svg>A/B testy</button><button type="button" role="tab" data-shot="7" aria-selected="false"><svg class="ico"><use href="#i-coins"/></svg>Fakturace</button><button type="button" role="tab" data-shot="8" aria-selected="false"><svg class="ico"><use href="#i-settings"/></svg>Napojení</button><button type="button" role="tab" data-shot="9" aria-selected="false"><svg class="ico"><use href="#i-bot"/></svg>AI asistent</button></div>
       <div class="vl-window">
         <div class="vl-bar"><i></i><i></i><i></i><span>Velín · Studio Klára – koučink · ukázková data</span></div>
-        <div class="vl-stage"><img src="assets/velin/prehledy-dark.webp" width="1440" height="810" alt="Velín – Přehledy (ukázková data)" data-cap="Tržby, zisk, leady, cena za lead i návratnost reklamy za libovolné období — na jednom místě." class="on"><img src="assets/velin/klienti.webp" width="1440" height="810" alt="Velín – Klienti (ukázková data)" data-cap="CRM: každý lead od dotazníku po platbu. Stav konzultace se počítá sám z rezervací." loading="lazy"><img src="assets/velin/rezervace.webp" width="1440" height="810" alt="Velín – Rezervace (ukázková data)" data-cap="Rezervační systém napojený na tvůj kalendář — termíny, připomínky a přeplánování." loading="lazy"><img src="assets/velin/faktury.webp" width="1440" height="810" alt="Velín – Fakturace (ukázková data)" data-cap="Faktury s QR platbou a automatické připomínky splátek — víš, kdo kolik dluží." loading="lazy"><img src="assets/velin/em-auto.webp" width="1440" height="810" alt="Velín – Automatizace (ukázková data)" data-cap="Follow-up e-maily běží samy — po dotazníku, rezervaci i schůzce." loading="lazy"><img src="assets/velin/claude.webp" width="1440" height="810" alt="Velín – AI asistent (ukázková data)" data-cap="Velín ovládáš běžnou řečí z Claude, ChatGPT, Gemini a dalších AI." loading="lazy"></div>
+        <div class="vl-stage"><img src="assets/velin/prehledy-dark.webp" width="1440" height="810" alt="Velín – Přehledy (ukázková data)" data-cap="Tržby, zisk, leady, cena za lead i návratnost reklamy za libovolné období — na jednom místě." class="on"><img src="assets/velin/weby.webp" width="1440" height="810" alt="Velín – Stránky (ukázková data)" data-cap="Všechny stránky projektu na jednom místě — web, landing pages, dotazníky, verze a připomínky ke každé stránce." loading="lazy"><img src="assets/velin/weby-mapa.webp" width="1440" height="810" alt="Velín – Mapa funnelu (ukázková data)" data-cap="Mapa celého projektu: kam která stránka vede, kde je dotazník a kde rezervace — vidíš celý funnel najednou." loading="lazy"><img src="assets/velin/klienti.webp" width="1440" height="810" alt="Velín – Klienti (ukázková data)" data-cap="CRM: každý lead od dotazníku po platbu. Stav konzultace se počítá sám z rezervací." loading="lazy"><img src="assets/velin/rezervace.webp" width="1440" height="810" alt="Velín – Rezervace (ukázková data)" data-cap="Rezervační systém napojený na tvůj kalendář — termíny, připomínky a přeplánování." loading="lazy"><img src="assets/velin/au-editor.webp" width="1440" height="810" alt="Velín – Automatické e-maily (ukázková data)" data-cap="Automatizace poskládáš z kroků: spouštěč → e-mail → počkat → připomínka. Běží sama po dotazníku, rezervaci i změně v CRM." loading="lazy"><img src="assets/velin/ab.webp" width="1440" height="810" alt="Velín – A/B testy (ukázková data)" data-cap="A/B testy přímo na tvém webu — zobrazení, kliky, formuláře i rezervace pro každou variantu. Vítěz se servíruje sám." loading="lazy"><img src="assets/velin/faktury.webp" width="1440" height="810" alt="Velín – Fakturace (ukázková data)" data-cap="Faktury s QR platbou a automatické připomínky splátek — víš, kdo kolik dluží." loading="lazy"><img src="assets/velin/napojeni.webp" width="1440" height="810" alt="Velín – Napojení (ukázková data)" data-cap="Odpovědi, leady a platby tečou kam potřebuješ — tabulka, CRM, Meta, kalendář, banka. Seznam všech napojení najdeš níž." loading="lazy"><img src="assets/velin/claude.webp" width="1440" height="810" alt="Velín – AI asistent (ukázková data)" data-cap="Velín ovládáš běžnou řečí z Claude, ChatGPT, Gemini a dalších AI." loading="lazy"></div>
         <div class="vl-chat" aria-hidden="true">
           <div class="vl-q">Kolik leadů přišlo za 30 dní a kolik stál jeden?</div>
           <div class="vl-a"><b>24 leadů</b> · cena za lead <b>420 Kč</b> · 6 schůzek, zisk 30 291 Kč</div>
         </div>
       </div>
       <p class="vl-cap" id="vlCap">Tržby, zisk, leady, cena za lead i návratnost reklamy za libovolné období — na jednom místě.</p>
+    </div>
+
+    <div class="vl-ints reveal">
+      <h3 class="display">Napojíš, co už <span class="lr-grad-text">používáš</span></h3>
+      <p>Velín je centrála — data posílá i stahuje z nástrojů, které znáš. Co nemá přímé napojení, propojíš přes webhook.</p>
+      <div class="vl-int-grid"><div class="vl-int-g"><small>Reklama a měření</small><div><span class="vl-int"><i style="--c:#0866FF">M</i>Meta Pixel + Conversions API</span><span class="vl-int"><i style="--c:#0866FF">M</i>Meta Ads — útrata a cena za lead</span><span class="vl-int"><i style="--c:#e9b64f">AB</i>A/B testy na tvém webu</span></div></div><div class="vl-int-g"><small>Kalendář a e-maily</small><div><span class="vl-int"><i style="--c:#4285F4">G</i>Google Kalendář</span><span class="vl-int"><i style="--c:#EA4335">G</i>Gmail</span><span class="vl-int"><i style="--c:#9aa0a6">R</i>Resend — vlastní doména</span><span class="vl-int"><i style="--c:#0B996E">B</i>Brevo — newslettery</span></div></div><div class="vl-int-g"><small>Data a CRM</small><div><span class="vl-int"><i style="--c:#0F9D58">GS</i>Google tabulky</span><span class="vl-int"><i style="--c:#bdbdbd">N</i>Notion</span><span class="vl-int"><i style="--c:#2F6BFF">GHL</i>GoHighLevel / Swipescale</span><span class="vl-int"><i style="--c:#ff6339">⇄</i>Webhook → Make, n8n, Zapier a tisíce dalších aplikací</span></div></div><div class="vl-int-g"><small>Platby a e-shop</small><div><span class="vl-int"><i style="--c:#635BFF">S</i>Stripe — platby kartou</span><span class="vl-int"><i style="--c:#2A7DE1">F</i>Fio banka — párování plateb</span><span class="vl-int"><i style="--c:#5E8E3E">S</i>Shopify</span><span class="vl-int"><i style="--c:#E2231A">Z</i>Zásilkovna</span></div></div><div class="vl-int-g"><small>AI a vývoj</small><div><span class="vl-int"><i style="--c:#D97757">C</i>Claude</span><span class="vl-int"><i style="--c:#10A37F">AI</i>ChatGPT · Codex</span><span class="vl-int"><i style="--c:#8E75FF">G</i>Gemini</span><span class="vl-int"><i style="--c:#9aa0a6">⌘</i>Cursor · VS Code</span><span class="vl-int"><i style="--c:#bdbdbd">GH</i>GitHub — weby z repozitáře</span></div></div></div>
     </div>
 
     <div class="obsah-grid velin-grid">
@@ -1053,15 +1048,15 @@
     <div class="velin-price reveal">
       <div class="big-extra-item big-extra-gold">
         <span class="big-extra-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
-        <div><b>V balíčku zdarma</b><span>Po celou dobu Launch Boostu nebo Elite.</span></div>
+        <div><b>V balíčku v ceně</b><span>Celý Velín po celou dobu Launch Boostu i Launch Boost Master — postavíme ho spolu.</span></div>
+      </div>
+      <div class="big-extra-item big-extra-hl">
+        <span class="big-extra-ico"><svg class="ico"><use href="#i-package"/></svg></span>
+        <div><b>Licence napořád — zdarma</b><span>V Launch Boost Master a Elite dostaneš vlastní kopii Velínu natrvalo místo <s>45 000 Kč</s>.</span></div>
       </div>
       <div class="big-extra-item">
         <span class="big-extra-ico"><svg class="ico"><use href="#i-monitor"/></svg></span>
-        <div><b>400 Kč / měsíc</b><span>Samostatné předplatné — jen pro absolventy programů (Leadership Restart, Launch Boost a další). ≈ 16 €</span></div>
-      </div>
-      <div class="big-extra-item">
-        <span class="big-extra-ico"><svg class="ico"><use href="#i-package"/></svg></span>
-        <div><b>20 000 Kč jednorázově</b><span>Kopie celého kódu Velínu — vlastní verze k přizpůsobení, provozuješ ji u sebe. ≈ 800 €</span></div>
+        <div><b>Po balíčku 400 Kč / měsíc</b><span>Předplatné jen pro absolventy programů (≈ 16 €). Nebo licence samostatně za 45 000 Kč (≈ 1 800 €).</span></div>
       </div>
     </div>
     <p class="cena-note" style="margin-top:18px;font-size:13.5px">
@@ -1373,6 +1368,7 @@
     tabs.forEach(function(b,k){b.setAttribute('aria-selected',k===i?'true':'false');});
     imgs.forEach(function(m,k){m.classList.toggle('on',k===i);});
     cap.textContent=imgs[i].dataset.cap;
+    var chat=document.querySelector('.vl-chat'); if(chat) chat.classList.toggle('off',i!==0);
     var t=tabs[i], bar=t.parentNode; if(bar.scrollWidth>bar.clientWidth) bar.scrollTo({left:t.offsetLeft-16,behavior:'smooth'});
   }
   function stop(){clearInterval(timer);timer=null;}
