@@ -55,17 +55,16 @@ body.no-bar{padding-top:58px}
 
 .kicker-bf{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;
   font-size:10px;line-height:1.5;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--lr-gold-light);background:rgba(233,182,79,.08);border:1px solid rgba(233,182,79,.3);
-  padding:8px 16px;border-radius:999px;max-width:100%;text-align:center}
+  color:var(--lr-gold-light);padding:0;max-width:100%;text-align:center}
 .kicker-bf::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--lr-grad);flex:none}
 
-.cta-bf{display:inline-block;font-family:"Manrope",sans-serif;font-weight:700;font-size:16px;line-height:24px;
+.cta-bf,.bf a.cta-bf{display:inline-block;font-family:"Manrope",sans-serif;font-weight:700;font-size:16px;line-height:24px;
   color:#1a1206;background:var(--lr-grad);text-decoration:none;padding:16px 40px;border-radius:999px;border:0;cursor:pointer;
   box-shadow:0 14px 40px rgba(233,182,79,.3);max-width:100%;text-align:center;
   transition:transform .25s ease,box-shadow .25s ease}
 .cta-bf:hover{transform:translateY(-3px);box-shadow:0 22px 56px rgba(233,182,79,.42)}
 .cta-bf:active{transform:scale(.98)}
-.cta-ghost{display:inline-block;font-family:"Manrope",sans-serif;font-weight:700;font-size:15px;line-height:24px;color:var(--lr-gold-light);
+.cta-ghost,.bf a.cta-ghost{display:inline-block;font-family:"Manrope",sans-serif;font-weight:700;font-size:15px;line-height:24px;color:var(--lr-gold-light);
   background:rgba(233,182,79,.08);border:1px solid rgba(233,182,79,.35);text-decoration:none;padding:14px 28px;border-radius:999px;cursor:pointer;
   transition:background .25s ease,border-color .25s ease}
 .cta-ghost:hover{background:rgba(233,182,79,.16);border-color:rgba(233,182,79,.6)}

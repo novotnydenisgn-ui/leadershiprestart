@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=22">
-<link rel="stylesheet" href="assets/bf.css?v=1">
+<link rel="stylesheet" href="assets/bf.css?v=2">
 <style>
   .hero-bf .check{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;margin:0 auto 18px;
     color:#1a1206;background:var(--lr-grad);box-shadow:0 14px 40px rgba(233,182,79,.35)}
@@ -30,6 +30,10 @@
   .contact{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:22px;font-size:15px;line-height:24px;color:var(--dk-muted)}
   .contact a{color:#fff;text-decoration:none;font-weight:700}
   .contact a:hover{color:var(--lr-gold-light)}
+  /* nabídka druhého poukazu (Stripe účtuje 1 kus na objednávku, akce dovoluje max. 2 na osobu) */
+  .second-bf{margin:28px auto 0;max-width:560px;padding:22px 24px;border:1px solid rgba(233,182,79,.25);border-radius:18px;background:rgba(233,182,79,.05);text-align:center}
+  .second-bf .second-h{margin:0;font-weight:800;font-size:19px;line-height:1.3;letter-spacing:-.02em;color:#fff}
+  .second-bf .second-t{margin:8px 0 16px;font-size:15px;line-height:24px;color:var(--dk-muted)}
 </style>
 </head>
 <body class="bf">
@@ -63,6 +67,12 @@
     <div class="hero-cta">
       <a class="cta-bf" id="ctaForm" data-cta-pos="bf_thanks_form" href="/darkova-karta">Doplnit údaje pro poukaz (1 minuta)</a>
       <p class="cta-note">Poukaz přijde na e-mail, který v dotazníku uvedeš · obvykle do pár minut</p>
+    </div>
+
+    <div class="second-bf">
+      <p class="second-h">Chceš darovat ještě jeden poukaz?</p>
+      <p class="second-t">Můžeš mít nejvíc 2 na osobu. Každý poukaz se platí zvlášť – dotazník ale stačí vyplnit jednou a zvolit počet 2.</p>
+      <a class="cta-ghost" data-cta-pos="bf_thanks_second" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Objednat druhý poukaz za 4 599 Kč</a>
     </div>
 
     <div class="card-stage">
@@ -149,8 +159,9 @@
           <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a poukaz ti pošleme ručně.</div>
       </details>
       <details>
-        <summary>Koupil jsem dva poukazy. Vyplňuju dotazník dvakrát?</summary>
-        <div class="a">Ne. Vyplň ho jednou a v otázce „Kolik poukazů jsi koupil“ zvol 2 – dostaneš dva poukazy, každý s vlastním jménem obdarovaného.</div>
+        <summary>Chci dva poukazy. Platím a vyplňuju dotazník dvakrát?</summary>
+        <div class="a">Platí se každý poukaz zvlášť – druhý objednáš stejným odkazem znovu (nejvíc 2 na osobu). Dotazník ale vyplň jen jednou:
+          v otázce „Kolik poukazů jsi koupil“ zvol 2 a dostaneš dva poukazy, každý s vlastním jménem obdarovaného.</div>
       </details>
       <details>
         <summary>Jak poukaz daruju?</summary>
