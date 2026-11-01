@@ -1,9 +1,9 @@
 // Black Friday 2026: kolik dárkových poukazů ještě zbývá – SKUTEČNÝ počet ze Stripe (times_redeemed kupónu = zaplacené
-// objednávky). Žádné vymyšlené odečítání: bez klíče vrací left = null a stránka nechá „10 z 10“.
-// 1. vlna (klienti, 5.–6. 11.) = 10 kusů; Payment Link má limit 10 plateb (kupón sám má 30 i pro 2. vlnu 27. 11.).
+// objednávky). Žádné vymyšlené odečítání: bez klíče vrací left = null a stránka nechá „5 z 5“.
+// 1. vlna (klienti, 5.–6. 11.) = 5 kusů; Payment Link má mít limit 5 plateb (nastavuje Denis) (kupón sám má 30 i pro 2. vlnu 27. 11.).
 // Klíč: Stripe → Developers → API keys → Restricted key jen s oprávněním Coupons: Read → `npx wrangler secret put STRIPE_BF_KEY`.
 const COUPON = '321jE13q';
-const TOTAL = 10; // kusů v aktuální vlně (Payment Link: limit dokončených plateb)
+const TOTAL = 5; // kusů v aktuální vlně (Payment Link: limit dokončených plateb)
 const CACHE_KEY = 'https://leadershiprestart.cz/api/bf/zbyva';
 
 export async function bfStock(env, ctx) {
