@@ -6,6 +6,8 @@
 <title>Black Friday – dárkový poukaz se slevou 80 % | Leadership Restart</title>
 <meta name="description" content="Black Friday: dárkový poukaz Leadership Restart v hodnotě 22 990 Kč (920 €) jen za 4 599 Kč (184 €). Jen 30 poukazů, maximálně 2 na osobu. Akce končí 6. 11. 2026.">
 <link rel="canonical" href="https://leadershiprestart.cz/black-friday">
+<!-- Po vypršení odpočtu stránka přesměruje na /black-friday-konec (skript dole); rel="next" to říká i Velínu (mapa funnelu – šipka „po vypršení odpočtu“) -->
+<link rel="next" href="/black-friday-konec" title="po vypršení odpočtu">
 <meta name="robots" content="noindex,follow">
 <!--
   /black-friday – LANDING PAGE Black Friday.
@@ -100,6 +102,22 @@
   .cta-bf:hover{transform:translateY(-3px);box-shadow:0 22px 56px rgba(233,182,79,.42)}
   .cta-bf:active{transform:scale(.98)}
   .cta-note{font-size:12px;line-height:20px;color:rgba(255,255,255,.35);margin-top:12px}
+
+  /* Před startem prodeje (html.bf-pre, do čt 5. 11. 2026 10:00): místo tlačítka na platbu
+     rámeček ve tvaru tlačítka s odpočtem do začátku předprodeje. Po startu se skryje a tlačítko se objeví. */
+  .cta-wait,.cta-note-pre{display:none}
+  html.bf-pre .cta-bf,html.bf-pre .cta-note:not(.cta-note-pre){display:none}
+  html.bf-pre .cta-wait{display:inline-flex}
+  html.bf-pre .cta-note-pre{display:block}
+  .cta-wait{flex-direction:column;align-items:center;gap:6px;max-width:100%;
+    padding:14px 36px;border-radius:999px;border:1.5px solid rgba(233,182,79,.75);
+    background:rgba(233,182,79,.08);box-shadow:0 14px 40px rgba(233,182,79,.14);color:#f6d47c;cursor:default}
+  .cta-wait .cw-lbl{font-family:"Manrope",sans-serif;font-size:12px;line-height:16px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;opacity:.85}
+  .cta-wait .cw-cd{display:inline-flex;gap:10px;font-family:"League Spartan",sans-serif;font-weight:800;
+    font-size:24px;line-height:28px;font-variant-numeric:tabular-nums;color:#fff}
+  .cta-wait .cw-cd i{font-style:normal;font-family:"Manrope",sans-serif;font-size:12px;font-weight:700;
+    color:#f6d47c;opacity:.75;margin-left:2px}
 
   /* cena: Kč velké, € menší pod ní */
   .pr{display:inline-grid;justify-items:center;line-height:1;vertical-align:middle;white-space:nowrap}
@@ -282,6 +300,9 @@
     .final-bf{padding:48px 0}
     .final-bf .text{font-size:16px;line-height:26px}
     .cta-bf{font-size:15px;padding:14px 28px}
+    .cta-wait{padding:12px 24px}
+    .cta-wait .cw-lbl{font-size:11px;letter-spacing:.12em}
+    .cta-wait .cw-cd{font-size:20px;gap:8px}
     @keyframes float{
       0%,100%{transform:translateY(0) rotate(-1.5deg) rotateX(2deg) rotateY(-3deg)}
       50%{transform:translateY(-10px) rotate(-.5deg) rotateX(-1deg) rotateY(2deg)}
@@ -289,6 +310,13 @@
     .gcard{border-radius:18px}
   }
 </style>
+<script>
+/* Start prodeje: čt 5. 11. 2026 10:00 Europe/Prague (CET = UTC+1). Před startem třída html.bf-pre
+   (nastavená hned v hlavičce, aby tlačítko na platbu ani neprobliklo); přepnutí po startu dělá skript dole. */
+window.BF_START = new Date('2026-11-05T10:00:00+01:00').getTime();
+window.BF_LIVE = Date.now() >= window.BF_START;
+if(!window.BF_LIVE) document.documentElement.classList.add('bf-pre');
+</script>
 </head>
 <body class="bf">
 
@@ -355,7 +383,9 @@
 
     <div class="hero-cta">
       <a class="cta-bf" data-cta-pos="bf_hero" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Chci dárkový poukaz v hodnotě 22 990 Kč (920 €) jen za 4 599 Kč (184 €)</a>
+      <div class="cta-wait" role="timer" aria-label="Předprodej začíná ve čtvrtek 5. 11. 2026 v 10:00"><span class="cw-lbl">Předprodej začíná za</span><span class="cw-cd"><span><b data-w="d">--</b><i>d</i></span><span><b data-w="h">--</b><i>h</i></span><span><b data-w="m">--</b><i>m</i></span><span><b data-w="s">--</b><i>s</i></span></span></div>
       <p class="cta-note">Bezpečná platba přes Stripe · poukaz ti přijde hned e-mailem</p>
+      <p class="cta-note cta-note-pre">Spouštíme ve čtvrtek 5. 11. 2026 v 10:00 · pak se tu objeví tlačítko na platbu</p>
     </div>
   </div>
 </section>
@@ -481,7 +511,9 @@
 
     <div class="hero-cta">
       <a class="cta-bf" data-cta-pos="bf_final" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Chci se stát nejštědřejším člověkem pod stromečkem</a>
+      <div class="cta-wait" role="timer" aria-label="Předprodej začíná ve čtvrtek 5. 11. 2026 v 10:00"><span class="cw-lbl">Předprodej začíná za</span><span class="cw-cd"><span><b data-w="d">--</b><i>d</i></span><span><b data-w="h">--</b><i>h</i></span><span><b data-w="m">--</b><i>m</i></span><span><b data-w="s">--</b><i>s</i></span></span></div>
       <p class="cta-note">Bezpečná platba přes Stripe · poukaz ti přijde hned e-mailem</p>
+      <p class="cta-note cta-note-pre">Spouštíme ve čtvrtek 5. 11. 2026 v 10:00 · pak se tu objeví tlačítko na platbu</p>
     </div>
   </div>
 </section>
@@ -517,10 +549,16 @@
 
 <script src="assets/site.js?v=21"></script>
 <script>
-// LP: CTA v navigaci vede na platbu dárkového poukazu (site.js jinak staví odkaz na kvalifikaci do výzvy)
+// LP: CTA v navigaci vede na platbu dárkového poukazu (site.js jinak staví odkaz na kvalifikaci do výzvy).
+// Před startem prodeje (window.BF_LIVE = false) jen ukazuje termín startu a odroluje nahoru, na platbu nevede.
 (function(){
+  var STRIPE='https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80';
   function fix(){ var c=document.querySelector('.nav-links a.nav-cta'); if(!c) return false;
-    c.href='https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80'; c.removeAttribute('target'); c.dataset.ctaPos='nav_bf'; c.textContent='Chci dárkový poukaz'; return true; }
+    c.removeAttribute('target'); c.dataset.ctaPos='nav_bf';
+    if(window.BF_LIVE){ c.href=STRIPE; c.textContent='Chci dárkový poukaz'; c.onclick=null; }
+    else { c.href='#'; c.textContent='Start čt 5. 11. v 10:00'; c.onclick=function(e){ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); }; }
+    return true; }
+  window.bfNavFix = fix;
   if(!fix()){ document.addEventListener('DOMContentLoaded', fix); var n=0, t=setInterval(function(){ if(fix()||++n>20) clearInterval(t); },100); }
 })();
 // Patička: „Nastavení cookies“ otevře sdílený cookie panel ze site.js (sušenka vlevo dole)
@@ -529,21 +567,47 @@ document.getElementById('bfCookies').addEventListener('click', function(){
 });
 </script>
 <script>
-/* ===== Odpočet do konce akce (podle vzoru): 6. 11. 2026 23:59 Europe/Prague (v listopadu CET = UTC+1) ===== */
+/* ===== Odpočty (Europe/Prague, v listopadu CET = UTC+1):
+   1) Před startem (do čt 5. 11. 2026 10:00, window.BF_START z hlavičky): lišta „Akce začíná za“ + rámečky
+      „Předprodej začíná za“ místo tlačítek; tlačítka nemají odkaz na platbu.
+   2) Po startu se stránka sama přepne: lišta „Akce končí za“ do 6. 11. 2026 23:59, tlačítka vedou do Stripe.
+   3) Po konci: přesměrování na stránku Konec akce (/black-friday-konec) – i když má někdo stránku otevřenou přes půlnoc. ===== */
 (function(){
+  var BF_START = window.BF_START || new Date('2026-11-05T10:00:00+01:00').getTime();
   var BF_END = new Date('2026-11-06T23:59:00+01:00').getTime();
+  var KONEC = '/black-friday-konec';
+  var STRIPE = 'https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80';
+  if(Date.now() >= BF_END){ location.replace(KONEC); return; }
   var box = document.getElementById('cd'); if(!box) return;
-  var el = {};
-  ['d','h','m','s'].forEach(function(k){ el[k] = box.querySelector('[data-cd="'+k+'"]'); });
+  var lbl = document.querySelector('.bf-bar .lbl');
+  var waits = Array.prototype.slice.call(document.querySelectorAll('.cta-wait'));
+  var ctas = Array.prototype.slice.call(document.querySelectorAll('a.cta-bf'));
   function pad(n){ return (n<10?'0':'')+n; }
+  function fill(root, attr, ms){
+    var s = Math.floor(Math.max(0, ms)/1000);
+    var v = { d: pad(Math.floor(s/86400)), h: pad(Math.floor(s%86400/3600)), m: pad(Math.floor(s%3600/60)), s: pad(s%60) };
+    for(var k in v){ var e = root.querySelector('['+attr+'="'+k+'"]'); if(e) e.textContent = v[k]; }
+  }
+  var live = null;
+  function setLive(on){
+    if(live === on) return; live = on; window.BF_LIVE = on;
+    document.documentElement.classList.toggle('bf-pre', !on);
+    if(lbl) lbl.textContent = on ? 'Akce končí za' : 'Akce začíná za';
+    ctas.forEach(function(a){ if(on){ a.href = STRIPE; a.removeAttribute('aria-disabled'); } else { a.removeAttribute('href'); a.setAttribute('aria-disabled','true'); } });
+    if(window.bfNavFix) window.bfNavFix();
+  }
   function tick(){
-    var left = Math.max(0, BF_END - Date.now());
-    var s = Math.floor(left/1000);
-    el.d.textContent = pad(Math.floor(s/86400));
-    el.h.textContent = pad(Math.floor(s%86400/3600));
-    el.m.textContent = pad(Math.floor(s%3600/60));
-    el.s.textContent = pad(s%60);
-    if(left<=0){ clearInterval(t); var l=document.querySelector('.bf-bar .lbl'); if(l) l.textContent='Akce skončila'; }
+    var now = Date.now();
+    if(now < BF_START){
+      setLive(false);
+      fill(box, 'data-cd', BF_START - now);
+      waits.forEach(function(w){ fill(w, 'data-w', BF_START - now); });
+      return;
+    }
+    setLive(true);
+    var left = BF_END - now;
+    fill(box, 'data-cd', left);
+    if(left <= 0){ clearInterval(t); if(lbl) lbl.textContent = 'Akce skončila'; setTimeout(function(){ location.replace(KONEC); }, 1500); }
   }
   tick(); var t = setInterval(tick, 1000);
 })();
