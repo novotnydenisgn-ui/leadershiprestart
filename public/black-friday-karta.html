@@ -13,6 +13,10 @@
   (vše nepovinné, kupující si texty může upravit přímo na stránce – poukaz se přepisuje živě).
   Tisk: Ctrl/Cmd+P nebo tlačítko → vytiskne se jen poukaz (na šířku, A5/A4), vše ostatní je skryté.
   Design poukazu = 1:1 landing page /black-friday (styly v assets/bf.css).
+  QR kód vpravo dole na poukazu = WhatsApp odkaz wa.me/420774845929?text=… (připravená zpráva se jmény z poukazu),
+  generuje se lokálně knihovnou assets/qrcode.js (qrcode-generator, MIT) jako SVG – žádná cizí služba, v tisku/PDF
+  zůstane ostrý. Celý štítek i text v „Uplatnění“ je odkaz na stejný wa.me (na mobilu stačí klepnout); číslo a e-mail
+  zůstávají viditelné jako záloha.
 -->
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="alternate icon" type="image/png" href="assets/favicon.png">
@@ -40,6 +44,13 @@
   .tip p{font-size:14px;line-height:22px;color:var(--dk-muted-2)}
   @media(max-width:900px){.tips{grid-template-columns:1fr}}
   @media(max-width:640px){.edit{grid-template-columns:1fr}.karta-bf{padding:36px 0 56px}}
+  /* QR kód k uplatnění: bílý štítek vpravo dole (přes konec stuhy), ~31 mm na tisku 185 mm; celý je odkaz mailto */
+  .karta-bf .gcard .g-qr{position:absolute;right:5%;bottom:7%;z-index:2;width:clamp(64px,17cqw,124px);display:flex;flex-direction:column;align-items:center;gap:.9cqw;text-decoration:none;color:inherit}
+  .karta-bf .gcard .g-num{position:static;text-align:center;white-space:normal;overflow-wrap:anywhere;letter-spacing:.14em}
+  .karta-bf .gcard .g-qr-box{display:block;width:100%;box-sizing:border-box;padding:7%;background:#fff;border-radius:10%;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  .karta-bf .gcard .g-qr-box svg{display:block;width:100%;height:auto}
+  .karta-bf .gcard .g-qr-cap{font-size:clamp(7px,1.8cqw,11px);line-height:1.4;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);text-align:center}
+  .karta-bf .gcard .g-qr:hover .g-qr-cap{color:#f6d47c}
 
   /* ---------- tisk: jen poukaz, na šířku ---------- */
   @media print{
@@ -51,6 +62,7 @@
     .karta-bf .card-float{width:min(100%,185mm)!important;animation:none!important;transform:none!important}
     .gcard{box-shadow:none!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-color:rgba(200,149,47,.6)!important}
     .gcard .shine{display:none!important}
+    .karta-bf .gcard .g-qr-box{box-shadow:none!important}
   }
 </style>
 </head>
@@ -66,7 +78,7 @@
 
     <div class="card-stage">
       <div class="card-float still">
-        <div class="gcard" id="gcard" role="img" aria-label="Dárkový poukaz Leadership Restart v hodnotě 22 990 Kč (920 €)">
+        <div class="gcard" id="gcard" role="group" aria-label="Dárkový poukaz Leadership Restart v hodnotě 22 990 Kč (920 €)">
           <div class="rb-h" aria-hidden="true"></div>
           <div class="rb-v" aria-hidden="true"></div>
           <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
@@ -90,7 +102,11 @@
             <div class="g-valid">Platí od 1. 1. 2027 do 31. 12. 2027</div>
             <div class="g-who" id="gWho" hidden><span>Pro:</span> <b id="gPro"></b> <span id="gOdWrap" hidden>· <span>Od:</span> <b id="gOd"></b></span></div>
           </div>
-          <div class="g-num" id="gNum" hidden>Poukaz č. <b id="gC"></b></div>
+          <a class="g-qr" id="gQr" href="https://wa.me/420774845929" target="_blank" rel="noopener" aria-label="Uplatnit poukaz přes WhatsApp – naskenuj QR kód nebo klepni">
+            <span class="g-qr-box" id="qrBox" aria-hidden="true"></span>
+            <span class="g-qr-cap">Uplatnění:<br>naskenuj</span>
+            <span class="g-num" id="gNum" hidden>Poukaz č. <b id="gC"></b></span>
+          </a>
         </div>
       </div>
     </div>
@@ -109,7 +125,7 @@
     <div class="tips">
       <div class="tip"><h3>🎄 Pod stromeček</h3><p>Vytiskni barevně na pevnější papír (ideálně A5 na šířku), přelož nebo vlož do obálky. Hotovo.</p></div>
       <div class="tip"><h3>📩 Digitálně</h3><p>Ulož poukaz jako PDF a pošli ho obdarovanému v den Vánoc – nebo mu přepošli e-mail, ve kterém poukaz dostal.</p></div>
-      <div class="tip"><h3>✅ Uplatnění</h3><p>Obdarovaný nám od 1. 1. 2027 do 31. 12. 2027 napíše na <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a domluvíme, na co hodnotu poukazu použije.</p></div>
+      <div class="tip"><h3>✅ Uplatnění</h3><p>Naskenuj QR kód na poukazu nebo <a id="tipMail" href="https://wa.me/420774845929" target="_blank" rel="noopener">klikni a napiš nám na WhatsApp</a> – zpráva je připravená, stačí odeslat. Platí od 1. 1. 2027 do 31. 12. 2027. Záloha: <a href="tel:+420774845929">+420 774 845 929</a> nebo <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a>.</p></div>
     </div>
   </div>
 </section>
@@ -139,8 +155,11 @@
 </svg>
 
 <script src="assets/site.js?v=21"></script>
+<script src="assets/qrcode.js"></script>
 <script>
 (function(){
+  var WA = '420774845929'; // WhatsApp k uplatnění (+420 774 845 929, stejné číslo jako tel: odkaz na webu)
+  var gQr = document.getElementById('gQr'), qrBox = document.getElementById('qrBox'), tipMail = document.getElementById('tipMail'), lastQr = '';
   var q = new URLSearchParams(location.search);
   var inPro = document.getElementById('inPro'), inOd = document.getElementById('inOd');
   var gWho = document.getElementById('gWho'), gPro = document.getElementById('gPro'), gOd = document.getElementById('gOd'), gOdWrap = document.getElementById('gOdWrap');
@@ -163,6 +182,14 @@
     var abs = location.origin + url;
     document.getElementById('btnMail').href = 'mailto:?subject=' + encodeURIComponent('Dárkový poukaz Leadership Restart 🎁') +
       '&body=' + encodeURIComponent('Ahoj' + (pro ? ' ' + pro : '') + ',\n\nposílám ti dárkový poukaz Leadership Restart v hodnotě 22 990 Kč. Zobrazíš si ho tady:\n' + abs + '\n\nPlatí od 1. 1. 2027 do 31. 12. 2027.' + (od ? '\n\n' + od : ''));
+    // QR kód + odkaz k uplatnění: WhatsApp s připravenou zprávou, jména z poukazu v textu
+    var kdo = ['od: ' + (od || '…'), 'pro: ' + (pro || '…')]; if(c) kdo.push('č. ' + c);
+    var wa = 'https://wa.me/' + WA + '?text=' + encodeURIComponent('Dobrý den, mám dárkový poukaz Leadership Restart (' + kdo.join(', ') + ') a rád/a bych si domluvil/a termín.');
+    gQr.href = wa; if(tipMail) tipMail.href = wa;
+    if(wa !== lastQr){
+      try{ var qr = qrcode(0, wa.length > 400 ? 'L' : 'M'); qr.addData(wa); qr.make(); qrBox.innerHTML = qr.createSvgTag({cellSize:1, margin:0, scalable:true}); qrBox.hidden = false; lastQr = wa; }
+      catch(e){ qrBox.hidden = true; }
+    }
   }
   inPro.addEventListener('input', draw); inOd.addEventListener('input', draw); draw();
   document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
