@@ -87,7 +87,7 @@
             <div class="g-label">Dárkový poukaz</div>
             <div class="g-value"><span class="pr"><span class="grad grad-num">22 990 Kč</span><small>920 €</small></span></div>
             <div class="g-use">Na jakékoli služby Leadership Restart</div>
-            <div class="g-valid">Platí od 24. 12. 2026 do 31. 12. 2027</div>
+            <div class="g-valid">Platí od 1. 1. 2027 do 31. 12. 2027</div>
             <div class="g-who" id="gWho" hidden><span>Pro:</span> <b id="gPro"></b> <span id="gOdWrap" hidden>· <span>Od:</span> <b id="gOd"></b></span></div>
           </div>
           <div class="g-num" id="gNum" hidden>Poukaz č. <b id="gC"></b></div>
@@ -109,7 +109,7 @@
     <div class="tips">
       <div class="tip"><h3>🎄 Pod stromeček</h3><p>Vytiskni barevně na pevnější papír (ideálně A5 na šířku), přelož nebo vlož do obálky. Hotovo.</p></div>
       <div class="tip"><h3>📩 Digitálně</h3><p>Ulož poukaz jako PDF a pošli ho obdarovanému v den Vánoc – nebo mu přepošli e-mail, ve kterém poukaz dostal.</p></div>
-      <div class="tip"><h3>✅ Uplatnění</h3><p>Obdarovaný nám od 24. 12. 2026 do 31. 12. 2027 napíše na <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a domluvíme, na co hodnotu poukazu použije.</p></div>
+      <div class="tip"><h3>✅ Uplatnění</h3><p>Obdarovaný nám od 1. 1. 2027 do 31. 12. 2027 napíše na <a href="mailto:novotny.denis.gn@gmail.com">novotny.denis.gn@gmail.com</a> a domluvíme, na co hodnotu poukazu použije.</p></div>
     </div>
   </div>
 </section>
@@ -162,7 +162,7 @@
     history.replaceState(null, '', url);
     var abs = location.origin + url;
     document.getElementById('btnMail').href = 'mailto:?subject=' + encodeURIComponent('Dárkový poukaz Leadership Restart 🎁') +
-      '&body=' + encodeURIComponent('Ahoj' + (pro ? ' ' + pro : '') + ',\n\nposílám ti dárkový poukaz Leadership Restart v hodnotě 22 990 Kč. Zobrazíš si ho tady:\n' + abs + '\n\nPlatí od 24. 12. 2026 do 31. 12. 2027.' + (od ? '\n\n' + od : ''));
+      '&body=' + encodeURIComponent('Ahoj' + (pro ? ' ' + pro : '') + ',\n\nposílám ti dárkový poukaz Leadership Restart v hodnotě 22 990 Kč. Zobrazíš si ho tady:\n' + abs + '\n\nPlatí od 1. 1. 2027 do 31. 12. 2027.' + (od ? '\n\n' + od : ''));
   }
   inPro.addEventListener('input', draw); inOd.addEventListener('input', draw); draw();
   document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
