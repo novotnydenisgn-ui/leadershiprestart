@@ -14,6 +14,7 @@ import {
 import { isBot, isExcluded, previewVariant } from './bots.js';
 import { logView, logClick, logGoal, deviceFrom } from './log.js';
 import { handleForms } from './forms.js';
+import { bfStock } from './bf.js';
 
 const APEX = 'leadershiprestart.cz';
 
@@ -41,6 +42,9 @@ export default {
     }
     if (url.pathname === '/api/click' && request.method === 'POST') {
       return handleClick(request, env, ctx);
+    }
+    if (url.pathname === '/api/bf/zbyva') {
+      return bfStock(env, ctx);
     }
     if (url.pathname === '/api/goal') {
       return handleGoal(request, env, ctx, url);
