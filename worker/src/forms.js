@@ -23,11 +23,19 @@ export const FORM_PATHS = {
   // Výzva (kopie Tilda funnelu silabytsebou.cz): kvalifikace → rezervace
   '/kvalifikace-vyzva': 'kvalifikace-vyzva',
   '/kvalifikace_do_vyzvy': 'kvalifikace-vyzva',
+  // Případová studie zdarma (funnel z reklamy): dotazník → /rezervace (Velín, projekt Leadership Restart)
+  '/pripadova-studie-dotaznik': 'pripadova-studie',
 };
 // Stránky funnelu z Velínu (Velín → projekt → Stránky): /<cesta> → /p/<slug>
 export const PAGE_PATHS = {
   '/rezervace-vyzva': 'rezervace-vyzva',
   '/rezervace_vyzva': 'rezervace-vyzva',
+  // Případová studie zdarma: opt-in → (dotazník) → rezervace → studie z e-mailu → rezervováno; nevhodní → děkujeme za zájem
+  '/pripadova-studie-ziskat': 'pripadova-studie-ziskat',
+  '/rezervace': 'rezervace',
+  '/pripadova-studie': 'pripadova-studie',
+  '/rezervovano': 'rezervovano',
+  '/dekujeme-za-zajem': 'dekujeme-za-zajem',
 };
 // Rezervace termínu (po kvalifikaci v dotazníku): /<cesta> → stránka /r/<slug> v aplikaci Dotazníky
 export const BOOKING_PATHS = {};
