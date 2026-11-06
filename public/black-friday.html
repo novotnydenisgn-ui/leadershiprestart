@@ -309,20 +309,10 @@
     }
     .gcard{border-radius:18px}
   }
-  /* Kolik poukazů zbývá – skutečný počet ze Stripe (/api/bf/zbyva, worker/src/bf.js), obnovuje se každých 30 s */
-  .stock{max-width:460px;margin:30px auto 24px;text-align:center;padding:18px 26px 16px;border-radius:22px;
-    border:1.5px solid rgba(233,182,79,.35);background:rgba(233,182,79,.06);box-shadow:0 18px 50px rgba(233,182,79,.10)}
-  .stock .st-txt{font-family:"League Spartan",sans-serif;font-weight:800;font-size:30px;line-height:1.15;color:#fff}
-  .stock .st-txt b{font-size:1.55em;background:linear-gradient(90deg,#e9b64f 0%,#f6d47c 55%,#fff6d6 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;padding:0 .08em}
-  .stock .st-bar{height:12px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(233,182,79,.3);overflow:hidden;margin-top:12px}
-  .stock .st-bar i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(100deg,#f6d47c,#e9b64f 50%,#c8952f);
-    box-shadow:0 0 18px rgba(233,182,79,.5);transition:width .8s ease}
-  .stock .st-note{font-size:12px;line-height:18px;color:rgba(255,255,255,.45);margin-top:8px}
+  /* Vyprodáno – podle skutečného stavu ze Stripe (/api/bf/zbyva, worker/src/bf.js): tlačítka na platbu pryč */
   .cta-sold{display:none;font-family:"League Spartan",sans-serif;font-weight:800;font-size:22px;color:#f6d47c}
   html.bf-sold .cta-bf,html.bf-sold .cta-wait,html.bf-sold .cta-note{display:none}
   html.bf-sold .cta-sold{display:block}
-  @media (max-width:640px){ .stock .st-txt{font-size:21px} }
 </style>
 <script>
 /* Start prodeje: čt 5. 11. 2026 10:00 Europe/Prague (CET = UTC+1). Před startem třída html.bf-pre
@@ -396,7 +386,6 @@ if(!window.BF_LIVE) document.documentElement.classList.add('bf-pre');
     </div>
 
     <div class="hero-cta">
-      <div class="stock" aria-live="polite"><div class="st-txt">Zbývá <b data-left>5</b> z <span data-total>5</span> poukazů</div><div class="st-bar"><i data-bar></i></div><div class="st-note">Počet se mění podle skutečných objednávek</div></div>
       <p class="cta-sold">Vyprodáno – všech 5 poukazů má svého majitele. Děkujeme! 🎁</p>
       <a class="cta-bf" data-cta-pos="bf_hero" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Chci dárkový poukaz v hodnotě 22 990 Kč (920 €) jen za 4 599 Kč (184 €)</a>
       <div class="cta-wait" role="timer" aria-label="Předprodej začíná ve čtvrtek 5. 11. 2026 v 10:00"><span class="cw-lbl">Předprodej začíná za</span><span class="cw-cd"><span><b data-w="d">--</b><i>d</i></span><span><b data-w="h">--</b><i>h</i></span><span><b data-w="m">--</b><i>m</i></span><span><b data-w="s">--</b><i>s</i></span></span></div>
@@ -526,7 +515,6 @@ if(!window.BF_LIVE) document.documentElement.classList.add('bf-pre');
     </div>
 
     <div class="hero-cta">
-      <div class="stock" aria-live="polite"><div class="st-txt">Zbývá <b data-left>5</b> z <span data-total>5</span> poukazů</div><div class="st-bar"><i data-bar></i></div><div class="st-note">Počet se mění podle skutečných objednávek</div></div>
       <p class="cta-sold">Vyprodáno – všech 5 poukazů má svého majitele. Děkujeme! 🎁</p>
       <a class="cta-bf" data-cta-pos="bf_final" href="https://buy.stripe.com/5kQaEZ63c1FmdiOb59fQI0e?prefilled_promo_code=BLACKFRIDAY80">Chci se stát nejštědřejším člověkem pod stromečkem</a>
       <div class="cta-wait" role="timer" aria-label="Předprodej začíná ve čtvrtek 5. 11. 2026 v 10:00"><span class="cw-lbl">Předprodej začíná za</span><span class="cw-cd"><span><b data-w="d">--</b><i>d</i></span><span><b data-w="h">--</b><i>h</i></span><span><b data-w="m">--</b><i>m</i></span><span><b data-w="s">--</b><i>s</i></span></span></div>
@@ -630,7 +618,7 @@ document.getElementById('bfCookies').addEventListener('click', function(){
   }
   tick(); var t = setInterval(tick, 1000);
 })();
-/* ===== Kolik poukazů zbývá: skutečný stav ze Stripe přes /api/bf/zbyva (bez klíče / při chybě zůstane statické „5 z 5“) ===== */
+/* ===== Vyprodáno? Skutečný stav ze Stripe přes /api/bf/zbyva (bez klíče / při chybě se nic nemění) ===== */
 (function(){
   function show(d){
     if(!d || d.left == null) return;
