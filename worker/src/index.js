@@ -40,6 +40,9 @@ export default {
         return Response.redirect(new URL('/up-great', url).toString(), 301);
       }
     }
+    if (url.pathname.startsWith('/video/')) {
+      return handleVideo(request, env);
+    }
     if (url.pathname === '/api/click' && request.method === 'POST') {
       return handleClick(request, env, ctx);
     }
@@ -87,6 +90,33 @@ async function fetchAsset(env, request, url) {
   alt.pathname = candidate;
   const retry = await env.ASSETS.fetch(new Request(alt.toString(), request));
   return retry.status === 404 ? direct : retry;
+}
+
+// Videa (/video/*) jdou přes Worker kvůli Range: statické assets Cloudflaru na Range vrací
+// celý soubor (200) a Safari / iOS pak MP4 nepřehraje. Soubory jsou malé (do ~10 MB),
+// takže výřez stačí udělat v paměti.
+async function handleVideo(request, env) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return new Response(null, { status: 405 });
+  const resp = await env.ASSETS.fetch(new Request(request.url));
+  if (!resp.ok) return resp;
+  const headers = new Headers(resp.headers);
+  headers.set('Accept-Ranges', 'bytes');
+  headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  const head = request.method === 'HEAD';
+  const m = /^bytes=(\d*)-(\d*)$/.exec(request.headers.get('Range') || '');
+  if (!m || (m[1] === '' && m[2] === '')) return new Response(head ? null : resp.body, { status: 200, headers });
+
+  const buf = await resp.arrayBuffer();
+  const size = buf.byteLength;
+  // "bytes=-500" = posledních 500 bajtů; "bytes=100-" = od 100 do konce
+  const start = m[1] === '' ? Math.max(0, size - Number(m[2])) : Number(m[1]);
+  const end = m[1] === '' || m[2] === '' ? size - 1 : Math.min(Number(m[2]), size - 1);
+  if (start > end) {
+    return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+  }
+  headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
+  headers.set('Content-Length', String(end - start + 1));
+  return new Response(head ? null : buf.slice(start, end + 1), { status: 206, headers });
 }
 
 async function handlePage(request, env, ctx, url) {
