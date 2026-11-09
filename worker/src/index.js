@@ -300,9 +300,28 @@ async function handleClick(request, env, ctx) {
   const ip = request.headers.get('CF-Connecting-IP') || '0.0.0.0';
   const cookies = parseCookies(request);
 
-  if (isBot(ua) || cookies[COOKIE_EXCLUDE] === '1' || !cookies.ab_v) {
+  if (isBot(ua) || cookies[COOKIE_EXCLUDE] === '1') {
     return new Response(null, { status: 204 });
   }
+  let body = {};
+  try {
+    body = await request.json();
+  } catch {
+    /* sendBeacon bez JSON -> prázdné */
+  }
+  const ctaPos = typeof body.pos === 'string' ? body.pos.slice(0, 32) : 'other';
+  let page = typeof body.page === 'string' ? body.page.slice(0, 128) : null;
+
+  // Videa (pozice „video:…“ ze site.js: spuštění, dokoukání, odchod na YouTube) jdou do logů Workeru
+  // vždy, i bez běžícího testu – výchozí čísla (Workers → leadershiprestart → Logs, filtr video_event).
+  // Do Velínu se klíč videa připojí ke stránce (/#roman), ať jde rozpad podle videí.
+  if (ctaPos.startsWith('video:')) {
+    const ref = typeof body.ref === 'string' ? body.ref.replace(/[^\w-]/g, '').slice(0, 40) : '';
+    console.log(JSON.stringify({ video_event: ctaPos.slice(6), ref, page, device: deviceFrom(ua), ab: cookies.ab_v || null }));
+    if (ref && page) page = `${page}#${ref}`.slice(0, 128);
+  }
+
+  if (!cookies.ab_v) return new Response(null, { status: 204 });
   const [tid, vid] = (cookies.ab_v || '').split(':');
   const { state, ...ab } = await getAb(env, ctx);
   const test = testById(ab, tid);
@@ -311,15 +330,6 @@ async function handleClick(request, env, ctx) {
     return new Response(null, { status: 204 });
   }
   if (!test.variants.some((v) => v.id === vid)) return new Response(null, { status: 204 });
-
-  let body = {};
-  try {
-    body = await request.json();
-  } catch {
-    /* sendBeacon bez JSON -> prázdné */
-  }
-  const ctaPos = typeof body.pos === 'string' ? body.pos.slice(0, 32) : 'other';
-  const page = typeof body.page === 'string' ? body.page.slice(0, 128) : null;
 
   ctx.waitUntil(
     visitorHash(ip, ua).then((visitor) =>

@@ -52,6 +52,23 @@
     border:1px solid var(--glass-brd);transition:border-color .3s ease,transform .3s ease}
   .ref-embed:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
   .ref-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  /* A/B varianta slotu refs_videos: vlastní přehrávač (/video/ref/), žádný proklik na YouTube.
+     Markup varianty: scripts/ab-refs-videos.mjs, chování: site.js (mountOwnRefs) */
+  .ref-own-bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;
+    filter:blur(18px) brightness(.45);transform:scale(1.05)}
+  .ref-own-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+  .ref-own-play{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.6));border:0;cursor:pointer;padding:0}
+  .ref-own-play span{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;
+    justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:transform .25s ease}
+  .ref-own-play:hover span,.ref-own-play:focus-visible span{transform:scale(1.09)}
+  .ref-own-play svg{width:24px;height:24px;fill:#0b0e13;margin-left:4px}
+  .ref-own-cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:3;pointer-events:none;color:#fff;
+    text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .ref-own-cap b{display:block;font-size:14px;font-weight:800;line-height:1.25}
+  .ref-own-cap span{display:block;font-size:12px;font-weight:700;opacity:.85;margin-top:2px}
+  .ref-own video{position:absolute;inset:0;z-index:4;width:100%;height:100%;object-fit:contain;background:#000}
+  .ref-own.playing .ref-own-play,.ref-own.playing .ref-own-cap{display:none}
 
   /* ---- benefity: linkové ikony místo emoji ---- */
   .b-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
@@ -428,19 +445,19 @@
     <div class="vrefs-dots" id="vrefsDots" aria-hidden="true"></div>
     <h3 class="display h-section" style="margin-top:clamp(46px,6vw,74px);font-size:clamp(22px,2.8vw,34px);text-align:center">
       Co o mě a programu <span class="grad-text">říkají</span></h3>
-    <div class="refs-grid">
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/M6q2CLq_170?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/-v6xZ6xo5w8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/J9Jlyw0-Jiw?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/cbf6HUMZFt8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/N5T8hqXaFCk?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/7cJ2fcQ0J_I?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/c1EyZpkdmiY?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/347l1tHpooM?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/bU3qbJcYPGk?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Iivs0hrn_VE?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/yzCJE_t99B8?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Lt9ly4qTcf0?rel=0" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <div class="refs-grid" data-ab-slot="refs_videos">
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/M6q2CLq_170?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/-v6xZ6xo5w8?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/J9Jlyw0-Jiw?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/cbf6HUMZFt8?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/N5T8hqXaFCk?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/7cJ2fcQ0J_I?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/c1EyZpkdmiY?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/347l1tHpooM?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/bU3qbJcYPGk?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Iivs0hrn_VE?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/yzCJE_t99B8?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+      <div class="ref-embed reveal"><iframe src="https://www.youtube-nocookie.com/embed/Lt9ly4qTcf0?rel=0&amp;enablejsapi=1" title="Reference — Leadership Restart" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
     </div>
   </div>
 </section>
@@ -707,7 +724,7 @@
 
 <div id="siteFooter"></div>
 
-<script src="assets/site.js?v=21"></script>
+<script src="assets/site.js?v=22"></script>
 <script>
 /* harmonogram — linka vlevo postupně nabíhá podle scrollu */
 (function(){
