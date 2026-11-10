@@ -17,6 +17,12 @@ import { handleForms } from './forms.js';
 import { bfStock } from './bf.js';
 
 const APEX = 'leadershiprestart.cz';
+const VELIN = 'https://admin.leadershiprestart.cz';
+// stará adresa šablony → šablona ve Velínu (/admin/sablony/<soubor>); ostatní (rozcestník, děkujeme, vítej) → Velín
+const SABLONY = {
+  '/sablona-lp': 'sablona-funnel', '/sablona-funnel': 'sablona-funnel', '/sablona-zacni-tady': 'podklady',
+  '/sablona-brand-manual': 'brand-manual', '/sablona-links': 'links', '/sablona-cenik': 'cenik', '/sablona-dashboard': 'dashboard',
+};
 
 export default {
   async fetch(request, env, ctx) {
@@ -38,6 +44,19 @@ export default {
       const aliases = ['/up-great', '/up-great.html', '/up-grade', '/up-grade.html', '/up-great-lp', '/up-great-lp.html'];
       if (aliases.includes(lower) && url.pathname !== '/up-great') {
         return Response.redirect(new URL('/up-great', url).toString(), 301);
+      }
+    }
+    // Šablony pro klienty jsou jen ve Velínu za přihlášením (položka Šablony) – staré adresy vedou tam
+    {
+      let p = url.pathname;
+      try { p = decodeURIComponent(p); } catch {}
+      p = p.toLowerCase().replace(/\.html$/, '').replace(/\/+$/, '');
+      if (p === '/sablony' || p.startsWith('/sablona-') || p === '/p/sablony' || p.startsWith('/p/sablony-')) {
+        const file = SABLONY[p.replace(/^\/p\/sablony/, '/sablona').replace(/^\/sablona$/, '/sablona-lp')];
+        return new Response(null, {
+          status: 302,
+          headers: { Location: `${VELIN}/admin/${file ? `sablony/${file}` : ''}`, 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' },
+        });
       }
     }
     if (url.pathname.startsWith('/video/')) {
