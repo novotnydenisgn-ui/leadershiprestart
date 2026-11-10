@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Šablona analytického dashboardu | Leadership Restart</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Klikací šablona analytického dashboardu pro koučink a mentoring: obrat, CAC, LTGP 30, show-up, close rate, MRR. Všechna čísla jsou vymyšlená.">
+<style>
+:root{
+  --blue:#0071e3;--good:#248a3d;--bad:#d70015;--neu:#6e6e73;
+  --ink:#1d1d1f;--mute:#6e6e73;--mute2:#86868b;--hair:#c7c7cc;
+  --panel:#f5f5f7;--seg:#e3e3e8;--setter:#ff9f0a;--s2:#d2d2d7;
+  --warnT:#b25000;--warnB:#fff4e5;--errB:#fff8e6;--errT:#7a4d00;--errL:#f5d48a;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;font-size:14px}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select{font:inherit;color:inherit}
+.num,.cv,td.n,.tab-num{font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+
+/* ---------- login ---------- */
+.login{min-height:100vh;display:grid;place-items:center;background:var(--panel);padding:16px}
+.login-card{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:36px 32px;width:100%;max-width:400px;text-align:center}
+.login-card h1{font-size:26px;margin:14px 0 6px;font-weight:600}
+.login-card p{color:var(--mute);margin:0 0 22px;line-height:1.45}
+.field{width:100%;border:1px solid #d2d2d7;border-radius:12px;padding:12px 14px;font-size:15px;outline:none;background:#fff}
+.field:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,113,227,.15)}
+.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:500;background:var(--blue);color:#fff;font-size:14px}
+.btn:hover{background:#0077ed}
+.btn.full{width:100%;margin-top:10px}
+.btn.ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px #d2d2d7}
+.btn.ghost:hover{background:#fafafa}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:10px}
+.btn.green{background:var(--good)}
+.btn.red{background:#fff;color:var(--bad);box-shadow:inset 0 0 0 1px #f2c4c8}
+.btn:disabled{opacity:.45;cursor:default}
+.fine{font-size:12px;color:var(--mute2);margin-top:18px;line-height:1.5}
+.logo{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:17px;letter-spacing:-.01em}
+.logo-mark{width:30px;height:30px;border-radius:9px;background:#0071e3;display:grid;place-items:center}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid rgba(0,0,0,.06)}
+.top-in{max-width:1440px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:18px}
+.nav{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav button{border:0;background:none;padding:8px 12px;border-radius:9px;color:var(--mute);font-weight:500;white-space:nowrap;position:relative}
+.nav button:hover{color:var(--ink);background:rgba(0,0,0,.04)}
+.nav button.on{color:var(--ink);background:rgba(0,0,0,.06)}
+.badge{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:var(--setter);color:#fff;font-size:11px;font-weight:600;padding:0 5px;margin-left:5px}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#0071e3,#5ac8fa);color:#fff;border:0;font-weight:600;font-size:12px}
+.menu{position:absolute;right:16px;top:52px;background:#fff;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.14);padding:6px;min-width:200px;z-index:40}
+.menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 12px;border-radius:9px}
+.menu button:hover{background:var(--panel)}
+.menu .who{padding:9px 12px;font-size:12px;color:var(--mute);border-bottom:1px solid #eee;margin-bottom:4px}
+
+.sample{max-width:1440px;margin:12px auto 0;padding:0 16px}
+.sample-in{background:#eef5ff;color:#0b4a8f;border-radius:14px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:13px}
+.sample-in b{font-weight:600}
+.sample-in button{margin-left:auto;border:0;background:none;color:#0b4a8f;font-weight:500}
+
+main{max-width:1440px;margin:0 auto;padding:12px 16px 60px}
+.panel{background:var(--panel);border-radius:28px;padding:24px}
+.head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.head h1{font-size:32px;font-weight:600;margin:0;letter-spacing:-.02em}
+.head .sub{font-size:14px;color:var(--mute);margin:4px 0 0}
+.head .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#30d158;margin-right:6px;vertical-align:1px;box-shadow:0 0 0 3px rgba(48,209,88,.18)}
+
+/* segmented control */
+.seg{display:inline-flex;background:var(--seg);border-radius:11px;padding:2px;gap:2px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar,.nav::-webkit-scrollbar{display:none}
+.seg button{border:0;background:none;border-radius:9px;padding:6px 12px;font-size:13px;font-weight:500;color:var(--mute);white-space:nowrap}
+.seg button:hover{color:var(--ink)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg .add{color:var(--blue)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-bottom:12px}
+.toolbar .grow{flex:1}
+.period{display:flex;align-items:center;gap:6px;position:relative}
+.arrow{width:32px;height:32px;border-radius:10px;border:0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);font-size:17px;line-height:1;color:var(--ink)}
+.arrow:disabled{opacity:.35;cursor:default}
+.pill{border:0;background:#fff;border-radius:12px;padding:6px 14px;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:left;min-width:190px}
+.pill .r{font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
+.pill .c{font-size:11px;color:var(--mute2);margin-top:1px}
+.pill:hover{box-shadow:0 1px 3px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.08)}
+
+/* calendar */
+.cal{position:absolute;top:44px;right:0;z-index:25;background:#fff;border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.18);padding:16px;width:max-content}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.cal-ms{display:flex;gap:22px}
+.cm-t{text-align:center;font-weight:600;font-size:13px;margin-bottom:8px}
+.cm-g{display:grid;grid-template-columns:repeat(7,34px);row-gap:2px}
+.cw{font-size:10px;color:var(--mute2);text-align:center;padding:4px 0;text-transform:uppercase}
+.cdn{border:0;background:none;height:34px;font-size:13px;border-radius:0;font-variant-numeric:tabular-nums}
+.cdn:hover:not(:disabled){background:#eef5ff;border-radius:9px}
+.cdn:disabled{color:#c7c7cc;cursor:default}
+.cdn.in{background:#e8f1fd;border-radius:0}
+.cdn.st,.cdn.en{background:var(--blue);color:#fff;border-radius:9px}
+.cdn.st.in{border-radius:9px 0 0 9px}.cdn.en.in{border-radius:0 9px 9px 0}.cdn.st.en{border-radius:9px}
+.cdn.today{font-weight:700}
+.cal-f{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid #eee;font-size:12px;color:var(--mute)}
+.cal-f .sp{flex:1}
+
+/* data warnings */
+.dwarn{background:var(--errB);color:var(--errT);border:1px solid var(--errL);border-radius:14px;padding:9px 14px;font-size:13px;margin-bottom:12px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.dwarn a{color:var(--errT);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+
+/* grid + cards */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{background:#fff;border-radius:16px;padding:16px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.04);transition:border-color .15s;cursor:pointer;position:relative;min-width:0;display:flex;flex-direction:column}
+.card:hover{border-color:rgba(0,0,0,.12)}
+.card.w{grid-column:span 2}.card.f{grid-column:1/-1}
+.card-h{display:flex;align-items:center;gap:6px;min-height:20px}
+.ct{font-size:13px;font-weight:500;color:var(--mute);text-decoration:underline dotted var(--hair);text-underline-offset:3px;cursor:help}
+.cv{font-size:26px;font-weight:600;margin-top:8px;letter-spacing:-.01em;white-space:nowrap}
+.cd{font-size:12px;margin-top:3px;font-weight:500}
+.cd span{color:var(--mute2);font-weight:400}
+.good{color:var(--good)}.bad{color:var(--bad)}.neu{color:var(--neu)}
+.cn{font-size:12px;color:var(--mute2);margin-top:6px;line-height:1.4}
+.chip-warn{display:inline-block;font-size:11px;font-weight:500;color:var(--warnT);background:var(--warnB);border-radius:6px;padding:2px 7px;margin-top:6px;margin-right:4px}
+.spark{display:block;width:100%;height:40px;margin-top:auto;padding-top:10px}
+.est{font-size:10px;font-weight:600;color:var(--warnT);background:var(--warnB);border-radius:5px;padding:1px 5px;text-transform:uppercase;letter-spacing:.03em}
+.tools{margin-left:auto;display:none;gap:4px}
+.tools button,.tools select{border:0;background:var(--panel);border-radius:7px;font-size:11px;padding:3px 7px;color:var(--mute)}
+.tools button:hover{color:var(--ink);background:var(--seg)}
+.editing .tools{display:flex}
+.editing .card{outline:1.5px dashed var(--hair);outline-offset:-1px;cursor:grab}
+.editing .card.dragging{opacity:.35}
+.empty-tab{grid-column:1/-1;text-align:center;color:var(--mute);padding:50px 20px;background:#fff;border-radius:16px;border:1.5px dashed var(--hair)}
+.tray{margin-top:16px;background:#fff;border-radius:16px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px}
+.tray .lbl{color:var(--mute);margin-right:4px}
+.tray button{border:0;background:var(--panel);border-radius:9px;padding:5px 10px;font-size:12px}
+.tray button:hover{background:var(--seg)}
+.editbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:#fff;border-radius:14px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:var(--mute)}
+.editbar .sp{flex:1}
+
+/* skeleton */
+.sk{background:linear-gradient(90deg,#ececf0 0,#f7f7f9 40%,#ececf0 80%);background-size:200% 100%;animation:sh 1.4s infinite linear;border-radius:8px}
+@keyframes sh{from{background-position:100% 0}to{background-position:-100% 0}}
+.loading-txt{font-size:13px;color:var(--mute);margin:0 0 10px}
+
+/* special cards */
+.funnel{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:14px}
+.fstep{background:var(--panel);border-radius:12px;padding:12px;position:relative;cursor:pointer}
+.fstep:hover{background:#ececf0}
+.fstep .l{font-size:12px;color:var(--mute)}
+.fstep .v{font-size:22px;font-weight:600;margin:4px 0 8px;font-variant-numeric:tabular-nums}
+.fbar{height:6px;border-radius:3px;background:var(--seg);overflow:hidden}
+.fbar i{display:block;height:100%;background:var(--blue);border-radius:3px}
+.fstep .cvr{font-size:11px;color:var(--mute2);margin-top:6px}
+.fstep.bad-step .fbar i{background:var(--bad)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.duo>div{background:var(--panel);border-radius:12px;padding:12px}
+.duo .l{font-size:12px;color:var(--mute);display:flex;align-items:center;gap:6px}
+.duo .v{font-size:22px;font-weight:600;margin-top:4px;font-variant-numeric:tabular-nums}
+.duo .s{font-size:12px;color:var(--mute2);margin-top:2px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.save{margin-top:10px;font-size:13px;color:var(--good);font-weight:500}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mute);margin-left:auto;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.chart{width:100%;margin-top:10px;min-height:200px}
+.chart svg{display:block}
+.hbars{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.hb .t{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:4px}
+.hb .t b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.hb .b{height:8px;background:var(--panel);border-radius:4px;overflow:hidden}
+.hb .b i{display:block;height:100%;border-radius:4px;background:var(--blue)}
+.stack{display:flex;height:14px;border-radius:7px;overflow:hidden;margin-top:14px;background:var(--panel)}
+.stack i{display:block;height:100%}
+.slegend{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:12px;font-size:12px;color:var(--mute)}
+.slegend div{display:flex;align-items:center;gap:6px}
+.slegend b{margin-left:auto;color:var(--ink);font-variant-numeric:tabular-nums}
+.srcs{margin-top:10px;display:flex;flex-direction:column}
+.src{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid #f0f0f2;font-size:13px}
+.src:first-child{border-top:0}
+.src .t{margin-left:auto;color:var(--mute2);font-size:12px;font-variant-numeric:tabular-nums}
+.src.old .t{color:var(--warnT);font-weight:500}
+.sdot{width:8px;height:8px;border-radius:50%;background:#30d158;flex:none}
+.src.old .sdot{background:var(--setter)}
+
+/* tables */
+.tbl-wrap{overflow:auto;max-height:60vh;border-radius:12px;border:1px solid #f0f0f2}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute2);font-weight:500;text-align:left;padding:9px 12px;background:#fafafa;position:sticky;top:0;white-space:nowrap}
+td{padding:9px 12px;border-top:1px solid #f2f2f4;white-space:nowrap}
+th.n,td.n{text-align:right}
+tr.click{cursor:pointer}
+tr.click:hover td{background:#fafafc}
+.tag{display:inline-block;font-size:11px;font-weight:500;border-radius:6px;padding:2px 7px;background:var(--panel);color:var(--mute)}
+.tag.blue{background:#e8f1fd;color:#0058b0}.tag.green{background:#e7f6ea;color:var(--good)}.tag.red{background:#fde8ea;color:var(--bad)}.tag.orange{background:var(--warnB);color:var(--warnT)}
+.more{font-size:12px;color:var(--mute2);padding:10px 2px}
+
+/* modal */
+.mback{position:fixed;inset:0;background:rgba(0,0,0,.28);z-index:50;display:grid;place-items:center;padding:16px;animation:fade .15s}
+.modal{background:#fff;border-radius:24px;width:100%;max-width:768px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.25);animation:pop .18s}
+.modal-h{padding:20px 22px 12px;display:flex;gap:12px;align-items:flex-start}
+.modal-h h2{font-size:20px;margin:0;font-weight:600}
+.modal-h p{margin:4px 0 0;color:var(--mute);font-size:13px}
+.x{margin-left:auto;border:0;background:var(--panel);width:30px;height:30px;border-radius:50%;font-size:16px;color:var(--mute);flex:none}
+.modal-b{padding:0 22px 22px;overflow:auto}
+.sumrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sumrow div{background:var(--panel);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--mute)}
+.sumrow b{display:block;color:var(--ink);font-size:15px;font-variant-numeric:tabular-nums}
+.formula{font-size:12px;color:var(--mute);background:var(--panel);border-radius:10px;padding:8px 12px;margin-bottom:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+@keyframes fade{from{opacity:0}}@keyframes pop{from{transform:translateY(8px) scale(.98);opacity:0}}
+
+/* tooltip, toast */
+.tip{position:fixed;z-index:60;max-width:300px;background:rgba(29,29,31,.94);color:#fff;font-size:12px;line-height:1.45;border-radius:10px;padding:9px 11px;pointer-events:none;white-space:pre-line;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.tip b{display:block;margin-bottom:3px}
+.tip code{display:block;margin-top:6px;color:#a1c9ff;font-family:ui-monospace,Menlo,monospace;font-size:11px;white-space:normal}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;z-index:70;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:pop .2s}
+
+/* CRM + settings */
+.sec{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:16px;margin-bottom:12px}
+.sec h3{margin:0 0 4px;font-size:15px;font-weight:600}
+.sec .hint{font-size:12px;color:var(--mute2);margin:0 0 12px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filters .field{width:auto;min-width:220px;padding:8px 12px;font-size:13px;border-radius:10px}
+select.field{padding-right:28px}
+.call{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #f2f2f4;flex-wrap:wrap}
+.call:first-of-type{border-top:0}
+.call .who{min-width:180px}
+.call .who b{display:block;font-weight:500}
+.call .who span{font-size:12px;color:var(--mute2)}
+.call .acts{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.chk{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mute)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form label{font-size:12px;color:var(--mute);display:flex;flex-direction:column;gap:5px}
+.form .field{padding:9px 12px;font-size:13px;border-radius:10px}
+.form .wide{grid-column:1/-1}
+.conn{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.cc{border:1px solid #eee;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.cc .top2{display:flex;align-items:center;gap:10px}
+.ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none}
+.cc .n{font-weight:600}
+.cc .w{font-size:12px;color:var(--mute)}
+.cc .meta{font-size:12px;color:var(--mute2);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.cc .foot{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cc .foot .t{font-size:12px;color:var(--mute2)}
+.cc.old .foot .t{color:var(--warnT);font-weight:500}
+.spin{width:14px;height:14px;border:2px solid #cfe2fb;border-top-color:var(--blue);border-radius:50%;display:inline-block;animation:rot .7s linear infinite;vertical-align:-2px}
+@keyframes rot{to{transform:rotate(360deg)}}
+.inline-in{width:90px;border:1px solid #e3e3e8;border-radius:8px;padding:5px 8px;text-align:right;font-variant-numeric:tabular-nums}
+.inline-sel{border:1px solid #e3e3e8;border-radius:8px;padding:4px 6px;background:#fff}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;font-size:13px;margin-bottom:14px}
+.kv dt{color:var(--mute)}.kv dd{margin:0}
+.h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute2);margin:16px 0 8px;font-weight:500}
+
+@media (max-width:1024px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card.w,.card.f{grid-column:1/-1}
+  .funnel{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .panel{padding:14px;border-radius:22px}
+  .head h1{font-size:26px}
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .card.w,.card.f{grid-column:auto}
+  .funnel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .duo{grid-template-columns:1fr}
+  .cal{position:fixed;left:8px;right:8px;top:80px;width:auto}
+  .cal-ms>div:nth-child(2){display:none}
+  .cm-g{grid-template-columns:repeat(7,1fr)}
+  .period{width:100%}.pill{flex:1;min-width:0}
+  .mback{place-items:end center;padding:0}
+  .modal{border-radius:24px 24px 0 0;max-height:90vh}
+  .form{grid-template-columns:1fr}
+  .slegend{grid-template-columns:1fr}
+  .top-in{gap:10px}
+  .logo span{display:none}
+}
+/* tmavý režim */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--ink:#f5f5f7;--mute:#a1a1a6;--mute2:#8e8e93;--hair:#48484a;--panel:#1c1c1e;--seg:#2c2c2e;--s2:#48484a;--warnB:#3a2a14;--warnT:#ffb340;--errB:#2e2512;--errT:#ffd479;--errL:#5c4a1e;--card:#2c2c2e;--bg:#000}
+}
+:root[data-theme="dark"]{--ink:#f5f5f7;--mute:#a1a1a6;--mute2:#8e8e93;--hair:#48484a;--panel:#1c1c1e;--seg:#2c2c2e;--s2:#48484a;--warnB:#3a2a14;--warnT:#ffb340;--errB:#2e2512;--errT:#ffd479;--errL:#5c4a1e;--card:#2c2c2e;--bg:#000}
+body{background:var(--bg,#fff)}
+.card,.pill,.arrow,.seg button.on,.sec,.modal,.tray,.editbar,.cal,.menu,.login-card,.field,.btn.ghost,.empty-tab,.inline-sel,.inline-in{background:var(--card,#fff)}
+.top{background:color-mix(in srgb,var(--bg,#fff) 82%,transparent)}
+.seg button.on,.pill,.arrow{color:var(--ink)}
+.btn.ghost,.field,.inline-sel,.inline-in{color:var(--ink)}
+th{background:var(--panel)}td{border-top-color:var(--seg)}
+.tbl-wrap,.cc{border-color:var(--seg)}
+.src{border-top-color:var(--seg)}
+.sample-in{background:color-mix(in srgb,#0071e3 14%,var(--bg,#fff));color:var(--ink)}
+.sample-in button{color:var(--blue)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div class="login" id="login">
+  <div class="login-card">
+    <div class="logo"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div></div>
+    <div id="loginStep1">
+      <h1>Přihlášení</h1>
+      <p>Čísla tvého byznysu na jednom místě.<br>Pošleme ti přihlašovací odkaz e-mailem.</p>
+      <input class="field" id="loginEmail" type="email" placeholder="ty@firma.cz" autocomplete="off">
+      <button class="btn full" id="loginSend">Poslat přihlašovací odkaz</button>
+      <div class="fine">Přístup mají jen lidé z tvého týmu. Bez hesla – přihlášení přes magic link.</div>
+    </div>
+    <div id="loginStep2" hidden>
+      <h1>Zkontroluj e-mail</h1>
+      <p>Poslali jsme odkaz na <b id="loginTo"></b>. Klikni na něj a jsi uvnitř.</p>
+      <button class="btn full" id="loginOpen">Otevřít odkaz (prototyp)</button>
+      <button class="btn ghost full" id="loginBack">Zadat jiný e-mail</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="top-in">
+      <div class="logo"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div><span>Puls <span style="color:var(--mute);font-weight:500">· šablona</span></span></div>
+      <nav class="nav" id="nav">
+        <button data-view="analytics" class="on">Analytika</button>
+        <button data-view="crm">Mini CRM<span class="badge" id="navBadge" hidden></span></button>
+        <button data-view="settings">Nastavení</button>
+      </nav>
+      <button class="avatar" id="avatarBtn" title="Účet">TY</button>
+    </div>
+    <div class="menu" id="userMenu" hidden>
+      <div class="who">Přihlášen jako<br><b id="whoEmail">ty@firma.cz</b> · vlastník</div>
+      <button data-go="settings:team">Tým a přístupy</button>
+      <button id="logout">Odhlásit se</button>
+    </div>
+  </header>
+
+  <div class="sample" id="sampleBar">
+    <div class="sample-in"><span>🧪</span><span><b>Ukázková šablona – všechna čísla, jména a produkty jsou vymyšlené.</b> Takhle může vypadat analytika tvého byznysu, když se data naťahují sama. Vše je klikací: období, karty, mini CRM i nastavení.</span><button id="sampleHide">Skrýt</button></div>
+  </div>
+
+  <main>
+    <!-- ANALYTICS -->
+    <section id="view-analytics">
+      <div class="panel">
+        <div class="head">
+          <div>
+            <h1>Analytika</h1>
+            <p class="sub"><span class="live"></span>Aktualizuje se samo · poslední synchronizace <span id="lastSync">před 3 min</span></p>
+          </div>
+          <div class="right">
+            <button class="btn ghost sm" id="editBtn">Upravit rozložení</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="seg" id="tabs"></div>
+          <div class="grow"></div>
+          <div class="period">
+            <button class="arrow" id="prevP" title="Předchozí období">‹</button>
+            <button class="pill" id="pill"><div class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span id="pillR"></span></div><div class="c" id="pillC"></div></button>
+            <button class="arrow" id="nextP" title="Další období">›</button>
+            <div class="cal" id="cal" hidden></div>
+          </div>
+        </div>
+        <div class="toolbar"><div class="seg" id="presets"></div></div>
+
+        <div id="editBar" class="editbar" hidden>
+          <span>Režim úprav: přetahuj karty, měň velikost, přesouvej je mezi záložkami nebo je skryj. Dvojklik na záložku ji přejmenuje.</span>
+          <span class="sp"></span>
+          <button class="btn ghost sm" id="addTab">+ Vlastní záložka</button>
+          <button class="btn ghost sm" id="resetLayout">Obnovit původní</button>
+          <button class="btn sm" id="doneEdit">Hotovo</button>
+        </div>
+
+        <div id="dataWarn"></div>
+        <div id="loadingTxt" class="loading-txt" hidden>Načítám čísla…</div>
+        <div class="grid" id="grid"></div>
+        <div id="tray"></div>
+      </div>
+    </section>
+
+    <!-- CRM -->
+    <section id="view-crm" hidden>
+      <div class="panel">
+        <div class="head"><div><h1>Mini CRM</h1><p class="sub">Ručně zapisuješ jen to, co nikde jinde není: výsledek hovoru a platby mimo Stripe.</p></div></div>
+        <div class="toolbar"><div class="seg" id="crmTabs">
+          <button data-t="calls" class="on">Hovory</button><button data-t="leads">Leady</button><button data-t="customers">Zákazníci</button><button data-t="manual">Platby mimo Stripe</button>
+        </div></div>
+        <div id="crmBody"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-settings" hidden>
+      <div class="panel">
+        <div class="head"><div><h1>Nastavení</h1><p class="sub">Produkty, tým, napojení a základní jednotky.</p></div></div>
+        <div class="toolbar"><div class="seg" id="setTabs">
+          <button data-t="conn" class="on">Napojení</button><button data-t="products">Produkty</button><button data-t="team">Tým</button><button data-t="units">Měna a pásmo</button><button data-t="defs">Moje odchylky</button>
+        </div></div>
+        <div id="setBody"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="tip" id="tip" hidden></div>
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script>
+/* =====================================================================
+   Puls – klikací prototyp analytického dashboardu (vzorová data)
+   Vše běží v prohlížeči, žádná napojení. Definice čísel podle 03_METRIKY.md
+   ===================================================================== */
+const DAY = 864e5;
+const NOW = new Date();
+const T = Math.floor(Date.UTC(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()) / DAY); // dnešek
+const T0 = T - 729;            // začátek historie (2 roky)
+const AD_START = T - 640;      // první den s reklamou
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- storage (bezpečně) ---------- */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d }catch(e){ return d } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k) }catch(e){} }
+};
+
+/* ---------- formáty ---------- */
+const state = {
+  cur: store.get('puls.cur', 'CZK'), vat: store.get('puls.vat', 0), tz: store.get('puls.tz', 'Europe/Prague'),
+  view: 'analytics', tab: 'prehled', a: T - 29, b: T, preset: '30d', edit: false,
+  crmTab: 'calls', setTab: 'conn'
+};
+const EUR = 25.2;
+const nf0 = new Intl.NumberFormat('cs-CZ', {maximumFractionDigits: 0});
+const nf1 = new Intl.NumberFormat('cs-CZ', {maximumFractionDigits: 1});
+const nfP = new Intl.NumberFormat('cs-CZ', {style: 'percent', maximumFractionDigits: 1});
+const nfCompact = new Intl.NumberFormat('cs-CZ', {notation: 'compact', maximumFractionDigits: 1});
+let nfMoney;
+function setMoneyFmt(){ nfMoney = new Intl.NumberFormat('cs-CZ', {style: 'currency', currency: state.cur, maximumFractionDigits: 0}) }
+setMoneyFmt();
+const conv = v => state.cur === 'EUR' ? v / EUR : v;
+const money = v => v == null || isNaN(v) ? '—' : nfMoney.format(conv(v));
+const moneyShort = v => nfCompact.format(conv(v)) + (state.cur === 'EUR' ? ' €' : ' Kč');
+const pct = v => v == null || isNaN(v) ? '—' : nfP.format(v);
+const num = v => v == null || isNaN(v) ? '—' : nf0.format(v);
+const ratio = v => v == null || isNaN(v) ? '—' : '1 : ' + nf1.format(v);
+const FMT = {money, pct, num, ratio};
+
+const MONTHS = ['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+const dd = d => new Date(d * DAY);
+const fD = d => { const x = dd(d); return `${x.getUTCDate()}. ${x.getUTCMonth()+1}. ${x.getUTCFullYear()}` };
+const fDs = d => { const x = dd(d); return `${x.getUTCDate()}. ${x.getUTCMonth()+1}.` };
+const ymd = d => dd(d).toISOString().slice(0, 10);
+const parseYmd = s => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? Math.floor(Date.UTC(+m[1], m[2]-1, +m[3]) / DAY) : null };
+function fRange(a, b){
+  if (a === b) return fD(a);
+  const x = dd(a), y = dd(b);
+  if (x.getUTCFullYear() === y.getUTCFullYear()){
+    if (x.getUTCMonth() === y.getUTCMonth()) return `${x.getUTCDate()}. – ${fD(b)}`;
+    return `${fDs(a)} – ${fD(b)}`;
+  }
+  return `${fD(a)} – ${fD(b)}`;
+}
+const ago = m => m < 60 ? `před ${m} min` : m < 1440 ? `před ${Math.round(m/60)} h` : `před ${Math.floor(m/1440)} d ${Math.round((m%1440)/60)} h`;
+
+/* =====================================================================
+   VZOROVÁ DATA (deterministický generátor) – všechna čísla jsou vymyšlená
+   ===================================================================== */
+let seed = 20261105;
+function rnd(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 }
+const ri = (a, b) => a + Math.floor(rnd() * (b - a + 1));
+const pick = a => a[Math.floor(rnd() * a.length)];
+
+const PRODUCTS = [
+  {id:'p1', name:'Online workshop „Restart“', basket:'frontend', price:1490, cogs:180, est:true, stripe:'prod_Wk7…'},
+  {id:'p2', name:'Mentoringový program (3 měsíce)', basket:'backend', price:39000, cogs:9500, est:true, stripe:'prod_Mp3…'},
+  {id:'p3', name:'Komunita – měsíční členství', basket:'subscription', price:990, cogs:120, est:false, stripe:'prod_Km1…'},
+  {id:'p4', name:'Konzultace 1:1', basket:'other', price:3500, cogs:0, est:false, stripe:'prod_Kn1…'},
+  {id:'p5', name:'Vrácení zálohy partnerovi', basket:'excluded', price:0, cogs:0, est:false, stripe:'prod_Vr0…'}
+];
+const PROD_BY = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+const BASKETS = {frontend:'Frontend', backend:'Backend', subscription:'Předplatné', other:'Jiné', excluded:'Mimo analytiku'};
+const ADS = [
+  {id:'ad1', name:'Video – příběh klienta', w:.34, eff:1.2},
+  {id:'ad2', name:'Carousel – 5 chyb lídra', w:.26, eff:.9},
+  {id:'ad3', name:'Obrázek – pozvánka na workshop', w:.22, eff:1.05},
+  {id:'ad4', name:'Reels – 30s tip', w:.18, eff:.75}
+];
+const DEBTS = {outstanding:184300, overdue:61900, overdueCount:7, openCount:19};
+const FM = ['Jan','Petr','Tomáš','Martin','Jakub','Lukáš','Ondřej','David','Michal','Filip','Adam','Marek','Pavel','Radek','Vojtěch','Daniel','Roman','Jiří'];
+const FF = ['Jana','Petra','Lucie','Kateřina','Tereza','Eva','Markéta','Veronika','Barbora','Klára','Alena','Zuzana','Monika','Lenka','Simona','Hana','Michaela'];
+const SM = ['Novák','Svoboda','Dvořák','Černý','Procházka','Kučera','Veselý','Horák','Němec','Marek','Pospíšil','Hájek','Král','Jelínek','Růžička','Beneš','Fiala','Sedláček','Doležal','Zeman','Kolář','Navrátil'];
+const SF = ['Nováková','Svobodová','Dvořáková','Černá','Procházková','Kučerová','Veselá','Horáková','Němcová','Marková','Pospíšilová','Hájková','Králová','Jelínková','Růžičková','Benešová','Fialová','Sedláčková','Doležalová','Zemanová','Kolářová','Navrátilová'];
+const DOMS = ['gmail.com','seznam.cz','email.cz','centrum.cz','firma.cz','studio.cz'];
+const plain = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+let nameN = 0;
+function person(){
+  const i = ri(0, SM.length - 1);
+  const name = rnd() < .5 ? `${pick(FM)} ${SM[i]}` : `${pick(FF)} ${SF[i]}`;
+  const [f, l] = name.split(' ');
+  return {name, email: `${plain(f)}.${plain(l)}${++nameN % 7 === 0 ? nameN % 90 : ''}@${pick(DOMS)}`, phone: `+420 ${ri(601,799)} ${ri(100,999)} ${ri(100,999)}`};
+}
+
+const LEADS = [], BOOK = [], CUST = [], PAY = [], SUBS = [];
+const SPEND = new Float64Array(730);
+const LEAD_BY = {};
+let pid = 0;
+
+function newCustomer(p, lead){
+  const c = {id:'c' + (CUST.length + 1), name:p.name, email:p.email, phone:p.phone, lead:lead || null, isTest:!!(lead && lead.isTest), pays:[], subs:[]};
+  CUST.push(c); if (lead) lead.customer = c; return c;
+}
+function addPay(c, prod, day, amount, o = {}){
+  if (day > T) return null;
+  const p = {id:'py' + (++pid), cust:c, prod, day, amount, refund:false, source:o.source || 'stripe'};
+  c.pays.push(p); PAY.push(p); return p;
+}
+function buyBackend(c, day){
+  if (day > T) return;
+  const src = rnd() < .15 ? 'manual' : 'stripe';
+  if (rnd() < .6) addPay(c, 'p2', day, 39000, {source:src});
+  else for (let i = 0; i < 3; i++) addPay(c, 'p2', day + i * 30, 13000, {source:src});
+  for (const s of c.subs) if (s.end == null && s.start <= day && s.firstPaid){ s.end = day; s.endReason = 'upgrade na Backend' }
+}
+function startSub(c, day, trialOnly){
+  if (day > T) return;
+  const s = {id:'sub' + (SUBS.length + 1), cust:c, prod:'p3', start:day, cycle:30, price:990, trial:trialOnly, firstPaid:!trialOnly, end:null, endReason:null, paused:false, pausedSince:null, overdueSince:null};
+  if (trialOnly){ s.end = day + 14; s.endReason = 'zkušební doba bez platby'; if (s.end > T) s.end = null }
+  else {
+    let m = 1; while (rnd() > .085 && m < 40) m++;
+    const end = day + m * 30;
+    if (end <= T){ s.end = end; const r = rnd(); s.endReason = r < .55 ? 'klient zrušil' : r < .8 ? 'neprošla karta' : 'neznámé' }
+    else { const r = rnd(); if (r < .04){ s.paused = true; s.pausedSince = T - ri(3, 40) } else if (r < .09) s.overdueSince = T - ri(1, 12) }
+  }
+  c.subs.push(s); SUBS.push(s);
+}
+function afterFrontend(c, day){
+  const r = rnd();
+  if (r < .13) buyBackend(c, day + ri(8, 70));
+  else if (r < .36) startSub(c, day + ri(0, 30), false);
+  else if (r < .45) startSub(c, day + ri(0, 20), true);
+}
+function buyFrontend(c, day){ if (day > T) return false; addPay(c, 'p1', day, 1490); afterFrontend(c, day); return true }
+
+function mkBooking(L, bd, ch){
+  if (bd > T) return null;
+  const B = {id:'b' + (BOOK.length + 1), lead:L, booked:bd, sched:bd + ri(1, 6), channel:ch, cancel:null, outcome:null};
+  if (rnd() < .11){ const cd = bd + ri(0, Math.max(0, B.sched - bd - 1)); if (cd <= T) B.cancel = cd }
+  if (B.cancel == null && B.sched < T){
+    if (B.sched >= T - 7 && rnd() < .3) B.outcome = null;     // zapomenutý výsledek
+    else B.outcome = rnd() < .68 ? 'attended' : 'no_show';
+  }
+  L.bookings.push(B); BOOK.push(B); return B;
+}
+function makeLead(d){
+  const p = person();
+  let r = rnd(), acc = 0, ad = ADS[0];
+  const tot = ADS.reduce((s, a) => s + a.w * a.eff, 0);
+  for (const a of ADS){ acc += a.w * a.eff / tot; if (r <= acc){ ad = a; break } }
+  const L = {id:'L' + (LEADS.length + 1), day:d, ...p, ad:d >= AD_START ? ad.id : null, qualified:rnd() < .72, dqSetter:false, isTest:rnd() < .008, bookings:[], customer:null};
+  if (L.isTest){ L.name = 'TEST ' + L.name; L.email = 'test+' + L.email }
+  LEADS.push(L); LEAD_BY[L.id] = L;
+  if (!L.qualified){ if (rnd() < .02){ const c = newCustomer(L, L); if (!buyFrontend(c, d + ri(0, 3))) { CUST.pop(); L.customer = null } } return }
+  const x = rnd();
+  let B = null;
+  if (x < .34) B = mkBooking(L, d + ri(0, 2), 'direct');
+  else if (x < .52) B = mkBooking(L, d + ri(1, 4), 'setter');
+  else if (x < .56){ const c = newCustomer(L, L); if (!buyFrontend(c, d + ri(0, 5))){ CUST.pop(); L.customer = null } return }
+  if (!B) return;
+  if (rnd() < .07) L.dqSetter = true;
+  if (B.outcome === 'attended'){
+    if (rnd() < (L.dqSetter ? .03 : .28)){
+      const pd = B.sched + (rnd() < .75 ? 0 : ri(1, 14));
+      if (pd <= T){
+        const c = newCustomer(L, L);
+        const y = rnd();
+        if (y < .8) buyBackend(c, pd); else if (y < .92) startSub(c, pd, false); else buyFrontend(c, pd);
+      }
+    }
+  } else if (B.outcome === 'no_show' && rnd() < .02){
+    const pd = B.sched + ri(2, 20); if (pd <= T){ const c = newCustomer(L, L); buyFrontend(c, pd) }
+  }
+}
+
+(function generate(){
+  for (let d = T0; d <= T; d++){
+    const i = d - T0, grow = (1 + .45 * (i / 730)) * (i > 670 ? 1 + (i - 670) / 60 * .3 : 1);
+    let sp = 0;
+    if (d >= AD_START){
+      sp = 3000 * grow * (1 + .07 * Math.sin(i / 17)) * (.75 + rnd() * .5);
+      if (d === T) sp *= Math.min(1, Math.max(.15, (NOW.getHours() + NOW.getMinutes() / 60) / 24));
+    }
+    SPEND[i] = Math.round(sp);
+    const n = d >= AD_START ? Math.round(sp / 340 * (.7 + rnd() * .6)) : ri(0, 2);
+    for (let k = 0; k < n; k++) makeLead(d);
+    if (rnd() < (d >= AD_START ? .5 : .3)){ const c = newCustomer(person()); buyFrontend(c, d) }
+    if (rnd() < .035 && CUST.length > 5){ const c = CUST[ri(0, CUST.length - 1)]; if (c.pays.length) addPay(c, 'p4', d, 3500, {source: rnd() < .5 ? 'manual' : 'stripe'}) }
+  }
+  // platby předplatného
+  for (const s of SUBS){
+    if (!s.firstPaid) continue;
+    const stop = s.end != null ? s.end - 1 : s.overdueSince != null ? s.overdueSince - 1 : s.paused ? s.pausedSince - 1 : T;
+    for (let d = s.start; d <= Math.min(stop, T); d += s.cycle) addPay(s.cust, 'p3', d, s.price);
+    if (!s.cust.pays.some(p => p.prod === 'p3')) s.firstPaid = false;
+  }
+  // refundace
+  for (const p of PAY.slice()){
+    if ((p.prod === 'p1' && rnd() < .03) || (p.prod === 'p2' && rnd() < .01)){
+      const day = p.day + ri(1, 10);
+      if (day <= T){ const r = {id:'py' + (++pid), cust:p.cust, prod:p.prod, day, amount:p.amount, refund:true, source:p.source}; p.cust.pays.push(r); PAY.push(r) }
+    }
+  }
+  // platby bez produktu (k přiřazení)
+  for (let k = 0; k < 3; k++){ const c = newCustomer(person()); addPay(c, null, T - ri(1, 18), 2500) }
+  // jedna položka mimo analytiku
+  addPay(CUST[3], 'p5', T - 9, 5000, {source:'manual'});
+})();
+
+/* ---------- odvozené hodnoty (přepočítá se po každé ruční změně) ---------- */
+const basketOf = p => p.prod ? PROD_BY[p.prod].basket : null;
+const isExcl = p => basketOf(p) === 'excluded';
+const exVat = a => a / (1 + state.vat);
+function cogs(p){ if (p.refund || !p.prod) return 0; const pr = PROD_BY[p.prod]; return pr.price ? pr.cogs * Math.min(1, p.amount / pr.price) : 0 }
+const fee = p => p.source === 'stripe' && !p.refund ? p.amount * .014 + 6.5 : 0;
+function derive(){
+  for (const c of CUST){
+    c.pays.sort((x, y) => x.day - y.day);
+    const pos = c.pays.filter(p => !p.refund && !isExcl(p));
+    c.first = c.pre ? null : pos[0] || null; c.firstDay = c.pre ? T0 - 1 : c.first ? c.first.day : null;
+    c.firstGp = c.first ? exVat(c.first.amount) - cogs(c.first) - fee(c.first) : 0;
+    c.net = 0; c.gp30 = 0; c.gpAll = 0;
+    for (const p of c.pays){
+      if (isExcl(p)) continue;
+      const g = p.refund ? -exVat(p.amount) : exVat(p.amount) - cogs(p) - fee(p);
+      c.net += p.refund ? -p.amount : p.amount; c.gpAll += g;
+      if (c.firstDay != null && p.day >= c.firstDay && p.day <= c.firstDay + 30) c.gp30 += g;
+    }
+    const has = b => pos.some(p => basketOf(p) === b);
+    c.type = has('backend') ? 'backend' : has('subscription') ? 'subscription' : has('frontend') ? 'frontend' : 'other';
+    const ff = pos.find(p => basketOf(p) === 'frontend'); c.firstFront = ff ? ff.day : null;
+  }
+  CACHE.clear();
+}
+const CACHE = new Map();
+derive();
+
+/* =====================================================================
+   VÝPOČET METRIK ZA OBDOBÍ [a, b]  (podle 03_METRIKY.md)
+   ===================================================================== */
+function payingSet(x){
+  const s = new Set();
+  for (const u of SUBS) if (u.firstPaid && !u.cust.isTest && u.start < x && (u.end == null || u.end >= x)) s.add(u.cust);
+  return s;
+}
+function mrrAt(x){
+  let mrr = 0, cnt = 0, over = 0, paused = 0;
+  for (const s of SUBS){
+    if (s.cust.isTest || !s.firstPaid || s.start > x || (s.end != null && s.end <= x)) continue;
+    const v = s.price * 30 / s.cycle;
+    if (s.paused && x >= s.pausedSince){ paused += v; continue }
+    if (s.overdueSince != null && x >= s.overdueSince){ if (x - s.overdueSince > 30) continue; over += v }
+    mrr += v; cnt++;
+  }
+  return {mrr, subCount:cnt, mrrOver:over, mrrPaused:paused, avgSub: cnt ? mrr / cnt : null};
+}
+function compute(a, b){
+  const key = a + ':' + b;
+  if (CACHE.has(key)) return CACHE.get(key);
+  const r = {a, b};
+  let rev = 0, refunds = 0, gpPre = 0, fees = 0, pos = 0, noProd = 0;
+  for (const p of PAY){
+    if (p.day < a || p.day > b || p.cust.isTest || isExcl(p)) continue;
+    if (p.refund){ refunds += p.amount; gpPre -= exVat(p.amount) }
+    else { rev += p.amount; pos++; gpPre += exVat(p.amount) - cogs(p); fees += fee(p); if (!p.prod) noProd++ }
+  }
+  Object.assign(r, {rev, refunds, net:rev - refunds, gpPre, fees, gp:gpPre - fees, aov:pos ? rev / pos : null, payCount:pos, noProd});
+  let spend = 0; for (let d = Math.max(a, T0); d <= Math.min(b, T); d++) spend += SPEND[d - T0];
+  r.spend = spend;
+
+  let nc = 0, ncAd = 0, firstRev = 0, firstGp = 0, gp30 = 0, pend = 0;
+  for (const c of CUST){
+    if (c.isTest || c.firstDay == null || c.firstDay < a || c.firstDay > b) continue;
+    nc++; if (c.firstDay >= AD_START) ncAd++;
+    firstRev += c.first.amount; firstGp += c.firstGp; gp30 += c.gp30; if (c.firstDay + 30 > T) pend++;
+  }
+  Object.assign(r, {newCust:nc, firstRev, firstGp, coverage: spend ? firstGp / spend : null, cac: ncAd ? spend / ncAd : null,
+    gp30, ltgp30: nc ? gp30 / nc : null, roi30: spend ? (gp30 - spend) / spend : null, pend30:pend});
+  r.ratio = r.cac && r.ltgp30 ? r.ltgp30 / r.cac : null;
+
+  let lt = 0, lq = 0, ldq = 0, lbk = 0, lsdq = 0;
+  for (const L of LEADS){
+    if (L.isTest || L.day < a || L.day > b) continue;
+    lt++; if (!L.qualified) ldq++; else if (L.dqSetter) lsdq++; else lq++;
+    if (L.bookings.length) lbk++;
+  }
+  Object.assign(r, {leads:lt, qLeads:lq, dqForm:ldq, dqSetter:lsdq, leadsBooked:lbk, cpl: lq ? spend / lq : null, bookingRate: lt ? lbk / lt : null});
+
+  let bk = 0, bd = 0, bs = 0, cn = 0, att = 0, ns = 0, miss = 0;
+  const attLeads = new Set();
+  for (const B of BOOK){
+    if (B.lead.isTest) continue;
+    if (B.booked >= a && B.booked <= b){ bk++; B.channel === 'direct' ? bd++ : bs++ }
+    if (B.cancel != null && B.cancel >= a && B.cancel <= b) cn++;
+    if (B.cancel == null && B.sched >= a && B.sched <= b && B.sched < T){
+      if (B.outcome === 'attended'){ att++; attLeads.add(B.lead) } else if (B.outcome === 'no_show') ns++; else miss++;
+    }
+  }
+  Object.assign(r, {bookings:bk, bDirect:bd, bSetter:bs, cancelled:cn, cancelPct: bk ? cn / bk : null, att, ns, miss, showUp: att + ns ? att / (att + ns) : null});
+  let den = 0, nm = 0;
+  for (const L of attLeads){ const paid = !!(L.customer && L.customer.firstDay != null); if (L.dqSetter && !paid) continue; den++; if (paid) nm++ }
+  Object.assign(r, {closeDen:den, closeNum:nm, close: den ? nm / den : null});
+  let w = 0, wc = 0;
+  for (const c of CUST){
+    if (!(c.lead || c.win) || c.isTest || c.firstDay == null || c.firstDay < a || c.firstDay > b) continue;
+    w++; if (c.lead && c.lead.bookings.some(B => B.outcome === 'attended' && B.sched <= c.firstDay + 1)) wc++;
+  }
+  Object.assign(r, {wins:w, winsCall:wc, winsNoCall:w - wc, cpb: bk ? spend / bk : null, cpbDirect: bd ? spend / bd : null, cpbSetter: bs ? spend / bs : null});
+
+  Object.assign(r, mrrAt(Math.min(b, T)));
+  const A = payingSet(a), Bs = payingSet(Math.min(b, T) + 1);
+  let ch = 0, up = 0; const reasons = {};
+  for (const c of A){
+    if (Bs.has(c)) continue;
+    const s = c.subs.filter(u => u.end != null).sort((x, y) => y.end - x.end)[0];
+    const why = s ? s.endReason : 'neznámé';
+    if (why === 'upgrade na Backend'){ up++; continue }
+    ch++; reasons[why] = (reasons[why] || 0) + 1;
+  }
+  Object.assign(r, {churn:ch, churnBase:A.size, churnRate: A.size ? ch / A.size : null, upgrades:up, churnReasons:reasons});
+
+  const cont = {backend:0, sub:0, trial:0, none:0}; let ctot = 0, cyoung = 0;
+  for (const c of CUST){
+    if (c.isTest || c.firstFront == null || c.firstFront < a || c.firstFront > b) continue;
+    ctot++; if (c.firstFront > T - 45){ cyoung++; continue }
+    if (c.pays.some(p => !p.refund && basketOf(p) === 'backend' && p.day >= c.firstFront)) cont.backend++;
+    else if (c.subs.some(s => s.firstPaid && s.start >= c.firstFront)) cont.sub++;
+    else if (c.subs.some(s => s.trial)) cont.trial++;
+    else cont.none++;
+  }
+  Object.assign(r, {cont, contTotal:ctot, contYoung:cyoung, contMature:ctot - cyoung});
+  CACHE.set(key, r);
+  return r;
+}
+function lifetime(){
+  let tot = 0, n = 0; const t = {backend:[0,0], subscription:[0,0], frontend:[0,0], other:[0,0]};
+  for (const c of CUST){ if (c.isTest || c.firstDay == null) continue; n++; tot += c.net; t[c.type][0] += c.net; t[c.type][1]++ }
+  return {ltvTotal:tot, ltvAvg: n ? tot / n : null, ltvN:n, ltvTypes:t};
+}
+
+/* =====================================================================
+   DEFINICE KARET
+   ===================================================================== */
+const M = {
+  obrat:{t:'Obrat', fmt:'money', good:'up', v:r => r.rev, note:r => `Čistý obrat ${money(r.net)} · refundace ${money(r.refunds)}`,
+    tip:'Součet všech kladných plateb v období (den platby). Zálohy se počítají v den zaplacení, nezaplacená faktura ne.', f:'Obrat = Σ kladné platby · Čistý obrat = Obrat − Refundace', rows:'payments'},
+  hz:{t:'Hrubý zisk', fmt:'money', good:'up', v:r => r.gp, note:r => `Před poplatky Stripe ${money(r.gpPre)}`, warn:() => PRODUCTS.some(p => p.est && p.basket !== 'excluded') ? 'COGS je odhad' : null,
+    tip:'Částka bez DPH minus náklad na dodání (COGS), refundace jako mínus, minus poplatky platební brány.', f:'HZ = Σ (částka bez DPH − COGS) − refundace − poplatky Stripe', rows:'payments'},
+  reklama:{t:'Náklady na reklamu', fmt:'money', good:'neutral', v:r => r.spend, note:r => `Meta Ads · dnešek se doplňuje každou hodinu`,
+    tip:'Součet denních nákladů ze všech reklamních účtů, přepočteno na základní měnu kurzem daného dne.', f:'Σ denní spend (Meta + ostatní kanály)', rows:'spend'},
+  rezervace:{t:'Rezervované hovory', fmt:'num', good:'up', v:r => r.bookings, note:r => `Samostatně ${num(r.bDirect)} · setter ${num(r.bSetter)}`,
+    tip:'Počet unikátních rezervací podle dne vytvoření (ne dne hovoru). Přeplánování není nová rezervace, interní hovory se nepočítají.', f:'Počet rezervací vytvořených v období', rows:'bookings'},
+  showup:{t:'Show-up rate', fmt:'pct', good:'up', v:r => r.showUp, note:r => `Dorazili ${num(r.att)} · nedorazili ${num(r.ns)}`, warn:r => r.miss ? `${r.miss} ${pl(r.miss,'hovor','hovory','hovorů')} bez výsledku` : null,
+    tip:'Podle dne hovoru. Hovory bez výsledku se do míry nepočítají – zobrazí se oranžově.', f:'Show-up = dorazili ÷ (dorazili + nedorazili)', rows:'calls'},
+  close:{t:'Close rate', fmt:'pct', good:'up', v:r => r.close, note:r => `${num(r.closeNum)} z ${num(r.closeDen)} se stali klienty`,
+    tip:'Leady, jejichž hovor v období skončil „Dorazil“, a kolik z nich kdykoli zaplatilo. Diskvalifikovaní, kteří nezaplatili, se nepočítají.', f:'Close = zaplatili ÷ leady s výsledkem „dorazil“', rows:'close'},
+  vyhry:{t:'Výhry', fmt:'num', good:'up', v:r => r.wins, note:r => `Po hovoru ${num(r.winsCall)} · bez hovoru ${num(r.winsNoCall)}`,
+    tip:'První kladná platba nového zákazníka, který přišel jako lead (spárováno podle e-mailu). Den = den první platby.', f:'Počet nových zákazníků z leadů s 1. platbou v období', rows:'wins'},
+  cpb:{t:'Cena za booking', fmt:'money', good:'down', v:r => r.cpb, note:r => `Samostatně ${money(r.cpbDirect)}`,
+    tip:'Náklady na reklamu vydělené všemi rezervacemi (samostatně i od settera).', f:'Cena za booking = reklama ÷ rezervace', rows:'bookings'},
+  cac:{t:'CAC', fmt:'money', good:'down', v:r => r.cac, note:r => `${num(r.newCust)} nových platících klientů`,
+    tip:'Kolik stojí získat jednoho nového platícího klienta. Počítají se klienti, kteří poprvé zaplatili v době, kdy už běžela reklama.', f:'CAC = reklama ÷ noví platící klienti', rows:'cohort'},
+  ltgp30:{t:'LTGP 30', fmt:'money', good:'up', v:r => r.ltgp30, note:r => `GP 30 celkem ${money(r.gp30)}`, warn:r => r.pend30 ? `${r.pend30} z ${r.newCust} ještě nemá 30 dní` : null,
+    tip:'Průměrný hrubý zisk na nového klienta za prvních 30 dní od jeho první platby (po poplatcích Stripe).', f:'LTGP 30 = GP 30 ÷ noví klienti', rows:'cohort'},
+  roi30:{t:'ROI 30', fmt:'pct', good:'up', v:r => r.roi30, note:r => `GP 30 ${money(r.gp30)} vs. reklama ${money(r.spend)}`, warn:r => r.pend30 ? 'neúplné – kohorta dozrává' : null,
+    tip:'Návratnost reklamy z hrubého zisku nových klientů za 30 dní.', f:'ROI 30 = (GP 30 − reklama) ÷ reklama', rows:'cohort'},
+  mrr:{t:'MRR', fmt:'money', good:'up', state:true, v:r => r.mrr, note:r => `${num(r.subCount)} předplatných · po splatnosti ${money(r.mrrOver)} · pozastaveno ${money(r.mrrPaused)}`,
+    tip:'Měsíční opakovaný příjem k poslednímu dni období. Stav k datu, proto bez srovnání. Jednorázový program zaplacený předem není MRR.', f:'MRR = Σ cena × 30 ÷ délka cyklu (aktivní předplatná)', rows:'subs'},
+  churn:{t:'Churn', fmt:'pct', good:'down', v:r => r.churnRate, note:r => `Odešlo ${num(r.churn)} z ${num(r.churnBase)} · upgrady ${num(r.upgrades)}`,
+    tip:'Klienti platící na začátku období, kteří na konci neplatí. Přechod z Předplatného na Backend je upgrade, ne churn.', f:'Churn = odešlí ÷ platící na začátku období', rows:'churn'},
+  cpl:{t:'Cena za kvalif. lead', fmt:'money', good:'down', v:r => r.cpl, note:r => `${num(r.qLeads)} kvalifikovaných z ${num(r.leads)} dotazníků`,
+    tip:'Kvalifikovaný lead prošel dotazníkem a nevyřadil ho setter ani není testovací.', f:'Cena za KL = reklama ÷ kvalifikované leady', rows:'leads'},
+  zrusene:{t:'Zrušené předem', fmt:'num', good:'down', v:r => r.cancelled, note:r => `${pct(r.cancelPct)} z rezervovaných`,
+    tip:'Rezervace zrušené před hovorem, podle dne zrušení. Do show-up ani close rate se nepočítají.', f:'Počet zrušení v období', rows:'cancels'},
+  prvni:{t:'První prodej nových klientů', fmt:'money', good:'up', v:r => r.firstRev, note:r => `HZ prvního prodeje ${money(r.firstGp)} · pokrytí reklamy ${pct(r.coverage)}`,
+    tip:'Součet prvních plateb klientů, jejichž úplně první platba padla do období.', f:'Pokrytí reklamy = HZ 1. prodeje ÷ reklama', rows:'cohort'},
+  novi:{t:'Noví platící klienti', fmt:'num', good:'up', v:r => r.newCust, note:r => `Z toho výhry z leadů ${num(r.wins)}`,
+    tip:'Zákazníci, jejichž úplně první kladná platba padla do období.', f:'Počet klientů s 1. platbou v období', rows:'cohort'},
+  cacltgp:{t:'CAC : LTGP 30', fmt:'ratio', good:'up', v:r => r.ratio, note:r => `CAC ${money(r.cac)} · LTGP 30 ${money(r.ltgp30)}`,
+    tip:'Kolikrát se vrátí to, co stojí získat klienta, v hrubém zisku za 30 dní.', f:'x = LTGP 30 ÷ CAC → zobrazeno jako 1 : x', rows:'cohort'},
+  aov:{t:'Průměrná objednávka', fmt:'money', good:'up', v:r => r.aov, note:r => `${num(r.payCount)} plateb v období`,
+    tip:'Obrat vydělený počtem kladných plateb. Počítají se i splátky a měsíční platby, refundace ne.', f:'AOV = obrat ÷ počet kladných plateb', rows:'payments'},
+  ltv:{t:'LTV klienta (průměr)', fmt:'money', good:'up', life:true, v:L => L.ltvAvg, note:L => `${num(L.ltvN)} klientů za celou historii`,
+    tip:'Celkový čistý obrat za celou historii ÷ počet zákazníků, kteří kdy zaplatili. Nezávisí na zvoleném období.', f:'LTV = Σ čistý obrat ÷ platící zákazníci', rows:'ltv'},
+  ltvcelk:{t:'Celkové LTV', fmt:'money', good:'up', life:true, v:L => L.ltvTotal, note:() => 'Kolik nám klienti doteď přinesli',
+    tip:'Součet čistého obratu všech zákazníků za celou historii.', f:'Σ čistý obrat všech zákazníků', rows:'ltv'},
+  avgsub:{t:'Průměrné předplatné', fmt:'money', good:'up', state:true, v:r => r.avgSub, note:r => `${num(r.subCount)} aktivních předplatných`,
+    tip:'MRR vydělené počtem předplatných započítaných do MRR.', f:'MRR ÷ počet předplatných', rows:'subs'},
+  pohledavky:{t:'Nezaplaceno', fmt:'money', good:'down', state:true, v:() => DEBTS.outstanding, note:() => `Po splatnosti ${money(DEBTS.overdue)} · ${DEBTS.overdueCount} faktur`, warn:() => `${DEBTS.openCount} otevřených faktur`,
+    tip:'Vystavené a nezaplacené faktury (stav k dnešku). Navíc nad rámec definic – hodí se, když klienti platí převodem na fakturu.', f:'Σ nezaplacené částky otevřených faktur', rows:'debts'},
+  /* speciální karty */
+  funnel:{t:'Prodejní trychtýř', special:true, size:'f', tip:'Kvalifikované leady → rezervovali → rezervované hovory → zrušené → dorazili → výhry. Klikni na krok pro záznamy.', f:'Kohorta leadů + rezervace v období'},
+  setter:{t:'Samostatně vs. setter', special:true, size:'w', tip:'Cena za booking jen ze samostatných rezervací vs. se setterem. Zeleně: o kolik setter cenu za booking snížil.', f:'Samostatně = reklama ÷ rezervace samostatně · Huntnutý = reklama ÷ rezervace settera'},
+  grafRez:{t:'Rezervace po dnech', special:true, size:'f', tip:'Nové rezervace podle dne vytvoření, rozdělené na samostatné a od settera. U delších období po týdnech/měsících.', f:'Počet rezervací za den'},
+  reklamy:{t:'Tabulka reklam', special:true, size:'f', tip:'Lead se přiřadí reklamě podle UTM parametrů z URL (utm_content = ID reklamy).', f:'utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}'},
+  ltvTyp:{t:'LTV podle typu klienta', special:true, size:'w', tip:'Klient patří do první skupiny, která platí: Backend → Předplatné → Frontend. Průměrný celkový čistý obrat.', f:'Průměr Σ čistý obrat ve skupině'},
+  pokrac:{t:'Pokračování z 1. produktu do 2.', special:true, size:'w', tip:'Kohorta: klienti s první platbou za Frontend v období. Procenta jen z těch, kdo zaplatili aspoň před 45 dny.', f:'Backend → jen Předplatné → jen zkušební doba → nic'},
+  grafObrat:{t:'Obrat vs. náklady na reklamu', special:true, size:'f', tip:'Obrat a náklady na reklamu po dnech (u delších období po týdnech/měsících).', f:'Σ platby · Σ spend'},
+  stav:{t:'Stav dat', special:true, size:'w', tip:'Čas posledního úspešného běhu každého zdroje. Starší než 24 h svítí oranžově.', f:'sync_runs → poslední úspěšný běh'}
+};
+const pl = (n, a, b, c) => n === 1 ? a : n >= 2 && n <= 4 ? b : c;
+
+const DEFAULT_LAYOUT = {
+  tabOrder:['prehled','prodej','penize'],
+  tabs:{prehled:'Přehled', prodej:'Prodej', penize:'Peníze a klienti'},
+  order:{
+    prehled:['obrat','hz','reklama','rezervace','showup','close','vyhry','cpb','cac','ltgp30','roi30','mrr','churn',].map(k => 'prehled:' + k),
+    prodej:['funnel','cpl','rezervace','zrusene','showup','close','vyhry','setter','grafRez','reklamy'].map(k => 'prodej:' + k),
+    penize:['obrat','hz','prvni','novi','cac','ltgp30','roi30','cacltgp','aov','ltv','ltvcelk','mrr','avgsub','churn','pohledavky','ltvTyp','pokrac','grafObrat','stav'].map(k => 'penize:' + k)
+  },
+  hidden:['penize:pohledavky'], sizes:{}, custom:[]
+};
+let layout = store.get('puls.layout.sablona1', null) || JSON.parse(JSON.stringify(DEFAULT_LAYOUT));
+const saveLayout = () => store.set('puls.layout.sablona1', layout);
+const keyOf = id => id.split(':')[1];
+const sizeOf = id => layout.sizes[id] || M[keyOf(id)].size || 's';
+
+const SOURCES = [
+  {id:'stripe', n:'Stripe', c:'#635bff', what:'Platby, faktury, předplatné, poplatky', acc:'Restricted key · jen čtení', freq:'každou hodinu', t:'před 12 min'},
+  {id:'meta', n:'Meta Ads', c:'#0866ff', what:'Denní náklady na reklamu, reklamy', acc:'ads_read · systémový uživatel', freq:'každou hodinu + ráno 4 dny zpět', t:'před 34 min'},
+  {id:'calendly', n:'Calendly', c:'#006bff', what:'Samostatné rezervace a zrušení', acc:'Webhook ověřený podpisem', freq:'okamžitě', t:'před 3 min'},
+  {id:'gcal', n:'Google Kalendář (setter)', c:'#34a853', what:'Rezervace vytvořené setterem', acc:'calendar.readonly', freq:'každých 15 min', t:'před 1 d 2 h', warn:true},
+  {id:'forms', n:'Formuláře z landing page', c:'#1d1d1f', what:'Leady a dotazníky', acc:'Webhook s tajným tokenem', freq:'okamžitě', t:'před 41 min'},
+  {id:'fx', n:'Kurzy měn (ECB)', c:'#8e8e93', what:'Kurz ke dni platby', acc:'veřejné API', freq:'denně', t:'před 9 h'},
+  {id:'manual', n:'Ruční záznamy (mini CRM)', c:'#ff9f0a', what:'Výsledky hovorů, platby mimo Stripe', acc:'přihlášený tým', freq:'průběžně', t:'před 5 min'}
+];
+
+/* =====================================================================
+   OBDOBÍ
+   ===================================================================== */
+const PRESETS = [
+  ['dnes','Dnes'],['vcera','Včera'],['7d','7 dní'],['30d','30 dní'],['mesic','Měsíc'],['3m','3 měsíce'],['rok','Rok'],['celkem','Celkově']
+];
+function presetRange(k){
+  const t = dd(T), y = t.getUTCFullYear(), m = t.getUTCMonth();
+  const f = (yy, mm) => Math.floor(Date.UTC(yy, mm, 1) / DAY);
+  switch (k){
+    case 'dnes': return [T, T];
+    case 'vcera': return [T - 1, T - 1];
+    case '7d': return [T - 6, T];
+    case '30d': return [T - 29, T];
+    case 'mesic': return [f(y, m), T];
+    case '3m': return [f(y, m - 2), T];
+    case 'rok': return [f(y, 0), T];
+    case 'celkem': return [T0, T];
+  }
+}
+function setPeriod(a, b, preset){
+  a = Math.max(T0, a); b = Math.min(T, b);
+  Object.assign(state, {a, b, preset: preset || null});
+  store.set('puls.period', {a: ymd(a), b: ymd(b), preset: state.preset});
+  try { const u = new URL(location.href); u.searchParams.set('od', ymd(a)); u.searchParams.set('do', ymd(b)); history.replaceState(null, '', u) } catch(e){}
+  renderAnalytics(true);
+}
+(function initPeriod(){
+  let a = null, b = null, p = null;
+  try { const q = new URLSearchParams(location.search); a = parseYmd(q.get('od')); b = parseYmd(q.get('do')) } catch(e){}
+  if (a == null || b == null){ const s = store.get('puls.period', null); if (s){ a = parseYmd(s.a); b = parseYmd(s.b); p = s.preset } }
+  if (p && presetRange(p)) [a, b] = presetRange(p);
+  if (a != null && b != null && a <= b && b <= T){ state.a = a; state.b = b; state.preset = p }
+})();
+const prevRange = () => { const len = state.b - state.a + 1; return [state.a - len, state.a - 1] };
+
+/* =====================================================================
+   RENDER – ANALYTIKA
+   ===================================================================== */
+function renderTabs(){
+  const el = $('#tabs');
+  el.innerHTML = layout.tabOrder.map(id => `<button data-tab="${id}" class="${id === state.tab ? 'on' : ''}">${esc(layout.tabs[id])}</button>`).join('');
+}
+function renderPresets(){
+  $('#presets').innerHTML = PRESETS.map(([k, l]) => `<button data-p="${k}" class="${state.preset === k ? 'on' : ''}">${l}</button>`).join('');
+  const [pa, pb] = prevRange();
+  $('#pillR').textContent = fRange(state.a, state.b);
+  $('#pillC').textContent = `oproti ${fRange(pa, pb)}`;
+  $('#nextP').disabled = state.b >= T;
+}
+function deltaOf(def, cur, prev){
+  if (def.state || def.life) return {txt:'stav k datu', cls:'neu', noArrow:true};
+  if (cur == null || prev == null) return {txt:'—', cls:'neu'};
+  let d, txt;
+  if (def.fmt === 'pct'){ d = (cur - prev) * 100; txt = `${d >= 0 ? '▲' : '▼'} ${nf1.format(Math.abs(d))} p. b.` }
+  else if (def.fmt === 'ratio'){ d = cur - prev; txt = `${d >= 0 ? '▲' : '▼'} ${nf1.format(Math.abs(d))}` }
+  else {
+    if (prev === 0) return cur === 0 ? {txt:'beze změny', cls:'neu'} : {txt:'nové', cls:'neu'};
+    d = (cur - prev) / Math.abs(prev); txt = `${d >= 0 ? '▲' : '▼'} ${nfP.format(Math.abs(d))}`;
+  }
+  if (Math.abs(d) < 1e-9) return {txt:'beze změny', cls:'neu'};
+  const cls = def.good === 'neutral' ? 'neu' : (d > 0) === (def.good === 'up') ? 'good' : 'bad';
+  return {txt, cls};
+}
+function buckets(a, b){
+  let len = b - a + 1;
+  if (len < 14){ a = Math.max(T0, b - 13); len = b - a + 1 }
+  const n = Math.min(len, 20), size = len / n, out = [];
+  for (let i = 0; i < n; i++) out.push([a + Math.floor(i * size), a + Math.floor((i + 1) * size) - 1]);
+  return out;
+}
+function sparkSvg(vals, gid){
+  const v = vals.map(x => x == null || isNaN(x) ? null : x);
+  const nn = v.filter(x => x != null);
+  if (nn.length < 2) return '';
+  let last = nn[0]; const s = v.map(x => x == null ? last : (last = x));
+  const min = Math.min(...s), max = Math.max(...s), W = 200, H = 40, rng = max - min || 1;
+  const pts = s.map((x, i) => [i / (s.length - 1) * W, H - 3 - (x - min) / rng * (H - 8)]);
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0071e3" stop-opacity=".18"/><stop offset="1" stop-color="#0071e3" stop-opacity="0"/></linearGradient></defs><path d="${line} L${W} ${H} L0 ${H} Z" fill="url(#${gid})"/><path d="${line}" fill="none" stroke="#0071e3" stroke-width="1.75" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+function tipAttr(def){ return `data-tip="${esc(def.t)}" data-tipbody="${esc(def.tip)}" data-tipf="${esc(def.f || '')}"` }
+function editTools(id){
+  if (!state.edit) return '';
+  const k = keyOf(id), cur = sizeOf(id);
+  const opts = layout.tabOrder.map(t => `<option value="${t}" ${t === state.tab ? 'selected' : ''}>${esc(layout.tabs[t])}</option>`).join('');
+  return `<div class="tools"><button data-act="size" title="Velikost">${cur === 's' ? 'Malá' : cur === 'w' ? 'Široká' : 'Celá šířka'}</button><select data-act="move" title="Přesunout na záložku">${opts}</select><button data-act="hide" title="Skrýt">Skrýt</button></div>`;
+}
+
+let gidN = 0;
+function cardHtml(id, r, rp, L, bk){
+  const k = keyOf(id), def = M[k], sz = sizeOf(id);
+  const head = `<div class="card-h"><span class="ct" ${tipAttr(def)}>${esc(def.t)}</span>${editTools(id)}</div>`;
+  if (def.special) return `<div class="card ${sz}" data-id="${id}" ${state.edit ? 'draggable="true"' : ''}>${head}${specialHtml(k, r, rp)}</div>`;
+  const src = def.life ? L : r;
+  const val = def.v(src);
+  const dl = deltaOf(def, val, def.life || def.state ? null : def.v(rp));
+  const warn = def.warn ? def.warn(r) : null;
+  const vals = def.life ? [] : bk.map(([x, y]) => def.v(compute(x, y)));
+  const est = k === 'hz' && warn ? '' : '';
+  return `<div class="card ${sz}" data-id="${id}" ${state.edit ? 'draggable="true"' : ''}>${head}
+    <div class="cv" data-v="${val == null ? '' : val}" data-fmt="${def.fmt}">${FMT[def.fmt](val)}</div>
+    <div class="cd ${dl.cls}">${dl.txt}${dl.noArrow || dl.txt === '—' ? '' : ' <span>oproti předchozímu</span>'}</div>
+    <div class="cn">${def.note(src)}</div>${warn ? `<div><span class="chip-warn">${esc(warn)}</span></div>` : ''}${est}
+    ${sparkSvg(vals, 'g' + (++gidN))}</div>`;
+}
+function specialHtml(k, r, rp){
+  if (k === 'funnel'){
+    const steps = [
+      ['Kvalifikované leady', r.qLeads, 'leads', null],
+      ['Rezervovali si hovor', r.leadsBooked, 'leadsBooked', `booking rate ${pct(r.bookingRate)}`],
+      ['Rezervované hovory', r.bookings, 'bookings', `samostatně ${num(r.bDirect)} · setter ${num(r.bSetter)}`],
+      ['Zrušené předem', r.cancelled, 'cancels', `${pct(r.cancelPct)} z rezervovaných`],
+      ['Dorazili', r.att, 'calls', `show-up ${pct(r.showUp)}`],
+      ['Výhry', r.wins, 'wins', `close rate ${pct(r.close)}`]
+    ];
+    const max = Math.max(1, ...steps.map(s => s[1]));
+    return `<div class="funnel">${steps.map((s, i) => `<div class="fstep ${i === 3 ? 'bad-step' : ''}" data-drill="${s[2]}" data-title="${esc(s[0])}"><div class="l">${s[0]}</div><div class="v">${num(s[1])}</div><div class="fbar"><i style="width:${Math.max(2, s[1] / max * 100)}%"></i></div><div class="cvr">${s[3] || `dotazníků ${num(r.leads)} · vyřazeno ${num(r.dqForm)}`}</div></div>`).join('')}</div>`;
+  }
+  if (k === 'setter'){
+    const save = r.cpbDirect && r.cpb ? r.cpbDirect - r.cpb : null;
+    return `<div class="duo">
+      <div><div class="l"><span class="dot" style="background:var(--blue)"></span>Samostatně</div><div class="v">${money(r.cpbDirect)}</div><div class="s">${num(r.bDirect)} rezervací · cena za booking</div></div>
+      <div><div class="l"><span class="dot" style="background:var(--setter)"></span>Se setterem</div><div class="v">${money(r.cpb)}</div><div class="s">${num(r.bookings)} rezervací · huntnutý booking ${money(r.cpbSetter)}</div></div>
+    </div>${save != null && save > 0 ? `<div class="save">Setter snížil cenu za booking o ${money(save)} (${nfP.format(save / r.cpbDirect)}).</div>` : ''}`;
+  }
+  if (k === 'grafRez') return `<div style="display:flex;align-items:center;margin-top:4px"><div class="legend"><span><i class="dot" style="background:var(--blue)"></i>Samostatně</span><span><i class="dot" style="background:var(--setter)"></i>Setter</span></div></div><div class="chart" data-chart="rez"></div>`;
+  if (k === 'grafObrat') return `<div style="display:flex;align-items:center;margin-top:4px"><div class="legend"><span><i class="dot" style="background:var(--blue)"></i>Obrat</span><span><i class="dot" style="background:var(--s2)"></i>Náklady na reklamu</span></div></div><div class="chart" data-chart="obrat"></div>`;
+  if (k === 'reklamy'){
+    const rows = adsRows(state.a, state.b);
+    return `<div class="tbl-wrap" style="margin-top:12px;max-height:none"><table><thead><tr><th>Reklama</th><th class="n">Náklady</th><th class="n">Kliky</th><th class="n">Leady</th><th class="n">Cena za lead</th><th class="n">Rezervace</th><th class="n">Výhry</th><th class="n">Obrat</th></tr></thead><tbody>${rows.map(x => `<tr><td>${esc(x.name)}</td><td class="n">${money(x.spend)}</td><td class="n">${num(x.clicks)}</td><td class="n">${num(x.leads)}</td><td class="n">${money(x.leads ? x.spend / x.leads : null)}</td><td class="n">${num(x.bookings)}</td><td class="n">${num(x.wins)}</td><td class="n">${money(x.rev)}</td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if (k === 'ltvTyp'){
+    const L = lifetime(); const t = L.ltvTypes;
+    const rows = [['Backend', t.backend], ['Předplatné', t.subscription], ['Frontend', t.frontend]];
+    const max = Math.max(1, ...rows.map(x => x[1][1] ? x[1][0] / x[1][1] : 0));
+    return `<div class="hbars">${rows.map(([n, [s, c]]) => { const v = c ? s / c : 0; return `<div class="hb"><div class="t"><span>${n} · ${num(c)} klientů</span><b>${money(c ? v : null)}</b></div><div class="b"><i style="width:${v / max * 100}%"></i></div></div>` }).join('')}</div><div class="cn" style="margin-top:10px">Celá historie · nezávisí na období</div>`;
+  }
+  if (k === 'pokrac'){
+    const c = r.cont, m = r.contMature || 1;
+    const parts = [['Backend', c.backend, '#0071e3'], ['Jen Předplatné', c.sub, '#5ac8fa'], ['Jen zkušební doba', c.trial, '#ff9f0a'], ['Nic', c.none, '#d2d2d7']];
+    return `<div class="stack">${parts.map(p => `<i style="width:${p[1] / m * 100}%;background:${p[2]}" data-tip="${esc(p[0])}" data-tipbody="${num(p[1])} klientů · ${nfP.format(p[1] / m)}"></i>`).join('')}</div>
+      <div class="slegend">${parts.map(p => `<div><span class="dot" style="background:${p[2]}"></span>${p[0]}<b>${r.contMature ? nfP.format(p[1] / m) : '—'}</b></div>`).join('')}</div>
+      <div class="cn" style="margin-top:10px">${num(r.contTotal)} klientů s 1. platbou za Frontend · ${r.contYoung ? `<span class="chip-warn" style="margin:0">${num(r.contYoung)} mladších než 45 dní – zobrazeno zvlášť</span>` : 'všichni mají ≥ 45 dní'}</div>`;
+  }
+  if (k === 'stav'){
+    return `<div class="srcs">${SOURCES.map(s => `<div class="src ${s.warn ? 'old' : ''}"><span class="sdot"></span>${esc(s.n)}<span class="t">${esc(s.t)}</span></div>`).join('')}</div>`;
+  }
+  return '';
+}
+
+function adsRows(a, b){
+  const r = compute(a, b);
+  return ADS.map((ad, i) => {
+    const spend = r.spend * ad.w;
+    let leads = 0, bookings = 0, wins = 0, rev = 0;
+    for (const L of LEADS) if (!L.isTest && L.ad === ad.id && L.day >= a && L.day <= b) leads++;
+    for (const B of BOOK) if (!B.lead.isTest && B.lead.ad === ad.id && B.booked >= a && B.booked <= b) bookings++;
+    for (const c of CUST) if (c.lead && c.lead.ad === ad.id && !c.isTest && c.firstDay != null && c.firstDay >= a && c.firstDay <= b) wins++;
+    for (const p of PAY) if (!p.refund && p.cust.lead && p.cust.lead.ad === ad.id && p.day >= a && p.day <= b) rev += p.amount;
+    return {name:ad.name, spend, clicks:Math.round(spend / (7.5 + i * 1.6)), leads, bookings, wins, rev};
+  });
+}
+
+/* ---------- grafy ---------- */
+function groupsFor(a, b){
+  const len = b - a + 1, step = len <= 45 ? 1 : len <= 200 ? 7 : 30, out = [];
+  for (let s = a; s <= b; s += step) out.push([s, Math.min(b, s + step - 1)]);
+  return {out, step};
+}
+function nice(x){ if (x <= 0) return 1; const p = Math.pow(10, Math.floor(Math.log10(x))), n = x / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p }
+function drawChart(el){
+  const kind = el.dataset.chart, {out, step} = groupsFor(state.a, state.b);
+  const W = Math.max(280, el.clientWidth), H = 210, pl = kind === "rez" ? 34 : 74, pr = 6, pt = 10, pb = 26;
+  let series, stacked, yfmt;
+  if (kind === 'rez'){
+    const g = out.map(([s, e]) => { let d = 0, st = 0; for (const B of BOOK) if (!B.lead.isTest && B.booked >= s && B.booked <= e) B.channel === 'direct' ? d++ : st++; return [d, st] });
+    series = [{c:'#0071e3', n:'Samostatně', v:g.map(x => x[0])}, {c:'#ff9f0a', n:'Setter', v:g.map(x => x[1])}]; stacked = true; yfmt = num;
+  } else {
+    const g = out.map(([s, e]) => { let rv = 0, sp = 0; for (const p of PAY) if (!p.refund && !p.cust.isTest && !isExcl(p) && p.day >= s && p.day <= e) rv += p.amount; for (let d = Math.max(s, T0); d <= e; d++) sp += SPEND[d - T0]; return [rv, sp] });
+    series = [{c:'#0071e3', n:'Obrat', v:g.map(x => x[0]), f:money}, {c:'#d2d2d7', n:'Reklama', v:g.map(x => x[1]), f:money}]; stacked = false; yfmt = moneyShort;
+  }
+  const n = out.length;
+  const raw = Math.max(1, ...out.map((_, i) => stacked ? series[0].v[i] + series[1].v[i] : Math.max(series[0].v[i], series[1].v[i])));
+  const max = kind === 'rez' ? Math.max(4, Math.ceil(raw / 4) * 4) : nice(raw);
+  const iw = W - pl - pr, ih = H - pt - pb, bw = iw / n;
+  const y = v => pt + ih - v / max * ih;
+  let svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-size="11" fill="#86868b">`;
+  for (let i = 0; i <= 4; i++){ const v = max / 4 * i, yy = y(v); svg += `<line x1="${pl}" x2="${W - pr}" y1="${yy}" y2="${yy}" stroke="${i ? '#f0f0f2' : '#e3e3e8'}"/><text x="${pl - 8}" y="${yy + 4}" text-anchor="end">${esc(kind === 'rez' ? num(v) : moneyShort(v))}</text>` }
+  const lblEvery = Math.ceil(n / Math.max(2, Math.floor(iw / 70)));
+  out.forEach(([s, e], i) => {
+    const x0 = pl + i * bw, gap = Math.min(6, bw * .25), w = bw - gap;
+    const lab = step === 1 ? fDs(s) : step === 7 ? `${fDs(s)}` : `${dd(s).getUTCMonth() + 1}/${String(dd(s).getUTCFullYear()).slice(2)}`;
+    const tip = `${step === 1 ? fD(s) : fRange(s, e)}\n` + series.map(se => `${se.n}: ${(se.f || num)(se.v[i])}`).join('\n');
+    if (stacked){
+      let base = 0;
+      series.forEach((se, si) => { const v = se.v[i]; if (v > 0){ const top = y(base + v), h = y(base) - top; svg += `<rect x="${x0 + gap / 2}" y="${top}" width="${w}" height="${Math.max(0, h - (si === 0 && series[1].v[i] ? 1 : 0))}" rx="${Math.min(3, w / 3)}" fill="${se.c}"/>` } base += v });
+    } else {
+      const hw = w / 2;
+      series.forEach((se, si) => { const v = se.v[i], top = y(v); svg += `<rect x="${x0 + gap / 2 + si * hw}" y="${top}" width="${Math.max(1, hw - 1)}" height="${pt + ih - top}" rx="${Math.min(3, hw / 3)}" fill="${se.c}"/>` });
+    }
+    svg += `<rect x="${x0}" y="${pt}" width="${bw}" height="${ih}" fill="transparent" data-tip="${esc(series[0].n === 'Obrat' ? 'Obrat a reklama' : 'Rezervace')}" data-tipbody="${esc(tip)}"/>`;
+    if (i % lblEvery === 0) svg += `<text x="${x0 + bw / 2}" y="${H - 8}" text-anchor="middle">${lab}</text>`;
+  });
+  el.innerHTML = svg + '</svg>';
+}
+
+/* ---------- počítání čísel ---------- */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function countUp(){
+  if (reduced) return;
+  const els = $$('#grid .cv').filter(e => e.dataset.v !== '');
+  const start = performance.now(), dur = 900;
+  const step = now => {
+    const t = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - t, 3);
+    for (const el of els){ const v = +el.dataset.v; el.textContent = FMT[el.dataset.fmt](el.dataset.fmt === 'num' ? Math.round(v * e) : v * e) }
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+let loadTimer = null;
+function renderAnalytics(withSkeleton){
+  renderTabs(); renderPresets(); renderWarn(); updateBadge();
+  const grid = $('#grid');
+  grid.classList.toggle('editing', state.edit);
+  $('#editBar').hidden = !state.edit;
+  $('#editBtn').hidden = state.edit;
+  const ids = (layout.order[state.tab] || []).filter(id => !layout.hidden.includes(id));
+  if (withSkeleton && !reduced){
+    $('#loadingTxt').hidden = false;
+    grid.innerHTML = ids.map(id => `<div class="card ${sizeOf(id)}" style="cursor:default"><div class="sk" style="height:14px;width:45%"></div><div class="sk" style="height:28px;width:65%;margin-top:12px"></div><div class="sk" style="height:10px;width:35%;margin-top:8px"></div><div class="sk" style="height:36px;margin-top:16px"></div></div>`).join('');
+    clearTimeout(loadTimer);
+    loadTimer = setTimeout(() => { $('#loadingTxt').hidden = true; paintGrid(ids, true) }, 380);
+  } else paintGrid(ids, false);
+  renderTray();
+}
+function paintGrid(ids, animate){
+  const grid = $('#grid');
+  const r = compute(state.a, state.b), [pa, pb] = prevRange(), rp = compute(Math.max(T0 - 1, pa), pb);
+  const L = lifetime(), bk = buckets(state.a, state.b);
+  grid.innerHTML = ids.length ? ids.map(id => cardHtml(id, r, rp, L, bk)).join('')
+    : `<div class="empty-tab">${state.edit ? 'Prázdná záložka. Přesuň sem karty z jiné záložky (u karty zvol záložku v menu).' : 'Tahle záložka je zatím prázdná. Klikni na „Upravit rozložení“ a přesuň sem karty.'}</div>`;
+  $$('#grid [data-chart]').forEach(drawChart);
+  if (animate) countUp();
+}
+function renderAnalyticsWarnOnly(){ if (!$('#view-analytics').hidden) renderWarn() }
+function renderWarn(){
+  const r = compute(state.a, state.b);
+  const noProdAll = PAY.filter(p => !p.prod && !p.refund).length;
+  const missAll = BOOK.filter(B => !B.lead.isTest && B.cancel == null && B.sched < T && !B.outcome).length;
+  const old = SOURCES.filter(s => s.warn);
+  const items = [];
+  if (missAll) items.push(`⚠︎ ${missAll} ${pl(missAll, 'hovor', 'hovory', 'hovorů')} bez výsledku <a data-go="crm:calls">Doplnit</a>`);
+  if (noProdAll) items.push(`${noProdAll} ${pl(noProdAll, 'platba', 'platby', 'plateb')} bez produktu <a data-go="settings:products">Přiřadit</a>`);
+  old.forEach(s => items.push(`${esc(s.n)}: poslední synchronizace ${esc(s.t)} <a data-go="settings:conn">Zkontrolovat</a>`));
+  $('#dataWarn').innerHTML = items.length ? `<div class="dwarn">${items.join('<span style="opacity:.4">·</span>')}</div>` : '';
+}
+function renderTray(){
+  const hid = (layout.order[state.tab] || []).filter(id => layout.hidden.includes(id));
+  $('#tray').innerHTML = hid.length ? `<div class="tray"><span class="lbl">Skryté karty:</span>${hid.map(id => `<button data-show="${id}">+ ${esc(M[keyOf(id)].t)}</button>`).join('')}</div>` : '';
+}
+
+/* =====================================================================
+   ROZKLIKNUTÍ (drill-down)
+   ===================================================================== */
+const srcName = s => ({stripe:'Stripe', manual:'Ručně', invoice:'Faktura', bank:'Převod'}[s] || s);
+const prodName = p => (p.prod ? PROD_BY[p.prod].name : '— bez produktu —') + (p.note ? ` · ${p.note}` : '');
+function tableHtml(cols, rows, limit = 250){
+  const shown = rows.slice(0, limit);
+  return `<div class="tbl-wrap"><table><thead><tr>${cols.map(c => `<th class="${c.n ? 'n' : ''}">${c.h}</th>`).join('')}</tr></thead><tbody>${shown.map(r => `<tr ${r._click ? `class="click" data-open="${r._click}"` : ''}>${cols.map((c, i) => `<td class="${c.n ? 'n' : ''}">${r[i]}</td>`).join('')}</tr>`).join('') || `<tr><td colspan="${cols.length}" style="color:var(--mute2)">Žádné záznamy v tomto období.</td></tr>`}</tbody></table></div>${rows.length > limit ? `<div class="more">+ ${num(rows.length - limit)} dalších záznamů</div>` : ''}`;
+}
+function outcomeTag(B){
+  if (B.cancel != null) return '<span class="tag">Zrušeno</span>';
+  if (B.sched >= T) return '<span class="tag blue">Naplánováno</span>';
+  if (B.outcome === 'attended') return '<span class="tag green">Dorazil</span>';
+  if (B.outcome === 'no_show') return '<span class="tag red">Nedorazil</span>';
+  return '<span class="tag orange">Bez výsledku</span>';
+}
+const chTag = ch => ch === 'direct' ? '<span class="tag blue">Samostatně</span>' : '<span class="tag orange">Setter</span>';
+function rowsFor(kind, a, b){
+  const inR = d => d != null && d >= a && d <= b;
+  switch (kind){
+    case 'payments': {
+      const l = PAY.filter(p => inR(p.day) && !p.cust.isTest && !isExcl(p)).sort((x, y) => y.day - x.day);
+      return {cols:[{h:'Datum'},{h:'Zákazník'},{h:'Produkt'},{h:'Košík'},{h:'Zdroj'},{h:'Částka', n:1}],
+        rows:l.map(p => Object.assign([fD(p.day), esc(p.cust.name), esc(prodName(p)), p.prod ? BASKETS[basketOf(p)] : '<span class="tag orange">přiřadit</span>', srcName(p.source), p.refund ? `<span class="bad">−${money(p.amount)}</span>` : money(p.amount)], {_click:'c:' + p.cust.id}))};
+    }
+    case 'spend': {
+      const l = []; for (let d = Math.min(b, T); d >= Math.max(a, T0); d--) l.push([fD(d), money(SPEND[d - T0]), money(0), money(SPEND[d - T0])]);
+      return {cols:[{h:'Den'},{h:'Meta', n:1},{h:'Ostatní (ručně)', n:1},{h:'Celkem', n:1}], rows:l};
+    }
+    case 'bookings': {
+      const l = BOOK.filter(B => !B.lead.isTest && inR(B.booked)).sort((x, y) => y.booked - x.booked);
+      return {cols:[{h:'Vytvořeno'},{h:'Lead'},{h:'Kanál'},{h:'Termín hovoru'},{h:'Stav'}], rows:l.map(B => Object.assign([fD(B.booked), esc(B.lead.name), chTag(B.channel), fD(B.sched), outcomeTag(B)], {_click:'l:' + B.lead.id}))};
+    }
+    case 'cancels': {
+      const l = BOOK.filter(B => !B.lead.isTest && inR(B.cancel)).sort((x, y) => y.cancel - x.cancel);
+      return {cols:[{h:'Zrušeno'},{h:'Lead'},{h:'Kanál'},{h:'Původní termín'}], rows:l.map(B => Object.assign([fD(B.cancel), esc(B.lead.name), chTag(B.channel), fD(B.sched)], {_click:'l:' + B.lead.id}))};
+    }
+    case 'calls': {
+      const l = BOOK.filter(B => !B.lead.isTest && B.cancel == null && inR(B.sched) && B.sched < T).sort((x, y) => y.sched - x.sched);
+      return {cols:[{h:'Den hovoru'},{h:'Lead'},{h:'Kanál'},{h:'Výsledek'}], rows:l.map(B => Object.assign([fD(B.sched), esc(B.lead.name) + (B.lead.dqSetter ? ' <span class="tag">diskv.</span>' : ''), chTag(B.channel), outcomeTag(B)], {_click:'l:' + B.lead.id}))};
+    }
+    case 'close': {
+      const set = new Map();
+      for (const B of BOOK) if (!B.lead.isTest && B.cancel == null && inR(B.sched) && B.sched < T && B.outcome === 'attended') set.set(B.lead, B);
+      const l = [...set.entries()].filter(([L]) => !(L.dqSetter && !(L.customer && L.customer.firstDay != null)));
+      return {cols:[{h:'Lead'},{h:'Hovor'},{h:'Klient?'},{h:'1. platba'},{h:'Částka', n:1}], rows:l.map(([L, B]) => { const c = L.customer, paid = c && c.firstDay != null; return Object.assign([esc(L.name), fD(B.sched), paid ? '<span class="tag green">Ano</span>' : '<span class="tag">Zatím ne</span>', paid ? fD(c.firstDay) : '—', paid ? money(c.first.amount) : '—'], {_click:'l:' + L.id}) })};
+    }
+    case 'wins': {
+      const l = CUST.filter(c => (c.lead || c.win) && !c.isTest && inR(c.firstDay)).sort((x, y) => y.firstDay - x.firstDay);
+      return {cols:[{h:'1. platba'},{h:'Zákazník'},{h:'Produkt'},{h:'Typ výhry'},{h:'Částka', n:1}], rows:l.map(c => { const call = c.lead && c.lead.bookings.some(B => B.outcome === 'attended' && B.sched <= c.firstDay + 1); return Object.assign([fD(c.firstDay), esc(c.name), esc(prodName(c.first)), call ? '<span class="tag green">Po hovoru</span>' : '<span class="tag">Bez hovoru</span>', money(c.first.amount)], {_click:'c:' + c.id}) })};
+    }
+    case 'cohort': {
+      const l = CUST.filter(c => !c.isTest && inR(c.firstDay)).sort((x, y) => y.firstDay - x.firstDay);
+      return {cols:[{h:'1. platba'},{h:'Zákazník'},{h:'Produkt'},{h:'1. platba', n:1},{h:'GP 30', n:1},{h:'Okno 30 dní'}], rows:l.map(c => Object.assign([fD(c.firstDay), esc(c.name), esc(prodName(c.first)), money(c.first.amount), money(c.gp30), c.firstDay + 30 > T ? `<span class="tag orange">ještě ${c.firstDay + 30 - T} d</span>` : '<span class="tag green">kompletní</span>'], {_click:'c:' + c.id}))};
+    }
+    case 'leads': case 'leadsBooked': {
+      const l = LEADS.filter(L => !L.isTest && inR(L.day) && (kind === 'leads' ? L.qualified && !L.dqSetter : L.bookings.length)).sort((x, y) => y.day - x.day);
+      return {cols:[{h:'Vytvořeno'},{h:'Lead'},{h:'E-mail'},{h:'Reklama'},{h:'Stav'}], rows:l.map(L => Object.assign([fD(L.day), esc(L.name), esc(L.email), L.ad ? esc(ADS.find(a => a.id === L.ad).name) : 'organicky', leadStatusTag(L)], {_click:'l:' + L.id}))};
+    }
+    case 'subs': {
+      const x = Math.min(b, T);
+      const l = SUBS.filter(s => !s.cust.isTest && s.firstPaid && s.start <= x && (s.end == null || s.end > x));
+      return {cols:[{h:'Zákazník'},{h:'Od'},{h:'Cena / měs.', n:1},{h:'Stav'}], rows:l.map(s => Object.assign([esc(s.cust.name), fD(s.start), money(s.price * 30 / s.cycle), s.paused && x >= s.pausedSince ? '<span class="tag">Pozastaveno</span>' : s.overdueSince != null && x >= s.overdueSince ? (x - s.overdueSince > 30 ? '<span class="tag red">Zaseknuté – mimo MRR</span>' : '<span class="tag orange">Po splatnosti</span>') : '<span class="tag green">Aktivní</span>'], {_click:'c:' + s.cust.id}))};
+    }
+    case 'churn': {
+      const A = payingSet(a), Bs = payingSet(Math.min(b, T) + 1), l = [];
+      for (const c of A) if (!Bs.has(c)){ const s = c.subs.filter(u => u.end != null).sort((x, y) => y.end - x.end)[0]; l.push(Object.assign([esc(c.name), s ? fD(s.end) : '—', s && s.endReason === 'upgrade na Backend' ? '<span class="tag green">Upgrade – není churn</span>' : esc(s ? s.endReason : 'neznámé')], {_click:'c:' + c.id})) }
+      return {cols:[{h:'Zákazník'},{h:'Konec'},{h:'Důvod'}], rows:l};
+    }
+    case 'debts': {
+      return {cols:[{h:'Stav'},{h:'Počet faktur', n:1},{h:'Částka', n:1}], rows:[['<span class="tag red">Po splatnosti</span>', num(DEBTS.overdueCount), money(DEBTS.overdue)], ['<span class="tag orange">Ve splatnosti</span>', num(DEBTS.openCount - DEBTS.overdueCount), money(DEBTS.outstanding - DEBTS.overdue)], ['Celkem', num(DEBTS.openCount), money(DEBTS.outstanding)]]};
+    }
+    case 'ltv': {
+      const l = CUST.filter(c => !c.isTest && c.firstDay != null).sort((x, y) => y.net - x.net);
+      return {cols:[{h:'Zákazník'},{h:'Typ'},{h:'1. platba'},{h:'Čistý obrat', n:1}], rows:l.map(c => Object.assign([esc(c.name), BASKETS[c.type] || 'Jiné', c.pre ? 'před 7. 9.' : fD(c.firstDay), money(c.net)], {_click:'c:' + c.id}))};
+    }
+  }
+  return {cols:[], rows:[]};
+}
+function openDrill(kind, title, def){
+  const {cols, rows} = rowsFor(kind, state.a, state.b);
+  const r = compute(state.a, state.b);
+  let sum = '';
+  if (def && !def.special){ const v = def.v(def.life ? lifetime() : r); sum = `<div class="sumrow"><div>Hodnota<b>${FMT[def.fmt](v)}</b></div><div>Období<b>${def.life ? 'celá historie' : def.state ? 'stav k ' + fD(state.b) : fRange(state.a, state.b)}</b></div><div>Záznamů<b>${num(rows.length)}</b></div></div><div class="formula">${esc(def.f)}</div>` }
+  else sum = `<div class="sumrow"><div>Období<b>${fRange(state.a, state.b)}</b></div><div>Záznamů<b>${num(rows.length)}</b></div></div>`;
+  openModal(title, 'Záznamy, ze kterých číslo vzniklo. Klikni na řádek pro detail.', sum + tableHtml(cols, rows));
+}
+
+/* =====================================================================
+   MODAL, TOOLTIP, TOAST
+   ===================================================================== */
+function openModal(title, sub, body){
+  $('#modalRoot').innerHTML = `<div class="mback" id="mback"><div class="modal" role="dialog" aria-modal="true"><div class="modal-h"><div><h2>${title}</h2>${sub ? `<p>${sub}</p>` : ''}</div><button class="x" id="mclose" aria-label="Zavřít">✕</button></div><div class="modal-b">${body}</div></div></div>`;
+}
+const closeModal = () => { $('#modalRoot').innerHTML = '' };
+function toast(t){ const el = document.createElement('div'); el.className = 'toast'; el.textContent = t; $('#toastRoot').appendChild(el); setTimeout(() => el.remove(), 2400) }
+
+const tip = $('#tip');
+function showTip(el, x, y){
+  const b = el.dataset.tipbody, f = el.dataset.tipf;
+  tip.innerHTML = `<b>${esc(el.dataset.tip)}</b>${esc(b || '')}${f ? `<code>${esc(f)}</code>` : ''}`;
+  tip.hidden = false;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let left = Math.min(window.innerWidth - w - 8, Math.max(8, x - w / 2)), top = y + 18;
+  if (top + h > window.innerHeight - 8) top = y - h - 12;
+  tip.style.left = left + 'px'; tip.style.top = top + 'px';
+}
+document.addEventListener('mousemove', e => {
+  const el = e.target.closest && e.target.closest('[data-tip]');
+  if (el) showTip(el, e.clientX, e.clientY); else tip.hidden = true;
+});
+document.addEventListener('scroll', () => { tip.hidden = true }, true);
+
+/* =====================================================================
+   KALENDÁŘ
+   ===================================================================== */
+const cal = {s:null, e:null, hover:null, y:0, m:0};
+function openCal(){
+  cal.s = state.a; cal.e = state.b; cal.hover = null;
+  const x = dd(state.b); cal.y = x.getUTCFullYear(); cal.m = x.getUTCMonth() - 1;
+  $('#cal').hidden = false; renderCal();
+}
+function monthHtml(y, m){
+  const first = Math.floor(Date.UTC(y, m, 1) / DAY), fd = dd(first);
+  y = fd.getUTCFullYear(); m = fd.getUTCMonth();
+  const dim = new Date(Date.UTC(y, m + 1, 0)).getUTCDate(), wd = (fd.getUTCDay() + 6) % 7;
+  const s = cal.s, e = cal.e != null ? cal.e : cal.hover != null && cal.s != null ? cal.hover : cal.s;
+  const lo = Math.min(s, e), hi = Math.max(s, e);
+  let h = `<div><div class="cm-t">${MONTHS[m][0].toUpperCase() + MONTHS[m].slice(1)} ${y}</div><div class="cm-g">${['Po','Út','St','Čt','Pá','So','Ne'].map(x => `<span class="cw">${x}</span>`).join('')}`;
+  for (let i = 0; i < wd; i++) h += '<span></span>';
+  for (let i = 1; i <= dim; i++){
+    const d = first + i - 1, dis = d > T || d < T0;
+    const cls = [d === T ? 'today' : '', s != null && d >= lo && d <= hi && lo !== hi ? 'in' : '', d === lo && s != null ? 'st' : '', d === hi && s != null ? 'en' : ''].join(' ');
+    h += `<button class="cdn ${cls}" data-d="${d}" ${dis ? 'disabled' : ''}>${i}</button>`;
+  }
+  return h + '</div></div>';
+}
+function renderCal(){
+  const len = cal.s != null && cal.e != null ? Math.abs(cal.e - cal.s) + 1 : null;
+  const nextDis = Math.floor(Date.UTC(cal.y, cal.m + 2, 1) / DAY) > T;
+  $('#cal').innerHTML = `<div class="cal-h"><button class="arrow" data-cal="prev">‹</button><span style="font-size:12px;color:var(--mute)">Vyber „od“ a „do“</span><button class="arrow" data-cal="next" ${nextDis ? 'disabled' : ''}>›</button></div>
+    <div class="cal-ms">${monthHtml(cal.y, cal.m)}${monthHtml(cal.y, cal.m + 1)}</div>
+    <div class="cal-f"><span>${len ? `${fRange(Math.min(cal.s, cal.e), Math.max(cal.s, cal.e))} · <b style="color:var(--ink)">${len} ${pl(len, 'den', 'dny', 'dní')}</b>` : cal.s != null ? 'Teď vyber konec období' : ''}</span><span class="sp"></span><button class="btn ghost sm" data-cal="cancel">Zrušit</button><button class="btn sm" data-cal="apply" ${len ? '' : 'disabled'}>Použít</button></div>`;
+}
+$('#cal').addEventListener('click', e => {
+  e.stopPropagation();
+  const b = e.target.closest('button'); if (!b || b.disabled) return;
+  if (b.dataset.d){
+    const d = +b.dataset.d;
+    if (cal.s == null || cal.e != null){ cal.s = d; cal.e = null } else { if (d < cal.s){ cal.e = cal.s; cal.s = d } else cal.e = d }
+    renderCal(); return;
+  }
+  const a = b.dataset.cal;
+  if (a === 'prev'){ cal.m--; renderCal() }
+  if (a === 'next'){ cal.m++; renderCal() }
+  if (a === 'cancel') $('#cal').hidden = true;
+  if (a === 'apply'){ $('#cal').hidden = true; setPeriod(Math.min(cal.s, cal.e), Math.max(cal.s, cal.e), null) }
+});
+$('#cal').addEventListener('mouseover', e => {
+  const b = e.target.closest('.cdn'); if (!b || b.disabled || cal.s == null || cal.e != null) return;
+  const d = +b.dataset.d; if (cal.hover === d) return; cal.hover = d; renderCal();
+});
+$('#pill').addEventListener('click', e => { e.stopPropagation(); $('#cal').hidden ? openCal() : ($('#cal').hidden = true) });
+document.addEventListener('click', e => { if (!$('#cal').hidden && !e.target.closest('#cal')) $('#cal').hidden = true; if (!e.target.closest('#userMenu') && !e.target.closest('#avatarBtn')) $('#userMenu').hidden = true });
+
+$('#prevP').addEventListener('click', () => { const len = state.b - state.a + 1; if (state.a - len < T0) return toast('Dál do historie už data nejsou (max. 2 roky).'); setPeriod(state.a - len, state.b - len, null) });
+$('#nextP').addEventListener('click', () => { const len = state.b - state.a + 1; let b = state.b + len, a = state.a + len; if (b > T){ b = T; a = T - len + 1 } setPeriod(a, b, null) });
+$('#presets').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b) return; const [a, z] = presetRange(b.dataset.p); setPeriod(a, z, b.dataset.p) });
+
+/* =====================================================================
+   INTERAKCE – ZÁLOŽKY, KARTY, ÚPRAVY ROZLOŽENÍ
+   ===================================================================== */
+$('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; state.tab = b.dataset.tab; renderAnalytics(true) });
+$('#tabs').addEventListener('dblclick', e => {
+  const b = e.target.closest('[data-tab]'); if (!b || !state.edit) return;
+  const n = prompt('Nový název záložky', layout.tabs[b.dataset.tab]); if (n && n.trim()){ layout.tabs[b.dataset.tab] = n.trim(); saveLayout(); renderAnalytics(false) }
+});
+$('#editBtn').addEventListener('click', () => { state.edit = true; renderAnalytics(false) });
+$('#doneEdit').addEventListener('click', () => { state.edit = false; renderAnalytics(false); toast('Rozložení uloženo') });
+$('#resetLayout').addEventListener('click', () => { if (!confirm('Vrátit původní rozložení všech záložek?')) return; layout = JSON.parse(JSON.stringify(DEFAULT_LAYOUT)); saveLayout(); state.tab = 'prehled'; renderAnalytics(false); toast('Původní rozložení obnoveno') });
+$('#addTab').addEventListener('click', () => {
+  const n = prompt('Název nové záložky', 'Moje čísla'); if (!n || !n.trim()) return;
+  const id = 'vlastni' + Date.now().toString(36);
+  layout.tabs[id] = n.trim(); layout.tabOrder.push(id); layout.order[id] = []; layout.custom.push({id, label:n.trim()});
+  state.tab = id; saveLayout(); renderAnalytics(false);
+});
+
+const grid = $('#grid');
+grid.addEventListener('click', e => {
+  if (e.target.closest('[data-tip]') && e.target.closest('.ct')){ return }
+  const tool = e.target.closest('[data-act]');
+  const card = e.target.closest('.card[data-id]');
+  if (!card) return;
+  const id = card.dataset.id;
+  if (tool){
+    e.stopPropagation();
+    const act = tool.dataset.act;
+    if (act === 'size'){ const s = sizeOf(id); layout.sizes[id] = s === 's' ? 'w' : s === 'w' ? 'f' : 's'; saveLayout(); renderAnalytics(false) }
+    if (act === 'hide'){ layout.hidden.push(id); saveLayout(); renderAnalytics(false) }
+    return;
+  }
+  if (state.edit) return;
+  const step = e.target.closest('[data-drill]');
+  if (step) return openDrill(step.dataset.drill, step.dataset.title, null);
+  const k = keyOf(id), def = M[k];
+  if (def.special){
+    const map = {setter:'bookings', grafRez:'bookings', grafObrat:'payments', ltvTyp:'ltv', pokrac:'cohort'};
+    if (k === 'stav') return go('settings', 'conn');
+    if (map[k]) return openDrill(map[k], def.t, null);
+    return;
+  }
+  openDrill(def.rows, def.t, def);
+});
+grid.addEventListener('change', e => {
+  const sel = e.target.closest('[data-act="move"]'); if (!sel) return;
+  const id = sel.closest('.card').dataset.id, to = sel.value;
+  if (to === state.tab) return;
+  layout.order[state.tab] = layout.order[state.tab].filter(x => x !== id);
+  layout.order[to].push(id); saveLayout(); renderAnalytics(false);
+  toast(`Karta přesunuta na „${layout.tabs[to]}“`);
+});
+let dragId = null;
+grid.addEventListener('dragstart', e => { const c = e.target.closest('.card'); if (!state.edit || !c) return; dragId = c.dataset.id; c.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', dragId) } catch(_){} });
+grid.addEventListener('dragover', e => {
+  if (!dragId) return; e.preventDefault();
+  const over = e.target.closest('.card'); if (!over || over.dataset.id === dragId) return;
+  const r = over.getBoundingClientRect(), after = (e.clientX - r.left) > r.width / 2;
+  const el = grid.querySelector(`[data-id="${CSS.escape(dragId)}"]`);
+  grid.insertBefore(el, after ? over.nextSibling : over);
+});
+function endDrag(){
+  if (!dragId) return;
+  const dom = $$('#grid .card[data-id]').map(c => c.dataset.id);
+  layout.order[state.tab] = [...dom, ...layout.order[state.tab].filter(id => layout.hidden.includes(id))];
+  saveLayout(); dragId = null; $$('#grid .dragging').forEach(c => c.classList.remove('dragging'));
+}
+grid.addEventListener('drop', e => { e.preventDefault(); endDrag() });
+grid.addEventListener('dragend', endDrag);
+$('#tray').addEventListener('click', e => { const b = e.target.closest('[data-show]'); if (!b) return; layout.hidden = layout.hidden.filter(x => x !== b.dataset.show); saveLayout(); renderAnalytics(false) });
+
+/* modal – otevření detailu leadu / zákazníka */
+document.addEventListener('click', e => {
+  if (e.target.id === 'mback' || e.target.closest('#mclose')) return closeModal();
+  const row = e.target.closest('[data-open]');
+  if (row){ const [t, id] = row.dataset.open.split(':'); t === 'l' ? openLead(LEAD_BY[id]) : openCustomer(CUST.find(c => c.id === id)) }
+  const g = e.target.closest('[data-go]');
+  if (g){ const [v, t] = g.dataset.go.split(':'); closeModal(); go(v, t); $('#userMenu').hidden = true }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape'){ closeModal(); $('#cal').hidden = true } });
+
+function leadStatusTag(L){
+  if (L.customer && L.customer.firstDay != null) return '<span class="tag green">Klient</span>';
+  if (!L.qualified) return '<span class="tag">Vyřazen dotazníkem</span>';
+  if (L.dqSetter) return '<span class="tag red">Diskvalifikován</span>';
+  if (L.bookings.some(B => B.outcome === 'attended')) return '<span class="tag blue">Dorazil na hovor</span>';
+  if (L.bookings.some(B => B.cancel == null)) return '<span class="tag blue">Rezervováno</span>';
+  return '<span class="tag">Nový</span>';
+}
+function openLead(L){
+  if (!L) return;
+  const ad = L.ad ? ADS.find(a => a.id === L.ad).name : 'organicky';
+  const c = L.customer;
+  const body = `<dl class="kv"><dt>E-mail</dt><dd>${esc(L.email)}</dd><dt>Telefon</dt><dd>${esc(L.phone)}</dd><dt>Vytvořen</dt><dd>${fD(L.day)}</dd><dt>Zdroj</dt><dd>${esc(ad)}${L.ad ? ` <span class="tag">utm_content=${L.ad}</span>` : ''}</dd><dt>Dotazník</dt><dd>${L.qualified ? '<span class="tag green">Prošel</span>' : '<span class="tag">Vyřazen</span>'}</dd><dt>Stav</dt><dd>${leadStatusTag(L)}</dd></dl>
+    <div class="h4">Rezervace a hovory</div>${tableHtml([{h:'Vytvořeno'},{h:'Kanál'},{h:'Termín'},{h:'Výsledek'}], L.bookings.map(B => [fD(B.booked), chTag(B.channel), fD(B.sched), outcomeTag(B)]))}
+    <div class="h4">Platby</div>${c ? tableHtml([{h:'Datum'},{h:'Produkt'},{h:'Zdroj'},{h:'Částka', n:1}], c.pays.slice().reverse().map(p => [fD(p.day), esc(prodName(p)), srcName(p.source), p.refund ? `<span class="bad">−${money(p.amount)}</span>` : money(p.amount)])) : '<div class="more">Zatím žádná platba. Spárování s platbou probíhá podle e-mailu.</div>'}`;
+  openModal(esc(L.name), 'Detail leadu', body);
+}
+function openCustomer(c){
+  if (!c) return;
+  const subs = c.subs.map(s => [fD(s.start), s.end != null ? fD(s.end) : '—', s.trial ? '<span class="tag orange">Zkušební doba</span>' : s.end == null ? '<span class="tag green">Aktivní</span>' : esc(s.endReason)]);
+  const body = `<div class="sumrow"><div>Čistý obrat (LTV)<b>${money(c.net)}</b></div><div>Hrubý zisk celkem<b>${money(c.gpAll)}</b></div><div>Typ klienta<b>${BASKETS[c.type] || 'Jiné'}</b></div><div>1. platba<b>${c.pre ? 'před 7. 9.' : c.firstDay != null ? fD(c.firstDay) : '—'}</b></div></div>
+    <dl class="kv"><dt>E-mail</dt><dd>${esc(c.email)}</dd><dt>Přišel jako lead</dt><dd>${c.lead ? `<a style="color:var(--blue);cursor:pointer" data-open="l:${c.lead.id}">Ano – zobrazit lead</a>` : 'Ne (koupil přímo)'}</dd></dl>
+    <div class="h4">Platby</div>${tableHtml([{h:'Datum'},{h:'Produkt'},{h:'Košík'},{h:'Zdroj'},{h:'Částka', n:1}], c.pays.slice().reverse().map(p => [fD(p.day), esc(prodName(p)), p.prod ? BASKETS[basketOf(p)] : '—', srcName(p.source), p.refund ? `<span class="bad">−${money(p.amount)}</span>` : money(p.amount)]))}
+    ${subs.length ? `<div class="h4">Předplatné</div>${tableHtml([{h:'Od'},{h:'Do'},{h:'Stav'}], subs)}` : ''}`;
+  openModal(esc(c.name), 'Detail zákazníka', body);
+}
+
+/* =====================================================================
+   NAVIGACE
+   ===================================================================== */
+function go(view, sub){
+  state.view = view;
+  if (view === 'crm' && sub) state.crmTab = sub;
+  if (view === 'settings' && sub) state.setTab = sub;
+  $$('#nav [data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+  ['analytics', 'crm', 'settings'].forEach(v => $('#view-' + v).hidden = v !== view);
+  if (view === 'analytics') renderAnalytics(true);
+  if (view === 'crm') renderCrm();
+  if (view === 'settings') renderSettings();
+  window.scrollTo({top:0});
+}
+$('#nav').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b) go(b.dataset.view) });
+function updateBadge(){
+  const n = BOOK.filter(B => !B.lead.isTest && B.cancel == null && B.sched < T && !B.outcome).length;
+  const el = $('#navBadge'); el.hidden = !n; el.textContent = n;
+}
+
+/* =====================================================================
+   MINI CRM
+   ===================================================================== */
+let crmLimit = 50, crmQ = '', crmF = 'all', recentSet = [];
+$('#crmTabs').addEventListener('click', e => { const b = e.target.closest('[data-t]'); if (!b) return; state.crmTab = b.dataset.t; crmLimit = 50; renderCrm() });
+function renderCrm(){
+  $$('#crmTabs button').forEach(b => b.classList.toggle('on', b.dataset.t === state.crmTab));
+  updateBadge();
+  const body = $('#crmBody');
+  if (state.crmTab === 'calls'){
+    const miss = BOOK.filter(B => !B.lead.isTest && B.cancel == null && B.sched < T && !B.outcome).sort((a, b) => b.sched - a.sched);
+    const up = BOOK.filter(B => !B.lead.isTest && B.cancel == null && B.sched >= T).sort((a, b) => a.sched - b.sched).slice(0, 12);
+    const callRow = B => `<div class="call" data-b="${B.id}"><div class="who"><b>${esc(B.lead.name)}</b><span>${fD(B.sched)} · ${B.channel === 'direct' ? 'samostatně' : 'setter'} · ${esc(B.lead.email)}</span></div>
+      <label class="chk"><input type="checkbox" data-dq ${B.lead.dqSetter ? 'checked' : ''}> Diskvalifikovat</label>
+      <div class="acts"><button class="btn green sm" data-out="attended">Dorazil</button><button class="btn red sm" data-out="no_show">Nedorazil</button><button class="btn ghost sm" data-open="l:${B.lead.id}">Detail</button></div></div>`;
+    body.innerHTML = `<div class="sec"><h3>Hovory bez výsledku ${miss.length ? `<span class="badge">${miss.length}</span>` : ''}</h3><p class="hint">Hovory, které už proběhly a nemají výsledek. Do show-up rate se nepočítají, dokud je nevyplníš.</p>${miss.length ? miss.map(callRow).join('') : '<div class="more">Vše vyplněno. 🎉</div>'}</div>
+      ${recentSet.length ? `<div class="sec"><h3>Právě vyplněné</h3>${recentSet.map(([B, o]) => `<div class="call"><div class="who"><b>${esc(B.lead.name)}</b><span>${fD(B.sched)}</span></div><div class="acts">${o === 'attended' ? '<span class="tag green">Dorazil</span>' : '<span class="tag red">Nedorazil</span>'}<button class="btn ghost sm" data-undo="${B.id}">Vrátit</button></div></div>`).join('')}</div>` : ''}
+      <div class="sec"><h3>Dnes a nadcházející</h3><p class="hint">Rezervace se načítají samy z Calendly a z kalendáře settera.</p>${up.map(B => `<div class="call"><div class="who"><b>${esc(B.lead.name)}</b><span>${fD(B.sched)} · ${B.channel === 'direct' ? 'samostatně' : 'setter'}</span></div><div class="acts">${B.sched === T ? '<span class="tag blue">Dnes</span>' : ''}<button class="btn ghost sm" data-open="l:${B.lead.id}">Detail</button></div></div>`).join('') || '<div class="more">Žádné naplánované hovory.</div>'}</div>`;
+  }
+  if (state.crmTab === 'leads'){
+    const q = plain(crmQ);
+    const l = LEADS.filter(L => !L.isTest).filter(L => !q || plain(L.name + ' ' + L.email).includes(q)).filter(L => {
+      const paid = L.customer && L.customer.firstDay != null;
+      return crmF === 'all' || (crmF === 'q' && L.qualified && !L.dqSetter) || (crmF === 'b' && L.bookings.length) || (crmF === 'a' && L.bookings.some(B => B.outcome === 'attended')) || (crmF === 'c' && paid) || (crmF === 'd' && (!L.qualified || L.dqSetter));
+    }).sort((a, b) => b.day - a.day);
+    body.innerHTML = `<div class="sec"><div class="filters"><input class="field" id="crmQ" placeholder="Hledat jméno nebo e-mail…" value="${esc(crmQ)}"><select class="field" id="crmF">${[['all','Všechny leady'],['q','Kvalifikované'],['b','S rezervací'],['a','Dorazili na hovor'],['c','Klienti'],['d','Vyřazené / diskvalifikované']].map(([v, t]) => `<option value="${v}" ${crmF === v ? 'selected' : ''}>${t}</option>`).join('')}</select><span class="more" style="padding:8px 0">${num(l.length)} leadů</span></div>
+      ${tableHtml([{h:'Vytvořeno'},{h:'Jméno'},{h:'E-mail'},{h:'Zdroj'},{h:'Stav'}], l.map(L => Object.assign([fD(L.day), esc(L.name), esc(L.email), L.ad ? esc(ADS.find(a => a.id === L.ad).name) : 'organicky', leadStatusTag(L)], {_click:'l:' + L.id})), crmLimit)}
+      ${l.length > crmLimit ? '<button class="btn ghost sm" id="crmMore" style="margin-top:10px">Zobrazit další</button>' : ''}</div>`;
+  }
+  if (state.crmTab === 'customers'){
+    const q = plain(crmQ);
+    const l = CUST.filter(c => !c.isTest && c.firstDay != null).filter(c => !q || plain(c.name + ' ' + c.email).includes(q)).sort((a, b) => b.net - a.net);
+    body.innerHTML = `<div class="sec"><div class="filters"><input class="field" id="crmQ" placeholder="Hledat zákazníka…" value="${esc(crmQ)}"><span class="more" style="padding:8px 0">${num(l.length)} zákazníků · LTV celkem ${money(l.reduce((s, c) => s + c.net, 0))}</span></div>
+      ${tableHtml([{h:'Zákazník'},{h:'Typ'},{h:'Produkty'},{h:'Předplatné'},{h:'1. platba'},{h:'LTV', n:1}], l.map(c => Object.assign([esc(c.name), BASKETS[c.type] || 'Jiné', [...new Set(c.pays.filter(p => p.prod).map(p => BASKETS[basketOf(p)]))].join(', '), c.subs.some(s => s.firstPaid && s.end == null) ? '<span class="tag green">Aktivní</span>' : c.subs.length ? '<span class="tag">Ukončené</span>' : '—', c.pre ? 'před 7. 9.' : fD(c.firstDay), money(c.net)], {_click:'c:' + c.id})), crmLimit)}
+      ${l.length > crmLimit ? '<button class="btn ghost sm" id="crmMore" style="margin-top:10px">Zobrazit další</button>' : ''}</div>`;
+  }
+  if (state.crmTab === 'manual'){
+    const recent = PAY.filter(p => p.source === 'manual').sort((a, b) => b.day - a.day).slice(0, 15);
+    body.innerHTML = `<div class="sec"><h3>Přidat platbu mimo Stripe</h3><p class="hint">Převod na účet nebo hotovost. Platba se hned propíše do obratu, hrubého zisku i LTV.</p>
+      <form class="form" id="payForm">
+        <label class="wide">E-mail zákazníka<input class="field" name="email" list="custList" required placeholder="např. jana.novakova@seznam.cz"><datalist id="custList">${CUST.filter(c => !c.isTest).slice(-150).map(c => `<option value="${esc(c.email)}">${esc(c.name)}</option>`).join('')}</datalist></label>
+        <label>Produkt<select class="field" name="prod">${PRODUCTS.filter(p => p.basket !== 'excluded').map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></label>
+        <label>Částka (Kč)<input class="field" name="amount" type="number" min="1" value="${PRODUCTS[0].price}" required></label>
+        <label>Datum platby<input class="field" name="date" type="date" value="${ymd(T)}" max="${ymd(T)}" required></label>
+        <label>Způsob<select class="field" name="how"><option>Bankovní převod</option><option>Hotovost</option></select></label>
+        <div class="wide"><button class="btn" type="submit">Uložit platbu</button></div>
+      </form></div>
+      <div class="sec"><h3>Poslední ruční platby</h3>${tableHtml([{h:'Datum'},{h:'Zákazník'},{h:'Produkt'},{h:'Částka', n:1}], recent.map(p => Object.assign([fD(p.day), esc(p.cust.name), esc(prodName(p)), money(p.amount)], {_click:'c:' + p.cust.id})))}</div>`;
+  }
+}
+$('#crmBody').addEventListener('click', e => {
+  const out = e.target.closest('[data-out]');
+  if (out){
+    const B = BOOK.find(x => x.id === out.closest('[data-b]').dataset.b);
+    B.outcome = out.dataset.out; recentSet.unshift([B, B.outcome]); recentSet = recentSet.slice(0, 6);
+    CACHE.clear(); renderCrm(); toast(`Uloženo: ${B.lead.name} – ${B.outcome === 'attended' ? 'dorazil' : 'nedorazil'}`); return;
+  }
+  const u = e.target.closest('[data-undo]');
+  if (u){ const B = BOOK.find(x => x.id === u.dataset.undo); B.outcome = null; recentSet = recentSet.filter(([x]) => x !== B); CACHE.clear(); renderCrm(); return }
+  if (e.target.id === 'crmMore'){ crmLimit += 100; renderCrm() }
+});
+$('#crmBody').addEventListener('change', e => {
+  if (e.target.matches('[data-dq]')){ const B = BOOK.find(x => x.id === e.target.closest('[data-b]').dataset.b); B.lead.dqSetter = e.target.checked; CACHE.clear(); toast(e.target.checked ? 'Lead označen jako diskvalifikovaný' : 'Diskvalifikace zrušena') }
+  if (e.target.id === 'crmF'){ crmF = e.target.value; crmLimit = 50; renderCrm() }
+  if (e.target.name === 'prod'){ const f = e.target.form; f.amount.value = PROD_BY[e.target.value].price }
+});
+$('#crmBody').addEventListener('input', e => {
+  if (e.target.id === 'crmQ'){ crmQ = e.target.value; const pos = e.target.selectionStart; renderCrm(); const el = $('#crmQ'); el.focus(); el.setSelectionRange(pos, pos) }
+});
+$('#crmBody').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target, email = f.email.value.trim().toLowerCase();
+  let c = CUST.find(x => x.email.toLowerCase() === email);
+  if (!c){ const nm = email.split('@')[0].split(/[._]/).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' '); c = newCustomer({name:nm || email, email, phone:'—'}) }
+  const day = parseYmd(f.date.value) ?? T;
+  addPay(c, f.prod.value, Math.min(day, T), +f.amount.value, {source:'manual'});
+  derive(); renderCrm(); toast(`Platba ${money(+f.amount.value)} uložena`);
+});
+
+/* =====================================================================
+   NASTAVENÍ
+   ===================================================================== */
+$('#setTabs').addEventListener('click', e => { const b = e.target.closest('[data-t]'); if (!b) return; state.setTab = b.dataset.t; renderSettings() });
+const MAPPINGS = [
+  ['Calendly', 'event_type', 'Úvodní konzultace (30 min)', 'rezervace – prodejní hovor'],
+  ['Calendly', 'event_type', 'Porada týmu', 'interní – nepočítá se'],
+  ['Google Kalendář', 'popis události', 'obsahuje „#setter“', 'kanál = setter'],
+  ['Formuláře', 'pole „Rozpočet“', '< 10 000 Kč', 'vyřazen dotazníkem'],
+  ['Mini CRM', 'výsledek', 'Dorazil / Nedorazil', 'attended / no_show']
+];
+function renderSettings(){
+  $$('#setTabs button').forEach(b => b.classList.toggle('on', b.dataset.t === state.setTab));
+  const body = $('#setBody');
+  if (state.setTab === 'conn'){
+    body.innerHTML = `<div class="sec"><h3>Napojení</h3><p class="hint">Všechna napojení jsou jen pro čtení – dashboard neumí poslat peníze ani změnit reklamu. Klíče vkládáš sám do Vercel → Settings → Environment Variables, nikdy do chatu.</p>
+      <div class="conn">${SOURCES.map(s => `<div class="cc ${s.warn ? 'old' : ''}" data-src="${s.id}"><div class="top2"><div class="ico" style="background:${s.c}">${s.n[0]}</div><div><div class="n">${esc(s.n)}</div><div class="w">${esc(s.what)}</div></div></div>
+        <div class="meta"><span class="tag green">jen čtení</span><span>${esc(s.acc)}</span></div><div class="meta">Synchronizace: ${esc(s.freq)}</div>
+        <div class="foot"><span class="sdot" style="${s.warn ? 'background:var(--setter)' : ''}"></span><span class="t">${s.warn ? 'Pozor – ' : 'Poslední běh '}${esc(s.t)}</span><span style="flex:1"></span><button class="btn ghost sm" data-sync="${s.id}">Synchronizovat teď</button></div></div>`).join('')}
+        <div class="cc" style="border-style:dashed;align-items:center;justify-content:center;text-align:center;color:var(--mute)"><div style="font-size:22px">＋</div><div class="n" style="color:var(--ink)">Přidat zdroj</div><div class="w">CRM, Airtable, Notion, Google Sheets…</div><button class="btn sm" id="addSrc" style="margin-top:6px">Přidat</button></div>
+      </div></div>
+      <div class="sec"><h3>Mapování stavů</h3><p class="hint">Jak se hodnoty z tvých nástrojů překládají na stavy v analytice (tabulka source_mappings).</p>${tableHtml([{h:'Zdroj'},{h:'Pole'},{h:'Hodnota'},{h:'Znamená'}], MAPPINGS.map(m => m.map(esc)))}</div>`;
+  }
+  if (state.setTab === 'products'){
+    const unassigned = PAY.filter(p => !p.prod && !p.refund);
+    body.innerHTML = `${unassigned.length ? `<div class="sec" style="background:var(--errB);box-shadow:none;border:1px solid var(--errL)"><h3 style="color:var(--errT)">${unassigned.length} ${pl(unassigned.length, 'platba', 'platby', 'plateb')} bez produktu</h3><p class="hint" style="color:var(--errT)">Bez produktu nejde spočítat hrubý zisk podle typu, LTV ani pokračování klientů.</p>
+      ${unassigned.map(p => `<div class="call"><div class="who"><b>${esc(p.cust.name)}</b><span>${fD(p.day)} · Stripe · ${money(p.amount)}</span></div><div class="acts"><select class="inline-sel" data-assign="${p.id}"><option value="">Přiřadit produkt…</option>${PRODUCTS.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join('')}</select></div></div>`).join('')}</div>` : ''}
+      <div class="sec"><h3>Produkty</h3><p class="hint">Každý produkt potřebuje košík a náklad na dodání (COGS). Odhad je na kartě Hrubý zisk označený.</p>
+      <div class="tbl-wrap" style="max-height:none"><table><thead><tr><th>Produkt</th><th>Košík</th><th class="n">Cena</th><th class="n">COGS</th><th></th><th>Stripe</th></tr></thead><tbody>
+      ${PRODUCTS.map(p => `<tr><td>${esc(p.name)}</td><td><select class="inline-sel" data-basket="${p.id}">${Object.entries(BASKETS).map(([k, v]) => `<option value="${k}" ${p.basket === k ? 'selected' : ''}>${v}</option>`).join('')}</select></td><td class="n">${money(p.price)}</td><td class="n"><input class="inline-in" type="number" min="0" value="${p.cogs}" data-cogs="${p.id}"></td><td>${p.est ? '<span class="est">odhad</span>' : ''}</td><td><span class="tag">${p.stripe}</span></td></tr>`).join('')}
+      </tbody></table></div></div>`;
+  }
+  if (state.setTab === 'team'){
+    const team = [['Ty', 'ty@firma.cz', 'Vlastník', 'Vše včetně nastavení a napojení'], ['Petra K.', 'petra@firma.cz', 'Closer', 'Výsledky hovorů, leady, ruční platby'], ['Martin S.', 'martin@firma.cz', 'Setter', 'Leady, diskvalifikace, vlastní rezervace']];
+    body.innerHTML = `<div class="sec"><h3>Tým</h3><p class="hint">Dashboard je za přihlášením. Přístup má jen tým z tohoto seznamu.</p>${tableHtml([{h:'Jméno'},{h:'E-mail'},{h:'Role'},{h:'Co může'}], team.map(t => [esc(t[0]), esc(t[1]), `<span class="tag blue">${t[2]}</span>`, `<span style="color:var(--mute)">${t[3]}</span>`]))}
+      <div class="filters" style="margin-top:14px;margin-bottom:0"><input class="field" id="invEmail" placeholder="e-mail kolegy"><select class="field" style="min-width:140px"><option>Closer</option><option>Setter</option><option>Vlastník</option></select><button class="btn sm" id="invite">Pozvat</button></div></div>`;
+  }
+  if (state.setTab === 'units'){
+    body.innerHTML = `<div class="sec"><h3>Měna, DPH a časové pásmo</h3><p class="hint">Všechny dny se počítají v tvém časovém pásmu. Cizí měny se přepočítají kurzem ze dne platby.</p>
+      <div class="form"><label>Základní měna<select class="field" id="setCur"><option value="CZK" ${state.cur === 'CZK' ? 'selected' : ''}>CZK – česká koruna</option><option value="EUR" ${state.cur === 'EUR' ? 'selected' : ''}>EUR – euro</option></select></label>
+      <label>Časové pásmo<select class="field" id="setTz"><option ${state.tz === 'Europe/Prague' ? 'selected' : ''}>Europe/Prague</option><option ${state.tz === 'Europe/Bratislava' ? 'selected' : ''}>Europe/Bratislava</option></select></label>
+      <label>DPH<select class="field" id="setVat"><option value="0" ${state.vat === 0 ? 'selected' : ''}>Neplátce DPH</option><option value="0.21" ${state.vat === .21 ? 'selected' : ''}>Plátce – 21 %</option></select></label>
+      <label>Reklama běží od<input class="field" type="date" value="${ymd(AD_START)}" disabled></label></div></div>`;
+  }
+  if (state.setTab === 'defs'){
+    body.innerHTML = `<div class="sec"><h3>Moje odchylky od definic</h3><p class="hint">Čísla se počítají přesně podle definic z 03_METRIKY.md. Každá schválená změna se zapíše sem i s důvodem.</p>
+      ${tableHtml([{h:'Datum'},{h:'Metrika'},{h:'Změna'},{h:'Proč'}], [[fD(T - 12), 'Výhry', 'Konzultace 1:1 (košík Jiné) se nepočítá jako výhra', 'Jde o doplněk existujícím klientům'], [fD(T - 12), 'Reklama', 'Jen Meta Ads, jiné kanály zatím nejsou', 'Jiné kanály nepoužívám']])}</div>`;
+  }
+}
+$('#setBody').addEventListener('click', e => {
+  const s = e.target.closest('[data-sync]');
+  if (s){
+    const src = SOURCES.find(x => x.id === s.dataset.sync);
+    s.disabled = true; s.innerHTML = '<span class="spin"></span> Synchronizuji…';
+    setTimeout(() => { src.warn = false; src.t = 'právě teď'; renderAnalyticsWarnOnly(); renderSettings(); toast(`${src.n}: synchronizace proběhla v pořádku`) }, 1300);
+  }
+  if (e.target.id === 'addSrc') openModal('Přidat zdroj dat', 'Claude se nejdřív podívá do dokumentace nástroje a vybere nejspolehlivější cestu.', `<div class="hbars">${[['1. Oficiální API, konektor nebo webhook', 'jen čtení – nejspolehlivější'], ['2. Export do CSV / Excelu', 'i opakovaný'], ['3. Make nebo Zapier', 'když nástroj nemá API'], ['4. Čtení přes prohlížeč', 'jen na první analýzu – pak trvalejší řešení']].map(x => `<div class="sec" style="margin:0;box-shadow:none;border:1px solid #eee"><h3>${x[0]}</h3><p class="hint" style="margin:0">${x[1]}</p></div>`).join('')}</div>`);
+  if (e.target.id === 'invite'){ const v = $('#invEmail').value.trim(); toast(v ? `Pozvánka pro ${v} připravena (prototyp – nic se neodeslalo)` : 'Zadej e-mail kolegy') }
+});
+$('#setBody').addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.basket){ PROD_BY[t.dataset.basket].basket = t.value; derive(); toast('Košík uložen – čísla přepočítána') }
+  if (t.dataset.cogs){ const p = PROD_BY[t.dataset.cogs]; p.cogs = Math.max(0, +t.value || 0); p.est = false; derive(); renderSettings(); toast('COGS uloženo – hrubý zisk přepočítán') }
+  if (t.dataset.assign){ if (!t.value) return; PAY.find(p => p.id === t.dataset.assign).prod = t.value; derive(); renderSettings(); toast('Produkt přiřazen') }
+  if (t.id === 'setCur'){ state.cur = t.value; store.set('puls.cur', state.cur); setMoneyFmt(); CACHE.clear(); toast(`Základní měna: ${state.cur}`) }
+  if (t.id === 'setTz'){ state.tz = t.value; store.set('puls.tz', state.tz); toast(`Časové pásmo: ${state.tz}`) }
+  if (t.id === 'setVat'){ state.vat = +t.value; store.set('puls.vat', state.vat); derive(); toast(state.vat ? 'Počítám s DPH 21 %' : 'Neplátce DPH') }
+});
+
+/* =====================================================================
+   PŘIHLÁŠENÍ + START
+   ===================================================================== */
+function enterApp(){
+  $('#login').hidden = true; $('#app').hidden = false;
+  
+  if (store.get('puls.sampleHidden', false)) $('#sampleBar').hidden = true;
+  if (!layout.order[state.tab]) state.tab = layout.tabOrder[0];
+  go('analytics');
+}
+$('#loginSend').addEventListener('click', () => {
+  const v = $('#loginEmail').value.trim() || 'ty@firma.cz';
+  store.set('puls.email', v); $('#loginTo').textContent = v;
+  $('#loginStep1').hidden = true; $('#loginStep2').hidden = false;
+});
+$('#loginEmail').addEventListener('keydown', e => { if (e.key === 'Enter') $('#loginSend').click() });
+$('#loginBack').addEventListener('click', () => { $('#loginStep1').hidden = false; $('#loginStep2').hidden = true });
+$('#loginOpen').addEventListener('click', () => { store.set('puls.logged', true); enterApp() });
+$('#avatarBtn').addEventListener('click', () => { $('#userMenu').hidden = !$('#userMenu').hidden });
+$('#logout').addEventListener('click', () => { store.del('puls.logged'); $('#app').hidden = true; $('#login').hidden = false; $('#loginStep1').hidden = false; $('#loginStep2').hidden = true; $('#userMenu').hidden = true });
+$('#sampleHide').addEventListener('click', () => { $('#sampleBar').hidden = true; store.set('puls.sampleHidden', true) });
+let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => $$('#grid [data-chart]').forEach(drawChart), 150) });
+
+
+if (store.get('puls.logged', false)) enterApp();
+</script>
+</body>
+</html>
