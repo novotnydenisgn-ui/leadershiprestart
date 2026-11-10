@@ -36,6 +36,22 @@ export const PAGE_PATHS = {
   '/pripadova-studie': 'pripadova-studie',
   '/rezervovano': 'rezervovano',
   '/dekujeme-za-zajem': 'dekujeme-za-zajem',
+  // Šablony pro klienty (Velín → projekt Šablony, rozcestník /sablony): /sablona-<co> → /p/sablony-<co>
+  '/sablona-lp': 'sablony',
+  '/sablona-dekujeme': 'sablony-dekujeme',
+  '/sablona-vitej': 'sablony-vitej-v-programu',
+  '/sablona-zacni-tady': 'sablony-zacni-tady',
+  '/sablona-brand-manual': 'sablony-brand-manual',
+  '/sablona-links': 'sablony-links',
+  '/sablona-cenik': 'sablony-cenik',
+  // odkazy mezi šablonami vedou na /p/<slug> – ať fungují i tady
+  '/p/sablony': 'sablony',
+  '/p/sablony-dekujeme': 'sablony-dekujeme',
+  '/p/sablony-vitej-v-programu': 'sablony-vitej-v-programu',
+  '/p/sablony-zacni-tady': 'sablony-zacni-tady',
+  '/p/sablony-brand-manual': 'sablony-brand-manual',
+  '/p/sablony-links': 'sablony-links',
+  '/p/sablony-cenik': 'sablony-cenik',
 };
 // Rezervace termínu (po kvalifikaci v dotazníku): /<cesta> → stránka /r/<slug> v aplikaci Dotazníky
 export const BOOKING_PATHS = {};
