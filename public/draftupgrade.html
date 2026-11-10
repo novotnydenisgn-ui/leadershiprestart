@@ -3,10 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DRAFT ceník · Launch Boost / Launch Boost Master | Leadership Restart</title>
+<title>DRAFT ceník · Leadership Up-Grade / Launch Boost | Leadership Restart</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Draft: Leadership Up-Grade jako jeden balíček Launch Boost — splátky 14× 5 450 / 9× 8 450 Kč, při koupi hned −15 % (od 47 900 Kč se slevou za pokračování z Restartu).">
+<meta name="description" content="Draft: Leadership Up-Grade Standard a Launch Boost — půlroční program, se zálohou z Restartu ×4 od 6× 5 450 Kč, při koupi hned −15 %.">
 <!--
+  10. 11. 2026 (v6): Leadership Up-Grade Standard (52 700) / Launch Boost (97 400, protokol na 2 funnely); záloha z Restartu 5 000 ×4 = −20 000
+  → 6× 5 450 / 6× 12 900; skupinové hovory 2× měsíčně; obsah Launch Boostu jako zamčený blok „Protokol Launch Boost“ na kartě.
+  10. 11. 2026 (v5): dvě varianty na 6 měsíců — Leadership Up-Grade (pokračování, 6× 5 450 pro absolventy) a Launch Boost
+  (Up-Grade + Velín, péče o reklamu, implementační konzultace, 6× 12 900); běžná cena vyšší, absolventi Restartu levněji, výchozí „kupuju hned“ −15 %.
+  10. 11. 2026 (v4): varianty Launch Boost Standard (6 měsíců, 14× 5 450) / Launch Boost Mastery (12 měsíců za 2×, 14× 10 900);
+  kalkulačka = varianta × platba (splátky / kupuju hned −15 %) × sleva za pokračování. Před ceny přidán obsah z /cenik-upgrade
+  (karty „Co v Up-Grade dostáváš“) a sekce Velín přesunuta nad ceník — stránka funguje jako prezentace, ceny až na konci.
   /draftupgrade (31. 10. 2026): NOVÁ FILOZOFIE Up-Grade = koupě celého balíčku Launch Boost (1. verze 72 000 Kč / 12× 6 000 / 9× 8 000;
   2. verze: splátky 14× 5 450 = 76 300 / 9× 8 450 = 76 050, kupuješ hned −15 % zaokrouhleno na …900, sleva za pokračování 5 000 z Restartu ×4 (draft přepínač ×3)).
   Postaveno z cenik-implementace.html; kalkulačka = inline skript dole. Jen draft (noindex) — oficiální
@@ -721,7 +728,7 @@
   .lb-tabs button:focus-visible{outline:2px solid #f6d47c;outline-offset:2px}
   .lb-badge{padding:2px 7px 1px;border-radius:999px;background:rgba(233,182,79,.18);color:#f6d47c;opacity:1!important}
 
-  .lb-price{text-align:center;margin:22px 0 4px;min-height:132px}
+  .lb-price{text-align:center;margin:22px 0 4px;min-height:90px}
   .lb-was{display:block;min-height:20px;font-size:15px;font-weight:700;color:var(--dk-muted);
     text-decoration-color:var(--lr-gold);text-decoration-thickness:2px}
   .lb-price .c-price{margin:2px 0 4px}
@@ -773,6 +780,78 @@
     color:var(--dk-muted);padding:4px 9px;border-radius:6px;cursor:pointer}
   .lb-xswitch button.on{background:#f6d47c;color:#1a0d06}
   @media(prefers-reduced-motion:reduce){.lb-pop{animation:none}}
+
+  /* draft 10. 11. 2026: varianta Up-Grade / Launch Boost + přepínač platby kupuju hned / splátky + výsledek a řádky jen pro jednu variantu */
+  .lb-tabs.lb-tabs-2{grid-template-columns:1fr 1fr}
+  .lb-card:not(.is-master) .only-lb,.lb-card.is-master .only-ug{display:none}
+  .lb-result{margin:16px 0 4px;padding:16px 18px;border-radius:16px;border:1px solid rgba(233,182,79,.45);background:rgba(233,182,79,.07)}
+  .lb-result small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#f6d47c;margin-bottom:6px}
+  .lb-result p{font-size:14.5px;line-height:1.6;color:var(--dk-text);margin:0}
+  .lb-result p b{color:#fff}
+  .lb-v-math b small{font-size:13px}
+  .lb-proto{margin-top:18px;padding:16px 18px 6px;border-radius:16px;border:1px dashed rgba(233,182,79,.45);transition:opacity .4s,border-color .4s,background .4s}
+  .lb-card:not(.is-master) .lb-proto{opacity:.5}
+  .lb-card.is-master .lb-proto{border-style:solid;border-color:rgba(233,182,79,.7);background:rgba(233,182,79,.07)}
+  .lb-proto-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#fff;font-size:15px;margin-bottom:8px}
+  .lb-proto-h>.ico{width:18px;height:18px;color:#f6d47c}
+  .lb-proto-h span{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;color:#f6d47c}
+  .lb-proto-h span .ico{width:14px;height:14px}
+  .lb-tabs.lb-tabs-2 button b{font-size:15.5px}
+  .lb-paysw{display:flex;justify-content:center;gap:4px;margin:10px auto 0;padding:3px;border-radius:12px;width:max-content;max-width:100%;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09)}
+  .lb-paysw button{-webkit-appearance:none;appearance:none;border:0;background:none;font:inherit;font-size:13px;font-weight:800;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;color:#aeb6c2;transition:background .25s,color .25s}
+  .lb-paysw button[aria-pressed="true"]{color:#1a1206;background:var(--c-gold-grad)}
+  .lb-paysw button[aria-pressed="true"] .lb-badge{background:rgba(26,18,6,.15);color:#1a1206}
+  .lb-paysw button:focus-visible{outline:2px solid #f6d47c;outline-offset:2px}
+  .lb-paysw .lb-badge{font-size:11px}
+
+  /* Co v Up-Grade dostáváš — rozbalovací karty (převzato z /cenik-upgrade) */
+  .xc-group{margin-top:44px;text-align:left;position:relative}
+  .xc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid var(--dk-brd)}
+  .xc-head b{font-family:"League Spartan",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:13px;color:var(--lr-gold-light)}
+  .xc-head span{font-size:14px;color:var(--dk-muted)}
+  .xcards{list-style:none;margin:0;padding:0;display:grid;gap:10px;height:470px;
+    transition:grid-template-columns .55s cubic-bezier(.2,.7,.2,1),grid-template-rows .55s cubic-bezier(.2,.7,.2,1)}
+  .xcard{position:relative;overflow:hidden;border-radius:22px;border:1px solid var(--dk-brd);cursor:pointer;
+    min-width:0;min-height:0;background:#0d0c0a;outline:none;isolation:isolate;transition:border-color .35s,box-shadow .35s}
+  .xcard[data-active="true"]{border-color:rgba(233,182,79,.55);box-shadow:0 24px 70px rgba(233,182,79,.14);cursor:default}
+  .xcard:focus-visible{outline:2px solid var(--lr-gold-light);outline-offset:3px}
+  .xcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.5);
+    transform:scale(1.1);transition:filter .45s ease,transform .7s ease}
+  .xcard[data-active="true"] img{filter:grayscale(0) brightness(.72);transform:scale(1)}
+  .xc-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,7,5,.97) 0%,rgba(8,7,5,.78) 36%,rgba(8,7,5,.18) 72%,rgba(8,7,5,.05))}
+  .xc-num{position:absolute;top:14px;right:18px;font:800 44px/1 "League Spartan",sans-serif;color:rgba(233,182,79,.28);transition:color .35s}
+  .xcard[data-active="true"] .xc-num{color:rgba(233,182,79,.5)}
+  .xc-vt{position:absolute;left:50%;bottom:26px;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;
+    font:800 14px/1.6 "League Spartan",sans-serif;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.85);
+    white-space:nowrap;max-height:calc(100% - 90px);overflow:hidden;text-overflow:ellipsis;transition:opacity .3s}
+  .xcard[data-active="true"] .xc-vt{opacity:0}
+  .xc-body{position:absolute;left:0;bottom:0;width:100%;min-width:300px;padding:clamp(20px,2.4vw,30px);
+    display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .xc-body>*{opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .35s ease}
+  .xcard[data-active="true"] .xc-body>*{opacity:1;transform:none}
+  .xcard[data-active="true"] .xc-body>:nth-child(1){transition-delay:.12s}
+  .xcard[data-active="true"] .xc-body>:nth-child(2){transition-delay:.18s}
+  .xcard[data-active="true"] .xc-body>:nth-child(3){transition-delay:.24s}
+  .xcard[data-active="true"] .xc-body>:nth-child(4){transition-delay:.3s}
+  .xc-ico{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:var(--lr-gold-light);
+    background:rgba(233,182,79,.12);border:1px solid rgba(233,182,79,.4);margin-bottom:4px}
+  .xc-ico .ico{width:24px;height:24px}
+  .xc-tag{font-family:"League Spartan",sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lr-gold-light)}
+  .xc-body h3{font-size:clamp(20px,2.1vw,27px);line-height:1.15;color:#fff;margin:0;max-width:560px}
+  .xc-body p{font-size:15px;line-height:1.6;color:#cfd2d6;max-width:560px;margin:0}
+  .xc-body p b{color:#fff}
+  .xc-body p a{color:var(--lr-gold-light)}
+  @media(max-width:767px){
+    .xcards{height:auto;min-height:0}
+    .xcards[data-n="5"]{height:680px}.xcards[data-n="4"]{height:600px}
+    .xc-vt{writing-mode:horizontal-tb;transform:translateY(50%);left:20px;right:70px;bottom:50%;max-height:none;font-size:13px}
+    .xc-num{font-size:30px;top:50%;transform:translateY(-50%)}
+    .xcard[data-active="true"] .xc-num{top:14px;transform:none}
+    .xc-body{min-width:0}
+  }
+  @media(prefers-reduced-motion:reduce){.xcards,.xcard img,.xc-body>*{transition:none}}
 </style>
 </head>
 <body>
@@ -817,11 +896,11 @@
 <div class="hero-pin">
 <section class="hero-up hero-impl">
   <div class="wrap">
-    <span class="lr-kicker">Leadership Up-Grade · celý balíček</span>
-    <h1 class="display">Jeden balíček. Jeden cíl:<br><span class="lr-grad-text">4× tvůj byznys</span></h1>
+    <span class="lr-kicker">Leadership Up-Grade · půlroční program</span>
+    <h1 class="display">Půl roku. Jeden cíl:<br><span class="lr-grad-text">4× tvůj byznys</span></h1>
     <p class="h-sub" style="font-size:clamp(16px,1.6vw,19px);max-width:700px;margin:0 auto">
-    Žádné skládání měsíčních úrovní. Pořídíš si <b>celý Launch Boost</b> — marketing, automatizace
-    a zefektivnění všeho, co dnes brzdí tvůj zisk. Postavíme to spolu a dotáhneme do výsledku.</p>
+    Marketing, automatizace a zefektivnění všeho, co dnes brzdí tvůj zisk.
+    A když chceš zrychlit, <b>Launch Boost</b> — nastavíme to spolu a dotáhneme do výsledku.</p>
 
     <div class="anchor-band" style="margin-top:34px">
       <div class="lr-card anchor-card">
@@ -832,17 +911,17 @@
       <div class="lr-card anchor-card anchor-hero">
         <small>Garance návratnosti</small>
         <b class="lr-grad-text">1 : 3</b>
-        <span>dokud reklama nevydělává 1 : 3, pracujeme s tebou dál</span>
+        <span>v Launch Boostu — jinak další měsíce zdarma</span>
       </div>
       <div class="lr-card anchor-card">
-        <small><svg class="ico"><use href="#i-calendar"/></svg>Splátky</small>
+        <small><svg class="ico"><use href="#i-calendar"/></svg>Pro absolventy Restartu</small>
         <b>od 5 450 Kč</b>
-        <span>měsíčně jako dřív Grow — nebo kup hned a ušetři 15 %</span>
+        <span>měsíčně · se zálohou z Restartu ×4</span>
       </div>
     </div>
 
     <div class="hero-cta" style="text-align:center;margin-top:28px">
-      <a class="btn btn-lr" data-cta-pos="lb_hero" href="#investice">Chci vidět cenu</a>
+      <a class="btn btn-lr" data-cta-pos="lb_hero" href="#obsah">Co v programu dostanu</a>
       <p class="h-sub" style="font-size:13px;margin:12px auto 0;max-width:520px;opacity:.8">Nebo rovnou <a href="/up-great-dotaznik" style="color:var(--lr-gold-light);font-weight:700">krátký dotazník (2 min)</a> → nezávazná schůzka o tvém byznysu.</p>
     </div>
   </div>
@@ -893,162 +972,134 @@
   </div>
 </section>
 
-<!-- ======================= INVESTICE — BALÍČEK + KALKULAČKA ======================= -->
-<section class="section sec-dark cenik-sec" id="investice">
-  <div class="wrap">
-    <div style="text-align:center;position:relative">
-      <span class="lr-kicker">Investice</span>
-      <h2 class="display h-section" style="color:#fff">Launch Boost — <span class="lr-grad-text">celý balíček</span></h2>
-      <p class="h-sub" style="margin:0 auto;max-width:680px">Jedna cena za celé řešení. Kup hned se slevou 15 %, nebo splácej stejně jako dřív měsíční členství —
-      jen <b>méně plateb</b> a máš celý balíček.</p>
-    </div>
+<!-- ======================= OBSAH — CO V PROGRAMU DOSTÁVÁŠ (převzato z /cenik-upgrade, 10. 11. 2026) ======================= -->
+<section class="section sec-dark sec-tint-blue" id="obsah">
+  <div class="wrap" style="text-align:center">
+    <span class="lr-kicker">Obsah programu</span>
+    <h2 class="display h-section">Co v Up-Grade <span class="lr-grad-text">dostáváš</span></h2>
+    <p class="h-sub" style="margin:0 auto;max-width:680px">Nejde jen o coaching ani jen o marketing.
+    Propojujeme <b>mentoring, komunitu podnikatelů, skupinové hovory, vzdělávání, marketingové postupy
+    a šablony, software i praktickou implementaci</b> — na podnikání už nejsi sám.</p>
 
-    <div class="lr-card cena-card v-launch lb-card reveal">
-      <div class="c-rib-clip"><div class="c-ribbon r-launch">Celý balíček</div></div>
-
-      <!-- levá strana: co je v balíčku -->
-      <div class="lb-left">
-        <div class="c-name" id="lbName">Launch Boost</div>
-        <div class="c-tag">kompletní balíček Leadership Up-Grade</div>
-        <div class="c-motto">Postavme, spusťme a znásobme to společně.</div>
-        <ul class="c-list c-list-top">
-          <li class="gift"><svg class="ico"><use href="#i-target"/></svg>Cíl 4× tvůj byznys — plán, čísla a ekonomika kampaně hned na začátku</li>
-        </ul>
-        <ul class="c-list">
-          <li><svg class="ico"><use href="#i-compass"/></svg><span><b>Úvodní strategická konzultace</b> — cíle, nabídka, ekonomika kampaně a plán</span></li>
-          <li><svg class="ico"><use href="#i-magnet"/></svg><span><b>Marketing</b> — funnel, texty, dotazník, reklama; klíčové části dotahujeme my</span></li>
-          <li><svg class="ico"><use href="#i-video"/></svg><span><b>1–2 půldenní natáčení</b> podle potřeby projektu</span></li>
-          <li><svg class="ico"><use href="#i-settings"/></svg><span><b>Automatizace ve Velínu</b> — CRM, follow-up, rezervace, fakturace a reporty (aplikace v ceně)</span></li>
-          <li><svg class="ico"><use href="#i-phone"/></svg><span><b>Prodej s Denisem</b> — zpětná vazba z nahrávek hovorů, prodejní scripty, ladění procesu</span></li>
-          <li><svg class="ico"><use href="#i-trend"/></svg><span><b>Zefektivnění</b> — ceny, procesy a delegování pro vyšší zisk z každé zakázky</span></li>
-          <li><svg class="ico"><use href="#i-users"/></svg><span><b>Mentoring 1 : 1</b> 2–4× měsíčně + <b>8× focus call</b> a <b>8× strategický hovor</b></span></li>
-          <li><svg class="ico"><use href="#i-template"/></svg><span>Komunita Up-Grade, vzdělávací sekce, šablony a prompty</span></li>
-          <li><svg class="ico"><use href="#i-chart"/></svg><span><b>Vyhodnocování a optimalizace</b>, dokud reklama nevydělává min. 1 : 3</span></li>
-        </ul>
-      </div>
-
-      <!-- pravá strana: kalkulačka ceny -->
-      <div class="lb-right">
-        <div class="lb-tabs" role="group" aria-label="Způsob platby">
-          <button type="button" data-pay="once" aria-pressed="false"><b>Kupuješ hned</b><small class="lb-badge">−15 %</small></button>
-          <button type="button" data-pay="m14" aria-pressed="true"><b>Launch Boost</b><small>14× 5 450 Kč</small></button>
-          <button type="button" data-pay="m9" aria-pressed="false"><b>Launch Boost Master</b><small>9× 8 450 Kč</small></button>
-        </div>
-
-        <div class="lb-price">
-          <s class="lb-was" id="lbWas"></s>
-          <div class="c-price p-launch"><span id="lbBig">5 450</span><small>Kč</small><em id="lbPer">/ měsíc</em></div>
-          <div class="c-eur" id="lbEur">≈ 218 € měsíčně</div>
-          <div class="lb-plan" id="lbPlan">14× 5 450 Kč · celkem 76 300 Kč</div>
-          <div class="lb-hint" id="lbHint">Měsíčně jako dřív Grow — ale máš celý balíček</div>
-        </div>
-
-        <!-- sleva za pokračování -->
-        <div class="lb-voucher" id="lbVoucherBox">
-          <div class="lb-v-head"><svg class="ico"><use href="#i-gift"/></svg><b>Pokračuješ z Leadership Restartu?</b></div>
-          <p>Slevu <b>5 000 Kč za plné nasazení</b> nenecháš propadnout — při pokračování ji
-          <b><span class="lb-x">×4</span> znásobíme</b>. Tvůj byznys chceme taky ×4.</p>
-          <div class="lb-v-math" aria-hidden="true">
-            <span>5 000 Kč</span><i class="lb-x">×4</i><b><span id="lbVoucherSum">20 000</span> Kč</b>
-          </div>
-          <button type="button" class="lb-v-btn" id="lbVoucher" aria-pressed="false">Uplatnit slevu <span>−<span class="lb-dval">20 000</span> Kč</span></button>
-        </div>
-
-        <!-- rozpis -->
-        <dl class="lb-sum">
-          <div><dt id="lbListLbl">Cena na splátky</dt><dd><span id="lbList">76 300</span> Kč</dd></div>
-          <div id="lbRowV" hidden><dt>Sleva za pokračování <span class="lb-x">×4</span></dt><dd class="neg">−<span class="lb-dval">20 000</span> Kč</dd></div>
-          <div id="lbRowO" hidden><dt>Kupuješ hned −15 %</dt><dd class="neg">−<span id="lbOnceVal">10 800</span> Kč</dd></div>
-          <div class="tot"><dt>Celkem zaplatíš</dt><dd><span id="lbTotal">76 300</span> Kč</dd></div>
-        </dl>
-        <div class="lb-save" id="lbSave" hidden>Ušetříš <b><span id="lbSaveVal">0</span> Kč</b></div>
-
-        <a class="btn btn-launch" data-cta-pos="lb_buy" href="/up-great-dotaznik">Chci celý balíček</a>
-        <div class="c-note"><b>Garance: do 3 měsíců je systém spuštěný.</b> Pokud návratnost ještě nebude
-        1 : 3 (např. 10 000 Kč do reklamy → min. 30 000 Kč podle přesně definované ekonomiky kampaně),
-        pracujeme s tebou dál — dokud jí nedosáhneme.</div>
-      </div>
-
-      <!-- třetí sloupec: co navíc přináší Launch Boost Master -->
-      <aside class="lb-bonus" aria-label="Navíc v Launch Boost Master">
-        <div class="lb-b-head">
-          <svg class="ico"><use href="#i-crown"/></svg>
-          <div><small id="lbBKick">Launch Boost</small><b id="lbBTitle">Co máš v ceně</b></div>
-        </div>
-
-        <!-- dlaždice kreslí kalkulačka podle zvolené záložky (BONUS ve skriptu níže) -->
-        <div class="lb-b-tiles" id="lbBonus"></div>
-
-        <table class="lb-b-cmp">
-          <thead><tr><th></th><th>Launch Boost</th><th>Master</th></tr></thead>
-          <tbody>
-            <tr><td>Celý balíček</td><td>✓</td><td>✓</td></tr>
-            <tr><td>Individuální coaching</td><td>1× měsíčně</td><td>2× měsíčně</td></tr>
-            <tr><td>Software Velín</td><td>po dobu balíčku</td><td>napořád zdarma</td></tr>
-            <tr><td>Splátky</td><td>14× 5 450</td><td>9× 8 450</td></tr>
-            <tr><td>Celkem</td><td>76 300 Kč</td><td>76 050 Kč</td></tr>
-          </tbody>
-        </table>
-
-        <div class="lb-b-foot">
-          <button type="button" class="lb-b-cta" id="lbToMaster">Odemknout vše s Masterem · 9×&nbsp;8&nbsp;450&nbsp;Kč</button>
-          <div class="lb-b-ok"><svg class="ico"><use href="#i-check"/></svg>Vybráno — všechno odemčené je v ceně</div>
-        </div>
-      </aside>
-    </div>
-
-    <!-- co dál / alternativy -->
-    <div class="cenik-group-h"><b>Další možnosti</b><span>když chceš všechno delegovat, nebo po balíčku pokračovat</span></div>
-    <div class="extra-grid">
-      <div class="lr-card extra-card reveal">
-        <span class="extra-ico"><svg class="ico"><use href="#i-crown"/></svg></span>
-        <div>
-          <b>Elite — udělejte to za mě</b>
-          <div class="extra-price">120 000 Kč <small>· max. 4 klienti</small></div>
-          <p>Vše z Launch Boostu, ale <b>celý systém postavíme a spustíme za tebe</b> — ty dodáš sebe
-          a rozhodnutí. Navíc licence Velínu v hodnotě 45 000 Kč zdarma.</p>
-        </div>
-      </div>
-      <div class="lr-card extra-card reveal">
-        <span class="extra-ico"><svg class="ico"><use href="#i-settings"/></svg></span>
-        <div>
-          <b>Po balíčku: správa kampaní</b>
-          <div class="extra-price">12 000–15 000 Kč <small>/ měsíc</small></div>
-          <p>Systém máš postavený a funguje. Když nechceš reklamu spravovat sám,
-          <b>převezmeme přímou správu kampaní</b> a dál optimalizujeme. Velín samostatně
-          pro absolventy za 400 Kč / měsíc.</p>
-        </div>
-      </div>
-    </div>
-
-    <p class="cena-note">
-      Nevíš, jestli je balíček teď pro tebe? Od toho je úvodní schůzka.
-      <a data-cta-pos="text" href="/up-great-dotaznik">Vyplň krátký dotazník</a>
-      a projdeme tvůj byznys, čísla a to, kde máš největší páku.
-    </p>
-    <p class="cena-note" style="margin-top:14px;font-size:13px;opacity:.8">
-      Ceny v eurech jsou orientační (přepočet kurzem 25 Kč/€, zaokrouhleno). Fakturujeme v korunách.
-    </p>
-
-    <!-- poznámky k draftu — před publikací smazat -->
-    <div class="draft-notes">
-      <b>Poznámky k draftu (31. 10. 2026) — před publikací smazat</b>
-      <ul>
-        <li><b>Násobek slevy za pokračování:</b>
-          <span class="lb-xswitch" role="group" aria-label="Násobek slevy">
-            <button type="button" data-mult="3">×3 = 15 000 Kč</button><button type="button" data-mult="4" class="on">×4 = 20 000 Kč</button>
-          </span> — přepni a uvidíš dopad na cenu (jde i přes adresu <code>?x=3</code>).</li>
-        <li><b>Ceny v2:</b> splátky drží velikost členství (5 450 = Grow, 8 450 = pod Mastery 8 800) → 14× 5 450 = 76 300 Kč, 9× 8 450 = 76 050 Kč.
-          Kupuješ hned = −15 % z 76 300, zaokrouhleno na „…900“: <b>64 900 Kč</b>; se slevou za pokračování ×4 <b>47 900 Kč</b> (×3 → 51 900 Kč).</li>
-        <li><b>Launch Boost Master</b> má navíc 2× měsíčně individuální coaching + licenci Velínu zdarma (místo 45 000 Kč). Licence Velínu je teď všude 45 000 Kč (dřív 20 000). Platí „Kupuješ hned“ (64 900) jen pro Launch Boost, nebo i pro Master?</li>
-        <li><b>Kombinace slev:</b> obě platí — nejdřív sleva za pokračování, ze zbytku pak −15 % za koupi hned.</li>
-        <li><b>Sleva u splátek</b> se odečítá z posledních splátek (např. 14× 5 450 → 10× 5 450 + 1× 1 800 = 11 splátek). Alternativa: nižší měsíční částka.</li>
-        <li><b>Délka balíčku:</b> splátky 12× / 9× neříkají, jak dlouho program běží. Garance „do 3 měsíců spuštěno“ zůstala — co je potom (optimalizace do konce splátek)?</li>
-        <li><b>Nárok na slevu za pokračování:</b> jen absolventi Restartu, kteří splnili plné nasazení? Do kdy od konce Restartu ji musí uplatnit?</li>
-        <li><b>Měsíční úrovně Basic / Grow / Mastery:</b> v draftu nejsou — zrušit úplně, nebo nechat jen jako pokračování po balíčku?</li>
+    <div class="xc-group">
+      <div class="xc-head"><b>Postupy a nástroje</b><span>co tě naučíme a čím systém postavíš</span></div>
+      <ul class="xcards" data-xcards>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-onboarding.jpg" alt="Kompas v ruce" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">01</span>
+          <span class="xc-vt">Marketingový funnel</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-route"/></svg></span>
+            <span class="xc-tag">Postup</span>
+            <h3 class="display">Marketingový funnel krok za krokem</h3>
+            <p>Konkrétní postup pro nasazení <b>marketingového funnelu</b>, který má <b>100% úspěšnost už od 2 dnů od spuštění</b>. Žádná teorie — přesné kroky v přesném pořadí, od první reklamy po první poptávku.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/gold-graph.webp" alt="Zlatý rostoucí graf" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">02</span>
+          <span class="xc-vt">Šablony 4× zisk</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-template"/></svg></span>
+            <span class="xc-tag">Šablony</span>
+            <h3 class="display">Nabídka a model podnikání — 4× ziskovější</h3>
+            <p><b>Zábavné šablony</b>, které tě krok za krokem provedou a <b>vytvoří ti nabídku</b> i <b>model tvého podnikání</b> tak, aby bylo <b>4× a více ziskovější</b>. Vyplňuješ, ne vymýšlíš od nuly.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/marble-face.webp" alt="Mramorové oko" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">03</span>
+          <span class="xc-vt">Web s AI agenty</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-bot"/></svg></span>
+            <span class="xc-tag">AI agenti</span>
+            <h3 class="display">Stylový web se srdcem tvé firmy</h3>
+            <p>AI agenti, kteří za tebe <b>postaví web</b> — s designem, tónem a příběhem, jako bys ho <b>navrhoval sám</b>. Ty dodáš vizi, oni ji přetaví do stránek.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-reflexe.jpg" alt="Aplikace v telefonu" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">04</span>
+          <span class="xc-vt">36 hodin ušetřených</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-zap"/></svg></span>
+            <span class="xc-tag">AI agenti</span>
+            <h3 class="display">Přes 36 hodin práce ušetřených</h3>
+            <p>Agenti, kteří ti ušetří <b>36+ hodin ruční práce</b> — nebo <b>26 000 Kč</b>, které bys jinak zaplatil někomu jinému. Rutina jede sama, ty děláš jen to, co byznys posouvá.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-materialy.jpg" alt="Přehledy na obrazovkách" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">05</span>
+          <span class="xc-vt">Aplikace Velín</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-chart"/></svg></span>
+            <span class="xc-tag">Software</span>
+            <h3 class="display">Aplikace Velín — ušetří 2 000+ Kč měsíčně</h3>
+            <p>CRM, dotazníky, rezervace, e-maily, stránky, fakturace i přehledy na jednom místě — <b>v ceně programu</b> (základní funkce), v Launch Boostu i bonusové funkce. Vč. Interaktivního Remind Systému. <a href="#velin">Více o Velínu ↓</a></p>
+          </article>
+        </li>
       </ul>
     </div>
 
+    <div class="xc-group">
+      <div class="xc-head"><b>Vedení a komunita</b><span>kdo tě vede a co dostaneš navíc</span></div>
+      <ul class="xcards" data-xcards>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/denis.webp" alt="Denis Novotný" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">06</span>
+          <span class="xc-vt">Mentoring 1 : 1</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-compass"/></svg></span>
+            <span class="xc-tag">1 : 1</span>
+            <h3 class="display">Individuální mentoring s Denisem</h3>
+            <p><b>Osobní vedení</b> nad tvým byznysem — strategie, čísla, rozhodnutí. Nečekáš na obecnou radu, řešíš přesně svou situaci.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/symf/symf-status.jpg" alt="Skupinový online hovor" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">07</span>
+          <span class="xc-vt">Skupinové hovory</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-target"/></svg></span>
+            <span class="xc-tag">Skupina</span>
+            <h3 class="display">Skupinové strategické hovory</h3>
+            <p>Pravidelné <b>strategické hovory</b> pro <b>implementaci celého systému</b> — vyhodnotíme, kde jsi, odblokujeme, co drhne, a nastavíme další kroky. Plus komunita podnikatelů, se kterými sdílíš cestu.</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/welcome-box.webp" alt="Zlatě zářící krabice" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">08</span>
+          <span class="xc-vt">Vstupní balíček</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-package"/></svg></span>
+            <span class="xc-tag">Start</span>
+            <h3 class="display">Vstupní balíček pro implementaci</h3>
+            <p>Všechno, co potřebuješ, abys systém <b>rozjel hned první týden</b> — ne až „někdy".</p>
+          </article>
+        </li>
+        <li class="xcard" tabindex="0">
+          <img src="assets/img/bg-consistency.webp" alt="Trénink za úsvitu" loading="lazy">
+          <div class="xc-shade"></div>
+          <span class="xc-num">09</span>
+          <span class="xc-vt">Akce až −50 %</span>
+          <article class="xc-body">
+            <span class="xc-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
+            <span class="xc-tag">Výhody</span>
+            <h3 class="display">Osobní akce se slevou až 50 %</h3>
+            <p>Retreaty, workshopy a živé akce za zvýhodněnou cenu — <b>Standard 30 %, Launch Boost 50 %</b>.</p>
+          </article>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -1136,11 +1187,11 @@
     <div class="velin-price reveal">
       <div class="big-extra-item big-extra-gold">
         <span class="big-extra-ico"><svg class="ico"><use href="#i-gift"/></svg></span>
-        <div><b>V balíčku v ceně</b><span>Celý Velín po celou dobu Launch Boostu i Launch Boost Master — postavíme ho spolu.</span></div>
+        <div><b>V programu v ceně</b><span>Základní funkce Velínu po celou dobu programu, v Launch Boostu i bonusové funkce a šablony.</span></div>
       </div>
       <div class="big-extra-item big-extra-hl">
         <span class="big-extra-ico"><svg class="ico"><use href="#i-package"/></svg></span>
-        <div><b>Licence napořád — zdarma</b><span>V Launch Boost Master a Elite dostaneš vlastní kopii Velínu natrvalo místo <s>45 000 Kč</s>.</span></div>
+        <div><b>Licence napořád — zdarma</b><span>V Elite dostaneš vlastní kopii Velínu natrvalo místo <s>45 000 Kč</s>.</span></div>
       </div>
       <div class="big-extra-item">
         <span class="big-extra-ico"><svg class="ico"><use href="#i-monitor"/></svg></span>
@@ -1151,6 +1202,178 @@
       Sociální sítě napojíme přes Metu a nástroj, který rozesílá příspěvky na všechny platformy — spouštíme je,
       až akviziční systém stabilně vydělává 1 : 3. Velín jde ovládat i z Telegramu, jakmile je systém postavený.
     </p>
+  </div>
+</section>
+
+<!-- ======================= INVESTICE — BALÍČEK + KALKULAČKA ======================= -->
+<section class="section sec-dark cenik-sec" id="investice">
+  <div class="wrap">
+    <div style="text-align:center;position:relative">
+      <span class="lr-kicker">Investice</span>
+      <h2 class="display h-section" style="color:#fff">Leadership Up-Grade <span class="lr-grad-text">Standard</span> nebo <span class="lr-grad-text">Launch Boost</span></h2>
+      <p class="h-sub" style="margin:0 auto;max-width:680px"><b>Up-Grade</b> je půlroční pokračování po Restartu.
+      <b>Launch Boost</b> k němu přidá protokol na dva funnely, moji pomoc s nastavením a garanci návratnosti.</p>
+    </div>
+
+    <div class="lr-card cena-card v-launch lb-card reveal">
+      <div class="c-rib-clip"><div class="c-ribbon r-launch" id="lbRib">Půlroční program</div></div>
+
+      <!-- levá strana: co je v programu; .lb-proto je odemčený jen v Launch Boostu (třída .is-master na kartě) -->
+      <div class="lb-left">
+        <div class="c-name" id="lbName">Leadership Up-Grade</div>
+        <div class="c-tag" id="lbTag">Standard · půlroční program</div>
+        <div class="c-motto">Upgradujme tvé podnikání — a pak ho zrychleme.</div>
+        <div class="lb-result">
+          <small>Co si kupuješ</small>
+          <p class="only-ug"><b>Za 6 měsíců:</b> podnikání, které vydělává víc za méně tvého času — vyladěné ceny a prodej,
+          zautomatizovanou rutinu a marketingovou strategii, kterou umíš sám realizovat.</p>
+          <p class="only-lb"><b>Za 6 měsíců:</b> všechno ze Standardu — a navíc dva funnely nastavené se mnou ve Velínu
+          a reklamu, která vydělává aspoň 1 : 3.</p>
+        </div>
+        <ul class="c-list c-list-top">
+          <li class="gift"><svg class="ico"><use href="#i-target"/></svg>Cíl 4× tvůj byznys — plán, čísla a páky profitability hned na začátku</li>
+        </ul>
+        <ul class="c-list">
+          <li><svg class="ico"><use href="#i-compass"/></svg><span><b>Strategie</b> — úvodní strategická konzultace, optimalizace nabídky a plánu</span></li>
+          <li><svg class="ico"><use href="#i-trend"/></svg><span><b>Ceny a páky profitability</b> — ceny, procesy a delegování pro vyšší zisk z každé zakázky</span></li>
+          <li><svg class="ico"><use href="#i-phone"/></svg><span><b>Prodejní hovory</b> — zpětná vazba z nahrávek, prodejní scripty, ladění procesu</span></li>
+          <li><svg class="ico"><use href="#i-magnet"/></svg><span><b>Marketingová strategie</b> — funnel, reklama a texty: postupy a šablony</span></li>
+          <li><svg class="ico"><use href="#i-settings"/></svg><span><b>Automatizace ve Velínu</b> — implementace základních funkcí: CRM, dotazníky, rezervace, e-maily (po dobu programu)</span></li>
+          <li><svg class="ico"><use href="#i-users"/></svg><span><b>Skupinové hovory 2× měsíčně</b> — inspirační a statusové, jako v Leadership Restartu</span></li>
+          <li><svg class="ico"><use href="#i-message"/></svg><span><b>Individuální konzultace 1 : 1</b> 1× měsíčně</span></li>
+          <li><svg class="ico"><use href="#i-template"/></svg><span><b>Celé know-how bez omezení</b> — komunita Up-Grade, vzdělávací sekce, šablony a prompty</span></li>
+        </ul>
+
+        <div class="lb-proto">
+          <div class="lb-proto-h"><svg class="ico"><use href="#i-rocket"/></svg><b>Protokol Launch Boost</b>
+            <span class="only-ug"><svg class="ico"><use href="#i-lock"/></svg>v Launch Boostu</span><span class="only-lb"><svg class="ico"><use href="#i-check"/></svg>v ceně</span></div>
+          <ul class="c-list">
+            <li><svg class="ico"><use href="#i-route"/></svg><span><b>Postupy a šablony na 2 funnely</b> — a pomůžu ti je nastavit přímo ve Velínu</span></li>
+            <li><svg class="ico"><use href="#i-monitor"/></svg><span><b>Bonusové funkce Velínu</b></span></li>
+            <li><svg class="ico"><use href="#i-video"/></svg><span><b>Půldenní natáčení s námi</b></span></li>
+            <li><svg class="ico"><use href="#i-phone"/></svg><span><b>Přímá linka na Denise</b> (WhatsApp)</span></li>
+            <li><svg class="ico"><use href="#i-chart"/></svg><span><b>Garance návratnosti 1 : 3</b> — jinak další měsíce zdarma</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- pravá strana: kalkulačka ceny -->
+      <div class="lb-right">
+        <div class="lb-tabs lb-tabs-2" role="group" aria-label="Varianta programu">
+          <button type="button" data-tier="ug" aria-pressed="true"><b>Standard</b><small>půlroční program</small></button>
+          <button type="button" data-tier="lb" aria-pressed="false"><b>Launch Boost</b><small>+ 2 funnely a garance</small></button>
+        </div>
+        <div class="lb-paysw" role="group" aria-label="Způsob platby">
+          <button type="button" data-pay="once" aria-pressed="true">Kupuju hned <span class="lb-badge">−15 %</span></button>
+          <button type="button" data-pay="m" aria-pressed="false">Splátky</button>
+        </div>
+
+        <div class="lb-price">
+          <s class="lb-was" id="lbWas"></s>
+          <div class="c-price p-launch"><span id="lbBig">44 900</span><small>Kč</small><em id="lbPer">jednorázově</em></div>
+          <div class="lb-plan" id="lbPlan"></div>
+          <div class="lb-hint" id="lbHint"></div>
+        </div>
+
+        <!-- záloha z Restartu ×4 -->
+        <div class="lb-voucher" id="lbVoucherBox">
+          <div class="lb-v-head"><svg class="ico"><use href="#i-gift"/></svg><b>Pokračuješ z Leadership Restartu?</b></div>
+          <p>Tvou <b>vratnou motivační zálohu</b> při pokračování <b>×4 znásobíme</b> a odečteme z ceny.</p>
+          <div class="lb-v-math" aria-hidden="true">
+            <span>5 000 Kč</span><i>×4</i><b>20 000 Kč</b>
+          </div>
+          <button type="button" class="lb-v-btn" id="lbVoucher" aria-pressed="false">Uplatnit zálohu ×4 <span>−20 000 Kč</span></button>
+        </div>
+
+        <!-- rozpis -->
+        <dl class="lb-sum">
+          <div><dt>Cena programu</dt><dd><span id="lbList">52 700</span> Kč</dd></div>
+          <div id="lbRowV" hidden><dt>Záloha z Restartu ×4</dt><dd class="neg">−20 000 Kč</dd></div>
+          <div id="lbRowO" hidden><dt>Kupuješ hned −15 %</dt><dd class="neg">−<span id="lbOnceVal">7 800</span> Kč</dd></div>
+          <div class="tot"><dt>Celkem zaplatíš</dt><dd><span id="lbTotal">44 900</span> Kč</dd></div>
+        </dl>
+
+        <a class="btn btn-launch" data-cta-pos="lb_buy" href="/up-great-dotaznik">Chci začít</a>
+        <div class="c-note only-lb"><b>Garance návratnosti 1 : 3.</b> Pokud reklama po implementaci nevydělává aspoň 1 : 3,
+        pracuju s tebou další měsíce zdarma — dokud to nenastavíme.</div>
+      </div>
+
+      <!-- třetí sloupec: co navíc přináší Launch Boost -->
+      <aside class="lb-bonus" aria-label="Navíc v Launch Boostu">
+        <div class="lb-b-head">
+          <svg class="ico"><use href="#i-crown"/></svg>
+          <div><small id="lbBKick">Up-Grade Standard</small><b id="lbBTitle">Co máš v ceně</b></div>
+        </div>
+
+        <!-- dlaždice kreslí kalkulačka podle zvolené varianty a platby (BONUS ve skriptu níže) -->
+        <div class="lb-b-tiles" id="lbBonus"></div>
+
+        <table class="lb-b-cmp">
+          <thead><tr><th></th><th>Standard</th><th>Launch Boost</th></tr></thead>
+          <tbody>
+            <tr><td>Postupy na 2 funnely + nastavení</td><td>—</td><td>✓</td></tr>
+            <tr><td>Bonusové funkce Velínu</td><td>—</td><td>✓</td></tr>
+            <tr><td>Natáčení s námi</td><td>—</td><td>✓</td></tr>
+            <tr><td>Přímá linka</td><td>—</td><td>✓</td></tr>
+            <tr><td>Garance 1 : 3</td><td>—</td><td>✓</td></tr>
+            <tr><td>Osobní akce</td><td>−30 %</td><td>−50 %</td></tr>
+            <tr><td>Se zálohou ×4, hned</td><td id="cmpUgO"></td><td id="cmpLbO"></td></tr>
+          </tbody>
+        </table>
+
+        <div class="lb-b-foot">
+          <button type="button" class="lb-b-cta" id="lbToMaster">Zrychlit s Launch Boostem</button>
+          <div class="lb-b-ok"><svg class="ico"><use href="#i-check"/></svg>Vybráno — všechno odemčené je v ceně</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- co dál / alternativy -->
+    <div class="cenik-group-h"><b>Další možnosti</b><span>když chceš všechno delegovat, nebo po balíčku pokračovat</span></div>
+    <div class="extra-grid">
+      <div class="lr-card extra-card reveal">
+        <span class="extra-ico"><svg class="ico"><use href="#i-crown"/></svg></span>
+        <div>
+          <b>Elite — udělejte to za mě</b>
+          <div class="extra-price">120 000 Kč <small>· max. 4 klienti</small></div>
+          <p>Vše z Launch Boostu, ale <b>celý systém postavíme a spustíme za tebe</b> — ty dodáš sebe
+          a rozhodnutí. Navíc licence Velínu v hodnotě 45 000 Kč zdarma.</p>
+        </div>
+      </div>
+      <div class="lr-card extra-card reveal">
+        <span class="extra-ico"><svg class="ico"><use href="#i-settings"/></svg></span>
+        <div>
+          <b>Po balíčku: správa kampaní</b>
+          <div class="extra-price">12 000–15 000 Kč <small>/ měsíc</small></div>
+          <p>Systém máš postavený a funguje. Když nechceš reklamu spravovat sám,
+          <b>převezmeme přímou správu kampaní</b> a dál optimalizujeme. Velín samostatně
+          pro absolventy za 400 Kč / měsíc.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="cena-note">
+      Nevíš, jestli je balíček teď pro tebe? Od toho je úvodní schůzka.
+      <a data-cta-pos="text" href="/up-great-dotaznik">Vyplň krátký dotazník</a>
+      a projdeme tvůj byznys, čísla a to, kde máš největší páku.
+    </p>
+    <p class="cena-note" style="margin-top:14px;font-size:13px;opacity:.8">
+      Ceny v eurech jsou orientační (přepočet kurzem 25 Kč/€, zaokrouhleno). Fakturujeme v korunách.
+    </p>
+
+    <!-- poznámky k draftu — před publikací smazat -->
+    <div class="draft-notes">
+      <b>Poznámky k draftu (11. 11. 2026) — před publikací smazat</b>
+      <ul>
+        <li><b>Ceny</b> (schváleno, otestovat): program 52 700 / 97 400 Kč; se zálohou ×4 (−20 000) 6× 5 450 / 6× 12 900; hned −15 %: 27 900 / 65 900 Kč.
+          Launch Boost případně později zdražit.</li>
+        <li><b>Garance 1 : 3:</b> když reklama po implementaci nevydělává aspoň 1 : 3, další měsíce zdarma, dokud to nenastavíme.</li>
+        <li><b>Záloha:</b> vrací se jen při plném nasazení? Do kdy od konce Restartu ji musí klient ×4 uplatnit?</li>
+        <li><b>Koučink s Mirkem</b> zatím ne — nejdřív vyzkoušet s 2–3 klienty, pak 1 sezení do Launch Boostu.</li>
+        <li><b>Elite (120 000 Kč)</b> — délka? A je jen o kousek dražší než Launch Boost bez zálohy (97 400).</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
@@ -1298,39 +1521,39 @@
 })();
 </script>
 <script>
-/* Kalkulačka ceny balíčku Launch Boost (draft 31. 10. 2026)
-   Splátky 14× 5 450 (= 76 300 Kč) / 9× 8 450 (= 76 050 Kč) · kupuješ hned −15 % z 76 300, výsledek zaokrouhlený na „…900“
-   Sleva za pokračování = 5 000 Kč z Restartu × MULT (×4 výchozí, ?x=3 nebo přepínač v poznámkách draftu).
-   Pořadí: nejdřív sleva za pokračování, z rozdílu −15 % za platbu najednou; u splátek odpadnou poslední splátky. */
+/* Kalkulačka ceny (draft 10. 11. 2026, v6)
+   Leadership Up-Grade Standard (půlroční program) · Launch Boost = Standard + protokol na 2 funnely, bonusové funkce Velínu, pomoc s nastavením.
+   Cena programu 52 700 / 97 400 Kč; vratná motivační záloha z Restartu 5 000 ×4 = −20 000 Kč → 6× 5 450 / 6× 12 900.
+   Kupuju hned −15 % ze zbytku, zaokrouhleno na „…900“ (absolventi 27 900 / 65 900). Výchozí volba = kupuju hned.
+   11. 11.: zeštíhleno — bez eur, bez „ušetříš“ duplicit a bez bonusového natáčení za platbu hned. */
 (function(){
-  var BASE_DISCOUNT = 5000, ONCE_OFF = 0.15, EUR = 25;
-  var PLANS = { m14: { name: 'Launch Boost', rate: 5450, n: 14, hint: 'Měsíčně jako dřív Grow — ale máš celý balíček' },
-                m9:  { name: 'Launch Boost Master', rate: 8450, n: 9,  hint: 'Méně než dřív Mastery (8 800) — a splaceno za 9 měsíců' } };
-  /* sloupec bonusů: co je u které záložky odemčené (on) a co zamčené jen pro Master */
+  var DEPOSIT = 5000, MULT = 4, ONCE_OFF = 0.15;
+  var VOUCHER = DEPOSIT * MULT;
+  var TIERS = { ug: { name: 'Leadership Up-Grade', tag: 'Standard · půlroční program', kick: 'Up-Grade Standard', rib: 'Půlroční program', months: 6, price: 52700, n: 6 },
+                lb: { name: 'Leadership Up-Grade Launch Boost', tag: 'Standard + protokol Launch Boost · 6 měsíců', kick: 'Up-Grade Launch Boost', rib: 'Nejrychlejší cesta', months: 6, price: 97400, n: 6 } };
+  /* sloupec bonusů: co je u které varianty odemčené (on) a co zamčené jen pro Launch Boost */
   var T = {
-    c1:   { on: 1, ico: 'users',   b: 'Individuální coaching 1× měsíčně', t: 'Osobní čas jen pro tebe a tvoje témata' },
-    c2:   { on: 1, ico: 'users',   b: 'Individuální coaching 2× měsíčně', t: 'Dvakrát víc osobního času jen pro tebe' },
-    c2x:  { on: 0, ico: 'users',   b: 'Coaching 2× měsíčně', t: 'Odemkne Launch Boost Master' },
-    vel:  { on: 1, ico: 'monitor', b: 'Software Velín pro marketing', t: 'CRM, funnel, e-maily a reporty po celou dobu balíčku' },
-    lic:  { on: 1, ico: 'gift',    b: 'Licence Velínu napořád — zdarma', t: 'Vlastní kopie celého systému místo <s>45 000 Kč</s>' },
-    licx: { on: 0, ico: 'gift',    b: 'Licence Velínu napořád', t: 'Odemkne Master — místo <s>45 000 Kč</s> zdarma' },
-    once: { on: 1, ico: 'coins',   b: 'Jedna platba, −15 %', t: 'Nejvýhodnější cena za celý balíček' },
-    m9:   { on: 1, ico: 'calendar', b: 'Splaceno za 9 měsíců místo 14', t: 'Dřív máš hotovo — a celkem dokonce o 250 Kč méně' },
-    m9x:  { on: 0, ico: 'calendar', b: 'Splaceno za 9 měsíců', t: 'V Masteru dřív hotovo a celkem o 250 Kč méně' }
+    grp:    { on: 1, ico: 'users',    b: 'Skupinové hovory 2× měsíčně', t: 'Inspirační a statusové' },
+    c1:     { on: 1, ico: 'message',  b: 'Konzultace 1 : 1 1× měsíčně', t: 'Osobní čas jen pro tebe' },
+    velb:   { on: 1, ico: 'settings', b: 'Velín — základní funkce', t: 'Po celou dobu programu' },
+    proto:  { on: 1, ico: 'route',    b: '2 funnely s nastavením', t: 'Postupy, šablony a moje pomoc' },
+    protox: { on: 0, ico: 'route',    b: '2 funnely s nastavením', t: 'Odemkne Launch Boost' },
+    velp:   { on: 1, ico: 'monitor',  b: 'Bonusové funkce Velínu', t: 'Pokročilé funkce a šablony' },
+    film:   { on: 1, ico: 'video',    b: 'Natáčení s námi', t: 'Reklamy, reference, obsah' },
+    line:   { on: 1, ico: 'phone',    b: 'Přímá linka na Denise', t: 'WhatsApp' },
+    gar:    { on: 1, ico: 'chart',    b: 'Garance návratnosti 1 : 3', t: 'Jinak další měsíce zdarma' },
+    garx:   { on: 0, ico: 'chart',    b: 'Garance návratnosti 1 : 3', t: 'Odemkne Launch Boost' }
   };
-  var BONUS = { once: ['c1', 'vel', 'once', 'c2x', 'licx'],
-                m14:  ['c1', 'vel', 'c2x', 'licx', 'm9x'],
-                m9:   ['c2', 'vel', 'lic', 'm9'] };
-  var PRICE = PLANS.m14.rate * PLANS.m14.n;           /* 76 300 — kotva pro koupi hned */
-  var charm = function (x) { return Math.round((x - 900) / 1000) * 1000 + 900; };  /* 64 855 → 64 900 */
+  var BONUS = { ug: ['grp', 'c1', 'velb', 'protox', 'garx'],
+                lb: ['proto', 'velp', 'film', 'line', 'gar'] };
+  var charm = function (x) { return Math.round((x - 900) / 1000) * 1000 + 900; };  /* 27 795 → 27 900 */
   var q = new URLSearchParams(location.search);
-  var mult = q.get('x') === '3' ? 3 : 4;
-  var pay = 'm14', voucher = false;
+  var tier = q.get('v') === 'launch' ? 'lb' : 'ug', pay = 'once', voucher = q.get('a') === '1';
 
   var $ = function (id) { return document.getElementById(id); };
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fmt = function (n) { return Math.round(n).toLocaleString('cs-CZ'); };
-  var big = $('lbBig'); big._cur = 5450;
+  var big = $('lbBig'); big._cur = 0;
 
   function tween(el, to) {
     cancelAnimationFrame(el._raf); clearTimeout(el._done);
@@ -1346,48 +1569,47 @@
     })(t0);
   }
 
-  function render(pop) {
-    var disc = voucher ? BASE_DISCOUNT * mult : 0;
-    var plan = PLANS[pay], list, total;
+  /* ceny jedné varianty: inst = na splátky (po odečtení zálohy ×4), rate = splátka zaokrouhlená nahoru na desítky, last = poslední splátka */
+  function prices(t, abs) {
+    var x = TIERS[t], inst = x.price - (abs ? VOUCHER : 0), rate = Math.ceil(inst / x.n / 10) * 10;
+    return { full: x.price, inst: inst, rate: rate, last: inst - rate * (x.n - 1), once: charm(inst * (1 - ONCE_OFF)) };
+  }
+  function planText(t, pr) {
+    var n = TIERS[t].n;
+    return pr.last === pr.rate ? n + '× ' + fmt(pr.rate) : (n - 1) + '× ' + fmt(pr.rate) + ' + 1× ' + fmt(pr.last);
+  }
 
-    [].forEach.call(document.querySelectorAll('.lb-x'), function (e) { e.textContent = '×' + mult; });
-    [].forEach.call(document.querySelectorAll('.lb-dval'), function (e) { e.textContent = fmt(BASE_DISCOUNT * mult); });
-    $('lbVoucherSum').textContent = fmt(BASE_DISCOUNT * mult);
+  function render(pop) {
+    var plan = TIERS[tier], pr = prices(tier, voucher), total = pay === 'once' ? pr.once : pr.inst;
 
     if (pay === 'once') {
-      list = PRICE;
-      total = charm((list - disc) * (1 - ONCE_OFF));
       tween(big, total);
       $('lbPer').textContent = 'jednorázově';
-      $('lbWas').textContent = fmt(list) + ' Kč';
-      $('lbEur').textContent = '≈ ' + fmt(total / EUR) + ' €';
-      $('lbPlan').innerHTML = 'Jedna platba · <b>−15 %</b> za to, že kupuješ hned';
-      $('lbHint').textContent = 'Nejvýhodnější cena za celý balíček';
+      $('lbWas').textContent = fmt(pr.full) + ' Kč';
+      $('lbPlan').textContent = '';
+      $('lbHint').textContent = '';
     } else {
-      list = plan.rate * plan.n;
-      total = list - disc;
-      var full = Math.floor(total / plan.rate), rest = total - full * plan.rate, count = full + (rest ? 1 : 0);
-      tween(big, plan.rate);
+      tween(big, pr.rate);
       $('lbPer').textContent = '/ měsíc';
       $('lbWas').textContent = '';
-      $('lbEur').textContent = '≈ ' + fmt(plan.rate / EUR) + ' € měsíčně';
-      $('lbPlan').innerHTML = disc
-        ? full + '× ' + fmt(plan.rate) + (rest ? ' + 1× ' + fmt(rest) : '') + ' Kč · <b>jen ' + count + ' splátek místo ' + plan.n + '</b>'
-        : plan.n + '× ' + fmt(plan.rate) + ' Kč · celkem ' + fmt(list) + ' Kč';
-      $('lbHint').textContent = plan.hint;
+      $('lbPlan').textContent = planText(tier, pr) + ' Kč';
+      $('lbHint').innerHTML = 'Když zaplatíš hned, ušetříš <b>' + fmt(pr.inst - pr.once) + ' Kč</b>';
     }
 
-    if ($('lbBonus').dataset.pay !== pay) renderBonus();
-    $('lbName').textContent = pay === 'once' ? 'Launch Boost' : plan.name;
-    $('lbName').closest('.lb-card').classList.toggle('is-master', pay === 'm9');
-    $('lbListLbl').textContent = pay === 'once' ? 'Cena balíčku' : 'Cena na splátky';
-    $('lbList').textContent = fmt(list);
-    $('lbRowV').hidden = !disc;
+    if ($('lbBonus').dataset.key !== tier) renderBonus(tier);
+    $('lbName').textContent = plan.name;
+    $('lbTag').textContent = plan.tag;
+    $('lbRib').textContent = plan.rib;
+    $('lbName').closest('.lb-card').classList.toggle('is-master', tier === 'lb');
+    $('lbList').textContent = fmt(pr.full);
+    $('lbRowV').hidden = !voucher;
     $('lbRowO').hidden = pay !== 'once';
-    $('lbOnceVal').textContent = fmt(list - disc - total);
+    $('lbOnceVal').textContent = fmt(pr.inst - pr.once);
     $('lbTotal').textContent = fmt(total);
-    $('lbSave').hidden = total === list;
-    $('lbSaveVal').textContent = fmt(list - total);
+
+    /* srovnávací tabulka: ceny se zálohou ×4 */
+    $('cmpUgO').textContent = fmt(prices('ug', true).once);
+    $('cmpLbO').textContent = fmt(prices('lb', true).once);
 
     if (pop) {
       var p = big.closest('.c-price');
@@ -1395,12 +1617,12 @@
     }
   }
 
-  function renderBonus() {
-    var box = $('lbBonus');
-    box.dataset.pay = pay;
-    $('lbBKick').textContent = pay === 'm9' ? 'Launch Boost Master' : pay === 'once' ? 'Launch Boost · kupuješ hned' : 'Launch Boost';
-    $('lbBTitle').textContent = pay === 'm9' ? 'Všechno odemčené' : 'Co máš v ceně';
-    box.innerHTML = BONUS[pay].map(function (k, i) {
+  function renderBonus(key) {
+    var box = $('lbBonus'), keys = BONUS[tier].slice();
+    box.dataset.key = key;
+    $('lbBKick').textContent = TIERS[tier].kick;
+    $('lbBTitle').textContent = tier === 'lb' ? 'Všechno odemčené' : 'Co máš v ceně';
+    box.innerHTML = keys.map(function (k, i) {
       var x = T[k];
       return '<div class="lb-b-tile' + (x.on ? ' on' : '') + '" style="--i:' + i + '">' +
         '<svg class="ico"><use href="#i-' + x.ico + '"/></svg><b>' + x.b + '</b><span>' + x.t + '</span>' +
@@ -1437,45 +1659,68 @@
     })();
   }
 
-  [].forEach.call(document.querySelectorAll('.lb-tabs button'), function (b) {
-    b.addEventListener('click', function () {
-      if (b.dataset.pay === pay) return;
-      pay = b.dataset.pay;
-      [].forEach.call(document.querySelectorAll('.lb-tabs button'), function (x) {
-        x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+  /* přepínače: varianta (Up-Grade / Launch Boost) a platba (kupuju hned / splátky) */
+  function group(sel, attr, get, set, onPick) {
+    var btns = [].slice.call(document.querySelectorAll(sel));
+    function sync() { btns.forEach(function (x) { x.setAttribute('aria-pressed', x.dataset[attr] === get() ? 'true' : 'false'); }); }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.dataset[attr] === get()) return;
+        set(b.dataset[attr]); sync(); render(true); if (onPick) onPick();
       });
-      render(true);
-      if (pay === 'once') confetti(big);
     });
-  });
+    sync();
+  }
+  group('.lb-tabs button', 'tier', function () { return tier; }, function (v) { tier = v; },
+    function () { if (tier === 'lb') confetti(big); });
+  group('.lb-paysw button', 'pay', function () { return pay; }, function (v) { pay = v; },
+    function () { if (pay === 'once') confetti(big); });
 
-  /* tlačítko ve sloupci bonusů přepne na Master stejně jako záložka nahoře */
+  /* tlačítko ve sloupci bonusů přepne na Launch Boost stejně jako záložka nahoře */
   $('lbToMaster').addEventListener('click', function () {
-    document.querySelector('.lb-tabs button[data-pay="m9"]').click();
+    document.querySelector('.lb-tabs button[data-tier="lb"]').click();
   });
 
   var vBtn = $('lbVoucher');
+  function syncVoucher() {
+    vBtn.setAttribute('aria-pressed', voucher ? 'true' : 'false');
+    vBtn.innerHTML = voucher ? '✓ Záloha ×4 uplatněna · zrušit'
+      : 'Uplatnit zálohu ×4 <span>−' + fmt(VOUCHER) + ' Kč</span>';
+    $('lbVoucherBox').classList.toggle('on', voucher);
+  }
   vBtn.addEventListener('click', function () {
     voucher = !voucher;
-    vBtn.setAttribute('aria-pressed', voucher ? 'true' : 'false');
-    vBtn.innerHTML = voucher ? '✓ Sleva uplatněna · zrušit'
-      : 'Uplatnit slevu <span>−<span class="lb-dval">' + fmt(BASE_DISCOUNT * mult) + '</span> Kč</span>';
-    $('lbVoucherBox').classList.toggle('on', voucher);
+    syncVoucher();
     render(true);
     if (voucher) confetti(big);
   });
 
-  [].forEach.call(document.querySelectorAll('.lb-xswitch button'), function (b) {
-    b.classList.toggle('on', +b.dataset.mult === mult);
-    b.addEventListener('click', function () {
-      mult = +b.dataset.mult;
-      [].forEach.call(document.querySelectorAll('.lb-xswitch button'), function (x) { x.classList.toggle('on', x === b); });
-      if (!voucher) vBtn.querySelector('.lb-dval').textContent = fmt(BASE_DISCOUNT * mult);
-      render(voucher);
-    });
-  });
-
+  syncVoucher();
   render(false);
+})();
+</script>
+<script>
+/* rozbalovací karty „Co v Up-Grade dostáváš“ — aktivní karta 5fr, ostatní 1fr (desktop sloupce, mobil řádky) */
+(function(){
+  var mq=window.matchMedia('(min-width:768px)');
+  document.querySelectorAll('[data-xcards]').forEach(function(ul){
+    var items=[].slice.call(ul.children), act=0;
+    ul.setAttribute('data-n',items.length);
+    function set(i){
+      act=i;
+      items.forEach(function(li,k){li.setAttribute('data-active',k===i?'true':'false');});
+      var tpl=items.map(function(_,k){return k===i?'5fr':'1fr';}).join(' ');
+      if(mq.matches){ul.style.gridTemplateColumns=tpl;ul.style.gridTemplateRows='1fr';}
+      else{ul.style.gridTemplateRows=tpl;ul.style.gridTemplateColumns='1fr';}
+    }
+    items.forEach(function(li,k){
+      li.addEventListener('mouseenter',function(){set(k);});
+      li.addEventListener('focus',function(){set(k);});
+      li.addEventListener('click',function(){set(k);});
+    });
+    (mq.addEventListener?mq.addEventListener('change',function(){set(act);}):mq.addListener(function(){set(act);}));
+    set(0);
+  });
 })();
 </script>
 <script>
