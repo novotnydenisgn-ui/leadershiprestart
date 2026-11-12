@@ -14,3 +14,10 @@ NASAZENI.md
 node_modules/
 .wrangler/
 .dev.vars
+
+# lokální nástroje Claude Code (worktree sezení)
+.claude/worktrees/
+
+# pracovní soubory se skutečnými daty / poznámky (nepatří do repa ani na web)
+analyticky-dashboard.html
+velin-google-overeni.md
