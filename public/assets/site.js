@@ -248,6 +248,136 @@
     if (id) loadWistia(host, id);
   }
 
+  /* --- Reference „Co o mě a programu říkají“ (slot refs_videos) ------------
+     Kontrola: YouTube embedy — měříme, kolik lidí video pustí a kolik z nich
+     odejde na YouTube (logo, název, „Sledovat na YouTube“, doporučená videa).
+     Varianta: vlastní <video> z /video/ref/ bez jakéhokoli prokliku ven.
+     Události jdou jako klik s pozicí „video:…“ (Velín je nepočítá mezi kliky
+     na CTA, ukáže je zvlášť) a do Clarity. Každá událost max. 1× na video. */
+  function videoEvent(name, key) {
+    var sent = videoEvent.sent || (videoEvent.sent = {});
+    var id = name + '|' + (key || '');
+    if (sent[id]) return;
+    sent[id] = 1;
+    try { if (window.clarity) window.clarity('event', name); } catch (err) { /* nic */ }
+    if (AB.x === 1 || !navigator.sendBeacon) return;
+    try {
+      navigator.sendBeacon('/api/click', new Blob(
+        [JSON.stringify({ pos: 'video:' + name, page: location.pathname, ref: key || '' })],
+        { type: 'application/json' }
+      ));
+    } catch (err) { /* měření nesmí rozbít přehrávání */ }
+  }
+
+  function trackYoutubeRefs(grid) {
+    var frames = [].slice.call(grid.querySelectorAll('iframe[src*="youtube"]'));
+    if (!frames.length) return;
+    var idOf = function (f) { var m = /embed\/([\w-]{6,})/.exec(f.src); return m ? m[1] : ''; };
+
+    /* Odchod na YouTube: po interakci s embedem se do pár sekund schová celá
+       stránka (nový panel / aplikace YouTube). Interakci poznáme podle
+       (a) kliku do iframu — stránka ztratí fokus (počítač),
+       (b) pauzy z IFrame API — klik na logo / „Sledovat na YouTube“ video zastaví (mobil),
+       (c) konce videa — YouTube pak nabízí další videa (30 s na proklik).
+       Když video při schování stránky hraje nebo se načítá, šlo o spuštění
+       (a stránku schoval jiný důvod) — nepočítá se, čísla odchodů jsou spíš dolní odhad. */
+    var armed = null;
+    var players = {};
+    function arm(id, ms) { armed = { id: id, until: Date.now() + ms }; }
+    function playing(id) {
+      try { var s = players[id] && players[id].getPlayerState(); return s === 1 || s === 3; } catch (err) { return false; }
+    }
+    addEventListener('blur', function () {
+      setTimeout(function () {
+        var f = document.activeElement;
+        if (!f || frames.indexOf(f) < 0) return;
+        videoEvent('yt_click', idOf(f));
+        arm(idOf(f), 4000);
+        /* fokus zpět na stránku, ať se pozná i další klik do iframu */
+        setTimeout(function () { if (document.activeElement === f) f.blur(); }, 4500);
+      }, 0);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState !== 'hidden' || !armed) return;
+      if (Date.now() < armed.until && !playing(armed.id)) videoEvent('yt_exit', armed.id);
+      armed = null;
+    });
+
+    /* Spuštění a dokoukání — IFrame API se načte, až se sekce blíží do zorného pole. */
+    function hook() {
+      frames.forEach(function (f) {
+        try {
+          players[idOf(f)] = new window.YT.Player(f, {
+            events: {
+              onStateChange: function (e) {
+                var id = idOf(f);
+                /* klik do iframu, po kterém video začne hrát, bylo spuštění, ne odchod */
+                if (e.data === 1) { videoEvent('yt_play', id); armed = null; }
+                if (e.data === 2) arm(id, 2500);
+                if (e.data === 0) { videoEvent('yt_end', id); arm(id, 30000); }
+              }
+            }
+          });
+        } catch (err) { /* bez API zůstane aspoň měření odchodu */ }
+      });
+    }
+    function loadApi() {
+      if (window.YT && window.YT.Player) return hook();
+      var prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function () { if (prev) prev(); hook(); };
+      var s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    if (!('IntersectionObserver' in window)) return loadApi();
+    var io = new IntersectionObserver(function (en) {
+      if (!en.some(function (x) { return x.isIntersecting; })) return;
+      io.disconnect();
+      loadApi();
+    }, { rootMargin: '600px 0px' });
+    io.observe(grid);
+  }
+
+  function mountOwnRefs(grid) {
+    grid.querySelectorAll('.ref-own[data-ref]').forEach(function (box) {
+      var key = (box.getAttribute('data-ref') || '').replace(/[^a-z0-9-]/g, '');
+      var btn = box.querySelector('.ref-own-play');
+      if (!key || !btn) return;
+      btn.addEventListener('click', function () {
+        if (box.classList.contains('playing')) return;
+        var v = document.createElement('video');
+        v.src = '/video/ref/' + key + '.mp4';
+        v.poster = '/video/ref/' + key + '.jpg';
+        v.controls = true;
+        v.playsInline = true;
+        v.preload = 'auto';
+        v.setAttribute('playsinline', '');
+        v.setAttribute('controlslist', 'nodownload noremoteplayback');
+        v.addEventListener('play', function () {
+          videoEvent('own_play', key);
+          /* naráz hraje jen jedno video */
+          grid.querySelectorAll('video').forEach(function (o) { if (o !== v) o.pause(); });
+        });
+        v.addEventListener('timeupdate', function () {
+          if (v.duration && v.currentTime / v.duration >= 0.5) videoEvent('own_50', key);
+        });
+        v.addEventListener('ended', function () { videoEvent('own_end', key); });
+        box.classList.add('playing');
+        box.appendChild(v);
+        var p = v.play();
+        if (p && p.catch) p.catch(function () { /* autoplay zakázaný — zůstanou ovládací prvky */ });
+      });
+    });
+  }
+
+  function refVideos() {
+    var grid = document.querySelector('[data-ab-slot="refs_videos"]');
+    if (!grid) return;
+    if (grid.querySelector('.ref-own')) mountOwnRefs(grid);
+    else trackYoutubeRefs(grid);
+  }
+
   /* --- Microsoft Clarity (heatmapy, nahrávky) ---------------------------
      Načítá se jen se souhlasem s funkčními cookies. Každé sezení označíme
      testem a variantou (window.__AB), aby šly nahrávky a heatmapy v Clarity
@@ -561,5 +691,6 @@
     mountPixel();
     mountClarity();
     mountWistia();
+    refVideos();
   });
 })();

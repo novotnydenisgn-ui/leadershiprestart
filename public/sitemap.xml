@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generuje scripts/sitemap.mjs (npm run sitemap) – neupravovat ručně. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://leadershiprestart.cz/</loc></url>
+  <url><loc>https://leadershiprestart.cz/black-friday-dekujeme</loc></url>
+  <url><loc>https://leadershiprestart.cz/black-friday-konec</loc></url>
+  <url><loc>https://leadershiprestart.cz/black-friday</loc></url>
+  <url><loc>https://leadershiprestart.cz/cenik-implementace</loc></url>
+  <url><loc>https://leadershiprestart.cz/cenik-upgrade</loc></url>
+  <url><loc>https://leadershiprestart.cz/cenik</loc></url>
+  <url><loc>https://leadershiprestart.cz/gdpr</loc></url>
+  <url><loc>https://leadershiprestart.cz/kariera</loc></url>
+  <url><loc>https://leadershiprestart.cz/links</loc></url>
+  <url><loc>https://leadershiprestart.cz/mise</loc></url>
+  <url><loc>https://leadershiprestart.cz/odstoupeni</loc></url>
+  <url><loc>https://leadershiprestart.cz/up-great-prezentace</loc></url>
+  <url><loc>https://leadershiprestart.cz/up-great</loc></url>
+  <url><loc>https://leadershiprestart.cz/vyzva</loc></url>
+</urlset>

@@ -36,6 +36,7 @@ export const PAGE_PATHS = {
   '/pripadova-studie': 'pripadova-studie',
   '/rezervovano': 'rezervovano',
   '/dekujeme-za-zajem': 'dekujeme-za-zajem',
+  // Šablony pro klienty tu nejsou – jsou jen ve Velínu za přihlášením (index.js, SABLONY → přesměrování)
 };
 // Rezervace termínu (po kvalifikaci v dotazníku): /<cesta> → stránka /r/<slug> v aplikaci Dotazníky
 export const BOOKING_PATHS = {};

@@ -17,6 +17,12 @@ import { handleForms } from './forms.js';
 import { bfStock } from './bf.js';
 
 const APEX = 'leadershiprestart.cz';
+const VELIN = 'https://admin.leadershiprestart.cz';
+// stará adresa šablony → šablona ve Velínu (/admin/sablony/<soubor>); ostatní (rozcestník, děkujeme, vítej) → Velín
+const SABLONY = {
+  '/sablona-lp': 'sablona-funnel', '/sablona-funnel': 'sablona-funnel', '/sablona-zacni-tady': 'podklady',
+  '/sablona-brand-manual': 'brand-manual', '/sablona-links': 'links', '/sablona-cenik': 'cenik', '/sablona-dashboard': 'dashboard',
+};
 
 export default {
   async fetch(request, env, ctx) {
@@ -39,6 +45,22 @@ export default {
       if (aliases.includes(lower) && url.pathname !== '/up-great') {
         return Response.redirect(new URL('/up-great', url).toString(), 301);
       }
+    }
+    // Šablony pro klienty jsou jen ve Velínu za přihlášením (položka Šablony) – staré adresy vedou tam
+    {
+      let p = url.pathname;
+      try { p = decodeURIComponent(p); } catch {}
+      p = p.toLowerCase().replace(/\.html$/, '').replace(/\/+$/, '');
+      if (p === '/sablony' || p.startsWith('/sablona-') || p === '/p/sablony' || p.startsWith('/p/sablony-')) {
+        const file = SABLONY[p.replace(/^\/p\/sablony/, '/sablona').replace(/^\/sablona$/, '/sablona-lp')];
+        return new Response(null, {
+          status: 302,
+          headers: { Location: `${VELIN}/admin/${file ? `sablony/${file}` : ''}`, 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex' },
+        });
+      }
+    }
+    if (url.pathname.startsWith('/video/')) {
+      return handleVideo(request, env);
     }
     if (url.pathname === '/api/click' && request.method === 'POST') {
       return handleClick(request, env, ctx);
@@ -87,6 +109,33 @@ async function fetchAsset(env, request, url) {
   alt.pathname = candidate;
   const retry = await env.ASSETS.fetch(new Request(alt.toString(), request));
   return retry.status === 404 ? direct : retry;
+}
+
+// Videa (/video/*) jdou přes Worker kvůli Range: statické assets Cloudflaru na Range vrací
+// celý soubor (200) a Safari / iOS pak MP4 nepřehraje. Soubory jsou malé (do ~10 MB),
+// takže výřez stačí udělat v paměti.
+async function handleVideo(request, env) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return new Response(null, { status: 405 });
+  const resp = await env.ASSETS.fetch(new Request(request.url));
+  if (!resp.ok) return resp;
+  const headers = new Headers(resp.headers);
+  headers.set('Accept-Ranges', 'bytes');
+  headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  const head = request.method === 'HEAD';
+  const m = /^bytes=(\d*)-(\d*)$/.exec(request.headers.get('Range') || '');
+  if (!m || (m[1] === '' && m[2] === '')) return new Response(head ? null : resp.body, { status: 200, headers });
+
+  const buf = await resp.arrayBuffer();
+  const size = buf.byteLength;
+  // "bytes=-500" = posledních 500 bajtů; "bytes=100-" = od 100 do konce
+  const start = m[1] === '' ? Math.max(0, size - Number(m[2])) : Number(m[1]);
+  const end = m[1] === '' || m[2] === '' ? size - 1 : Math.min(Number(m[2]), size - 1);
+  if (start > end) {
+    return new Response(null, { status: 416, headers: { 'Content-Range': `bytes */${size}` } });
+  }
+  headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
+  headers.set('Content-Length', String(end - start + 1));
+  return new Response(head ? null : buf.slice(start, end + 1), { status: 206, headers });
 }
 
 async function handlePage(request, env, ctx, url) {
@@ -270,9 +319,28 @@ async function handleClick(request, env, ctx) {
   const ip = request.headers.get('CF-Connecting-IP') || '0.0.0.0';
   const cookies = parseCookies(request);
 
-  if (isBot(ua) || cookies[COOKIE_EXCLUDE] === '1' || !cookies.ab_v) {
+  if (isBot(ua) || cookies[COOKIE_EXCLUDE] === '1') {
     return new Response(null, { status: 204 });
   }
+  let body = {};
+  try {
+    body = await request.json();
+  } catch {
+    /* sendBeacon bez JSON -> prázdné */
+  }
+  const ctaPos = typeof body.pos === 'string' ? body.pos.slice(0, 32) : 'other';
+  let page = typeof body.page === 'string' ? body.page.slice(0, 128) : null;
+
+  // Videa (pozice „video:…“ ze site.js: spuštění, dokoukání, odchod na YouTube) jdou do logů Workeru
+  // vždy, i bez běžícího testu – výchozí čísla (Workers → leadershiprestart → Logs, filtr video_event).
+  // Do Velínu se klíč videa připojí ke stránce (/#roman), ať jde rozpad podle videí.
+  if (ctaPos.startsWith('video:')) {
+    const ref = typeof body.ref === 'string' ? body.ref.replace(/[^\w-]/g, '').slice(0, 40) : '';
+    console.log(JSON.stringify({ video_event: ctaPos.slice(6), ref, page, device: deviceFrom(ua), ab: cookies.ab_v || null }));
+    if (ref && page) page = `${page}#${ref}`.slice(0, 128);
+  }
+
+  if (!cookies.ab_v) return new Response(null, { status: 204 });
   const [tid, vid] = (cookies.ab_v || '').split(':');
   const { state, ...ab } = await getAb(env, ctx);
   const test = testById(ab, tid);
@@ -281,15 +349,6 @@ async function handleClick(request, env, ctx) {
     return new Response(null, { status: 204 });
   }
   if (!test.variants.some((v) => v.id === vid)) return new Response(null, { status: 204 });
-
-  let body = {};
-  try {
-    body = await request.json();
-  } catch {
-    /* sendBeacon bez JSON -> prázdné */
-  }
-  const ctaPos = typeof body.pos === 'string' ? body.pos.slice(0, 32) : 'other';
-  const page = typeof body.page === 'string' ? body.page.slice(0, 128) : null;
 
   ctx.waitUntil(
     visitorHash(ip, ua).then((visitor) =>
