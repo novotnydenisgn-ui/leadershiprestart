@@ -5,8 +5,7 @@
  * 1. V tabulce: Rozšíření → Apps Script, smazat obsah Code.gs a vložit celý tento soubor, uložit.
  * 2. Nasadit → Nové nasazení → typ „Webová aplikace“
  *    Spustit jako: Já · Kdo má přístup: Kdokoli → Nasadit → povolit přístup ke svému účtu.
- * 3. URL webové aplikace (…/exec) uložit do workeru:
- *    npx wrangler secret put DAREK_SHEET_URL
+ * 3. URL webové aplikace (…/exec) vložit ve Velínu u dotazníku Dárek → Napojení → Google tabulka.
  * Při změně kódu: Nasadit → Spravovat nasazení → tužka → Verze: Nová verze (jinak běží starý kód).
  */
 // ID tabulky „Balíček_leadership restart“ — skript tak funguje, i když není vytvořený přímo z tabulky.
@@ -24,7 +23,10 @@ function doPost(e) {
       var m = {};
       d._cols.forEach(function (c) { m[c.k] = c.v; });
       if (m.test === 'ano') return out({ ok: true, skipped: 'test' }); // testovací odpovědi z Velínu do objednávek nepatří
-      d = { name: m.name, email: m.email, phone: m.phone, address: m['q:address'], sport: m['q:sport'], hours: m['q:hours'] };
+      // „Jiné“ u sportu má doplňující otázku (q:sport_jine) → do sloupce Sport jako „Jiné – lezení“
+      var sport = m['q:sport'] || '';
+      if (m['q:sport_jine']) sport = (sport ? sport + ' – ' : '') + m['q:sport_jine'];
+      d = { name: m.name, email: m.email, phone: m.phone, address: m['q:address'], sport: sport, hours: m['q:hours'] };
     }
     var sh = SpreadsheetApp.openById(SHEET_ID).getSheetByName(LIST);
     if (!sh) return out({ ok: false, error: 'List ' + LIST + ' neexistuje' });
